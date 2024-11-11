@@ -9,13 +9,29 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #f1f1f1;
+    --foreground: #000000;
   }
 }
 
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "Regular", sans-serif;
+}
+
+.gradient1 {
+  background: linear-gradient(90deg, #ccedff 0%, #c9a9ff 100%);
+}
+
+.gradient2 {
+  /* background: linear-gradient(90deg, #ffcca5 0%, #ffe6d5 100%); */
+  background: linear-gradient(90deg, #ffd1d1 0%, #ff9e80 100%);
+}
+
+.glassmorph {
+  background: rgba(255, 255, 255, 0.35);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  border-radius: 10px;
 }
