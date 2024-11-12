@@ -20,13 +20,24 @@ body {
   font-family: "Regular", sans-serif;
 }
 
-.gradient1 {
+.program-gradient {
   background: linear-gradient(90deg, #ccedff 0%, #c9a9ff 100%);
 }
 
-.gradient2 {
+.coaching-gradient {
   /* background: linear-gradient(90deg, #ffcca5 0%, #ffe6d5 100%); */
   background: linear-gradient(90deg, #ffd1d1 0%, #ff9e80 100%);
+}
+
+.footer-gradient {
+  background: linear-gradient(
+    90deg,
+    #ff5b79 2.11%,
+    #bb5ff0 45.48%,
+    #6988f5 94.43%
+  );
+  rotate: -6deg;
+  filter: blur(6.625rem);
 }
 
 .glassmorph {
