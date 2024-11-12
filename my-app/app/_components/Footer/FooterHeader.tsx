@@ -4,7 +4,7 @@ const FooterHeader = () => (
       <h1 className="text-xl lg:text-5xl text-start">
         Construisez votre physique maintenant
       </h1>
-      <button className="bg-[#B06FF9] hover:bg-[#8452bc] p-2 lg:p-4 rounded-xl lg:text-lg w-max">
+      <button className="bg-[#B06FF9] hover:bg-[#8452bc] p-4 lg:p-4 rounded-xl lg:text-lg w-max">
         Commencer
       </button>
     </div>
