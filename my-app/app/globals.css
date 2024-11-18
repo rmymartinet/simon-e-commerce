@@ -17,11 +17,27 @@
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: "Regular", sans-serif;
+  font-family: "Roboto", sans-serif;
 }
 
 .program-gradient {
-  background: linear-gradient(90deg, #ccedff 0%, #c9a9ff 100%);
+  background: rgb(201, 169, 255);
+  background: -moz-radial-gradient(
+    circle,
+    rgba(201, 169, 255, 1) 0%,
+    rgba(204, 237, 255, 1) 100%
+  );
+  background: -webkit-radial-gradient(
+    circle,
+    rgba(201, 169, 255, 1) 0%,
+    rgba(204, 237, 255, 1) 100%
+  );
+  background: radial-gradient(
+    circle,
+    rgba(201, 169, 255, 1) 0%,
+    rgba(204, 237, 255, 1) 100%
+  );
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#c9a9ff",endColorstr="#ccedff",GradientType=1);
 }
 
 .coaching-gradient {
@@ -41,8 +57,36 @@ body {
 }
 
 .glassmorph {
-  background: rgba(255, 255, 255, 0.35);
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
+  background: rgba(0, 0, 0, 0.02);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   border-radius: 10px;
+}
+
+.black-glassmorph {
+  background: rgba(0, 0, 0, 0.025);
+  backdrop-filter: blur(11.5px);
+  -webkit-backdrop-filter: blur(11.5px);
+  border-radius: 10px;
+}
+
+.pie-chart-inner {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%; /* Pour faire un cercle parfait */
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
+
+.glassmorph1 {
+  background: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.test {
+  background-color: rgba(255, 255, 255, 0.09);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
 }
