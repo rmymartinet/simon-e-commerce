@@ -47,21 +47,21 @@ const ProgramContentDesktop = () => {
     <>
       <div
         ref={deskProgram1Ref}
-        className="absolute top-10 left-1/2 -translate-x-1/2 rounded-3xl overflow-hidden p-4 glassmorph1 flex flex-col gap-20 z-50 opacity-0"
+        className="absolute top-10 left-1/2 -translate-x-1/2 rounded-3xl overflow-hidden p-4 glassmorph1 flex flex-col gap-40 z-50 opacity-0"
       >
         <Image
           className="w-full h-full object-cover rounded-xl"
-          src="/images/cycle.png"
+          src="/images/pdf/cycle.png"
           alt=""
-          width={500}
-          height={500}
+          width={350}
+          height={350}
         />
         <Image
           className="w-full h-full object-cover rounded-xl"
-          src="/images/day.png"
+          src="/images/pdf/day.png"
           alt=""
-          width={500}
-          height={500}
+          width={350}
+          height={350}
         />
       </div>
       <div
@@ -70,10 +70,10 @@ const ProgramContentDesktop = () => {
       >
         <Image
           className="w-full h-full object-cover"
-          src="/images/weekintro.png"
+          src="/images/pdf/weekintro.png"
           alt=""
-          width={500}
-          height={500}
+          width={350}
+          height={350}
         />
       </div>
       <div
@@ -82,10 +82,10 @@ const ProgramContentDesktop = () => {
       >
         <Image
           className="w-full h-full object-cover"
-          src="/images/details.png"
+          src="/images/pdf/details.png"
           alt=""
-          width={500}
-          height={500}
+          width={350}
+          height={350}
         />
       </div>
     </>
