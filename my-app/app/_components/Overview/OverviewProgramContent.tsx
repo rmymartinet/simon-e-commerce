@@ -8,7 +8,7 @@ gsap.registerPlugin(useGSAP);
 const OverviewProgramContent = ({ gradient }: OverviewSectionProps) => {
   return (
     <div
-      className={`${gradient} rounded-2xl h-full w-full lg:col-start-2-end-4 relative overflow-hidden `}
+      className={`${gradient} rounded-2xl h-full w-full lg:col-start-2-end-4 relative overflow-hidden`}
     >
       <ProgramContentDesktop />
     </div>
