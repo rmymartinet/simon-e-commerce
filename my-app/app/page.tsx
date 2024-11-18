@@ -4,12 +4,12 @@ import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { FaUserFriends } from "react-icons/fa";
 import { FaPersonWalking } from "react-icons/fa6";
-import { SiHellofresh } from "react-icons/si";
 import BeforeAfterPhoto from "./_components/BeforeAfterPhoto";
 import FeaturesContainer from "./_components/Features/FeaturesContainer";
 import ItemsFeatures from "./_components/Features/ItemsFeatures";
-import { default as GradiantSection } from "./_components/GradiantSection";
 import Header from "./_components/Header";
+import OverviewSection from "./_components/Overview/OverviewSection";
+import { featuresCoaching, featuresProgram } from "./data/features";
 
 gsap.registerPlugin(useGSAP);
 
@@ -17,85 +17,77 @@ export default function Home() {
   return (
     <>
       <Header />
-      <GradiantSection
-        gradiant="program-gradient"
-        logo={<FaPersonWalking size={20} />}
-        title="Programmes adaptées"
-        subtitle="Adapté à chaque niveau"
-        description="Débutant, intermédiaire, ou avancé ? Choisissez le programme qui correspond à votre niveau pour progresser efficacement, avec des techniques d’entraînement adaptées à chaque étape."
-        titleContent="Programmes adaptées"
-        descriptionContent="Chaque programme est concu pour répondre à vos besoins et vous permettre de progresser rapidement selon votre niveau et vos objectifs."
+      <OverviewSection
+        gradient="program-gradient"
+        bgColor="#CADCDC"
+        isCoaching={false}
+        titleContent="Programmes adaptés"
+        descriptionContent="Chaque programme est conçu pour répondre à vos besoins et vous permettre de progresser rapidement selon votre niveau et vos objectifs."
+        featureLayoutContent={{
+          title: "Programmes adaptés",
+          description:
+            "Chaque programme est conçu pour répondre à vos besoins et vous permettre de progresser rapidement selon votre niveau et vos objectifs.",
+          titleRight: "Conseils nutritionnels",
+          descriptionRight:
+            "Des recommandations adaptées pour optimiser votre alimentation et soutenir vos objectifs. Simples, efficaces et faciles à intégrer à votre quotidien.",
+          titleLeft: "Vidéos de démonstration",
+          descriptionLeft:
+            "Des vidéos explicatives pour apprendre et exécuter chaque mouvement correctement. Un support visuel clair pour vous guider et maximiser vos résultats.",
+        }}
+        headerProps={{
+          logo: <FaPersonWalking size={20} />,
+          title: "Programmes adaptés",
+          subtitle: "Adapté à chaque niveau",
+          description:
+            "Débutant, intermédiaire, ou avancé ? Choisissez le programme qui correspond à votre niveau pour progresser efficacement, avec des techniques d’entraînement adaptées à chaque étape.",
+        }}
       >
-        <FeaturesContainer>
-          <ItemsFeatures
-            logo={<SiHellofresh />}
-            title="Mode de Vie de Récupération"
-            paragraph="Découvre comment mieux récupérer pour progresser plus rapidement et éviter les blessures."
-          />
-          <ItemsFeatures
-            logo={<SiHellofresh />}
-            title="Vidéos de démonstration incluses"
-            paragraph="Accède à des démonstrations vidéos pour maîtriser chaque mouvement, à ton rythme et en toute sécurité."
-          />
-          <ItemsFeatures
-            logo={<SiHellofresh />}
-            title="Surcharge Progressive"
-            paragraph="Accède à des démonstrations vidéos pour maîtriser chaque mouvement, à ton rythme et en toute sécurité."
-          />
-          <ItemsFeatures
-            logo={<SiHellofresh />}
-            title="Suivi de l’Intensité"
-            paragraph="Accède à des démonstrations vidéos pour maîtriser chaque mouvement, à ton rythme et en toute sécurité."
-          />
-          <ItemsFeatures
-            logo={<SiHellofresh />}
-            title="Exercices Alternatifs"
-            paragraph="Accède à des démonstrations vidéos pour maîtriser chaque mouvement, à ton rythme et en toute sécurité."
-          />
-          <ItemsFeatures
-            logo={<SiHellofresh />}
-            title="Durée du Programme et Deloads"
-            paragraph="Accède à des démonstrations vidéos pour maîtriser chaque mouvement, à ton rythme et en toute sécurité."
-          />
+        <FeaturesContainer title="Les programmes inclus">
+          {featuresProgram.map((item, index) => (
+            <ItemsFeatures
+              key={index}
+              logo={item.logo}
+              title={item.title}
+              paragraph={item.description}
+            />
+          ))}
         </FeaturesContainer>
-      </GradiantSection>
-      <GradiantSection
-        gradiant="coaching-gradient"
-        logo={<FaUserFriends size={20} />}
-        title="Coaching personalisé"
-        subtitle="Un suivi sur-mesure"
-        description="Trois mois pour démarrer ou se remettre en forme, jusqu’à neuf mois pour des transformations durables. Plus le coaching est long, plus les changements sont profonds et adaptés."
-        titleContent="Coaching personalisé"
-        descriptionContent="Un suivi sur-mesure pour des résultats durables."
+      </OverviewSection>
+      <OverviewSection
+        gradient="coaching-gradient"
+        headerProps={{
+          logo: <FaUserFriends size={20} />,
+          title: "Coaching personnalisé",
+          subtitle: "Un suivi sur-mesure",
+          description:
+            "3 mois pour démarrer ou se remettre en forme, jusqu’à 9 mois pour des transformations durables. Plus le coaching est long, plus les changements sont profonds et adaptés.",
+        }}
+        titleContent="Coaching personnalisé"
+        descriptionContent="Un suivi sur-mesure pour des résultats durables. Profite d’une approche complète et personnalisée pour t’accompagner dans l’atteinte de tes objectifs, en intégrant un suivi nutritionnel, des techniques d’entraînement avancées et des astuces de récupération, le tout pensé pour maximiser tes performances et t’offrir des résultats concrets et durables."
+        featureLayoutContent={{
+          title: "Coaching personnalisé",
+          description:
+            "Chaque programme est conçu pour répondre à vos besoins et vous permettre de progresser rapidement selon votre niveau et vos objectifs.",
+          titleRight: "Suivi nutritionnel",
+          descriptionRight:
+            "Un accompagnement sur mesure grâce à l’application Food. Échangez en temps réel avec votre coach pour ajuster votre alimentation selon vos besoins, vos envies et vos objectifs. Une approche flexible et personnalisée pour des résultats durables.",
+          titleLeft: "Suivi régulier en facetime",
+          descriptionLeft:
+            "Bénéficiez d’appels vidéo réguliers avec votre coach pour faire le point sur vos progrès, ajuster votre programme et répondre à vos questions, en fonction de l’offre choisie.",
+        }}
+        isCoaching
       >
-        <FeaturesContainer>
-          <ItemsFeatures
-            logo={<SiHellofresh />}
-            title="Support WhatsApp 12h/24h"
-            paragraph="Transforme tes doutes en réponses immédiates ! Profite d’un accompagnement réactif pour maximiser tes résultats."
-          />
-          <ItemsFeatures
-            logo={<SiHellofresh />}
-            title="Bilan des progrès chaque semaine"
-            paragraph="Suis chaque étape de ta progression et reste motivé avec un bilan complet de tes performances chaque semaine."
-          />
-          <ItemsFeatures
-            logo={<SiHellofresh />}
-            title="Suivi de l’alimentation"
-            paragraph="Obtiens des conseils personnalisés pour optimiser ton alimentation et booster tes performances."
-          />
-          <ItemsFeatures
-            logo={<SiHellofresh />}
-            title="Applications de suivi"
-            paragraph="Obtiens des conseils personnalisés pour optimiser ton alimentation et booster tes performances."
-          />
-          <ItemsFeatures
-            logo={<SiHellofresh />}
-            title="Vidéos de démonstration incluses"
-            paragraph="Accède à des démonstrations vidéos pour maîtriser chaque mouvement, à ton rythme et en toute sécurité."
-          />
+        <FeaturesContainer title="Tous les plans inclus">
+          {featuresCoaching.map((item, index) => (
+            <ItemsFeatures
+              key={index}
+              logo={item.logo}
+              title={item.title}
+              paragraph={item.description}
+            />
+          ))}
         </FeaturesContainer>
-      </GradiantSection>
+      </OverviewSection>
       <BeforeAfterPhoto />
     </>
   );
