@@ -3,7 +3,6 @@ import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { Flip } from "gsap/Flip";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import Image from "next/image";
 import { useEffect, useRef } from "react";
 import Iphone from "./Iphone";
 
@@ -11,9 +10,9 @@ gsap.registerPlugin(useGSAP, Flip, ScrollTrigger);
 
 const CoachingContent = ({ gradient }: OverviewSectionProps) => {
   const imagesUrls = {
-    accueil: "/images/virtualgymapp/accueilapp.png",
-    userInterface: "/images/virtualgymapp/user_interface.png",
-    stat: "/images/virtualgymapp/statapp.png",
+    accueil: "/images/virtualgym_app/accueilapp.png",
+    userInterface: "/images/virtualgym_app/user_interface.png",
+    stat: "/images/virtualgym_app/statapp.png",
   };
   const videosUrls = {
     intro: "/videos/app_video.mp4",
@@ -88,28 +87,6 @@ const CoachingContent = ({ gradient }: OverviewSectionProps) => {
           <Iphone imagesUrl={imagesUrls.userInterface} />
         </div>
         <div ref={iphone2} className="z-50 scale-125 opacity-0 relative">
-          <div
-            ref={headerRef}
-            className="absolute top-[60px] left-0 z-[99999] overflow-hidden rounded-xl"
-          >
-            <Image
-              src="/images/virtualgymapp/header.png"
-              alt=""
-              width={200}
-              height={200}
-            />
-          </div>
-          <div
-            ref={exerciceOverviewRef}
-            className="absolute top-[270px] left-0 z-[99999] overflow-hidden rounded-xl"
-          >
-            <Image
-              src="/images/virtualgymapp/exercice_overview.png"
-              alt=""
-              width={200}
-              height={200}
-            />
-          </div>
           <Iphone imagesUrl={imagesUrls.accueil} />
         </div>
         <div ref={iphone3} className="z-10 scale-95 opacity-0">
@@ -121,51 +98,30 @@ const CoachingContent = ({ gradient }: OverviewSectionProps) => {
         className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-50 scale-125 opacity-0"
       >
         <div className="relative">
-          {/* <div
-            ref={headerRef}
-            className="absolute top-[60px] left-0 z-[99999] overflow-hidden rounded-xl"
-          >
-            <Image
-              src="/images/virtualgymapp/header.png"
-              alt=""
-              width={200}
-              height={200}
-            />
-          </div>
-          <div
-            ref={exerciceOverviewRef}
-            className="absolute top-[270px] left-0 z-[99999] overflow-hidden rounded-xl"
-          >
-            <Image
-              src="/images/virtualgymapp/exercice_overview.png"
-              alt=""
-              width={200}
-              height={200}
-            />
-          </div> */}
           <Iphone videoUrls={videosUrls.intro} />
         </div>
       </div>
       <div
         ref={textRef}
-        className="absolute top-20 right-[140px] flex flex-col items-end gap-20 opacity-0"
+        className="absolute top-40 w-[35%] right-20 flex flex-col items-end gap-20 opacity-0"
       >
-        <div className="overflow-hidden rounded-xl flex flex-col center gap-4 w-[300px]">
-          <h1 className="text-4xl mr-40">Communiquer</h1>
+        <div className="overflow-hidden rounded-xl flex flex-col center gap-4">
+          <h1 className="text-4xl">Adaptatif en Temps Réel</h1>
           <p className="text-pretty">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-            Accusantium temporibus labore exercitationem quaerat dolores,
-            quibusdam ad cum, esse eos nihil porro? Sint nulla amet neque minima
-            in magni voluptates officiis.
+            Dans l’application, vous pouvez ajuster en temps réel vos paramètres
+            d’entraînement, tels que le nombre de répétitions et de séries. Dès
+            le début, je définis les valeurs de base, et si vous dépassez vos
+            objectifs ou avez des difficultés, vous pouvez les modifier
+            directement.
           </p>
         </div>
-        <div className="overflow-hidden rounded-xl flex flex-col center gap-4  w-[300px]">
-          <h1 className="text-4xl mr-24">Mouvements</h1>
+        <div className="overflow-hidden rounded-xl flex flex-col center gap-4">
+          <h1 className="text-4xl">Suivi et Vidéos d’Évolution</h1>
           <p className="text-pretty">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-            Accusantium temporibus labore exercitationem quaerat dolores,
-            quibusdam ad cum, esse eos nihil porro? Sint nulla amet neque minima
-            in magni voluptates officiis.
+            Suivez vos progrès avec des statistiques détaillées et visualisez
+            les mouvements en temps réel. Si vous avez des doutes, des vidéos
+            YouTube de démonstration des exercices sont également disponibles
+            pour vous guider.
           </p>
         </div>
       </div>
