@@ -2,7 +2,7 @@ import FooterLinkSection from "./FooterLinkSection";
 
 const FooterLinks = () => {
   return (
-    <div className="flex flex-col gap-20 lg:gap-0 items-start lg:grid lg:grid-cols-4 lg:justify-items-start w-full">
+    <div className="flex w-full flex-col items-start gap-20 lg:grid lg:grid-cols-4 lg:justify-items-start lg:gap-0">
       <h3 className="text-2xl font-semibold">S'M Coaching</h3>
       <FooterLinkSection
         title="Produits"

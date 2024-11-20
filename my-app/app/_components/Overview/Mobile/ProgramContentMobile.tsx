@@ -23,7 +23,7 @@ const ProgramContentMobile = () => {
           opacity: 1,
           duration: 2,
           ease: "power2.out",
-        }
+        },
       );
 
       tl.to(ref.current, {
@@ -43,14 +43,14 @@ const ProgramContentMobile = () => {
     <>
       <ContentContainerProgram ref={program1Ref}>
         <Image
-          className="w-full h-full object-contain rounded-3xl"
+          className="h-full w-full rounded-3xl object-contain"
           src="/images/cycle.png"
           alt=""
           width={500}
           height={500}
         />
         <Image
-          className="w-full h-full object-contain rounded-3xl"
+          className="h-full w-full rounded-3xl object-contain"
           src="/images/day.png"
           alt=""
           width={500}
@@ -60,18 +60,18 @@ const ProgramContentMobile = () => {
       <ContentContainerProgram ref={program2Ref}>
         <div className="relative">
           <Image
-            className="w-full h-full object-contain rounded-3xl"
+            className="h-full w-full rounded-3xl object-contain"
             src="/images/weekintro.png"
             alt=""
             width={500}
             height={500}
           />
-          <div className="absolute top-10 -translate-y-1/2 left-10 rounded-full w-20 h-20"></div>
+          <div className="absolute left-10 top-10 h-20 w-20 -translate-y-1/2 rounded-full"></div>
         </div>
       </ContentContainerProgram>
       <ContentContainerProgram ref={program3Ref}>
         <Image
-          className="w-full h-full object-contain rounded-3xl"
+          className="h-full w-full rounded-3xl object-contain"
           src="/images/details.png"
           alt=""
           width={500}

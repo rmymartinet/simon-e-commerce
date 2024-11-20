@@ -7,7 +7,7 @@ const ContentContainerProgram = forwardRef<
   return (
     <div
       ref={ref}
-      className="absolute w-full h-full grid place-content-center top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 rounded-3xl overflow-hidden p-4 gap-20 z-50 border-2 border-red-400"
+      className="absolute left-1/2 top-1/2 z-50 grid h-full w-full -translate-x-1/2 -translate-y-1/2 place-content-center gap-20 overflow-hidden rounded-3xl border-2 border-red-400 p-4"
     >
       {children}
     </div>

@@ -20,12 +20,12 @@ const FooterContact = () => {
           <GrLocationPin size={20} aria-label="Location icon" />
           <span>Cognac, France</span>
         </div>
-        <div className="flex items-center gap-4 mt-4 md:mt-0">
+        <div className="mt-4 flex items-center gap-4 md:mt-0">
           <CiMail size={20} aria-label="Mail icon" />
           <span>Contactez-moi</span>
         </div>
       </div>
-      <div className="flex items-center gap-4 mt-4 md:mt-0">
+      <div className="mt-4 flex items-center gap-4 md:mt-0">
         {socialIcons.map(({ icon, label }, idx) => (
           <span key={idx} aria-label={label}>
             {icon}

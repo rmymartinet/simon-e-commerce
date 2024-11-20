@@ -33,10 +33,10 @@ const Filter = ({ filterName, setFilterName }: FilterProps) => {
   }, [filterName]);
 
   return (
-    <div className="relative grid grid-cols-2 justify-items-center gap-10 rounded-full shadow-inner px-4 py-4 overflow-hidden border ">
+    <div className="relative grid grid-cols-2 justify-items-center gap-10 overflow-hidden rounded-full border p-4 shadow-inner">
       <div
         ref={bgFilterRef}
-        className="absolute bg-slate-300  w-1/2 h-full  rounded-full -z-10 shadow-md"
+        className="absolute -z-10 h-full w-1/2 rounded-full bg-slate-300 shadow-md"
       ></div>
       <button
         className="text-black"

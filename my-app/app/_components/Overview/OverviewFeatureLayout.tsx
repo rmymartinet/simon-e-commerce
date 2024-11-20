@@ -34,16 +34,16 @@ const OverviewFeatureLayout = ({
     <div className="flex flex-col">
       <div
         ref={containerRef}
-        className="bg-white rounded-2xl h-[70vh] md:h-[80vh] flex flex-col-reverse gap-10 lg:gap-0 lg:grid lg:grid-cols-custom lg:items-end p-4 lg:p-7"
+        className="flex h-[70vh] flex-col-reverse gap-10 rounded-2xl bg-white p-4 md:h-[80vh] lg:grid lg:grid-cols-custom lg:items-end lg:gap-0 lg:p-7"
       >
         <div className="flex flex-col gap-4 lg:col-start-1-end-2">
           <h4 className="text-xl">{title}</h4>
-          <p className="text-slate-400 text-pretty pr-8">{description}</p>
+          <p className="text-pretty pr-8 text-slate-400">{description}</p>
         </div>
         {!isCoaching && <OverviewProgramContent gradient={gradient} />}
         {isCoaching && <CoachingContent gradient={gradient} />}
       </div>
-      <div className="rounded-2xl flex flex-col lg:grid lg:grid-cols-custom gap-7 pt-7 borr ">
+      <div className="borr flex flex-col gap-7 rounded-2xl pt-7 lg:grid lg:grid-cols-custom">
         <OverviewRightFeatures
           isCoaching={isCoaching}
           title={titleRight}

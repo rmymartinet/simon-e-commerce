@@ -26,7 +26,7 @@ const ProgramContentDesktop = () => {
           duration: 2,
           ease: "power2.out",
           delay: delay,
-        }
+        },
       );
     }
   };
@@ -47,17 +47,17 @@ const ProgramContentDesktop = () => {
     <>
       <div
         ref={deskProgram1Ref}
-        className="absolute top-10 left-1/2 -translate-x-1/2 rounded-3xl overflow-hidden p-4 glassmorph1 flex flex-col gap-40 z-50 opacity-0"
+        className="glassmorph1 absolute left-1/2 top-10 z-50 flex -translate-x-1/2 flex-col gap-40 overflow-hidden rounded-3xl p-4 opacity-0"
       >
         <Image
-          className="w-full h-full object-cover rounded-xl"
+          className="h-full w-full rounded-xl object-cover"
           src="/images/pdf/cycle.png"
           alt=""
           width={350}
           height={350}
         />
         <Image
-          className="w-full h-full object-cover rounded-xl"
+          className="h-full w-full rounded-xl object-cover"
           src="/images/pdf/day.png"
           alt=""
           width={350}
@@ -66,10 +66,10 @@ const ProgramContentDesktop = () => {
       </div>
       <div
         ref={deskProgram2Ref}
-        className="absolute top-20 left-24 z-10 rounded-3xl overflow-hidden opacity-0"
+        className="absolute left-24 top-20 z-10 overflow-hidden rounded-3xl opacity-0"
       >
         <Image
-          className="w-full h-full object-cover"
+          className="h-full w-full object-cover"
           src="/images/pdf/weekintro.png"
           alt=""
           width={350}
@@ -78,10 +78,10 @@ const ProgramContentDesktop = () => {
       </div>
       <div
         ref={deskProgram3Ref}
-        className="absolute top-20 right-20 rounded-3xl overflow-hidden opacity-0"
+        className="absolute right-20 top-20 overflow-hidden rounded-3xl opacity-0"
       >
         <Image
-          className="w-full h-full object-cover"
+          className="h-full w-full object-cover"
           src="/images/pdf/details.png"
           alt=""
           width={350}

@@ -4,7 +4,7 @@ import FooterLinks from "./FooterLinks";
 
 const Footer = () => {
   return (
-    <footer className="relative min-h-screen bg-[#181818] mt-8 py-4 text-center text-white text-sm overflow-hidden flex flex-col items-start justify-between px-6 space-y-20 lg:space-y-0 ">
+    <footer className="relative mt-8 flex min-h-screen flex-col items-start justify-between space-y-20 overflow-hidden bg-[#181818] px-6 py-4 text-center text-sm text-white lg:space-y-0">
       <FooterHeader />
       <FooterLinks />
       <FooterContact />
