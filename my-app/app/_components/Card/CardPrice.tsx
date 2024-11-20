@@ -27,16 +27,16 @@ const CardPrice = ({
 }: CardPriceProps) => {
   return (
     <div
-      className={`flex flex-col px-10 py-7 rounded-3xl relative ${
+      className={`relative flex flex-col rounded-3xl px-10 py-7 ${
         bgColor ? "border-4 border-[#B06FF9] bg-white" : "bg-white"
       }`}
     >
       {/* <div className="absolute footer-gradient top-0 left-0 w-full h-full -z-10"></div> */}
-      <div className="flex justify-between mb-20">
+      <div className="mb-20 flex justify-between">
         <h1 className="text-2xl font-semibold">{title}</h1>
         <div className="flex flex-col gap-4">
           {mounth && (
-            <span className="flex items-center justify-center py-2 px-4 rounded-full w-max  shadow-inner">
+            <span className="flex w-max items-center justify-center rounded-full px-4 py-2 shadow-inner">
               {mounth}
             </span>
           )}
@@ -45,8 +45,8 @@ const CardPrice = ({
 
       <Price price={price} mounth={mounth} />
       <div className="grid grid-rows-cardPrice">
-        <p className="text-center md:text-start mt-10">{text}</p>
-        <button className="bg-[#B06FF9] py-4 px-4 w-full text-white text-center rounded-2xl self-end mb-10">
+        <p className="mt-10 text-center md:text-start">{text}</p>
+        <button className="mb-10 w-full self-end rounded-2xl bg-[#B06FF9] px-4 py-4 text-center text-white">
           Acheter
         </button>
 

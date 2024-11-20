@@ -3,7 +3,7 @@ import {
   coachingIncludes6Mounth,
   coachingIncludes9Mounth,
   programIncludes,
-} from "../data/cardPrice";
+} from "../../data/cardPrice";
 import CardPrice from "./CardPrice";
 
 interface CardPriceContainerProps {
@@ -14,7 +14,7 @@ const CardPriceContainer = ({ filterName }: CardPriceContainerProps) => {
   return (
     <>
       {filterName === "programmes" && (
-        <div className="flex flex-col lg:grid lg:grid-cols-3 gap-10 lg:w-[80%]">
+        <div className="flex flex-col gap-10 lg:grid lg:w-[80%] lg:grid-cols-3">
           <CardPrice
             title="Débutant"
             price="99"
@@ -39,7 +39,7 @@ const CardPriceContainer = ({ filterName }: CardPriceContainerProps) => {
         </div>
       )}
       {filterName === "coaching" && (
-        <div className="flex flex-col lg:grid lg:grid-cols-3 gap-10 lg:w-[80%] px-2 md:px-20 lg:px-0">
+        <div className="flex flex-col gap-10 px-2 md:px-20 lg:grid lg:w-[80%] lg:grid-cols-3 lg:px-0">
           <CardPrice
             title="Essai"
             mounth="3 mois"
