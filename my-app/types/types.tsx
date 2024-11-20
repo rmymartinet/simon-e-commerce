@@ -54,3 +54,9 @@ export interface CardPriceProps {
   includes?: string[];
   bgColor?: boolean;
 }
+
+export interface FeaturesContainerProps {
+  title: string;
+  text: string;
+  children: React.ReactNode;
+}
