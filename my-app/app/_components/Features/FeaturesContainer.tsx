@@ -1,23 +1,24 @@
-import React from "react";
-
-interface FeaturesContainerProps {
-  title: string;
-  children: React.ReactNode;
-}
+import { FeaturesContainerProps } from "@/types/types";
 
 /**
  * !TODO mt-40
  */
 
-const FeaturesContainer = ({ children, title }: FeaturesContainerProps) => {
+const FeaturesContainer = ({
+  title,
+  text,
+  children,
+}: FeaturesContainerProps) => {
   return (
-    <div className="rounded-2xl flex justify-end gap-10 pb-[24vh] mt-40">
-      <div className="h-full lg:w-[70vw] flex flex-col w-full gap-28">
+    <div className="mt-40 flex justify-end gap-10 rounded-2xl pb-[24vh]">
+      <div className="flex h-full w-full flex-col gap-28 lg:w-[70vw]">
         <div className="flex flex-col gap-4">
-          <h1 className="text-5xl text-center md:text-start">{title}</h1>
-          <p className="text-slate-400 text-lg">( sans suivi )</p>
+          <h1 className="text-center text-5xl md:text-start">{title}</h1>
+          <p className="text-center text-lg text-slate-400 md:text-start">
+            ( {text} )
+          </p>
         </div>
-        <div className="flex flex-col gap-32 md:grid md:grid-cols-2 md:grid-flow-row">
+        <div className="flex flex-col gap-32 md:grid md:grid-flow-row md:grid-cols-2">
           {children}
         </div>
       </div>
