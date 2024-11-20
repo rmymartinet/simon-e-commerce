@@ -18,7 +18,6 @@ export const revealRotateEl = (ref: React.RefObject<HTMLDivElement>) => {
     scrollTrigger: {
       trigger: ref.current,
       start: "top bottom",
-      markers: true,
     },
   });
 };
