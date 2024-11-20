@@ -20,21 +20,65 @@ const OverviewLeftFeatures = ({
   };
 
   const containerRef = useRef(null);
+  const foodRef = useRef<(HTMLDivElement | null)[]>([]);
 
   useGSAP(() => {
     revealRotateEl(containerRef);
+
+    const tl = gsap.timeline({
+      repeat: -1,
+      defaults: { ease: "power2.out", duration: 1 },
+    });
+
+    foodRef.current.forEach((el) => {
+      tl.fromTo(
+        el,
+        {
+          x: 500,
+        },
+        {
+          x: 0,
+          opacity: 1,
+        },
+        "-=1",
+      ).to(el, {
+        x: -500,
+        delay: 2,
+        opacity: 0,
+      });
+    });
   }, []);
+
+  const foodImages = [
+    "/images/food_app/1.png",
+    "/images/food_app/2.png",
+    "/images/food_app/3.png",
+  ];
 
   return (
     <div
       ref={containerRef}
-      className="bg-white h-[65vh] w-full rounded-2xl lg:col-start-2-end-3 grid p-6 gap-20"
+      className="grid h-[65vh] w-full gap-20 overflow-hidden rounded-2xl bg-white p-6 lg:col-start-2-end-3"
       style={{
         gridTemplateRows: "250px max-content",
       }}
     >
       {!isCoaching && <CircleChart data={data} />}
-      {isCoaching && <Iphone imagesUrl="/images/calorie.png" />}
+      {isCoaching && (
+        <div className="relative flex w-full">
+          {foodImages.map((url, index) => (
+            <div
+              ref={(el) => {
+                foodRef.current[index] = el;
+              }}
+              className="absolute h-full w-full opacity-0"
+              key={index}
+            >
+              <Iphone imagesUrl={url} />
+            </div>
+          ))}
+        </div>
+      )}
       <div className="flex flex-col gap-2 self-center">
         <h1 className="text-4xl">{title}</h1>
         <p>{text}</p>

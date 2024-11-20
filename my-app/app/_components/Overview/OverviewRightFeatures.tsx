@@ -5,8 +5,6 @@ import gsap from "gsap";
 import { useRef } from "react";
 import Iphone from "./Iphone";
 
-gsap.registerPlugin(useGSAP);
-
 const OverviewRightFeatures = ({
   isCoaching,
   title,
@@ -27,57 +25,108 @@ const OverviewRightFeatures = ({
   useGSAP(() => {
     revealRotateEl(containerRef);
 
-    const tl = gsap.timeline({
-      repeat: -1,
-      defaults: {
-        duration: 2,
-        ease: "power2.out",
-      },
-    });
+    // Initial setup for video elements
+    gsap.set(videoRef.current, { xPercent: 400, opacity: 0, scale: 0 });
 
-    videoRef.current.forEach((el) => {
+    const spacing = 0.2; // Espacement entre les vidéos
+
+    const cards = gsap.utils.toArray(videoRef.current);
+
+    // Fonction pour animer chaque élément vidéo
+    const animateFunc = (element) => {
+      const tl = gsap.timeline();
       tl.fromTo(
-        el,
+        element,
+        { scale: 0, opacity: 0 },
         {
-          opacity: 0,
-          x: 400,
-          scale: 0.4,
-        },
-        {
-          x: 0,
           scale: 1,
           opacity: 1,
-        }
+          zIndex: 100,
+          duration: 0.75,
+          yoyo: true,
+          repeat: 1,
+          ease: "power2.Out",
+          immediateRender: false,
+        },
+      ).fromTo(
+        element,
+        { xPercent: 400 },
+        { xPercent: -400, duration: 1.5, ease: "none", immediateRender: false }, // Durée ajustée pour ralentir la vidéo
+        0,
       );
-      tl.to(el, {
-        delay: 1,
-        x: -400,
-        scale: 0.4,
-        opacity: 0,
-      });
+      return tl;
+    };
+
+    // Créer une boucle sans fin avec un délai contrôlé
+    const seamlessLoop = buildSeamlessLoop(cards, spacing, animateFunc);
+
+    // Ralentir la boucle en ajustant la durée globale
+    gsap.to(seamlessLoop, {
+      time: "+=" + seamlessLoop.duration(),
+      duration: seamlessLoop.duration() * 4, // Ajoute un facteur pour ralentir la boucle
+      repeat: -1, // Boucle infinie
+      ease: "none",
+      paused: false,
     });
   }, []);
+
+  //fonction pour créer une boucle sans fin
+  function buildSeamlessLoop(items, spacing, animateFunc) {
+    const rawSequence = gsap.timeline({ paused: true });
+    const seamlessLoop = gsap.timeline({
+      paused: true,
+      repeat: -1,
+    });
+
+    const cycleDuration = spacing * items.length; // Garde la durée de la boucle mais ralentie
+    let dur;
+
+    // Boucle à travers les éléments et crée l'animation pour chaque
+    items
+      .concat(items)
+      .concat(items)
+      .forEach((item, i) => {
+        const anim = animateFunc(items[i % items.length]);
+        rawSequence.add(anim, i * spacing);
+        if (!dur) dur = anim.duration();
+      });
+
+    // Mettre à jour la position du playhead pour une boucle fluide
+    seamlessLoop.fromTo(
+      rawSequence,
+      {
+        time: cycleDuration + dur / 2,
+      },
+      {
+        time: "+=" + cycleDuration,
+        duration: cycleDuration * 1.5, // Ralentir la boucle globale sans affecter chaque animation
+        ease: "none",
+      },
+    );
+
+    return seamlessLoop;
+  }
 
   return (
     <div
       ref={containerRef}
-      className="bg-white h-[60vh] w-full rounded-2xl lg:col-start-3-end-4 gap-20 grid 2 p-6 overflow-hidden"
+      className="2 grid h-[60vh] w-full gap-20 overflow-hidden rounded-2xl bg-white p-6 lg:col-start-3-end-4"
       style={{
         gridTemplateRows: "250px max-content",
       }}
     >
       {!isCoaching && (
-        <div className="relative">
+        <div className="gallery relative flex">
           {videoUrls.map((url, index) => (
             <div
               key={index}
               ref={(el) => {
                 videoRef.current[index] = el;
               }}
-              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[30%] h-full rounded-2xl overflow-hidden opacity-0"
+              className="opacity-1Z absolute left-1/2 top-1/2 h-full w-[30%] -translate-x-1/2 -translate-y-1/2 overflow-hidden rounded-2xl"
             >
               <video
-                className="w-full h-full object-cover"
+                className="h-full w-full object-cover"
                 autoPlay
                 loop
                 muted
@@ -88,7 +137,7 @@ const OverviewRightFeatures = ({
         </div>
       )}
       {isCoaching && <Iphone imagesUrl="/images/call.png" />}
-      <div className="self-center flex flex-col gap-2">
+      <div className="flex flex-col gap-2 self-center">
         <h1 className="text-4xl">{title}</h1>
         <p>{text}</p>
       </div>
