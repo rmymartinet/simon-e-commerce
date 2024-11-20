@@ -32,10 +32,10 @@ const OverviewSection = ({
 
   return (
     <section ref={containerRef} className="flex flex-col">
-      <div className="relative px-2 lg:px-6 flex flex-col gap-20 overflow-hidden">
+      <div className="relative flex flex-col gap-20 overflow-hidden px-2 lg:px-6">
         <div
           ref={gradientRef}
-          className={`absolute ${gradient} w-screen -z-10 top-0 left-0 h-1/4 md:h-1/3 lg:h-1/3 scale-50`}
+          className={`absolute ${gradient} left-0 top-0 -z-10 h-1/4 w-screen scale-50 md:h-1/3 lg:h-1/3`}
         ></div>
         <OverviewHearder headerProps={headerProps} />
         <OverviewFeatureLayout
