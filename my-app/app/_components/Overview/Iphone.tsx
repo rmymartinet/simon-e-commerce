@@ -8,8 +8,8 @@ const Iphone = ({
   videoUrls?: string;
 }) => {
   return (
-    <section className="relative z-50 flex flex-col items-center justify-center">
-      <div className="relative -ml-2.5 h-[430px] w-[230px] rounded-[35px] border-4 border-black overflow-hidden">
+    <section className="relative z-50 flex h-full w-full flex-col items-center justify-center">
+      <div className="relative -ml-2.5 h-[430px] w-[230px] overflow-hidden rounded-[35px] border-4 border-black">
         {/* Silencer */}
         <div className="absolute left-[-2.5px] top-[81.5px] h-[13px] w-[2px] rounded-[5px] bg-slate-400 opacity-80"></div>
 
@@ -20,7 +20,7 @@ const Iphone = ({
         {/* Button On */}
         <div className="absolute right-[-2px] top-[121px] h-[45px] w-[2px] rounded-[5px] bg-slate-400 opacity-80"></div>
 
-        <div className="border-6 relative flex h-full w-full justify-center overflow-hidden  border-black bg-black">
+        <div className="border-6 relative flex h-full w-full justify-center overflow-hidden border-black bg-black">
           <video
             autoPlay
             muted
@@ -29,7 +29,7 @@ const Iphone = ({
             preload="auto"
             controls
             src={videoUrls}
-            className="absolute h-full w-full object-cover"
+            className="absolute h-full w-full object-contain"
           ></video>
 
           <Image
@@ -37,7 +37,7 @@ const Iphone = ({
             alt=""
             width={400}
             height={400}
-            className="w-full h-full object-cover absolute"
+            className="absolute h-full w-full object-cover"
           />
 
           {/* Camera */}

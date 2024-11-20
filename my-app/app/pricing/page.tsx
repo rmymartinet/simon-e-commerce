@@ -6,7 +6,7 @@ import { GiNotebook, GiStairsGoal, GiWeightLiftingUp } from "react-icons/gi";
 import { GrGroup } from "react-icons/gr";
 import { IoMdBook } from "react-icons/io";
 import { RiYoutubeFill } from "react-icons/ri";
-import CardPriceContainer from "../_components/CardPriceContainer";
+import CardPriceContainer from "../_components/Card/CardPriceContainer";
 import FeaturesContainer from "../_components/Features/FeaturesContainer";
 import ItemsFeatures from "../_components/Features/ItemsFeatures";
 import Filter from "../_components/Filter";
@@ -25,14 +25,14 @@ export default function Pricing() {
   const [filterName, setFilterName] = useState("programmes");
 
   return (
-    <div className="min-h-screen flex flex-col items-end gap-60 justify-center mt-72 px-2 md:px-20 lg:px-0 relative">
-      <div className="absolute top-0 left-0 w-full h-full -z-10"></div>
-      <div className="flex flex-col justify-center items-center gap-40">
+    <div className="relative mt-72 flex min-h-screen flex-col items-end justify-center gap-60 px-2 md:px-20 lg:px-0">
+      <div className="absolute left-0 top-0 -z-10 h-full w-full"></div>
+      <div className="flex flex-col items-center justify-center gap-40">
         <div className="flex flex-col items-center gap-4">
-          <h1 className="text-4xl md:text-6xl text-center ">
+          <h1 className="text-center text-4xl md:text-6xl">
             Une solution pour chaques besoins
           </h1>
-          <p className="text-slate-400 text-xl">
+          <p className="text-xl text-slate-400">
             Choisissez la solution qui vous conviens le mieux.
           </p>
         </div>
