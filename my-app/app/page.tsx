@@ -7,7 +7,7 @@ import { FaPersonWalking } from "react-icons/fa6";
 import BeforeAfterPhoto from "./_components/BeforeAfterPhoto";
 import FeaturesContainer from "./_components/Features/FeaturesContainer";
 import ItemsFeatures from "./_components/Features/ItemsFeatures";
-import Header from "./_components/Header";
+import Header from "./_components/Header/Header";
 import OverviewSection from "./_components/Overview/OverviewSection";
 import { featuresCoaching, featuresProgram } from "./data/features";
 
@@ -29,7 +29,7 @@ export default function Home() {
             "Chaque programme est conçu pour répondre à vos besoins et vous permettre de progresser rapidement selon votre niveau et vos objectifs.",
           titleRight: "Conseils nutritionnels",
           descriptionRight:
-            "Des recommandations adaptées pour optimiser votre alimentation et soutenir vos objectifs. Simples, efficaces et faciles à intégrer à votre quotidien.",
+            "Guide complet pour prendre en main votre alimentation et atteindre vos objectifs. Vous y découvrirez comment calculer vos besoins caloriques en fonction de votre métabolisme et de vos activités quotidiennes. Apprenez à répartir efficacement vos macronutriments (protéines, glucides, lipides) pour optimiser vos performance.",
           titleLeft: "Vidéos de démonstration",
           descriptionLeft:
             "Des vidéos explicatives pour apprendre et exécuter chaque mouvement correctement. Un support visuel clair pour vous guider et maximiser vos résultats.",
@@ -42,7 +42,10 @@ export default function Home() {
             "Débutant, intermédiaire, ou avancé ? Choisissez le programme qui correspond à votre niveau pour progresser efficacement, avec des techniques d’entraînement adaptées à chaque étape.",
         }}
       >
-        <FeaturesContainer title="Les programmes inclus">
+        <FeaturesContainer
+          title="Inclus avec votre programme"
+          text="sans suivi"
+        >
           {featuresProgram.map((item, index) => (
             <ItemsFeatures
               key={index}
@@ -77,7 +80,10 @@ export default function Home() {
         }}
         isCoaching
       >
-        <FeaturesContainer title="Tous les plans inclus">
+        <FeaturesContainer
+          title="Vos avantages en coaching personnalisé"
+          text="avec suivi"
+        >
           {featuresCoaching.map((item, index) => (
             <ItemsFeatures
               key={index}
