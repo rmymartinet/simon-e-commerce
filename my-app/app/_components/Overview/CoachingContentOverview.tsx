@@ -5,11 +5,11 @@ import gsap from "gsap";
 import { Flip } from "gsap/Flip";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useEffect, useRef } from "react";
-import Iphone from "./Iphone";
+import Iphone from "../Iphone";
 
 gsap.registerPlugin(useGSAP, Flip, ScrollTrigger);
 
-const CoachingContent = ({ gradient }: OverviewSectionProps) => {
+const CoachingContentOverview = ({ gradient }: OverviewSectionProps) => {
   const imagesUrls = {
     accueil: "/images/virtualgym_app/accueilapp.png",
     userInterface: "/images/virtualgym_app/user_interface.png",
@@ -154,4 +154,4 @@ const CoachingContent = ({ gradient }: OverviewSectionProps) => {
   );
 };
 
-export default CoachingContent;
+export default CoachingContentOverview;
