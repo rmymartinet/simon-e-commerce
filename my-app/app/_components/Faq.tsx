@@ -7,7 +7,7 @@ const Faq = () => {
       <div className="mb-20 flex flex-col items-center justify-center gap-4">
         <h1 className="text-7xl">Faq</h1>
         <p className="text-slate-400">
-          The most common questions we get asked.
+          Les questions les plus fréquemment posées.
         </p>
       </div>
       <div className="overflow-hidden rounded-2xl border border-slate-200">
