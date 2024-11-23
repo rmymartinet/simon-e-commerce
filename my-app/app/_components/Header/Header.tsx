@@ -12,7 +12,7 @@ const Header = () => {
           autoPlay
           loop
           muted
-          src="/videos/yo.mp4"
+          src="/videos/header_bg.mp4"
           className="h-full w-full object-cover brightness-[0.9] filter"
           preload="true"
         ></video>
