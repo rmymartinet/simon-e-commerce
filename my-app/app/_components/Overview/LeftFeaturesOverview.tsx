@@ -4,11 +4,11 @@ import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { useRef } from "react";
 import CircleChart from "../Circlechart";
-import Iphone from "./Iphone";
+import Iphone from "../Iphone";
 
 gsap.registerPlugin(useGSAP);
 
-const OverviewLeftFeatures = ({
+const LeftFeaturesOverview = ({
   isCoaching,
   title,
   text,
@@ -87,4 +87,4 @@ const OverviewLeftFeatures = ({
   );
 };
 
-export default OverviewLeftFeatures;
+export default LeftFeaturesOverview;
