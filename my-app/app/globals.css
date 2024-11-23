@@ -21,28 +21,11 @@ body {
 }
 
 .program-gradient {
-  background: rgb(201, 169, 255);
-  background: -moz-radial-gradient(
-    circle,
-    rgba(201, 169, 255, 1) 0%,
-    rgba(204, 237, 255, 1) 100%
-  );
-  background: -webkit-radial-gradient(
-    circle,
-    rgba(201, 169, 255, 1) 0%,
-    rgba(204, 237, 255, 1) 100%
-  );
-  background: radial-gradient(
-    circle,
-    rgba(201, 169, 255, 1) 0%,
-    rgba(204, 237, 255, 1) 100%
-  );
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#c9a9ff",endColorstr="#ccedff",GradientType=1);
+  background: linear-gradient(90deg, #f6d8e5 0%, #e4c5f4 100%);
 }
 
 .coaching-gradient {
-  /* background: linear-gradient(90deg, #ffcca5 0%, #ffe6d5 100%); */
-  background: linear-gradient(90deg, #ffd1d1 0%, #ff9e80 100%);
+  background: linear-gradient(90deg, #fde5d2 0%, #fad4e4 100%);
 }
 
 .footer-gradient {
@@ -55,6 +38,8 @@ body {
   rotate: -6deg;
   filter: blur(6.625rem);
 }
+
+/* Glassmorph to change */
 
 .glassmorph {
   background: rgba(0, 0, 0, 0.02);
@@ -79,14 +64,59 @@ body {
   background-repeat: no-repeat;
 }
 
-.glassmorph1 {
-  background: rgba(255, 255, 255, 0.5);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-}
-
-.test {
+.nav-bg {
   background-color: rgba(255, 255, 255, 0.09);
   backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.05);
 }
+
+.fixed-bg-purple {
+  background: #af4ce0;
+  background: radial-gradient(at center, #af4ce0, #9c7ae2);
+  background-size: 300% 300%;
+
+  filter: blur(100px);
+  opacity: 0.7;
+  border: rgba(255, 255, 255, 0.1);
+  animation: gradientAnimation 8s ease infinite;
+}
+
+@keyframes gradientAnimation {
+  0% {
+    background-position: 0% 0%;
+  }
+  50% {
+    background-position: 100% 100%;
+  }
+  100% {
+    background-position: 0% 0%;
+  }
+}
+
+.animate-bg-purple {
+  background: #af4ce0;
+  background: radial-gradient(at center, #c77dff, #f1f1f1);
+  background-size: 300% 300%;
+
+  filter: blur(100px);
+  opacity: 0.7;
+  border: rgba(255, 255, 255, 0.1);
+  animation: gradientAnimation 8s ease infinite;
+}
+
+@keyframes gradientAnimation {
+  0% {
+    background-position: 0% 0%;
+  }
+  50% {
+    background-position: 100% 100%;
+  }
+  100% {
+    background-position: 0% 0%;
+  }
+}
+
+.laoding {
+  transform-style: preserve-3d;
+  perspective: 2000px;
+}
+/* text-[#696868] */

@@ -14,7 +14,9 @@ const CardPriceContainer = ({ filterName }: CardPriceContainerProps) => {
   return (
     <>
       {filterName === "programmes" && (
-        <div className="flex flex-col gap-10 lg:grid lg:w-[80%] lg:grid-cols-3">
+        <div className="relative flex flex-col gap-10 lg:grid lg:w-[80%] lg:grid-cols-3">
+          <div className="test-g absolute bottom-0 right-0 -z-10 h-full w-full"></div>
+
           <CardPrice
             title="Débutant"
             price="99"
@@ -22,6 +24,7 @@ const CardPriceContainer = ({ filterName }: CardPriceContainerProps) => {
             includes={programIncludes}
           />
           <CardPrice
+            bgColor
             title="Intermédiaire"
             price="99"
             text="Consolidez vos acquis et progressez à votre rythme. Une approche équilibrée pour des résultats visibles"
@@ -30,7 +33,6 @@ const CardPriceContainer = ({ filterName }: CardPriceContainerProps) => {
           />
           <CardPrice
             title="Avancé"
-            bgColor
             price="99"
             text="Pour ceux qui veulent aller plus loin : un programme complet pour des objectifs ambitieux"
             discount="Économisez 23%"
@@ -39,7 +41,9 @@ const CardPriceContainer = ({ filterName }: CardPriceContainerProps) => {
         </div>
       )}
       {filterName === "coaching" && (
-        <div className="flex flex-col gap-10 px-2 md:px-20 lg:grid lg:w-[80%] lg:grid-cols-3 lg:px-0">
+        <div className="relative flex flex-col gap-10 px-2 md:px-20 lg:grid lg:w-[80%] lg:grid-cols-3 lg:px-0">
+          <div className="test-g absolute bottom-0 right-0 -z-10 h-full w-full"></div>
+
           <CardPrice
             title="Essai"
             mounth="3 mois"
@@ -48,6 +52,7 @@ const CardPriceContainer = ({ filterName }: CardPriceContainerProps) => {
             includes={coachingIncludes3Mounth}
           />
           <CardPrice
+            bgColor
             title="Standard"
             mounth="6 mois"
             price="109"
@@ -57,7 +62,6 @@ const CardPriceContainer = ({ filterName }: CardPriceContainerProps) => {
           />
           <CardPrice
             title="Intensif"
-            bgColor
             mounth="9 mois"
             price="99"
             text="Transformez-vous totalement avec un suivi intensif. L'engagement ultime pour un changement profond et pérenne."
