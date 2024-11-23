@@ -36,15 +36,18 @@ const Filter = ({ filterName, setFilterName }: FilterProps) => {
     <div className="relative grid grid-cols-2 justify-items-center gap-10 overflow-hidden rounded-full border p-4 shadow-inner">
       <div
         ref={bgFilterRef}
-        className="absolute -z-10 h-full w-1/2 rounded-full bg-slate-300 shadow-md"
+        className="absolute -z-10 h-full w-1/2 rounded-full bg-[#9D4EDD] shadow-md"
       ></div>
       <button
-        className="text-black"
+        className={`text-black ${filterName === "programmes" ? "font-semibold text-white" : ""}`}
         onClick={() => setFilterName("programmes")}
       >
         Programmes
       </button>
-      <button className="text-black" onClick={() => setFilterName("coaching")}>
+      <button
+        className={`text-black ${filterName === "coaching" ? "font-semibold text-white" : ""}`}
+        onClick={() => setFilterName("coaching")}
+      >
         Coaching
       </button>
     </div>
