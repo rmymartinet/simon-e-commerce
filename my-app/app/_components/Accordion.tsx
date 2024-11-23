@@ -8,6 +8,7 @@ const Accordion = ({ title, text }) => {
   const [isOpen, setIsOpen] = useState(false);
   const textRef = useRef(null);
   const iconRef = useRef(null);
+  const titleRef = useRef(null);
 
   const handleClick = () => {
     setIsOpen(!isOpen);
@@ -28,10 +29,21 @@ const Accordion = ({ title, text }) => {
         ease: "power3.inOut",
         color: "#9D4EDD",
       });
+      gsap.to(titleRef.current, {
+        color: "#9D4EDD",
+        duration: 0.7,
+        ease: "power3.inOut",
+      });
     } else {
       gsap.to(textRef.current, {
         height: 0,
         opacity: 0,
+        duration: 0.7,
+        ease: "power3.inOut",
+      });
+
+      gsap.to(titleRef.current, {
+        color: "black",
         duration: 0.7,
         ease: "power3.inOut",
       });
@@ -49,14 +61,16 @@ const Accordion = ({ title, text }) => {
     <div className="relative cursor-pointer p-4" onClick={() => handleClick()}>
       <div className="flex flex-col gap-4">
         <div className="flex items-center justify-between gap-40">
-          <h1 className="text-xl">{title}</h1>
+          <h1 ref={titleRef} className="text-xl">
+            {title}
+          </h1>
           <div ref={iconRef} className="rotate-45 cursor-pointer">
             <CgClose size={16} />
           </div>
         </div>
         <div
           ref={textRef}
-          className="h-0 w-[70%] overflow-hidden text-pretty opacity-0"
+          className="h-0 overflow-hidden text-pretty opacity-0 md:w-[70%]"
           dangerouslySetInnerHTML={{ __html: text }}
         />
       </div>
