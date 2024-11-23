@@ -1,13 +1,13 @@
-import Image from "next/image";
-
+import { OverviewSectionProps } from "@/types/types";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import Image from "next/image";
 import { useRef } from "react";
 
 gsap.registerPlugin(useGSAP, ScrollTrigger);
 
-const ProgramContentDesktop = () => {
+const ProgramContentOverview = ({ gradient }: OverviewSectionProps) => {
   const deskProgram1Ref = useRef<HTMLDivElement>(null);
   const deskProgram2Ref = useRef<HTMLDivElement>(null);
   const deskProgram3Ref = useRef<HTMLDivElement>(null);
@@ -44,20 +44,22 @@ const ProgramContentDesktop = () => {
     });
   }, []);
   return (
-    <>
+    <div
+      className={`${gradient} relative h-full w-full overflow-hidden rounded-2xl border-2 lg:col-start-2-end-4`}
+    >
       <div
         ref={deskProgram1Ref}
         className="glassmorph1 absolute left-1/2 top-10 z-50 flex -translate-x-1/2 flex-col gap-40 overflow-hidden rounded-3xl p-4 opacity-0"
       >
         <Image
-          className="h-full w-full rounded-xl object-cover"
+          className="h-full w-full rounded-xl object-contain"
           src="/images/pdf/cycle.png"
           alt=""
           width={350}
           height={350}
         />
         <Image
-          className="h-full w-full rounded-xl object-cover"
+          className="h-full w-full rounded-xl object-contain"
           src="/images/pdf/day.png"
           alt=""
           width={350}
@@ -69,7 +71,7 @@ const ProgramContentDesktop = () => {
         className="absolute left-24 top-20 z-10 overflow-hidden rounded-3xl opacity-0"
       >
         <Image
-          className="h-full w-full object-cover"
+          className="h-full w-full object-contain"
           src="/images/pdf/weekintro.png"
           alt=""
           width={350}
@@ -81,15 +83,15 @@ const ProgramContentDesktop = () => {
         className="absolute right-20 top-20 overflow-hidden rounded-3xl opacity-0"
       >
         <Image
-          className="h-full w-full object-cover"
+          className="h-full w-full object-contain"
           src="/images/pdf/details.png"
           alt=""
           width={350}
           height={350}
         />
       </div>
-    </>
+    </div>
   );
 };
 
-export default ProgramContentDesktop;
+export default ProgramContentOverview;
