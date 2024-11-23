@@ -3,12 +3,12 @@ import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useRef } from "react";
-import OverviewFeatureLayout from "./OverviewFeatureLayout";
-import OverviewHearder from "./OverviewHearder";
+import FeatureLayoutOverview from "./FeatureLayoutOverview";
+import HeaderOverview from "./HeaderOverview";
 
 gsap.registerPlugin(useGSAP, ScrollTrigger);
 
-const OverviewSection = ({
+const SectionOverview = ({
   gradient,
   featureLayoutContent,
   isCoaching,
@@ -22,6 +22,7 @@ const OverviewSection = ({
     gsap.to(gradientRef.current, {
       scale: 1,
       duration: 1,
+      filter: "blur(20px)",
       ease: "power2.out",
       scrollTrigger: {
         trigger: containerRef.current,
@@ -37,8 +38,8 @@ const OverviewSection = ({
           ref={gradientRef}
           className={`absolute ${gradient} left-0 top-0 -z-10 h-1/4 w-screen scale-50 md:h-1/3 lg:h-1/3`}
         ></div>
-        <OverviewHearder headerProps={headerProps} />
-        <OverviewFeatureLayout
+        <HeaderOverview headerProps={headerProps} />
+        <FeatureLayoutOverview
           featureLayoutContent={featureLayoutContent}
           gradient={gradient}
           isCoaching={isCoaching}
@@ -49,4 +50,4 @@ const OverviewSection = ({
   );
 };
 
-export default OverviewSection;
+export default SectionOverview;
