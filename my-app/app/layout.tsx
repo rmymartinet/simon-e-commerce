@@ -5,6 +5,7 @@ import Footer from "./_components/Footer/Footer";
 import NavBar from "./_components/Nav/NavBar";
 import { AnimationProvider } from "./AnimationContext";
 import "./globals.css";
+import LoadingPage from "./_components/LoadingPage";
 
 export default function RootLayout({
   children,
@@ -22,7 +23,7 @@ export default function RootLayout({
     <html lang="en">
       <body id="main-container" className="antialiased">
         <AnimationProvider>
-          {/* <LoadingPage /> */}
+          <LoadingPage />
           <NavBar />
           {children}
           <Footer />
