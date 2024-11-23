@@ -48,6 +48,12 @@ body {
   border-radius: 10px;
 }
 
+.footer-glassmorph {
+  background: rgba(0, 0, 0, 0.14);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
 .black-glassmorph {
   background: rgba(0, 0, 0, 0.025);
   backdrop-filter: blur(11.5px);
