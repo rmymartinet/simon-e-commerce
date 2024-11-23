@@ -15,7 +15,7 @@ const CardPriceContainer = ({ filterName }: CardPriceContainerProps) => {
     <>
       {filterName === "programmes" && (
         <div className="relative flex flex-col gap-10 lg:grid lg:w-[80%] lg:grid-cols-3">
-          <div className="test-g absolute bottom-0 right-0 -z-10 h-full w-full"></div>
+          <div className="fixed-bg-purple absolute bottom-0 right-0 -z-10 h-full w-full"></div>
 
           <CardPrice
             title="Débutant"
@@ -42,7 +42,7 @@ const CardPriceContainer = ({ filterName }: CardPriceContainerProps) => {
       )}
       {filterName === "coaching" && (
         <div className="relative flex flex-col gap-10 px-2 md:px-20 lg:grid lg:w-[80%] lg:grid-cols-3 lg:px-0">
-          <div className="test-g absolute bottom-0 right-0 -z-10 h-full w-full"></div>
+          <div className="fixed-bg-purple absolute bottom-0 right-0 -z-10 h-full w-full"></div>
 
           <CardPrice
             title="Essai"
