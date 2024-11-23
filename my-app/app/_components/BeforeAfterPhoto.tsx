@@ -9,21 +9,39 @@ gsap.registerPlugin(useGSAP);
 
 const BeforeAfterPhoto = () => {
   const chgRef = useRef<(HTMLDivElement | null)[]>([]);
-  const names = ["Romain", "Rémy", "Théo", "Anouk"];
+  const names = ["Romain", "Léa", "Nathan", "Justine"];
   const imagesUrls = [
     {
       name: "romain",
       firstMoutnh: "1mois",
       lastMoutnh: "6mois",
+      result: "- 4kg",
       before: "/images/before_after/romain/1.jpg",
       after: "/images/before_after/romain/2.jpg",
     },
     {
       name: "lea",
       firstMoutnh: "1mois",
-      lastMoutnh: "6mois",
+      lastMoutnh: "4mois",
+      result: "+ 3kg",
       before: "/images/before_after/lea/1.jpg",
       after: "/images/before_after/lea/2.jpg",
+    },
+    {
+      name: "nathan",
+      firstMoutnh: "1mois",
+      lastMoutnh: "8mois",
+      result: "+ 12kg",
+      before: "/images/before_after/nathan/1.png",
+      after: "/images/before_after/nathan/2.png",
+    },
+    {
+      name: "justine",
+      firstMoutnh: "1mois",
+      lastMoutnh: "5mois",
+      result: "- 8kg",
+      before: "/images/before_after/justine/1.png",
+      after: "/images/before_after/justine/2.png",
     },
   ];
 
@@ -55,7 +73,7 @@ const BeforeAfterPhoto = () => {
   }, []);
 
   return (
-    <div className="relative flex flex-col items-center justify-center p-6 pb-40">
+    <div className="relative flex flex-col items-center justify-center p-6">
       <div className="relative mb-20 w-full justify-center gap-4 md:inline-flex lg:mb-40">
         <h1 className="text-4xl lg:text-6xl">Changer comme</h1>
         <div className="relative h-20 w-40 overflow-hidden pb-4 lg:w-72">
@@ -87,25 +105,29 @@ const BeforeAfterPhoto = () => {
                 <div className="py-2">
                   <span className="text-xl">{url.firstMoutnh}</span>
                 </div>
-                <Image
-                  src={url.before}
-                  alt={`Image avant ${url.name}`}
-                  width={400}
-                  height={400}
-                  className="h-full w-full object-cover"
-                />
+                {url.before && (
+                  <Image
+                    src={url.before}
+                    alt={`Image avant ${url.name}`}
+                    width={400}
+                    height={400}
+                    className="h-full w-full object-cover"
+                  />
+                )}
               </div>
               <div className="flex flex-col items-center bg-black font-semibold text-white">
                 <div className="py-2">
-                  <span className="text-xl">{url.firstMoutnh}</span>
+                  <span className="text-xl">{url.lastMoutnh}</span>
                 </div>
-                <Image
-                  src={url.after}
-                  alt={`Image après ${url.name}`}
-                  width={400}
-                  height={400}
-                  className="h-full w-full object-cover"
-                />
+                {url.after && (
+                  <Image
+                    src={url.after}
+                    alt={`Image après ${url.name}`}
+                    width={400}
+                    height={400}
+                    className="h-full w-full object-cover"
+                  />
+                )}
               </div>
             </div>
           );
