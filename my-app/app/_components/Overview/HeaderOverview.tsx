@@ -1,6 +1,6 @@
 import { OverViewHeaderProps } from "@/types/types";
 
-const OverviewHearder = ({
+const HeaderOverview = ({
   headerProps,
 }: {
   headerProps: OverViewHeaderProps;
@@ -23,4 +23,4 @@ const OverviewHearder = ({
   );
 };
 
-export default OverviewHearder;
+export default HeaderOverview;
