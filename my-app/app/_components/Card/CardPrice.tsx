@@ -15,7 +15,7 @@ const CardPrice = ({
       className={`relative flex flex-col rounded-3xl px-10 py-7 ${
         bgColor
           ? "scale-105 bg-[#10002B] text-white"
-          : "bg-[#ECE0F5] text-black"
+          : "bg-[#F8F8F8] text-black"
       }`}
     >
       {bgColor && (
@@ -38,7 +38,7 @@ const CardPrice = ({
       <Price price={price} mounth={mounth} />
       <div className="grid grid-rows-cardPrice">
         <p className="mt-10 text-center md:text-start">{text}</p>
-        <button className="bg-button mb-10 w-full self-end rounded-xl px-4 py-4 text-center text-lg font-semibold text-white">
+        <button className="mb-10 w-full self-end rounded-xl bg-button px-4 py-4 text-center text-lg font-semibold text-white">
           Acheter
         </button>
         <ul className="flex flex-col gap-3">

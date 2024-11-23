@@ -13,11 +13,11 @@ export default function Pricing() {
   const [filterName, setFilterName] = useState("programmes");
 
   return (
-    <div className="relative mt-32 flex min-h-screen flex-col items-end justify-center gap-40 px-2 md:px-20 lg:px-0">
+    <div className="relative mt-60 flex min-h-screen flex-col items-end justify-center gap-40 px-2 md:px-20 lg:px-0">
       <div className="absolute left-0 top-0 -z-10 h-full w-full"></div>
       <div className="flex flex-col items-center justify-center gap-40">
         <div className="flex flex-col items-center gap-4">
-          <h1 className="text-center text-4xl md:text-6xl">
+          <h1 className="text-center text-4xl font-bold md:text-6xl">
             Une solution pour chaques besoins
           </h1>
           <p className="text-center text-xl text-slate-400 md:text-start">
