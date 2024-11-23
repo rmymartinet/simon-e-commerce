@@ -8,7 +8,7 @@ import BeforeAfterPhoto from "./_components/BeforeAfterPhoto";
 import FeaturesContainer from "./_components/Features/FeaturesContainer";
 import ItemsFeatures from "./_components/Features/ItemsFeatures";
 import Header from "./_components/Header/Header";
-import OverviewSection from "./_components/Overview/OverviewSection";
+import SectionOverview from "./_components/Overview/SectionOverview";
 import { featuresCoaching, featuresProgram } from "./data/features";
 
 gsap.registerPlugin(useGSAP);
@@ -17,7 +17,7 @@ export default function Home() {
   return (
     <>
       <Header />
-      <OverviewSection
+      <SectionOverview
         gradient="program-gradient"
         bgColor="#CADCDC"
         isCoaching={false}
@@ -27,11 +27,11 @@ export default function Home() {
           title: "Programmes adaptés",
           description:
             "Chaque programme est conçu pour répondre à vos besoins et vous permettre de progresser rapidement selon votre niveau et vos objectifs.",
-          titleRight: "Conseils nutritionnels",
-          descriptionRight:
-            "Guide complet pour prendre en main votre alimentation et atteindre vos objectifs. Vous y découvrirez comment calculer vos besoins caloriques en fonction de votre métabolisme et de vos activités quotidiennes. Apprenez à répartir efficacement vos macronutriments (protéines, glucides, lipides) pour optimiser vos performance.",
-          titleLeft: "Vidéos de démonstration",
+          titleLeft: "Conseils nutritionnels",
           descriptionLeft:
+            "Guide complet pour prendre en main votre alimentation et atteindre vos objectifs. Vous y découvrirez comment calculer vos besoins caloriques en fonction de votre métabolisme et de vos activités quotidiennes. Apprenez à répartir efficacement vos macronutriments (protéines, glucides, lipides) pour optimiser vos performance.",
+          titleRight: "Vidéos de démonstration",
+          descriptionRight:
             "Des vidéos explicatives pour apprendre et exécuter chaque mouvement correctement. Un support visuel clair pour vous guider et maximiser vos résultats.",
         }}
         headerProps={{
@@ -55,8 +55,8 @@ export default function Home() {
             />
           ))}
         </FeaturesContainer>
-      </OverviewSection>
-      <OverviewSection
+      </SectionOverview>
+      <SectionOverview
         gradient="coaching-gradient"
         headerProps={{
           logo: <FaUserFriends size={20} />,
@@ -71,11 +71,11 @@ export default function Home() {
           title: "Coaching personnalisé",
           description:
             "Chaque programme est conçu pour répondre à vos besoins et vous permettre de progresser rapidement selon votre niveau et vos objectifs.",
-          titleRight: "Suivi nutritionnel",
-          descriptionRight:
-            "Un accompagnement sur mesure grâce à l’application Food. Échangez en temps réel avec votre coach pour ajuster votre alimentation selon vos besoins, vos envies et vos objectifs. Une approche flexible et personnalisée pour des résultats durables.",
-          titleLeft: "Suivi régulier en facetime",
+          titleLeft: "Suivi nutritionnel",
           descriptionLeft:
+            "Un accompagnement sur mesure grâce à l’application Food. Échangez en temps réel avec votre coach pour ajuster votre alimentation selon vos besoins, vos envies et vos objectifs. Une approche flexible et personnalisée pour des résultats durables.",
+          titleRight: "Suivi régulier en facetime",
+          descriptionRight:
             "Bénéficiez d’appels vidéo réguliers avec votre coach pour faire le point sur vos progrès, ajuster votre programme et répondre à vos questions, en fonction de l’offre choisie.",
         }}
         isCoaching
@@ -93,7 +93,7 @@ export default function Home() {
             />
           ))}
         </FeaturesContainer>
-      </OverviewSection>
+      </SectionOverview>
       <BeforeAfterPhoto />
     </>
   );
