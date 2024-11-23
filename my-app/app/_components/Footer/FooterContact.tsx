@@ -1,5 +1,4 @@
 import { CiMail } from "react-icons/ci";
-import { GrLocationPin } from "react-icons/gr";
 import {
   PiInstagramLogoFill,
   PiLinkedinLogoFill,
@@ -16,10 +15,10 @@ const FooterContact = () => {
   return (
     <div className="flex flex-col gap-10 text-lg">
       <div className="flex gap-20">
-        <div className="flex items-center gap-4">
+        {/* <div className="flex items-center gap-4">
           <GrLocationPin size={20} aria-label="Location icon" />
           <span>Cognac, France</span>
-        </div>
+        </div> */}
         <div className="mt-4 flex items-center gap-4 md:mt-0">
           <CiMail size={20} aria-label="Mail icon" />
           <span>Contactez-moi</span>
