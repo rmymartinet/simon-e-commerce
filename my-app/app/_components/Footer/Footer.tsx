@@ -14,8 +14,8 @@ const Footer = () => {
       <div className="flex flex-col justify-between gap-20">
         <div className="flex flex-col justify-between gap-20 lg:flex-row lg:gap-0">
           <div className="flex flex-col gap-6">
-            <h1 className="text-2xl">Commencer dès maintenant</h1>
-            <button className="h-max w-max rounded-lg bg-button p-2 px-4 font-semibold">
+            <h1 className="text-3xl">Commencer dès maintenant</h1>
+            <button className="h-max w-max rounded-lg bg-button p-2 px-4 text-xl">
               Commencer
             </button>
           </div>
