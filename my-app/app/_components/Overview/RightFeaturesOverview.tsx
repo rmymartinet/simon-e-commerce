@@ -3,9 +3,9 @@ import { OverviewLeftAndRightFeaturesProps } from "@/types/types";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { useRef } from "react";
-import Iphone from "./Iphone";
+import Iphone from "../Iphone";
 
-const OverviewRightFeatures = ({
+const RightFeaturesOverview = ({
   isCoaching,
   title,
   text,
@@ -145,4 +145,4 @@ const OverviewRightFeatures = ({
   );
 };
 
-export default OverviewRightFeatures;
+export default RightFeaturesOverview;
