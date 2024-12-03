@@ -23,7 +23,7 @@ const CoachingContentOverview = ({ gradient }: OverviewSectionProps) => {
   const iphone1bis = useRef(null);
   const iphone2 = useRef(null);
   const iphone3 = useRef(null);
-  const textRef = useRef(null);
+  const textContainerRef = useRef(null);
   const cochingContainerRef = useRef(null);
 
   const { width, isMounted } = useWindowWidth();
@@ -47,6 +47,8 @@ const CoachingContentOverview = ({ gradient }: OverviewSectionProps) => {
         trigger: cochingContainerRef.current,
         start: "top 50%",
       },
+      repeat: -1,
+      repeatDelay: 24,
     });
 
     // Animations initiales
@@ -67,7 +69,7 @@ const CoachingContentOverview = ({ gradient }: OverviewSectionProps) => {
         gsap.to(iphone1.current, { opacity: 0, duration: 0 }),
         gsap.to(iphone1bis.current, { opacity: 1, duration: 0 }),
         gsap.to(iphone1bis.current, { x: -225, duration: 1 }),
-        gsap.to(textRef.current, {
+        gsap.to(textContainerRef.current, {
           delay: 0.7,
           opacity: 1,
           duration: 1,
@@ -78,12 +80,6 @@ const CoachingContentOverview = ({ gradient }: OverviewSectionProps) => {
       tl.add([
         gsap.to(iphone1.current, { opacity: 0, duration: 0 }),
         gsap.to(iphone1bis.current, { opacity: 1, duration: 0 }),
-        gsap.to(textRef.current, {
-          delay: 0.7,
-          opacity: 1,
-          duration: 1,
-          ease: "power2.out",
-        }),
       ]);
     }
 
@@ -126,8 +122,8 @@ const CoachingContentOverview = ({ gradient }: OverviewSectionProps) => {
           <Iphone videoUrls={videosUrls.intro} />
         </div>
       </div>
-      {/* <div
-        ref={textRef}
+      <div
+        ref={textContainerRef}
         className="absolute right-20 top-40 flex w-[35%] flex-col items-end gap-20 opacity-0"
       >
         <div className="center flex flex-col gap-4 overflow-hidden rounded-xl">
@@ -149,7 +145,7 @@ const CoachingContentOverview = ({ gradient }: OverviewSectionProps) => {
             pour vous guider.
           </p>
         </div>
-      </div> */}
+      </div>
     </div>
   );
 };
