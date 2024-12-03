@@ -3,7 +3,7 @@ import { OverviewLeftAndRightFeaturesProps } from "@/types/types";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { useRef } from "react";
-import CircleChart from "../Circlechart";
+import CircleChart from "../Calories/CircleChart";
 import Iphone from "../Iphone";
 
 gsap.registerPlugin(useGSAP);
@@ -14,11 +14,10 @@ const LeftFeaturesOverview = ({
   text,
 }: OverviewLeftAndRightFeaturesProps) => {
   const data = {
-    carbs: 250,
-    proteins: 300,
-    fats: 240,
+    carbs: 400,
+    proteins: 160,
+    fats: 130,
   };
-
   const containerRef = useRef(null);
   const foodRef = useRef<(HTMLDivElement | null)[]>([]);
 
