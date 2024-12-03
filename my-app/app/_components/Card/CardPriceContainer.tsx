@@ -6,11 +6,7 @@ import {
 } from "../../data/cardPrice";
 import CardPrice from "./CardPrice";
 
-interface CardPriceContainerProps {
-  filterName: string;
-}
-
-const CardPriceContainer = ({ filterName }: CardPriceContainerProps) => {
+const CardPriceContainer = ({ filterName }: { filterName: string }) => {
   return (
     <>
       {filterName === "programmes" && (
@@ -19,21 +15,21 @@ const CardPriceContainer = ({ filterName }: CardPriceContainerProps) => {
 
           <CardPrice
             title="Débutant"
-            price="99"
+            price="77"
             text="Un programme simple pour bien démarrer et poser les bases d’une nouvelle routine. Idéal pour débuter en douceur"
             includes={programIncludes}
           />
           <CardPrice
             bgColor
             title="Intermédiaire"
-            price="99"
+            price="87"
             text="Consolidez vos acquis et progressez à votre rythme. Une approche équilibrée pour des résultats visibles"
             discount="Économisez 16%"
             includes={programIncludes}
           />
           <CardPrice
             title="Avancé"
-            price="99"
+            price="97"
             text="Pour ceux qui veulent aller plus loin : un programme complet pour des objectifs ambitieux"
             discount="Économisez 23%"
             includes={programIncludes}
@@ -47,7 +43,8 @@ const CardPriceContainer = ({ filterName }: CardPriceContainerProps) => {
           <CardPrice
             title="Essai"
             mounth="3 mois"
-            price="129"
+            dayPrice="5"
+            price="147"
             text="Testez nos services et observez les premiers changements. Parfait pour initier votre transformation de style de vie."
             includes={coachingIncludes3Mounth}
           />
@@ -55,7 +52,8 @@ const CardPriceContainer = ({ filterName }: CardPriceContainerProps) => {
             bgColor
             title="Standard"
             mounth="6 mois"
-            price="109"
+            dayPrice="4,50"
+            price="127"
             text="Ancrez des habitudes saines et obtenez des résultats durables. Le meilleur équilibre entre durée et efficacité."
             discount="Economisez 16%"
             includes={coachingIncludes6Mounth}
@@ -63,7 +61,8 @@ const CardPriceContainer = ({ filterName }: CardPriceContainerProps) => {
           <CardPrice
             title="Intensif"
             mounth="9 mois"
-            price="99"
+            dayPrice="4"
+            price="107"
             text="Transformez-vous totalement avec un suivi intensif. L'engagement ultime pour un changement profond et pérenne."
             discount="Economisez 23%"
             includes={coachingIncludes9Mounth}

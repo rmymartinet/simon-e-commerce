@@ -9,6 +9,7 @@ const CardPrice = ({
   text,
   includes,
   bgColor,
+  dayPrice,
 }: CardPriceProps) => {
   return (
     <div
@@ -20,22 +21,22 @@ const CardPrice = ({
     >
       {bgColor && (
         <>
-          <div className="absolute -top-4 left-1/2 w-max -translate-x-1/2 rounded-xl bg-[#9D4EDD] px-4 text-lg text-white md:left-[80%]">
-            Plus populaire
+          <div className="popular-box absolute -right-10 -top-4 w-max -translate-x-1/2 rounded-full p-2 font-semibold">
+            Meilleur choix
           </div>
         </>
       )}
       <div className="mb-20 flex justify-between">
-        <h1 className="text-2xl font-semibold">{title}</h1>
+        <h1 className="text-4xl font-semibold">{title}</h1>
         <div className="flex flex-col gap-4">
           {mounth && (
             <span className="flex w-max items-center justify-center rounded-full px-4 py-2 shadow-inner">
-              {mounth}
+              Durée {mounth}
             </span>
           )}
         </div>
       </div>
-      <Price price={price} mounth={mounth} />
+      <Price price={price} mounth={mounth} dayPrice={dayPrice} />
       <div className="grid grid-rows-cardPrice">
         <p className="mt-10 text-center md:text-start">{text}</p>
         <button className="mb-10 w-full self-end rounded-xl bg-button px-4 py-4 text-center text-lg font-semibold text-white">
