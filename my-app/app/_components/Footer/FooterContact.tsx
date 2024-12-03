@@ -13,7 +13,7 @@ const FooterContact = () => {
   ];
 
   return (
-    <div className="flex justify-between gap-10 text-lg lg:flex-col">
+    <div className="flex w-max justify-between gap-10 text-lg lg:flex-col">
       <div className="flex gap-20">
         {/* <div className="flex items-center gap-4">
           <GrLocationPin size={20} aria-label="Location icon" />
