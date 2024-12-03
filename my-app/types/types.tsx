@@ -112,3 +112,10 @@ export interface FeedBackCardProps {
   imgUrl: string;
   text: string;
 }
+
+export interface AvailableOffersProps {
+  title: string;
+  follow: string;
+  subtitle: string;
+  features: string[];
+}
