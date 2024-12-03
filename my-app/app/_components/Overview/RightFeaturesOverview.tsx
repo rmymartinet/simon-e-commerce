@@ -26,14 +26,14 @@ const RightFeaturesOverview = ({
     revealRotateEl(containerRef);
 
     // Initial setup for video elements
-    gsap.set(videoRef.current, { xPercent: 400, opacity: 0, scale: 0 });
+    gsap.set(videoRef.current, { xPercent: 300, opacity: 0, scale: 0 });
 
     const spacing = 0.2; // Espacement entre les vidéos
 
-    const cards = gsap.utils.toArray(videoRef.current);
+    const cards = gsap.utils.toArray(videoRef.current) as HTMLDivElement[];
 
     // Fonction pour animer chaque élément vidéo
-    const animateFunc = (element) => {
+    const animateFunc = (element: HTMLDivElement) => {
       const tl = gsap.timeline();
       tl.fromTo(
         element,
@@ -51,7 +51,7 @@ const RightFeaturesOverview = ({
       ).fromTo(
         element,
         { xPercent: 400 },
-        { xPercent: -400, duration: 1.5, ease: "none", immediateRender: false }, // Durée ajustée pour ralentir la vidéo
+        { xPercent: -500, duration: 1.5, ease: "none", immediateRender: false }, // Durée ajustée pour ralentir la vidéo
         0,
       );
       return tl;
@@ -64,14 +64,18 @@ const RightFeaturesOverview = ({
     gsap.to(seamlessLoop, {
       time: "+=" + seamlessLoop.duration(),
       duration: seamlessLoop.duration() * 4, // Ajoute un facteur pour ralentir la boucle
-      repeat: -1, // Boucle infinie
+      repeat: -1,
       ease: "none",
       paused: false,
     });
   }, []);
 
   //fonction pour créer une boucle sans fin
-  function buildSeamlessLoop(items, spacing, animateFunc) {
+  function buildSeamlessLoop(
+    items: HTMLDivElement[],
+    spacing: number,
+    animateFunc: (element: HTMLDivElement) => gsap.core.Timeline,
+  ) {
     const rawSequence = gsap.timeline({ paused: true });
     const seamlessLoop = gsap.timeline({
       paused: true,
@@ -79,7 +83,7 @@ const RightFeaturesOverview = ({
     });
 
     const cycleDuration = spacing * items.length; // Garde la durée de la boucle mais ralentie
-    let dur;
+    let duration: number = 0;
 
     // Boucle à travers les éléments et crée l'animation pour chaque
     items
@@ -88,14 +92,14 @@ const RightFeaturesOverview = ({
       .forEach((item, i) => {
         const anim = animateFunc(items[i % items.length]);
         rawSequence.add(anim, i * spacing);
-        if (!dur) dur = anim.duration();
+        if (duration === 0) duration = anim.duration();
       });
 
     // Mettre à jour la position du playhead pour une boucle fluide
     seamlessLoop.fromTo(
       rawSequence,
       {
-        time: cycleDuration + dur / 2,
+        time: cycleDuration + duration / 2,
       },
       {
         time: "+=" + cycleDuration,
@@ -131,7 +135,7 @@ const RightFeaturesOverview = ({
                 loop
                 muted
                 src={url}
-              ></video>
+              />
             </div>
           ))}
         </div>
