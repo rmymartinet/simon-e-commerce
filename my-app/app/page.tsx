@@ -15,7 +15,7 @@ gsap.registerPlugin(useGSAP);
 
 export default function Home() {
   return (
-    <>
+    <section>
       <Header />
       <SectionOverview
         gradient="program-gradient"
@@ -95,6 +95,6 @@ export default function Home() {
         </FeaturesContainer>
       </SectionOverview>
       <BeforeAfterPhoto />
-    </>
+    </section>
   );
 }
