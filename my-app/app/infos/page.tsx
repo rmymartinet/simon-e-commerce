@@ -3,7 +3,7 @@ export default function Infos() {
     <div className="relative mt-40 flex min-h-screen flex-col items-center justify-center gap-40">
       <div className="relative w-[80%] overflow-hidden rounded-3xl">
         <video
-          src="/videos/home_header.mp4"
+          src="/videos/header_bg.mp4"
           className="h-full w-full object-contain"
           loop
           muted
@@ -11,17 +11,17 @@ export default function Infos() {
           controls
         ></video>
 
-        <div className="absolute left-20 top-40 flex w-[70%] flex-col">
+        {/* <div className="absolute left-20 top-40 flex w-[70%] flex-col">
           <h1 className="text-9xl font-semibold uppercase text-white mix-blend-difference">
             simon
           </h1>
           <h1 className="self-end text-9xl font-semibold uppercase text-white mix-blend-difference">
             martinet
           </h1>
-        </div>
+        </div> */}
       </div>
       <div className="relative flex gap-20">
-        <div className="test-f absolute right-0 top-0 -z-20 h-[80%] w-full" />
+        <div className="fixed-bg-purple absolute right-0 top-0 -z-20 h-[80%] w-full" />
         <div className="relative rounded-xl border border-white p-10">
           <span className="text-xl font-medium">Diplomé Staps</span>
         </div>
