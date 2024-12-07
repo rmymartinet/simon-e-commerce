@@ -1,9 +1,10 @@
-interface FooterLinkSectionProps {
+const FooterLinkSection = ({
+  title,
+  links,
+}: {
   title: string;
   links: string[];
-}
-
-const FooterLinkSection = ({ title, links }: FooterLinkSectionProps) => {
+}) => {
   return (
     <div className="flex gap-10 text-lg">
       <h4 className="w-24 text-start text-slate-200">{title}</h4>
