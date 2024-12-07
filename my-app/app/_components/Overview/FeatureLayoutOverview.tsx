@@ -46,7 +46,7 @@ const FeatureLayoutOverview = ({
         {!isCoaching && <ProgramContentOverview gradient={gradient} />}
         {isCoaching && <CoachingContentOverview gradient={gradient} />}
       </div>
-      <div className="flex flex-col gap-7 rounded-2xl pt-7 lg:grid lg:grid-cols-custom">
+      <div className="flex flex-col gap-7 rounded-2xl pt-7 lg:flex-row lg:pl-[26vw]">
         <LeftFeaturesOverview
           isCoaching={isCoaching}
           title={titleLeft}
