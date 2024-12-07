@@ -17,7 +17,7 @@ export default function IndexPage() {
   const [items, setItems] = useState<Post[]>([]);
   const [loading, setLoading] = useState(true);
   const [filteredPosts, setFilteredPosts] = useState<string>("");
-  const [clickedIndex, setClickedIndex] = useState<number>(null);
+  const [clickedIndex, setClickedIndex] = useState<number>(0);
 
   const options = { next: { revalidate: 30 } }; // Définissez les options ici
 
