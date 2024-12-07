@@ -80,8 +80,8 @@ const NutritionSteps = () => {
               ref={(el) => {
                 stepsRef.current[index] = el;
               }}
-              className="absolute left-1/2 top-1/2 h-full w-full -translate-x-1/2 -translate-y-1/2 scale-0 bg-[#E0AAFF] opacity-50 blur-[100px]"
-            ></div>
+              className="absolute left-[30%] top-1/2 h-full w-full -translate-x-1/2 -translate-y-1/2 scale-0 bg-[#E0AAFF] opacity-50 blur-[100px]"
+            />
             <StepCard
               step={step.step}
               title={step.title}
