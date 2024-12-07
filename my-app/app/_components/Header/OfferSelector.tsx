@@ -1,7 +1,7 @@
-import { useAnimation } from "@/app/AnimationContext";
 import gsap from "gsap";
 import { useEffect, useRef } from "react";
 import { IoIosArrowRoundForward } from "react-icons/io";
+import { useAnimation } from "../../AnimationContext";
 
 const OfferSelector = () => {
   const containerRef = useRef<HTMLDivElement>(null);
