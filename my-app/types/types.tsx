@@ -35,7 +35,7 @@ export interface ContentSideFeaturesProps {
 
 export interface OverviewFeatureLayoutProps {
   featureLayoutContent: ContentSideFeaturesProps;
-  gradient: string;
+  gradient?: string;
   isCoaching: boolean;
 }
 
@@ -118,4 +118,55 @@ export interface AvailableOffersProps {
   follow: string;
   subtitle: string;
   features: string[];
+}
+
+export interface BlogCardProps {
+  width: string;
+  imgSrc: string;
+  title: string;
+  subtitle: string;
+  text: string;
+}
+
+export interface LineChartWeightProps {
+  startWeight: number;
+  weightChange: number;
+  targetWeight: number;
+}
+
+export interface StepCardProps {
+  step: number;
+  title: string;
+  content: string;
+  bgClass?: string;
+  children: React.ReactNode;
+}
+
+export interface ItemsFeaturesProps {
+  logo: React.ReactNode;
+  title: string;
+  paragraph: string;
+}
+
+export interface FilterProps {
+  filterName: string;
+  setFilterName: (name: string) => void;
+}
+
+export interface Post {
+  _id: string;
+  title: string;
+  image: string;
+  slug: { current: string };
+  publishedAt: string;
+  teaser: string;
+  tags: string[];
+}
+
+export interface FilterBlogProps {
+  posts: Post;
+  filteredPosts: string;
+  setFilteredPosts: React.Dispatch<React.SetStateAction<string>>;
+  clickedIndex: number | null;
+  setClickedIndex: (index: number | null) => void;
 }
