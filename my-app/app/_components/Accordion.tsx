@@ -4,7 +4,7 @@ import { useRef, useState } from "react";
 import { CgClose } from "react-icons/cg";
 gsap.registerPlugin(useGSAP);
 
-const Accordion = ({ title, text }) => {
+const Accordion = ({ title, text }: { title: string; text: string }) => {
   const [isOpen, setIsOpen] = useState(false);
   const textRef = useRef(null);
   const iconRef = useRef(null);
@@ -60,8 +60,8 @@ const Accordion = ({ title, text }) => {
   return (
     <div className="relative cursor-pointer p-4" onClick={() => handleClick()}>
       <div className="flex flex-col gap-4">
-        <div className="flex items-center justify-between gap-40">
-          <h1 ref={titleRef} className="text-xl">
+        <div className="flex items-center justify-between gap-16 md:gap-40">
+          <h1 ref={titleRef} className="text-base md:text-xl">
             {title}
           </h1>
           <div ref={iconRef} className="rotate-45 cursor-pointer">
