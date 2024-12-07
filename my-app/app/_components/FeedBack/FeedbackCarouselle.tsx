@@ -4,10 +4,10 @@ import { useEffect, useRef, useState } from "react";
 import FeedBackCard from "./FeedBackCard";
 
 const FeedBackCarouselle = () => {
-  const container1Ref = useRef(null);
-  const container2Ref = useRef(null);
-  const mainContainerRef = useRef(null);
-  const animationRef = useRef(null);
+  const container1Ref = useRef<HTMLDivElement>(null);
+  const container2Ref = useRef<HTMLDivElement>(null);
+  const mainContainerRef = useRef<HTMLDivElement>(null);
+  const animationRef = useRef<gsap.core.Tween | null>(null);
 
   const [isHover, setIsHover] = useState(false);
 
@@ -34,7 +34,7 @@ const FeedBackCarouselle = () => {
         [container1, container2],
         { x: "16px" }, // Position de départ
         {
-          x: -mainContainerRef.current.offsetWidth, // Déplace d'une largeur de conteneur
+          x: -(mainContainerRef.current?.offsetWidth || 0), // Déplace d'une largeur de conteneur
           duration: 40, // Durée initiale
           ease: "none", // Pas d'accélération pour un mouvement fluide
           repeat: -1, // Répète l'animation indéfiniment
@@ -92,7 +92,6 @@ const FeedBackCarouselle = () => {
             </div>
           ))}
         </div>
-
         {/* Conteneur 2 */}
         <div ref={container2Ref} className="flex gap-4">
           {feedBack.slice(-5).map((item, i) => (
