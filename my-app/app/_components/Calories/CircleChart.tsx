@@ -7,11 +7,9 @@ const CircleChart = ({ data }: CircleChartProps) => {
   const proteinsPercentage = 30;
   const fatsPercentage = 20;
 
-  console.log(carbsPercentage, proteinsPercentage, fatsPercentage);
-
   return (
-    <figure className="relative flex h-full w-full items-start justify-center">
-      <figcaption className="absolute bottom-0 grid grid-cols-3 items-center justify-items-center gap-10">
+    <figure className="relative flex h-full w-full flex-col-reverse items-center justify-center">
+      <figcaption className="flex flex-wrap items-center justify-between gap-4">
         <div className="flex items-center gap-2">
           <span className="h-3 w-3 rounded-xl bg-[#f28e2c]"></span>
           <div className="flex gap-2">
@@ -34,7 +32,6 @@ const CircleChart = ({ data }: CircleChartProps) => {
           </div>
         </div>
       </figcaption>
-
       <div
         className="relative h-[80%] w-[80%] rounded-full"
         style={{
