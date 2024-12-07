@@ -1,3 +1,4 @@
+@import url("https://api.fontshare.com/v2/css?f[]=plein@300,301,400,401,500,501,700,701,900,901,1,2&display=swap");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -79,7 +80,6 @@ body {
   background: #af4ce0;
   background: radial-gradient(at center, #af4ce0, #9c7ae2);
   background-size: 300% 300%;
-
   filter: blur(100px);
   opacity: 0.7;
   border: rgba(255, 255, 255, 0.1);
@@ -104,7 +104,7 @@ body {
   background-size: 300% 300%;
 
   filter: blur(100px);
-  opacity: 0.7;
+  opacity: 0.5;
   border: rgba(255, 255, 255, 0.1);
   animation: gradientAnimation 8s ease infinite;
 }
@@ -126,3 +126,91 @@ body {
   perspective: 2000px;
 }
 /* text-[#696868] */
+
+.popular-box {
+  display: inline-block;
+  text-align: center;
+  border: solid 2px transparent;
+  background:
+    conic-gradient(from var(--border-angle), #213, #112 5%, #112 60%, #213 95%)
+      padding-box,
+    conic-gradient(
+        from var(--border-angle),
+        transparent 25%,
+        #5a189a,
+        #d00000 70%,
+        transparent
+      )
+      border-box;
+  animation: bg-spin 3s linear infinite;
+}
+
+.popular-box:hover {
+  animation-play-state: paused;
+}
+
+@property --border-angle {
+  syntax: "<angle>";
+  inherits: true;
+  initial-value: 0turn;
+}
+
+@keyframes bg-spin {
+  to {
+    --border-angle: 1turn;
+  }
+}
+
+#line-example-1 .line {
+  --line-size: 2px;
+  --color: #5520fa;
+}
+
+.clip-cone {
+  clip-path: polygon(25% 0, 75% 0, 100% 100%, 0% 100%);
+}
+
+.clip-liquid {
+  clip-path: polygon(25% 0, 75% 0, 100% 100%, 0% 100%);
+}
+
+.wave {
+  position: relative;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: #2c74b3;
+  border-radius: 0%;
+  box-shadow: inset 0 0 50px 0 rgba(0, 0, 0, 0.5);
+  rotate: -180deg;
+}
+.wave:before,
+.wave:after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 200%;
+  height: 170%;
+  background: black;
+  transform: translate(-50%, -75%);
+}
+.wave:before {
+  border-radius: 45%;
+  background: rgba(255, 255, 255, 1);
+  animation: animate 5s linear infinite;
+}
+.wave:after {
+  border-radius: 40%;
+  background: rgba(255, 255, 255, 0.5);
+  animation: animate 10s linear infinite;
+}
+
+@keyframes animate {
+  0% {
+    transform: translate(-50%, -75%) rotate(0deg);
+  }
+  100% {
+    transform: translate(-50%, -75%) rotate(360deg);
+  }
+}
