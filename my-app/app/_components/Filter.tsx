@@ -1,15 +1,11 @@
 "use client";
 
+import { FilterProps } from "@/types/types";
 import { useGSAP } from "@gsap/react";
 import { gsap } from "gsap";
 import { useRef } from "react";
 
 gsap.registerPlugin(useGSAP);
-
-interface FilterProps {
-  filterName: string;
-  setFilterName: (name: string) => void;
-}
 
 const Filter = ({ filterName, setFilterName }: FilterProps) => {
   const bgFilterRef = useRef<HTMLDivElement | null>(null);
