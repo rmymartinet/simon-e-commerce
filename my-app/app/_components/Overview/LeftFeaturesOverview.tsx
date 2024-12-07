@@ -57,14 +57,11 @@ const LeftFeaturesOverview = ({
   return (
     <div
       ref={containerRef}
-      className="grid h-[65vh] w-full gap-20 overflow-hidden rounded-2xl bg-white p-6 lg:col-start-2-end-3"
-      style={{
-        gridTemplateRows: "250px max-content",
-      }}
+      className={`${!isCoaching ? "grid grid-rows-2 md:grid-rows-featuresCard" : "grid grid-rows-2"}} w-full overflow-hidden rounded-2xl bg-white p-6 lg:col-start-2-end-3`}
     >
       {!isCoaching && <CircleChart data={data} />}
       {isCoaching && (
-        <div className="relative flex w-full">
+        <div className="relative flex h-[50vh] w-full flex-col">
           {foodImages.map((url, index) => (
             <div
               ref={(el) => {
@@ -78,8 +75,8 @@ const LeftFeaturesOverview = ({
           ))}
         </div>
       )}
-      <div className="flex flex-col gap-2 self-center">
-        <h1 className="text-4xl">{title}</h1>
+      <div className="mt-10 flex flex-col gap-4">
+        <h1 className="text-3xl">{title}</h1>
         <p>{text}</p>
       </div>
     </div>

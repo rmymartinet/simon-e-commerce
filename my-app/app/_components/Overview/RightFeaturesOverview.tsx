@@ -114,20 +114,17 @@ const RightFeaturesOverview = ({
   return (
     <div
       ref={containerRef}
-      className="2 grid h-[60vh] w-full gap-20 overflow-hidden rounded-2xl bg-white p-6 lg:col-start-3-end-4"
-      style={{
-        gridTemplateRows: "250px max-content",
-      }}
+      className={`${!isCoaching ? "grid grid-rows-2 md:grid-rows-featuresCard" : ""}} w-full overflow-hidden rounded-2xl bg-white p-6 lg:col-start-2-end-3`}
     >
       {!isCoaching && (
-        <div className="gallery relative flex">
+        <div className="gallery relative flex h-[30vh]">
           {videoUrls.map((url, index) => (
             <div
               key={index}
               ref={(el) => {
                 videoRef.current[index] = el;
               }}
-              className="opacity-1Z absolute left-1/2 top-1/2 h-full w-[30%] -translate-x-1/2 -translate-y-1/2 overflow-hidden rounded-2xl"
+              className="opacity-1 absolute left-1/2 top-1/2 h-full w-[30%] -translate-x-1/2 -translate-y-1/2 overflow-hidden rounded-2xl"
             >
               <video
                 className="h-full w-full object-cover"
@@ -140,9 +137,13 @@ const RightFeaturesOverview = ({
           ))}
         </div>
       )}
-      {isCoaching && <Iphone imagesUrl="/images/call.png" />}
-      <div className="flex flex-col gap-2 self-center">
-        <h1 className="text-4xl">{title}</h1>
+      {isCoaching && (
+        <div className="relative flex h-[50vh] w-full">
+          <Iphone imagesUrl="/images/call.png" />
+        </div>
+      )}
+      <div className="mt-10 flex flex-col gap-4">
+        <h1 className="text-3xl">{title}</h1>
         <p>{text}</p>
       </div>
     </div>
