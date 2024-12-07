@@ -10,7 +10,7 @@ const CardPriceContainer = ({ filterName }: { filterName: string }) => {
   return (
     <>
       {filterName === "programmes" && (
-        <div className="relative flex flex-col gap-10 lg:grid lg:w-[80%] lg:grid-cols-3">
+        <div className="relative flex flex-col gap-10 px-4 lg:grid lg:grid-cols-3 xl:w-[80%]">
           <div className="fixed-bg-purple absolute bottom-0 right-0 -z-10 h-full w-full"></div>
 
           <CardPrice

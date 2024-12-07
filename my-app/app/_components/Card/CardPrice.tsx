@@ -1,6 +1,7 @@
 import { CardPriceProps } from "@/types/types";
 import { IoCheckmarkOutline } from "react-icons/io5";
 import Price from "./Price";
+import useWindowWidth from "@/app/hooks/useWindowWidth";
 
 const CardPrice = ({
   title,
@@ -11,11 +12,15 @@ const CardPrice = ({
   bgColor,
   dayPrice,
 }: CardPriceProps) => {
+  const { width } = useWindowWidth();
+
+  const isMobile = width <= 768;
+
   return (
     <div
       className={`relative flex flex-col rounded-3xl px-10 py-7 ${
         bgColor
-          ? "scale-105 bg-[#10002B] text-white"
+          ? `${!isMobile ? "scale-105" : ""} bg-[#10002B] text-white`
           : "bg-[#F8F8F8] text-black"
       }`}
     >
