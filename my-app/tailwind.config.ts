@@ -1,5 +1,4 @@
-import type { Config } from "tailwindcss";
-
+/* eslint-disable */
 const config: Config = {
   content: [
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",
@@ -15,9 +14,12 @@ const config: Config = {
       },
       gridTemplateColumns: {
         custom: "20vw minmax(20vw, 1fr) minmax(20vw, 1fr)",
+        blogCustom: "2fr 1fr",
       },
       gridTemplateRows: {
         cardPrice: "150px max-content max-content",
+        featuresCard: "280px max-content",
+        feedBackContainer: "max-content 1fr",
       },
       gridColumn: {
         "start-1-end-2": "1 / 2",
@@ -25,11 +27,33 @@ const config: Config = {
         "start-2-end-3": "2 / 3",
         "start-3-end-4": "3 / 4",
       },
+
       backgroundColor: {
         glassmorph: "rgba(255, 255, 255, 0.35)",
       },
+      typography: (theme) => ({
+        DEFAULT: {
+          css: {
+            maxWidth: "100%",
+            h1: {
+              fontSize: theme("fontSize.5xl"), // Taille du titre h1
+              fontWeight: theme("fontWeight.semibold"), // Poids du titre h3
+            },
+            h2: {
+              fontSize: theme("fontSize.4xl"), // Taille du titre h2
+              fontWeight: theme("fontWeight.medium"), // Poids du titre h3
+            },
+            h3: {
+              fontSize: theme("fontSize.3xl"), // Taille du titre h3
+              fontWeight: theme("fontWeight.medium"), // Poids du titre h3
+            },
+          },
+        },
+      }),
     },
   },
-  plugins: [],
+  plugins: [require("@tailwindcss/typography")],
 };
+/* eslint-enable */
+
 export default config;
