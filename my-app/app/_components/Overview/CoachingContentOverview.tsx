@@ -1,5 +1,4 @@
 import useWindowWidth from "@/app/hooks/useWindowWidth";
-import { OverviewSectionProps } from "@/types/types";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { Flip } from "gsap/Flip";
@@ -9,7 +8,7 @@ import Iphone from "../Iphone";
 
 gsap.registerPlugin(useGSAP, Flip, ScrollTrigger);
 
-const CoachingContentOverview = ({ gradient }: OverviewSectionProps) => {
+const CoachingContentOverview = ({ gradient }: { gradient: string }) => {
   const imagesUrls = {
     accueil: "/images/virtualgym_app/accueilapp.png",
     userInterface: "/images/virtualgym_app/user_interface.png",
@@ -124,10 +123,10 @@ const CoachingContentOverview = ({ gradient }: OverviewSectionProps) => {
       </div>
       <div
         ref={textContainerRef}
-        className="absolute right-20 top-40 flex w-[35%] flex-col items-end gap-20 opacity-0"
+        className="absolute right-5 top-1/2 flex w-[45%] -translate-y-1/2 flex-col items-end gap-20 opacity-0 xl:right-20 xl:w-[35%]"
       >
         <div className="center flex flex-col gap-4 overflow-hidden rounded-xl">
-          <h1 className="text-4xl">Adaptatif en Temps Réel</h1>
+          <h1 className="text-3xl">Adaptatif en Temps Réel</h1>
           <p className="text-pretty">
             Dans l’application, vous pouvez ajuster en temps réel vos paramètres
             d’entraînement, tels que le nombre de répétitions et de séries. Dès
@@ -137,7 +136,7 @@ const CoachingContentOverview = ({ gradient }: OverviewSectionProps) => {
           </p>
         </div>
         <div className="center flex flex-col gap-4 overflow-hidden rounded-xl">
-          <h1 className="text-4xl">Suivi et Vidéos d’Évolution</h1>
+          <h1 className="text-3xl">Suivi et Vidéos d’Évolution</h1>
           <p className="text-pretty">
             Suivez vos progrès avec des statistiques détaillées et visualisez
             les mouvements en temps réel. Si vous avez des doutes, des vidéos
