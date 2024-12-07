@@ -17,7 +17,7 @@ export default function Pricing() {
       <div className="absolute left-0 top-0 -z-10 h-full w-full"></div>
       <div className="flex flex-col items-center justify-center gap-40">
         <div className="flex flex-col items-center gap-4">
-          <h1 className="text-center text-4xl font-bold md:text-6xl">
+          <h1 className="md:text-title text-center text-6xl font-bold">
             Une solution pour chaques besoins
           </h1>
           <p className="text-center text-xl text-slate-400 md:text-start">
