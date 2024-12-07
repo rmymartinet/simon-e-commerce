@@ -3,7 +3,7 @@ import Accordion from "./Accordion";
 
 const Faq = () => {
   return (
-    <section className="relative self-center md:w-[70%]">
+    <section className="relative self-center lg:w-[70%]">
       <div className="mb-20 flex flex-col items-center justify-center gap-4">
         <h1 className="text-7xl">Faq</h1>
         <p className="text-slate-400">
