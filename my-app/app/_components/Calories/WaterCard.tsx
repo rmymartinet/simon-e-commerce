@@ -6,7 +6,7 @@ const WaterCard = () => {
       <div className="flex items-center gap-4">
         <MdOutlineWaterDrop size={20} />
         <span className="flex w-max items-center justify-center rounded-full px-4 py-2 shadow-inner">
-          Total d'eau à consommer par jour
+          Total d&apos;eau à consommer par jour
         </span>
       </div>
       <div className="flex flex-wrap items-center justify-center gap-10">

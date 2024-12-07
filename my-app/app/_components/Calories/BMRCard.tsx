@@ -1,6 +1,6 @@
 import { IoMdSpeedometer } from "react-icons/io";
 
-const BMRCard = ({ BMR }) => {
+const BMRCard = ({ BMR }: { BMR: number }) => {
   return (
     <div className="flex flex-col items-center justify-between gap-4 rounded-xl bg-white p-4">
       <div className="flex items-center gap-4">

@@ -1,3 +1,4 @@
+import { StepCardProps } from "@/types/types";
 import { FaLightbulb } from "react-icons/fa";
 
 const StepCard = ({
@@ -6,10 +7,10 @@ const StepCard = ({
   content,
   bgClass = "glassmorph",
   children,
-}) => {
+}: StepCardProps) => {
   return (
     <div
-      className={`flex flex-col items-center gap-4 rounded-xl ${bgClass} border-2 border-white p-4 lg:w-[50vw]`}
+      className={`flex flex-col items-center gap-4 rounded-xl ${bgClass} border-2 border-white p-4`}
     >
       <div className="flex flex-col items-center gap-4 text-center text-lg font-medium">
         <h3 className="rounded-full bg-white px-2 py-1">Etape: {step}</h3>

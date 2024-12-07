@@ -1,7 +1,11 @@
+import { LineChartWeightProps } from "@/types/types";
 import "charts.css";
-import { section } from "framer-motion/client";
 
-const LineChartWeight = ({ startWeight, weightChange, targetWeight }) => {
+const LineChartWeight = ({
+  startWeight,
+  weightChange,
+  targetWeight,
+}: LineChartWeightProps) => {
   const isLosingWeight = startWeight > targetWeight;
   const weeksToReachTarget = Math.ceil(
     Math.abs(startWeight - targetWeight) / weightChange,
@@ -50,19 +54,23 @@ const LineChartWeight = ({ startWeight, weightChange, targetWeight }) => {
         {/* Graphique */}
         <table
           className="charts-css line show-data-axes show-4-secondary-axes show-primary-axis"
-          style={{
-            "--start-value": minWeight, // Poids minimal
-            "--end-value": maxWeight, // Poids initial
-          }}
+          style={
+            {
+              "--start-value": minWeight,
+              "--end-value": maxWeight,
+            } as React.CSSProperties
+          }
         >
           <tbody>
             {weeks.map(({ week, start, end }) => (
               <tr key={week}>
                 <td
-                  style={{
-                    "--start": (start - minWeight) / (maxWeight - minWeight), // Normalisation
-                    "--end": (end - minWeight) / (maxWeight - minWeight), // Normalisation
-                  }}
+                  style={
+                    {
+                      "--start": (start - minWeight) / (maxWeight - minWeight),
+                      "--end": (end - minWeight) / (maxWeight - minWeight),
+                    } as React.CSSProperties
+                  }
                 >
                   <span className="data rounded-full bg-button px-2 py-1 font-semibold text-white">
                     {end.toFixed(1)} kg
