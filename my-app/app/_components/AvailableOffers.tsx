@@ -3,6 +3,7 @@ import { IoCheckmarkOutline } from "react-icons/io5";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import { AvailableOffersProps } from "@/types/types";
+import Stars from "./Stars";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -26,10 +27,17 @@ const AvailableOffers = ({
   }, []);
 
   return (
-    <div className="relative flex flex-col gap-10 rounded-2xl border-2 border-slate-100 bg-[#ffffffce] p-10 shadow-sm">
+    <div className="card-box-shadow relative flex flex-col gap-10 overflow-hidden rounded-3xl border-card p-10">
+      <Stars
+        yposition="top-0"
+        xposition="left-0"
+        height="h-full"
+        weight="w-full"
+        isTop={true}
+      />
       <div
         ref={bgPurpleRef}
-        className="fixed-bg-purple absolute left-1/2 top-1/2 -z-10 h-[70%] w-[70%] -translate-x-1/2 -translate-y-1/2 scale-0"
+        className="fixed-bg-purple absolute bottom-0 right-0 -z-10 h-[20%] w-[20%] scale-0"
       ></div>
       <div className="flex justify-between gap-10">
         <h1 className="text-4xl font-medium">{title}</h1>
@@ -38,8 +46,8 @@ const AvailableOffers = ({
         </span>
       </div>
       <span>{subtitle}</span>
-      <button className="rounded-lg bg-button py-2 font-medium text-white">
-        Découvrir
+      <button className="rounded-lg bg-button-gradient py-2 font-medium text-white">
+        Commencer
       </button>
       <ul className="flex flex-col gap-2">
         <span className="mb-4 text-slate-300">Inclus:</span>
