@@ -10,11 +10,13 @@ const config: Config = {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
-        button: "#C77DFF",
+        textOpacity: "#6a6b6c",
+        card: "#000000cf",
       },
       gridTemplateColumns: {
         custom: "20vw minmax(20vw, 1fr) minmax(20vw, 1fr)",
         blogCustom: "2fr 1fr",
+        connexionModal: "1fr max-content 1fr",
       },
       gridTemplateRows: {
         cardPrice: "150px max-content max-content",
@@ -31,6 +33,13 @@ const config: Config = {
       backgroundColor: {
         glassmorph: "rgba(255, 255, 255, 0.35)",
       },
+      backgroundImage: {
+        "button-gradient": "linear-gradient(135deg, #a26ff4, #512e99)",
+      },
+      borderRadius: {
+        button: "1.125rem",
+      },
+
       typography: (theme) => ({
         DEFAULT: {
           css: {
