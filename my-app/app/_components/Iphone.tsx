@@ -1,67 +1,55 @@
 import Image from "next/image";
 
 const Iphone = ({
-  imagesUrl,
-  videoUrls,
+  title,
+  video,
+  imgUrl,
 }: {
-  imagesUrl?: string;
-  videoUrls?: string;
+  title?: string;
+  video?: string;
+  imgUrl?: string;
 }) => {
   return (
-    <section className="relative z-50 flex h-full w-full flex-col items-center justify-center">
-      <div className="relative -ml-2.5 h-[430px] w-[230px] overflow-hidden rounded-[35px] border-4 border-black">
-        {/* Silencer */}
-        <div className="absolute left-[-2.5px] top-[81.5px] h-[13px] w-[2px] rounded-[5px] bg-slate-400 opacity-80"></div>
-
-        {/* Volume Up and Down */}
-        <div className="absolute left-[-2.5px] top-[110px] h-[28px] w-[2px] rounded-[5px] bg-slate-400 opacity-80"></div>
-        <div className="absolute left-[-2.5px] top-[148px] h-[28px] w-[2px] rounded-[5px] bg-slate-400 opacity-80"></div>
-
-        {/* Button On */}
-        <div className="absolute right-[-2px] top-[121px] h-[45px] w-[2px] rounded-[5px] bg-slate-400 opacity-80"></div>
-
-        <div className="border-6 relative flex h-full w-full justify-center overflow-hidden border-black bg-black">
-          <video
-            autoPlay
-            muted
-            loop
-            playsInline
-            preload="auto"
-            controls
-            src={videoUrls}
-            className="absolute h-full w-full object-contain"
-          ></video>
-
+    <div className="flex flex-col items-center gap-10">
+      {title && (
+        <h1 className="card padding rounded-xl text-xl font-bold">{title}</h1>
+      )}{" "}
+      <div className="relative z-50 h-[30vh] md:h-[50vh]">
+        <div className="relative h-full w-full overflow-hidden">
           <Image
-            src={imagesUrl || ""}
+            src="/images/iphonee.png"
             alt=""
-            width={400}
-            height={400}
-            className="absolute h-full w-full object-cover"
+            width={1000}
+            height={1000}
+            className="z-20 h-full w-full object-contain"
+            quality={100}
           />
-
-          {/* Camera */}
-          <div className="relative flex h-[20px] w-[76px] justify-center rounded-b-[15px] bg-black">
-            <div className="absolute left-[12px] top-[5px] flex h-[5px] w-[5px] items-center justify-center rounded-full bg-white/20">
-              <div className="absolute h-[4px] w-[4px] rounded-full bg-white opacity-30 blur-[1px]"></div>
+          {imgUrl && (
+            <Image
+              src={imgUrl}
+              alt=""
+              width={1000}
+              height={1000}
+              className="absolute inset-0 left-1/2 top-1/2 -z-10 flex h-[80%] w-[87%] -translate-x-1/2 -translate-y-1/2 items-center justify-center object-cover lg:h-[95%] lg:w-[88%]"
+              quality={100}
+            />
+          )}
+          {video && (
+            <div className="absolute inset-0 left-1/2 top-1/2 -z-10 flex h-[80%] w-[87%] -translate-x-1/2 -translate-y-1/2 items-center justify-center lg:h-[95%] lg:w-[88%]">
+              <video
+                autoPlay
+                playsInline
+                loop
+                muted
+                preload="auto"
+                src={video}
+                className="h-full w-full object-cover"
+              ></video>
             </div>
-            <div className="absolute h-[1px] w-[1px] rounded-full bg-black opacity-70"></div>
-            <div className="absolute top-[-3px] h-[1px] w-[28px] rounded-[20px] bg-white opacity-20"></div>
-          </div>
-
-          {/* Battery and Signal */}
-          <div className="absolute right-[17px] top-[8px] flex gap-[5px] text-[10px]">
-            <div className="relative mt-[4px] h-[7px] w-[14px] rounded-[2px] border border-white/70">
-              <div className="m-[1px] h-[calc(100%-2px)] w-[calc(80%-2px)] rounded-[1px] bg-white"></div>
-              <div className="absolute right-[-2px] top-[1.5px] h-[3px] w-[1px] rounded-[2px] bg-white/70"></div>
-            </div>
-          </div>
-
-          {/* Bottom Line */}
-          <div className="absolute bottom-[6px] h-[2px] w-[80px] rounded-[2px] bg-black opacity-80"></div>
+          )}
         </div>
       </div>
-    </section>
+    </div>
   );
 };
 
