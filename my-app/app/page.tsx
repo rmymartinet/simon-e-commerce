@@ -9,12 +9,12 @@ import { coachingIncludes9Mounth, programIncludes } from "./data/cardPrice";
 import Youtube from "./_components/program/Youtube";
 import NutritionGrid from "./_components/coaching/NutritionGrid";
 import ProgramOverview from "./_components/program/ProgramOverview";
-import EvolvingProgram from "./_components/program/ProgramLife";
 import ProgramNutrition from "./_components/program/NutritionAdvice";
 import CoachingOverview from "./_components/coaching/CoachingOverview";
 import AppDetails from "./_components/coaching/AppDetails";
 import CoachingNutrition from "./_components/coaching/CoachingNutrition";
 import AppOverview from "./_components/coaching/AppOverview";
+import EvolvingProgram from "./_components/program/EvolvingProgram";
 
 gsap.registerPlugin(useGSAP);
 
