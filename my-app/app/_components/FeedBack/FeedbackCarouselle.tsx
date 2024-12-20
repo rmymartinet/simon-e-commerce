@@ -76,8 +76,8 @@ const FeedBackCarouselle = () => {
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
-      <div className="absolute z-50 h-full w-[20vw] bg-gradient-to-r from-[#f1f1f1] to-transparent"></div>
-      <div className="absolute right-0 z-50 h-full w-[20vw] bg-gradient-to-l from-[#f1f1f1] to-transparent"></div>
+      <div className="absolute z-50 h-full w-[20vw] bg-gradient-to-r from-[#0b0d14] to-transparent"></div>
+      <div className="absolute right-0 z-50 h-full w-[20vw] bg-gradient-to-l from-[#0b0d14] to-transparent"></div>
 
       {/* Conteneur 1 */}
       <div ref={mainContainerRef} className="flex gap-4">

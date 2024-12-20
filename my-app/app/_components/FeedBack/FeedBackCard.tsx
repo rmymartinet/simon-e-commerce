@@ -4,7 +4,7 @@ import { RiStarSFill } from "react-icons/ri";
 
 const FeedBackCard = ({ firstName, imgUrl, text }: FeedBackCardProps) => {
   return (
-    <div className="grid h-[30vh] grid-rows-3 justify-between rounded-2xl border border-white p-6">
+    <div className="card grid h-[30vh] grid-rows-3 justify-between rounded-2xl border border-[#424242] p-6">
       <div className="flex gap-2">
         <RiStarSFill color="#E0AAFF" />
         <RiStarSFill color="#E0AAFF" />
