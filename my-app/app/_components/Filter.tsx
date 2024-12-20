@@ -29,23 +29,25 @@ const Filter = ({ filterName, setFilterName }: FilterProps) => {
   }, [filterName]);
 
   return (
-    <div className="relative grid grid-cols-2 justify-items-center gap-10 overflow-hidden rounded-full border p-4 shadow-inner">
-      <div
-        ref={bgFilterRef}
-        className="absolute -z-10 h-full w-1/2 rounded-full border-[3px] border-slate-100 bg-[#9D4EDD] shadow-inner"
-      ></div>
-      <button
-        className={`z-[99999] cursor-pointer text-black ${filterName === "programmes" ? "font-semibold text-white" : ""}`}
-        onClick={() => setFilterName("programmes")}
-      >
-        Programmes
-      </button>
-      <button
-        className={`z-[99999] cursor-pointer text-black ${filterName === "coaching" ? "font-semibold text-white" : ""}`}
-        onClick={() => setFilterName("coaching")}
-      >
-        Coaching
-      </button>
+    <div className="card relative overflow-hidden rounded-full p-2">
+      <div className="relative grid grid-cols-2 justify-items-center gap-10 p-4">
+        <div
+          ref={bgFilterRef}
+          className="bg-button-gradient absolute z-10 h-full w-1/2 rounded-full"
+        ></div>
+        <button
+          className={`z-[99] cursor-pointer text-textOpacity ${filterName === "programmes" ? "font-bold text-white" : "font-medium"}`}
+          onClick={() => setFilterName("programmes")}
+        >
+          Programmes
+        </button>
+        <button
+          className={`z-[99] cursor-pointer text-slate-600 ${filterName === "coaching" ? "font-bold text-white" : "font-medium"}`}
+          onClick={() => setFilterName("coaching")}
+        >
+          Coaching
+        </button>
+      </div>
     </div>
   );
 };
