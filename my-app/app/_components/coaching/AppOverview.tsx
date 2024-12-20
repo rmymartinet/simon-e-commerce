@@ -8,7 +8,7 @@ import useWindowWidth from "@/hooks/useWindowWidth";
 
 gsap.registerPlugin(useGSAP, ScrollTrigger);
 
-const Organisation = () => {
+const AppOverview = () => {
   const iphoneContainerRef = useRef(null);
   const neonTitleRef = useRef(null);
 
@@ -104,4 +104,4 @@ const Organisation = () => {
   );
 };
 
-export default Organisation;
+export default AppOverview;
