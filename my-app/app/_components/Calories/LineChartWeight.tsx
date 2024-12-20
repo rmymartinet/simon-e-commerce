@@ -31,7 +31,7 @@ const LineChartWeight = ({
   }));
 
   return (
-    <section className="mt-4 flex rounded-xl bg-white p-10 pb-16">
+    <section className="card mt-4 flex rounded-xl p-10 pb-16">
       <div id="line-example-1" className="relative">
         {/* Labels des semaines alignés en dessous */}
         <div className="flex flex-col gap-2 pb-4">
@@ -45,7 +45,7 @@ const LineChartWeight = ({
             Pour des valeurs précises et adaptées à vos besoins, explorez nos
             programmes personnalisés.<br></br>
             Pour atteindre votre poids cible il vous faudra{" "}
-            <span className="font-medium text-button">
+            <span className="text-button font-medium">
               {weeksToReachTarget} semaines
             </span>
           </p>
@@ -72,7 +72,7 @@ const LineChartWeight = ({
                     } as React.CSSProperties
                   }
                 >
-                  <span className="data rounded-full bg-button px-2 py-1 font-semibold text-white">
+                  <span className="data bg-button rounded-full px-2 py-1 font-semibold text-white">
                     {end.toFixed(1)} kg
                   </span>
                 </td>

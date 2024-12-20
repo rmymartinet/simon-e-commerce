@@ -14,7 +14,7 @@ const CaloriesCard = ({
   };
 }) => {
   return (
-    <div className="col-span-2 flex flex-col gap-16 rounded-xl bg-white p-8">
+    <div className="card col-span-2 flex flex-col gap-16 rounded-xl bg-white p-8">
       <div className="flex">
         <div className="flex items-center gap-4">
           <FaBurn size={20} />
@@ -25,7 +25,7 @@ const CaloriesCard = ({
       </div>
       <div className="flex flex-col gap-10 md:gap-10">
         <div className="flex-2 flex flex-col gap-4 text-lg">
-          <span className="w-max text-xl font-medium text-button">
+          <span className="text-button w-max text-xl font-medium">
             {showResults && totalCalories} calories/jours
           </span>
           <div className="flex items-center gap-2">
@@ -50,7 +50,7 @@ const CaloriesCard = ({
             </p>
           </div>
         </div>
-        <p className="text-pretty text-slate-400">
+        <p className="text-pretty text-textOpacity">
           Ces données fournissent une base solide, mais d’autres facteurs comme
           votre métier, vos objectifs, vos jours d’entraînement, la fatigue et
           les fluctuations quotidiennes doivent également être pris en compte

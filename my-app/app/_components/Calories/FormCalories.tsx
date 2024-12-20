@@ -6,6 +6,7 @@ import CaloriesCard from "./CaloriesCard";
 import { IoFastFoodOutline } from "react-icons/io5";
 import gsap from "gsap";
 import { FormProps } from "@/types/types";
+import Stars from "../Stars";
 
 const FormCalories = ({ data, inputData }: FormProps) => {
   const resultRef = useRef(null);
@@ -104,14 +105,16 @@ const FormCalories = ({ data, inputData }: FormProps) => {
         {showResults && (
           <button
             ref={backButtonRef}
-            className="absolute -left-[10%] top-0 -translate-x-1/2 rounded-2xl bg-button p-2 text-white hover:bg-[#9D4EDD]"
+            className="bg-button absolute -left-[10%] top-0 -translate-x-1/2 rounded-2xl p-2 text-white hover:bg-[#9D4EDD]"
           >
             Précedent
           </button>
         )}
+        <div className="test absolute top-40 -z-20 h-full w-[70%] blur-3xl"></div>
+
         <div
           ref={resultRef}
-          className="absolute left-[0%] top-1/2 flex h-full w-full -translate-x-1/2 -translate-y-1/2 flex-col p-4"
+          className="program-button-container absolute left-1/2 top-[60%] flex h-max w-full -translate-x-1/2 -translate-y-1/2 flex-col rounded-2xl border-2 border-red-400 p-2"
         >
           <div className="flex flex-col gap-4">
             <CaloriesCard
@@ -132,10 +135,39 @@ const FormCalories = ({ data, inputData }: FormProps) => {
         </div>
         <form
           ref={formRef}
-          className="flex h-max w-screen flex-col gap-4 rounded-xl bg-white p-8 lg:w-full"
+          className="program-background relative flex h-max w-screen flex-col gap-4 rounded-xl p-8 lg:w-full"
           action="submit"
           onSubmit={handleSubmit}
         >
+          <Stars
+            yposition="-top-10"
+            xposition="left-0"
+            height="h-20"
+            weight="w-full"
+            isTop={false}
+          />
+          <Stars
+            yposition="-bottom-10"
+            xposition="left-0"
+            height="h-20"
+            weight="w-full"
+            isTop={false}
+          />
+          <Stars
+            yposition="top-0"
+            xposition="-right-10"
+            height="h-full"
+            weight="w-20"
+            isTop={true}
+          />
+
+          <Stars
+            yposition="top-0"
+            xposition="-left-10"
+            height="h-full"
+            weight="w-20"
+            isTop={true}
+          />
           <div className="flex flex-col">
             <label htmlFor="genre" className="mb-2">
               Genre
@@ -143,7 +175,7 @@ const FormCalories = ({ data, inputData }: FormProps) => {
             <select
               name="genre"
               id="genre"
-              className={`rounded-lg bg-slate-100 p-2 ${errors.genre ? "border border-red-400" : ""}`}
+              className={`rounded-lg bg-slate-100 p-2 text-black ${errors.genre ? "border border-red-400" : ""}`}
               onChange={(e) => setGenre(e.target.value)}
             >
               <option value="female">Femme</option>
@@ -158,7 +190,7 @@ const FormCalories = ({ data, inputData }: FormProps) => {
               Age
             </label>
             <input
-              className={`rounded-lg bg-slate-100 p-2 ${errors.age ? "border border-red-400" : ""}`}
+              className={`rounded-lg bg-slate-100 p-2 text-black ${errors.age ? "border border-red-400" : ""}`}
               type="number"
               name="age"
               id="age"
@@ -171,7 +203,7 @@ const FormCalories = ({ data, inputData }: FormProps) => {
               Taille (cm)
             </label>
             <input
-              className={`rounded-lg bg-slate-100 p-2 ${errors.height ? "border border-red-400" : ""}`}
+              className={`rounded-lg bg-slate-100 p-2 text-black ${errors.height ? "border border-red-400" : ""}`}
               type="number"
               name="height"
               id="height"
@@ -186,7 +218,7 @@ const FormCalories = ({ data, inputData }: FormProps) => {
               Poids (kg)
             </label>
             <input
-              className={`rounded-lg bg-slate-100 p-2 ${errors.weight ? "border border-red-400" : ""}`}
+              className={`rounded-lg bg-slate-100 p-2 text-black ${errors.weight ? "border border-red-400" : ""}`}
               type="number"
               name="weight"
               id="weight"
@@ -202,7 +234,7 @@ const FormCalories = ({ data, inputData }: FormProps) => {
               Poids que vous souhaitez atteindre (kg)
             </label>
             <input
-              className={`rounded-lg bg-slate-100 p-2 ${errors.targetWeight ? "border border-red-400" : ""}`}
+              className={`rounded-lg bg-slate-100 p-2 text-black ${errors.targetWeight ? "border border-red-400" : ""}`}
               type="number"
               name="targetWeight"
               id="targetWeight"
@@ -220,7 +252,7 @@ const FormCalories = ({ data, inputData }: FormProps) => {
             <select
               name="activities"
               id="activities"
-              className={`rounded-lg bg-slate-100 p-2 ${errors.activities ? "border border-red-400" : ""}`}
+              className={`rounded-lg bg-slate-100 p-2 text-black ${errors.activities ? "border border-red-400" : ""}`}
               onChange={(e) => setActivities(e.target.value)}
               defaultValue=""
             >
@@ -257,7 +289,7 @@ const FormCalories = ({ data, inputData }: FormProps) => {
             <select
               name="activite"
               id="activite"
-              className={`rounded-lg bg-slate-100 p-2 ${errors.goals ? "border border-red-400" : ""}`}
+              className={`rounded-lg bg-slate-100 p-2 text-black ${errors.goals ? "border border-red-400" : ""}`}
               onChange={(e) => setGoals(e.target.value)}
               defaultValue=""
             >
@@ -280,7 +312,7 @@ const FormCalories = ({ data, inputData }: FormProps) => {
               (en kg) :
             </label>
             <div
-              className={`flex items-center rounded-full bg-white p-2 ${errors.weightChange ? "border border-red-400" : ""}`}
+              className={`flex items-center rounded-full bg-slate-100 p-2 ${errors.weightChange ? "border border-red-400" : ""}`}
             >
               <input
                 className="cursor-pointer"
@@ -302,7 +334,7 @@ const FormCalories = ({ data, inputData }: FormProps) => {
           </div>
           <button
             type="submit"
-            className="mt-4 w-full rounded-lg bg-button p-2 text-white"
+            className="padding mt-10 w-full self-center rounded-lg bg-button-gradient font-bold text-white"
           >
             Calculer
           </button>

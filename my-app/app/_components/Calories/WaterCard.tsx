@@ -2,7 +2,7 @@ import { MdOutlineWaterDrop } from "react-icons/md";
 
 const WaterCard = () => {
   return (
-    <div className="flex w-full flex-col items-center gap-10 rounded-xl bg-white p-4">
+    <div className="card flex w-full flex-col items-center gap-10 rounded-xl bg-white p-4">
       <div className="flex items-center gap-4">
         <MdOutlineWaterDrop size={20} />
         <span className="flex w-max items-center justify-center rounded-full px-4 py-2 shadow-inner">
