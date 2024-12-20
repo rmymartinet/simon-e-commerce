@@ -4,7 +4,7 @@ const Price = ({
   dayPrice,
 }: {
   price: string;
-  mounth?: string;
+  mounth?: number;
   dayPrice?: string;
 }) => (
   <div className="flex flex-col gap-2">
@@ -12,14 +12,17 @@ const Price = ({
       <span className="mr-2 self-start text-2xl">€</span>
       <span className="mr-2 text-8xl font-semibold">{price}</span>
       {mounth ? (
-        <p className="self-end text-base">/ mois</p>
+        <div className="self-end">
+          <p className="text-base">/ mois</p>
+          <p className="tex text-base">engagement {mounth} mois</p>
+        </div>
       ) : (
-        <p className="self-end text-base">Disponible à vie</p>
+        <p className="self-end text-base">sans engagement</p>
       )}
     </div>
     {mounth && (
       <div>
-        <p className="pl-2 text-base font-semibold text-[#E0AAFF]">
+        <p className="mt-6 pl-2 text-base font-semibold text-[#E0AAFF]">
           À moins de {dayPrice} €/jour
         </p>
       </div>
