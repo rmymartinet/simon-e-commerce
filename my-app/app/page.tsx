@@ -7,7 +7,6 @@ import Header from "./_components/Header/Header";
 import AvailableOffers from "./_components/AvailableOffers";
 import { coachingIncludes9Mounth, programIncludes } from "./data/cardPrice";
 import Youtube from "./_components/program/Youtube";
-import Organisation from "./_components/coaching/Oraganisation";
 import NutritionGrid from "./_components/coaching/NutritionGrid";
 import ProgramOverview from "./_components/program/ProgramOverview";
 import EvolvingProgram from "./_components/program/ProgramLife";
@@ -15,6 +14,7 @@ import ProgramNutrition from "./_components/program/NutritionAdvice";
 import CoachingOverview from "./_components/coaching/CoachingOverview";
 import AppDetails from "./_components/coaching/AppDetails";
 import CoachingNutrition from "./_components/coaching/CoachingNutrition";
+import AppOverview from "./_components/coaching/AppOverview";
 
 gsap.registerPlugin(useGSAP);
 
@@ -41,7 +41,7 @@ export default function Home() {
       <ProgramNutrition />
       <Youtube />
       <CoachingOverview />
-      <Organisation />
+      <AppOverview />
       <AppDetails />
       <CoachingNutrition />
       <NutritionGrid />
