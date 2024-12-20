@@ -1,8 +1,8 @@
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
-import Image from "next/image";
 import { useRef } from "react";
 import { FaArrowDown } from "react-icons/fa6";
+import ColorShadowButton from "../ColorShadowButton";
 
 gsap.registerPlugin(useGSAP);
 
@@ -20,9 +20,7 @@ const Header = () => {
       duration: 5,
       ease: "power2.out",
     });
-  }, []);
 
-  useGSAP(() => {
     gsap.fromTo(
       headerRef.current,
       { height: "0%" },
@@ -83,13 +81,8 @@ const Header = () => {
           Faite le <span className="text-violet-300">premier pas</span> je vous
           guide pour le reste.
         </p>
-        <div className="relative mt-4 w-max">
-          <button className="program-button-container padding rounded-xl bg-button-gradient font-bold">
-            Commencer
-          </button>
-          <div className="absolute inset-0 -z-10 h-full w-full rounded-xl bg-[#c4b5fd] blur-sm"></div>
-          <div className="absolute inset-0 -z-10 h-full w-full rounded-xl bg-[#0b0d14]"></div>
-        </div>
+
+        <ColorShadowButton title="Commencer" color="#c4b5fd" />
       </div>
       <div className="absolute bottom-20 right-20 z-40 flex flex-col">
         <p className="text-pretty text-2xl font-bold uppercase">2025</p>
