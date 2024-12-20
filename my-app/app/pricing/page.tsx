@@ -13,15 +13,15 @@ export default function Pricing() {
   const [filterName, setFilterName] = useState("programmes");
 
   return (
-    <div className="relative mt-60 flex min-h-screen flex-col items-end justify-center gap-40 px-2 md:px-20 lg:px-0">
+    <div className="relative mt-[30vh] flex min-h-screen w-screen flex-col items-center justify-center gap-40 overflow-hidden">
       <div className="absolute left-0 top-0 -z-10 h-full w-full"></div>
-      <div className="flex flex-col items-center justify-center gap-40">
-        <div className="flex flex-col items-center gap-4">
-          <h1 className="md:text-title text-center text-6xl font-bold">
-            Une solution pour chaques besoins
+      <div className="flex flex-col items-center justify-center gap-20">
+        <div className="mb-10 flex flex-col items-center gap-4">
+          <h1 className="md:text-title text-center text-5xl font-bold">
+            Des plans conçus pour répondre à vos besoins
           </h1>
-          <p className="text-center text-xl text-slate-400 md:text-start">
-            Choisissez la solution qui vous conviens le mieux.
+          <p className="text-center text-lg font-semibold text-textOpacity md:text-start">
+            Des solutions pensées pour chaque étape de ton parcours{" "}
           </p>
         </div>
         <Filter filterName={filterName} setFilterName={setFilterName} />
@@ -29,8 +29,9 @@ export default function Pricing() {
       </div>
       {filterName === "programmes" && (
         <FeaturesContainer
-          title="Inclus avec votre programme"
+          title="Inclus dans tous les programmes"
           text="sans suivi"
+          coaching={false}
         >
           {featuresProgram.map((item, index) => (
             <ItemsFeatures
@@ -44,8 +45,9 @@ export default function Pricing() {
       )}
       {filterName === "coaching" && (
         <FeaturesContainer
-          title="Vos avantages en coaching personnalisé"
+          title="Inclus dans tous les coachings"
           text="avec suivi"
+          coaching={true}
         >
           {featuresCoaching.map((item, index) => (
             <ItemsFeatures
