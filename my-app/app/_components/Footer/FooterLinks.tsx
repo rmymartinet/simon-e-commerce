@@ -2,7 +2,7 @@ import FooterLinkSection from "./FooterLinkSection";
 
 const FooterLinks = () => {
   return (
-    <div className="flex flex-col items-start gap-10">
+    <div className="flex flex-col items-start gap-20 md:flex-row">
       <FooterLinkSection
         title="Produits"
         links={["Fonctionnalités", "Tarifs"]}

@@ -4,32 +4,29 @@ import {
   PiLinkedinLogoFill,
   PiYoutubeLogoFill,
 } from "react-icons/pi";
+import { IoIosMail } from "react-icons/io";
 
 const FooterContact = () => {
   const socialIcons = [
-    { icon: <PiInstagramLogoFill size={20} />, label: "Instagram" },
-    { icon: <PiYoutubeLogoFill size={20} />, label: "YouTube" },
-    { icon: <PiLinkedinLogoFill size={20} />, label: "LinkedIn" },
+    { icon: <PiInstagramLogoFill size={30} />, label: "Instagram" },
+    { icon: <PiYoutubeLogoFill size={30} />, label: "YouTube" },
+    { icon: <PiLinkedinLogoFill size={30} />, label: "LinkedIn" },
+    { icon: <IoIosMail size={30} />, label: "Mail" },
   ];
 
   return (
     <div className="flex w-max justify-between gap-10 text-lg lg:flex-col">
       <div className="flex gap-20">
-        {/* <div className="flex items-center gap-4">
-          <GrLocationPin size={20} aria-label="Location icon" />
-          <span>Cognac, France</span>
-        </div> */}
-        <div className="mt-4 flex items-center gap-4 md:mt-0">
-          <CiMail size={20} aria-label="Mail icon" />
-          <span>Contactez-moi</span>
+        <div className="program-button-container absolute bottom-8 left-8 z-50 grid grid-cols-4 gap-2 rounded-xl p-2 md:left-1/2 md:-translate-x-1/2">
+          {socialIcons.map((log, index) => (
+            <button
+              key={index}
+              className="padding grid place-content-center rounded-xl focus:outline-none"
+            >
+              {log.icon}
+            </button>
+          ))}
         </div>
-      </div>
-      <div className="mt-4 flex items-center gap-4 md:mt-0">
-        {socialIcons.map(({ icon, label }, idx) => (
-          <span key={idx} aria-label={label}>
-            {icon}
-          </span>
-        ))}
       </div>
     </div>
   );
