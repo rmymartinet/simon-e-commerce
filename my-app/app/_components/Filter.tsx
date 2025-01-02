@@ -33,16 +33,16 @@ const Filter = ({ filterName, setFilterName }: FilterProps) => {
       <div className="relative grid grid-cols-2 justify-items-center gap-10 p-4">
         <div
           ref={bgFilterRef}
-          className="bg-button-gradient absolute z-10 h-full w-1/2 rounded-full"
+          className="absolute z-10 h-full w-1/2 rounded-full bg-button-gradient"
         ></div>
         <button
-          className={`z-[99] cursor-pointer text-textOpacity ${filterName === "programmes" ? "font-bold text-white" : "font-medium"}`}
+          className={`z-[99] cursor-pointer ${filterName === "programmes" ? "font-bold text-white" : "text-subtle font-medium"}`}
           onClick={() => setFilterName("programmes")}
         >
           Programmes
         </button>
         <button
-          className={`z-[99] cursor-pointer text-slate-600 ${filterName === "coaching" ? "font-bold text-white" : "font-medium"}`}
+          className={`z-[99] cursor-pointer ${filterName === "coaching" ? "font-bold text-white" : "text-subtle font-medium"}`}
           onClick={() => setFilterName("coaching")}
         >
           Coaching
