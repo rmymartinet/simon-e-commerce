@@ -1,11 +1,11 @@
 import Image from "next/image";
-import { faqData } from "../data/faq";
+import { faqCoachingData, faqProgramData } from "../data/faqData";
 import Accordion from "./Accordion";
 
-const Faq = () => {
+const Faq = ({ filterName }: { filterName: string }) => {
   return (
     <section className="relative self-center lg:w-[70%]">
-      <div className="absolute left-0 top-[20%] -z-10 h-[60%] w-[90%] -translate-x-1/2">
+      <div className="absolute right-0 top-[20%] -z-10 h-[60%] w-[90%] translate-x-1/2">
         <Image
           src="/images/cube_mono.jpeg"
           alt=""
@@ -21,9 +21,25 @@ const Faq = () => {
         </p>
       </div>
       <div className="flex flex-col gap-4 overflow-hidden">
-        {faqData.map((item, index) => (
-          <Accordion key={index} title={item.question} text={item.answer} />
-        ))}
+        {filterName === "programmes"
+          ? faqProgramData.map(
+              (item: { question: string; answer: string }, index: number) => (
+                <Accordion
+                  key={index}
+                  title={item.question}
+                  text={item.answer}
+                />
+              ),
+            )
+          : faqCoachingData.map(
+              (item: { question: string; answer: string }, index: number) => (
+                <Accordion
+                  key={index}
+                  title={item.question}
+                  text={item.answer}
+                />
+              ),
+            )}
       </div>
     </section>
   );
