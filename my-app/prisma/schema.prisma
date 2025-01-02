@@ -94,8 +94,9 @@ model Purchase {
   amount             Float
   status             String
   customerId         String
-  subscriptionData   Json?
-  subscriptionStatus String?
+  subscriptionData   Json? // Champ JSON facultatif pour stocker les données
+  subscriptionStatus String? // Statut facultatif de l'abonnement
+  userPurchaseData   Json? // Champ JSON facultatif pour stocker les données de l'utilisateur
   createdAt          DateTime @default(now())
   updatedAt          DateTime @updatedAt
 }
