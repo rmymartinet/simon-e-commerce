@@ -1,4 +1,3 @@
-import Image from "next/image";
 import PurpleLight from "../PurpleLight";
 
 const EvolvingProgram = () => {
@@ -14,10 +13,10 @@ const EvolvingProgram = () => {
         <h1 className="text-center text-xl font-semibold md:text-start md:text-3xl">
           Un programme, des possibilités infinies
         </h1>
-        <p className="text-subtle text-center font-medium md:text-start md:text-xl">
+        <p className="text-center font-medium text-subtle md:text-start md:text-xl">
           Plus qu&apos;un simple programme : un outil pour progresser à vie.
         </p>
-        <p className="text-muted mt-10 text-lg font-medium md:mt-4">
+        <p className="mt-10 text-lg font-medium text-muted md:mt-4">
           Chaque programme inclut{" "}
           <span className="text-white">
             plusieurs phases d&apos;entraînement
@@ -35,7 +34,7 @@ const EvolvingProgram = () => {
           autoPlay
           playsInline
           preload="auto"
-          src="/videos/program/test.mov"
+          src="/videos/program/evolving_program.mov"
           className="h-full w-full rounded-xl object-cover"
         />
       </div>
