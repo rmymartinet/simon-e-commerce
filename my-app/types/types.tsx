@@ -29,6 +29,16 @@ export interface CardPriceProps {
   filterName: string;
 }
 
+export interface CheckoutData {
+  productData: ProductDataProps; // Remplacez `any` par le type exact de vos produits si possible
+  filterName: string;
+}
+
+export interface CheckoutContextValue {
+  checkoutData: CheckoutData | null;
+  setCheckoutData: (data: CheckoutData) => void;
+}
+
 export interface CartContextProps {
   cart: Item[];
   setCart: React.Dispatch<React.SetStateAction<Item[]>>;
@@ -203,7 +213,7 @@ export interface ProductDataProps {
   type: string;
   priceId?: string;
   imageUrl: string;
-  mostPopular: boolean;
+  mostPopular?: boolean;
   titlePlan: string;
   month: number;
   price: number;
