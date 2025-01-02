@@ -1,8 +1,8 @@
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { useRef } from "react";
-import { FaArrowDown } from "react-icons/fa6";
 import ColorShadowButton from "../ColorShadowButton";
+import useWindowWidth from "@/hooks/useWindowWidth";
 
 gsap.registerPlugin(useGSAP);
 
@@ -10,17 +10,10 @@ const Header = () => {
   const headerRef = useRef(null);
   const containerRef = useRef(null);
   const arrowRef = useRef(null);
-  const shadowLeftRef = useRef(null);
-  const shadowRightRef = useRef(null);
+
+  const { width } = useWindowWidth();
 
   useGSAP(() => {
-    gsap.to([shadowLeftRef.current, shadowRightRef.current], {
-      delay: 1,
-      opacity: 1,
-      duration: 5,
-      ease: "power2.out",
-    });
-
     gsap.fromTo(
       headerRef.current,
       { height: "0%" },
@@ -62,27 +55,11 @@ const Header = () => {
         ref={headerRef}
         className="absolute bottom-0 z-50 w-[100%] bg-gradient-to-t from-[#0b0d14] via-[#0b0d14]/60 to-black/0"
       ></div>
-      <div
-        ref={shadowLeftRef}
-        className="absolute left-0 top-0 z-50 h-full w-[20%] bg-gradient-to-r from-[#0b0d14] via-[#0b0d14]/60 to-black/0 opacity-0"
-      ></div>
-      <div
-        ref={shadowRightRef}
-        className="absolute right-0 top-0 z-50 h-full w-[20%] bg-gradient-to-l from-[#0b0d14] via-[#0b0d14]/60 to-black/0 opacity-0"
-      ></div>
-
-      <div className="program-button-container absolute bottom-0 left-1/2 z-50 -translate-x-1/2 -translate-y-1/2 overflow-hidden rounded-full p-4">
-        <div ref={arrowRef}>
-          <FaArrowDown size={20} />
-        </div>
-      </div>
-      <div className="absolute top-[40%] z-40 flex flex-col items-center md:items-start lg:left-[45%] lg:w-[40%]">
-        <p className="text-pretty text-center text-3xl font-bold uppercase text-[#eee] md:text-4xl lg:text-start">
-          Faite le <span className="text-violet-300">premier pas</span> je vous
-          guide pour le reste.
-        </p>
-
-        <ColorShadowButton title="Commencer" color="#c4b5fd" />
+      <div className="absolute left-1/2 top-1/2 z-50 flex w-full -translate-x-1/2 -translate-y-1/2 flex-col items-center rounded-xl">
+        <h1 className="text-center text-4xl font-bold uppercase md:text-5xl">
+          Sm coaching programme & coaching
+        </h1>
+        <ColorShadowButton title="Commencer maintenant" color="#c4b5fd" />
       </div>
       <div className="absolute bottom-20 right-20 z-40 flex flex-col">
         <p className="text-pretty text-2xl font-bold uppercase">2025</p>
@@ -92,7 +69,9 @@ const Header = () => {
           autoPlay
           loop
           muted
-          src="/test.mov"
+          src={
+            width <= 498 ? "/videos/mobile_header.mov" : "/videos/header.mov"
+          }
           className="h-full w-full object-cover brightness-[0.9] filter"
           preload="true"
         />
