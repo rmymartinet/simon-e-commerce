@@ -8,6 +8,11 @@ import useFecthUserData from "@/hooks/useFetchUserData";
 export default function Dashboard() {
   const { userData } = useFecthUserData();
   const [isProgram, setIsProgram] = useState<string>("program");
+
+  /*
+!TODO : GERER LE PROFIL
+  */
+
   function calculateNextPayment(startDate: string, endDate: string) {
     const start = new Date(startDate);
     const end = new Date(endDate);
@@ -41,13 +46,21 @@ export default function Dashboard() {
   };
   const allPurchases = userData?.Purchase || [];
   const programPurchases = allPurchases.filter(
-    (purchase) => purchase.userPurchaseData !== null,
+    (purchase: { userPurchaseData: { titlePlan: string } }) =>
+      purchase.userPurchaseData !== null,
   );
 
   //Parcour les données de l'utilisateur pour savoir si elle a un abonnement
   const subscriptionPurchase =
-    allPurchases.find((purchase) => purchase.subscriptionData) ||
-    defaultSubscription.subscriptionData;
+    allPurchases.find(
+      (purchase: {
+        subscriptionData?: {
+          titlePlan: string;
+          startDate: string;
+          endDate: string;
+        };
+      }) => purchase.subscriptionData,
+    ) || defaultSubscription.subscriptionData;
   console.log(subscriptionPurchase);
 
   const formattedDate = (date: string) => {
@@ -151,31 +164,45 @@ export default function Dashboard() {
                 </div>
                 <div className="px-6">
                   {allPurchases.length > 0 ? (
-                    allPurchases.map((purchase, index) => (
-                      <div
-                        key={index}
-                        className={`flex justify-between p-4 font-bold ${
-                          index % 2 !== 0
-                            ? "program-button-container rounded-md"
-                            : "bg-inherit"
-                        }`}
-                      >
-                        <p>
-                          {purchase.subscriptionData?.titlePlan ||
-                            purchase.userPurchaseData.titlePlan}
-                          {purchase.subscriptionData ? " (abonnement)" : ""}
-                        </p>
-                        <p>
-                          {purchase.subscriptionData?.startDate
-                            ? new Date(
-                                purchase.subscriptionData.startDate,
-                              ).toLocaleDateString("fr-FR")
-                            : new Date(purchase.createdAt).toLocaleDateString(
-                                "fr-FR",
-                              )}
-                        </p>
-                      </div>
-                    ))
+                    allPurchases.map(
+                      (
+                        purchase: {
+                          subscriptionData?: {
+                            titlePlan: string;
+                            startDate: string;
+                            endDate: string;
+                          };
+                          userPurchaseData: { titlePlan: string };
+                          createdAt: string;
+                          amount: number;
+                        },
+                        index: number,
+                      ) => (
+                        <div
+                          key={index}
+                          className={`flex justify-between p-4 font-bold ${
+                            index % 2 !== 0
+                              ? "program-button-container rounded-md"
+                              : "bg-inherit"
+                          }`}
+                        >
+                          <p>
+                            {purchase.subscriptionData?.titlePlan ||
+                              purchase.userPurchaseData.titlePlan}
+                            {purchase.subscriptionData ? " (abonnement)" : ""}
+                          </p>
+                          <p>
+                            {purchase.subscriptionData?.startDate
+                              ? new Date(
+                                  purchase.subscriptionData.startDate,
+                                ).toLocaleDateString("fr-FR")
+                              : new Date(purchase.createdAt).toLocaleDateString(
+                                  "fr-FR",
+                                )}
+                          </p>
+                        </div>
+                      ),
+                    )
                   ) : (
                     <p className="text-center">Aucun achat trouvé.</p>
                   )}
@@ -184,17 +211,25 @@ export default function Dashboard() {
               {isProgram === "program" ? (
                 <div className="program-button-container flex h-[40vh] flex-col gap-4 overflow-y-auto rounded-xl border-card p-6 lg:h-full">
                   {programPurchases.length > 0 ? (
-                    programPurchases.map((purchase, index: number) => (
-                      <div
-                        key={index}
-                        className="program-button-container flex items-center justify-between rounded-xl border-card p-6"
-                      >
-                        <strong className="text-xl">
-                          {purchase.userPurchaseData.titlePlan}
-                        </strong>
-                        <p>{purchase.amount / 100},00 €</p>
-                      </div>
-                    ))
+                    programPurchases.map(
+                      (
+                        purchase: {
+                          userPurchaseData: { titlePlan: string };
+                          amount: number;
+                        },
+                        index: number,
+                      ) => (
+                        <div
+                          key={index}
+                          className="program-button-container flex items-center justify-between rounded-xl border-card p-6"
+                        >
+                          <strong className="text-xl">
+                            {purchase.userPurchaseData.titlePlan}
+                          </strong>
+                          <p>{purchase.amount / 100},00 €</p>
+                        </div>
+                      ),
+                    )
                   ) : (
                     <div className="grid h-full w-full place-content-center">
                       <p className="text-center">Aucun programme trouvé.</p>
