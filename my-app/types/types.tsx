@@ -85,6 +85,19 @@ export interface FeedBackCardProps {
   text: string;
 }
 
+export interface AuthContextType {
+  user: { id: string; name: string; email: string } | null;
+}
+
+export interface useAddToCartProps {
+  type: string;
+  id: string;
+  titlePlan: string;
+  img: string;
+  price: number;
+  month: number;
+}
+
 export interface FeaturesContainerProps {
   coaching: boolean;
   title: string;
