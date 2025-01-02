@@ -31,7 +31,7 @@ const NutritionGrid = () => {
         <div className="card relative flex flex-col items-center gap-20 rounded-xl p-4 px-10 opacity-100">
           <div className="test absolute inset-0 -left-[200px] -z-10 h-[20%] w-full blur-3xl"></div>
           <h1 className="text-center text-xl font-bold md:text-2xl">
-            Un suivi optimisé pour vous
+            Des calories maîtrisées pour atteindre vos objectifs
           </h1>
           <div className="flex gap-10">
             <CircleChart
@@ -65,14 +65,17 @@ const NutritionGrid = () => {
           </div>
         </div>
         <div className="">
-          <h1 className="z-50 text-center text-xl font-bold md:text-start">
+          <h1 className="z-50 mb-4 text-center text-3xl font-bold md:text-start">
             Une nutrition connectée à votre entraînement avec Food.
           </h1>
-          <p className="mt-4 text-pretty break-words text-center text-lg font-semibold text-textOpacity md:mt-0 md:text-start">
+          <p className="text-muted mt-4 text-pretty break-words text-center text-lg md:mt-0 md:text-start">
             Grâce à l’intégration de Food avec Virtual Gym, vous avez tout à
-            portée de main : suivez vos progrès en temps réel, ajustez votre
-            alimentation en fonction de vos objectifs, et gardez le contrôle sur
-            chaque aspect de votre parcours.
+            portée de main :{" "}
+            <span className="font-semibold text-white">suivez vos progrès</span>{" "}
+            en temps réel, ajustez votre alimentation en fonction de vos
+            objectifs, et{" "}
+            <span className="font-semibold text-white">gardez le contrôle</span>{" "}
+            sur chaque aspect de votre parcours.
           </p>
           <div className="mt-4 flex items-center justify-center gap-2 md:justify-start">
             <div className="h-[5vh] overflow-hidden rounded-xl">
@@ -126,7 +129,7 @@ const NutritionGrid = () => {
                   className="flex items-center gap-4 text-textOpacity"
                 >
                   <div className="grid place-content-center rounded-full border-card p-2">
-                    <FaCheck />
+                    <FaCheck color="green" />
                   </div>
                   <p className="text-md font-semibold">{item}</p>
                 </div>

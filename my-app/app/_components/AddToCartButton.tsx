@@ -7,8 +7,6 @@ const AddToCartButton = ({ productData }: AddToCartButtonProps) => {
   const addToCart = useAddToCart();
   const { setIsOpen } = useCart();
 
-  console.log("productData", productData);
-
   const handleClick = () => {
     setIsOpen(true);
     addToCart({

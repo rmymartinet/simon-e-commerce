@@ -5,7 +5,7 @@ import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import Image from "next/image";
 import { IoClose } from "react-icons/io5";
-import { clientImg, imagesUrls, names } from "../data/beforeAfterPhoto";
+import { clientImg, imagesUrls, names } from "../data/beforeAfterPhotoData";
 
 gsap.registerPlugin(useGSAP);
 

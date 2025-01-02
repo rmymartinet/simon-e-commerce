@@ -3,7 +3,7 @@ import { useRef } from "react";
 import { FaCheck } from "react-icons/fa6";
 import gsap from "gsap";
 import PurpleLight from "../PurpleLight";
-import { checkData } from "@/app/data/coachingNutrition";
+import { checkData } from "@/app/data/coachingNutritionData";
 
 gsap.registerPlugin(useGSAP);
 

@@ -4,15 +4,12 @@ import { useGSAP } from "@gsap/react";
 import { useRef } from "react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Image from "next/image";
-import useWindowWidth from "@/hooks/useWindowWidth";
 
 gsap.registerPlugin(useGSAP, ScrollTrigger);
 
 const AppOverview = () => {
   const iphoneContainerRef = useRef(null);
   const neonTitleRef = useRef(null);
-
-  const { width } = useWindowWidth();
 
   useGSAP(() => {
     gsap.fromTo(
@@ -42,7 +39,7 @@ const AppOverview = () => {
         Une seule application, tout votre entraînement
       </h1>
       <div className="flex flex-col items-center gap-4 md:flex-row">
-        <p className="text-subtle font-medium md:text-lg">
+        <p className="font-medium text-subtle md:text-lg">
           Simplifiez vos entraînements avec VirtualGym
         </p>
         <div className="h-[5vh] overflow-hidden rounded-xl">

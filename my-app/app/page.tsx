@@ -7,13 +7,13 @@ import Header from "./_components/Header/Header";
 import Youtube from "./_components/program/Youtube";
 import NutritionGrid from "./_components/coaching/NutritionGrid";
 import ProgramOverview from "./_components/program/ProgramOverview";
-import ProgramNutrition from "./_components/program/NutritionAdvice";
 import CoachingOverview from "./_components/coaching/CoachingOverview";
 import AppDetails from "./_components/coaching/AppDetails";
 import CoachingNutrition from "./_components/coaching/CoachingNutrition";
 import AppOverview from "./_components/coaching/AppOverview";
 import EvolvingProgram from "./_components/program/EvolvingProgram";
 import AvailableOfferContainer from "./_components/AvailableOfferContainer";
+import NutritionAdvice from "./_components/program/NutritionAdvice";
 
 gsap.registerPlugin(useGSAP);
 
@@ -24,7 +24,7 @@ export default function Home() {
       <AvailableOfferContainer />
       <ProgramOverview />
       <EvolvingProgram />
-      <ProgramNutrition />
+      <NutritionAdvice />
       <Youtube />
       <CoachingOverview />
       <AppOverview />
