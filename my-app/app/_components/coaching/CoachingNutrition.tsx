@@ -2,6 +2,8 @@ import { useGSAP } from "@gsap/react";
 import { useRef } from "react";
 import { FaCheck } from "react-icons/fa6";
 import gsap from "gsap";
+import PurpleLight from "../PurpleLight";
+import { checkData } from "@/app/data/coachingNutrition";
 
 gsap.registerPlugin(useGSAP);
 
@@ -19,11 +21,11 @@ const CoachingNutrition = () => {
 
     wordsRefs.current.forEach((word) => {
       tl.to(word, {
-        color: "white", // Mot passe à blanc
+        color: "#6e7681", // Mot passe à blanc
         duration: 1,
         ease: "power2.out",
       }).to(word, {
-        color: "#6a6b6c", // Retour à la couleur initiale
+        color: "#4ade80", // Retour à la couleur initiale
         duration: 1,
         ease: "power2.out",
       });
@@ -51,32 +53,31 @@ const CoachingNutrition = () => {
     });
   }, []);
 
-  const checkData = [
-    "Une Analyse Complète de Vos Besoins",
-    "Création de Votre Plan Nutritionnel",
-    "Des Recettes Adaptées à Vos Goûts",
-    "Suivi Continu et Ajustements",
-  ];
   return (
-    <section className="mt-[20vh] flex w-screen flex-col items-center gap-20">
+    <section className="relative mt-[20vh] flex w-screen flex-col items-center gap-20">
+      <PurpleLight
+        yposition="top-0"
+        xposition="right-0"
+        height="h-full"
+        width="w-[30%]"
+      />
       <div className="mb-10 flex flex-col items-center">
         <h1 className="text-xl font-bold lg:text-3xl">
           Un suivi nutritionnel personnalisé
         </h1>
-        <p className="px-2 text-center font-medium text-textOpacity lg:text-lg">
+        <p className="px-2 text-center font-medium text-subtle lg:text-lg">
           Une approche sur-mesure, ajustée à votre mode de vie et à vos
           préférences alimentaires
         </p>
       </div>
       <div className="flex flex-col items-center justify-items-end gap-20 lg:grid lg:grid-cols-2">
-        <div className="text-pretty break-words text-center text-lg text-textOpacity md:text-start lg:w-[40vw] lg:text-2xl">
-          <p className="px-2">
+        <div className="text-pretty break-words text-center text-lg text-white md:text-start lg:w-[40vw] lg:text-2xl">
+          <p className="px-2 text-muted">
             Chacun a des besoins nutritionnels différents. Que vous cherchiez à{" "}
             <span
               ref={(el) => {
                 wordsRefs.current[0] = el;
               }}
-              className="text-textOpacity"
             >
               perdre du poids
             </span>
@@ -85,7 +86,6 @@ const CoachingNutrition = () => {
               ref={(el) => {
                 wordsRefs.current[1] = el;
               }}
-              className="text-textOpacity"
             >
               masse musculaire
             </span>{" "}
@@ -94,7 +94,6 @@ const CoachingNutrition = () => {
               ref={(el) => {
                 wordsRefs.current[2] = el;
               }}
-              className="text-textOpacity"
             >
               équilibrée
             </span>
@@ -103,7 +102,6 @@ const CoachingNutrition = () => {
               ref={(el) => {
                 wordsRefs.current[3] = el;
               }}
-              className="text-textOpacity"
             >
               vos besoins
             </span>{" "}
@@ -118,10 +116,7 @@ const CoachingNutrition = () => {
           </h1>
           <div className="z-10 mt-10 flex flex-col gap-4 self-start">
             {checkData.map((data, index) => (
-              <div
-                key={index}
-                className="flex items-center gap-4 text-textOpacity"
-              >
+              <div key={index} className="flex items-center gap-4 text-white">
                 <div
                   ref={(el) => {
                     checkRefs.current[index] = el;
