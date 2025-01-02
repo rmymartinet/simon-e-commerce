@@ -13,7 +13,7 @@ const FilterBlog = ({
   const bgRefs = useRef<(HTMLDivElement | null)[]>([]);
   const textRefs = useRef<(HTMLDivElement | null)[]>([]);
 
-  const handleFilter = (tag: string, index: number | null) => {
+  const handleFilter = (tag: string, index: number) => {
     setFilteredPosts(tag);
     setClickedIndex(index);
   };
@@ -54,17 +54,17 @@ const FilterBlog = ({
         onClick={() => handleFilter("", 0)}
         onMouseEnter={() => handleHover(0, true)}
         onMouseLeave={() => handleHover(0, false)}
-        className={`relative cursor-pointer overflow-hidden ${
+        className={`relative cursor-pointer overflow-hidden text-white ${
           clickedIndex === 0
-            ? "border-2 border-button bg-button text-white"
-            : "border-2 border-slate-200 bg-[#f1f1f1] text-black shadow-inner"
-        } rounded-full px-2 py-1`}
+            ? "bg-button-gradient font-bold"
+            : "card font-medium text-black shadow-inner"
+        } padding rounded-full`}
       >
         <div
           ref={(el) => {
             bgRefs.current[0] = el;
           }}
-          className="absolute bottom-0 left-0 -z-10 h-0 w-full origin-bottom bg-button"
+          className="bg-button absolute bottom-0 left-0 -z-10 h-0 w-full origin-bottom"
         />
         <p
           ref={(el) => {
@@ -83,17 +83,17 @@ const FilterBlog = ({
           onClick={() => handleFilter(tag, index + 1)}
           onMouseEnter={() => handleHover(index + 1, true)}
           onMouseLeave={() => handleHover(index + 1, false)}
-          className={`relative cursor-pointer overflow-hidden ${
+          className={`relative cursor-pointer overflow-hidden text-white ${
             clickedIndex === index + 1
-              ? "border-2 border-button bg-button text-white"
-              : "border-2 border-slate-200 bg-[#f1f1f1] text-black shadow-inner"
-          } rounded-full px-2 py-1`}
+              ? "bg-button-gradient font-bold"
+              : "card font-medium text-black shadow-inner"
+          } padding rounded-full`}
         >
           <div
             ref={(el) => {
               bgRefs.current[index + 1] = el;
             }}
-            className="absolute bottom-0 left-0 -z-10 h-0 w-full origin-bottom bg-button"
+            className="bg-button absolute bottom-0 left-0 -z-10 h-0 w-full origin-bottom"
           />
           <p
             ref={(el) => {

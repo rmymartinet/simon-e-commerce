@@ -19,16 +19,15 @@ export default function IndexPage() {
   const [filteredPosts, setFilteredPosts] = useState<string>("");
   const [clickedIndex, setClickedIndex] = useState<number>(0);
 
-  const options = { next: { revalidate: 30 } }; // Définissez les options ici
-
   useEffect(() => {
+    const options = { next: { revalidate: 30 } };
     const fetchPosts = async () => {
       const result = await client.fetch(POSTS_QUERY, {}, options);
 
       // Transformer en Post[]
       const formattedPosts: Post[] = result.map((doc: SanityDocument) => ({
-        ...doc, // Copier toutes les propriétés existantes
-        tags: doc.tags || [], // Ajouter tags par défaut si manquant
+        ...doc, // Copie les propriétés du document
+        tags: doc.tags || [], // Ajouter des tags par default si manquant
       }));
 
       setPosts(formattedPosts);
@@ -61,7 +60,7 @@ export default function IndexPage() {
   return (
     <main className="container mx-auto mt-40 flex min-h-screen flex-col items-center">
       <div className="mb-40 flex flex-col items-center gap-4 text-center">
-        <h1 className="text-6xl font-semibold">
+        <h1 className="text-4xl font-semibold md:text-6xl">
           Explorez mon univers : musculation, nutrition et inspiration
         </h1>
       </div>

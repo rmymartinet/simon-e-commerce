@@ -93,11 +93,11 @@ export interface FeaturesContainerProps {
 }
 
 export interface FilterBlogProps {
-  posts: Post;
+  posts: Post[];
   filteredPosts: string;
-  setFilteredPosts: React.Dispatch<React.SetStateAction<string>>;
-  clickedIndex: number | null;
-  setClickedIndex: (index: number | null) => void;
+  setFilteredPosts: (tag: string) => void;
+  clickedIndex: number;
+  setClickedIndex: (index: number) => void;
 }
 
 export interface FilterProps {
