@@ -1,4 +1,4 @@
-import useNavigation from "@/utils/navigationUtils";
+import useNavigation from "@/hooks/useNavigation";
 
 const ColorShadowButton = ({
   title,
