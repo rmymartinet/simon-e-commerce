@@ -39,26 +39,12 @@ const AppDetails = () => {
   }, []);
 
   const handleClick = () => {
-    console.log("clicked");
-
     if (trophyRef.current) {
-      const trophyPosition = trophyRef.current.getBoundingClientRect();
-      const centerX = trophyPosition.left + trophyPosition.width / 2;
-      const centerY = trophyPosition.top + trophyPosition.height / 2;
-
-      const origin = {
-        x: (centerX + window.scrollX) / window.innerWidth,
-        y: (centerY + window.scrollY) / window.innerHeight,
-      };
-
-      console.log("Trophy Position:", trophyPosition);
-      console.log("Confetti Origin:", origin);
-
       confetti({
         particleCount: 100,
         spread: 70,
         origin: {
-          y: 0.32,
+          y: 0.3,
           x: 0.7,
         },
       });
@@ -79,13 +65,13 @@ const AppDetails = () => {
           ref={lineRef}
           className="absolute left-0 top-1/2 -z-10 h-[1px] w-0 -translate-y-1/2 bg-[#7cbdeb] blur-[1px]"
         ></div>
-        <h1 className="card text-md rounded-full px-2 py-2 font-bold lg:px-4 lg:text-xl">
+        <h1 className="card rounded-lg px-2 py-2 text-sm font-bold lg:px-4 lg:text-xl">
           Communiquer
         </h1>
-        <h1 className="card text-md rounded-full px-2 py-2 font-bold lg:px-4 lg:text-xl">
+        <h1 className="card rounded-lg px-2 py-2 text-sm font-bold lg:px-4 lg:text-xl">
           Accompagner
         </h1>
-        <h1 className="card text-md rounded-full px-2 py-2 font-bold lg:px-4 lg:text-xl">
+        <h1 className="card rounded-lg px-2 py-2 text-sm font-bold lg:px-4 lg:text-xl">
           Réussir
         </h1>
         <div
@@ -100,15 +86,14 @@ const AppDetails = () => {
       </div>
       <div className="flex flex-col items-center gap-10 lg:grid lg:grid-cols-2 lg:gap-40">
         <div className="justify-self-end">
-          <Iphone video="/videos/exercice_change.mp4" />
+          <Iphone video="/videos/exercices/exercice_change.mp4" />
         </div>
         <div className="flex flex-col gap-2 lg:w-[70%]">
-          <h1 className="text-center text-2xl font-bold md:text-start">
-            Affinez chaque détail pour mieux{" "}
-            <span className="font-bold text-violet-600">performer</span>
+          <h1 className="mb-4 text-center text-2xl font-bold md:text-start">
+            Affinez chaque détail pour mieux performer
           </h1>
 
-          <p className="text-md mt-4 text-center font-semibold text-textOpacity md:mt-0 md:text-start">
+          <p className="text-md mt-4 text-center text-muted md:mt-0 md:text-start">
             Vos programmes ne sont{" "}
             <span className="font-semibold text-white">pas figés</span> :
             ajustez chaque séance selon vos ressentis. En cas de besoin,{" "}
@@ -122,16 +107,14 @@ const AppDetails = () => {
       </div>
       <div className="flex flex-col items-center gap-10 lg:grid lg:grid-cols-2 lg:gap-40">
         <div className="justify-self-end">
-          <Iphone video="/videos/exercice-demo.mp4" />
+          <Iphone video="/videos/exercices/exercice-demo.mp4" />
         </div>
         <div className="flex flex-col gap-2 lg:w-[70%]">
-          <h1 className="text-center text-2xl font-bold md:text-start">
-            Des{" "}
-            <span className="font-bold text-violet-600">démonstrations</span>{" "}
-            vidéo pour chaque mouvement
+          <h1 className="mb-4 text-center text-2xl font-bold md:text-start">
+            Des démonstrations vidéo pour chaque mouvement
           </h1>
 
-          <p className="text-md mt-4 text-center font-semibold text-textOpacity md:mt-0 md:text-start">
+          <p className="text-md mt-4 text-center text-muted md:mt-0 md:text-start">
             Ne restez jamais dans l&apos;incertitude : chaque mouvement est
             expliqué en vidéo dans{" "}
             <span className="font-semibold text-white">l’application</span>, et
