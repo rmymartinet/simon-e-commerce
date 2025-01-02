@@ -5,20 +5,13 @@ import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import Image from "next/image";
 import { IoClose } from "react-icons/io5";
+import { clientImg, imagesUrls, names } from "../data/beforeAfterPhoto";
 
 gsap.registerPlugin(useGSAP);
 
 const BeforeAfterPhoto = () => {
   const chgRef = useRef<(HTMLDivElement | null)[]>([]);
-  const names = [
-    "Romain",
-    "Léa",
-    "Nathan",
-    "Justine",
-    "Justine",
-    "Justine",
-    "Justine",
-  ];
+  const namesRef = useRef<(HTMLDivElement | null)[]>([]);
   const [index, setIndex] = useState(0);
   const [isClickedIndex, setIsClickedIndex] = useState(0);
   const [isClicked, setIsClicked] = useState(false);
@@ -39,68 +32,6 @@ const BeforeAfterPhoto = () => {
 
     return () => clearInterval(interval);
   }, []);
-
-  const imagesUrls = [
-    {
-      name: "romain",
-      firstMoutnh: "1mois",
-      lastMoutnh: "9mois",
-      result: "-50kg",
-      before: "/images/before_after/client1/1.jpeg",
-      after: "/images/before_after/client1/2.jpeg",
-    },
-    {
-      name: "justine",
-      firstMoutnh: "1mois",
-      lastMoutnh: "3mois",
-      result: "+9kg",
-      before: "/images/before_after/client2/img1.jpeg",
-      after: "/images/before_after/client2/img2.jpeg",
-    },
-    {
-      name: "théo",
-      firstMoutnh: "1mois",
-      lastMoutnh: "5mois",
-      result: "+3kg",
-      before: "/images/before_after/client5/img1.jpeg",
-      after: "/images/before_after/client5/img2.jpeg",
-    },
-    {
-      name: "nathan",
-      firstMoutnh: "1mois",
-      lastMoutnh: "3mois",
-      result: "+8kg",
-      before: "/images/before_after/client3/img1.jpeg",
-      after: "/images/before_after/client3/img2.jpeg",
-    },
-    {
-      name: "fanny",
-      firstMoutnh: "1mois",
-      lastMoutnh: "5mois",
-      result: "-15kg",
-      before: "/images/before_after/client4/img1.jpeg",
-      after: "/images/before_after/client4/img2.jpeg",
-    },
-
-    {
-      name: "pierre",
-      firstMoutnh: "1mois",
-      lastMoutnh: "4mois",
-      result: "+4kg",
-      before: "/images/before_after/client6/img1.jpeg",
-      after: "/images/before_after/client6/img2.jpeg",
-    },
-    {
-      name: "Alex",
-      firstMoutnh: "1mois",
-      lastMoutnh: "5mois",
-      result: "+4kg",
-      before: "/images/before_after/client7/img1.jpeg",
-      after: "/images/before_after/client7/img2.jpeg",
-    },
-  ];
-
-  const namesRef = useRef<(HTMLDivElement | null)[]>([]);
 
   useGSAP(() => {
     const tl = gsap.timeline({ repeat: -1 });
@@ -126,103 +57,6 @@ const BeforeAfterPhoto = () => {
       }
     });
   }, []);
-
-  const clientImg: {
-    before: { [key: string]: string };
-    after: { [key: string]: string };
-  }[] = [
-    {
-      before: {
-        img1: "/images/before_after/client1/removebg/before/img1.png",
-        img2: "/images/before_after/client1/removebg/before/img2.png",
-        img3: "/images/before_after/client1/removebg/before/img3.png",
-        img4: "/images/before_after/client1/removebg/before/img4.png",
-      },
-      after: {
-        img1: "/images/before_after/client1/removebg/after/img1.png",
-        img2: "/images/before_after/client1/removebg/after/img2.png",
-        img3: "/images/before_after/client1/removebg/after/img3.png",
-        img4: "/images/before_after/client1/removebg/after/img4.png",
-      },
-    },
-    {
-      before: {
-        img1: "/images/before_after/client2/removebg/before/img1.png",
-        img2: "/images/before_after/client2/removebg/before/img2.png",
-        img3: "/images/before_after/client2/removebg/before/img3.png",
-        img4: "/images/before_after/client2/removebg/before/img4.png",
-      },
-      after: {
-        img1: "/images/before_after/client2/removebg/after/img1.png",
-        img2: "/images/before_after/client2/removebg/after/img2.png",
-        img3: "/images/before_after/client2/removebg/after/img3.png",
-        img4: "/images/before_after/client2/removebg/after/img4.png",
-      },
-    },
-    {
-      before: {
-        img1: "/images/before_after/client4/removebg/before/img1.png",
-        img2: "/images/before_after/client4/removebg/before/img2.png",
-        img3: "/images/before_after/client4/removebg/before/img3.png",
-        img4: "/images/before_after/client4/removebg/before/img4.png",
-      },
-      after: {
-        img1: "/images/before_after/client4/removebg/after/img1.png",
-        img2: "/images/before_after/client4/removebg/after/img2.png",
-        img3: "/images/before_after/client4/removebg/after/img3.png",
-        img4: "/images/before_after/client4/removebg/after/img4.png",
-      },
-    },
-    {
-      before: {
-        img1: "/images/before_after/client3/removebg/before/img1.png",
-        img2: "/images/before_after/client3/removebg/before/img2.png",
-        img3: "/images/before_after/client3/removebg/before/img3.png",
-        img4: "/images/before_after/client3/removebg/before/img4.png",
-      },
-      after: {
-        img1: "/images/before_after/client3/removebg/after/img1.png",
-        img2: "/images/before_after/client3/removebg/after/img2.png",
-        img3: "/images/before_after/client3/removebg/after/img3.png",
-        img4: "/images/before_after/client3/removebg/after/img4.png",
-      },
-    },
-
-    {
-      before: {
-        img1: "/images/before_after/client5/removebg/before/img1.png",
-        img2: "/images/before_after/client5/removebg/before/img2.png",
-        img3: "/images/before_after/client5/removebg/before/img3.png",
-        img4: "/images/before_after/client5/removebg/before/img4.png",
-      },
-      after: {
-        img1: "/images/before_after/client5/removebg/after/img1.png",
-        img2: "/images/before_after/client5/removebg/after/img2.png",
-        img3: "/images/before_after/client5/removebg/after/img3.png",
-        img4: "/images/before_after/client5/removebg/after/img4.png",
-      },
-    },
-
-    {
-      before: {
-        img1: "/images/before_after/client6/removebg/before/img1.png",
-        img2: "/images/before_after/client6/removebg/before/img2.png",
-        img3: "/images/before_after/client6/removebg/before/img3.png",
-        img4: "/images/before_after/client6/removebg/before/img4.png",
-      },
-      after: {
-        img1: "/images/before_after/client6/removebg/after/img1.png",
-        img2: "/images/before_after/client6/removebg/after/img2.png",
-        img3: "/images/before_after/client6/removebg/after/img3.png",
-        img4: "/images/before_after/client6/removebg/after/img4.png",
-      },
-    },
-  ];
-
-  // Vérifiez que clientImg est un tableau valide
-  if (!Array.isArray(clientImg) || clientImg.length === 0) {
-    return <div>Aucune image disponible</div>;
-  }
 
   return (
     <div className="relative mt-[20vh] flex flex-col items-center justify-center p-6">
