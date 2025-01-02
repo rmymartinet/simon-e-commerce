@@ -4,13 +4,13 @@ import { RiStarSFill } from "react-icons/ri";
 
 const FeedBackCard = ({ firstName, imgUrl, text }: FeedBackCardProps) => {
   return (
-    <div className="card grid h-[30vh] grid-rows-3 justify-between rounded-2xl border border-[#424242] p-6">
-      <div className="flex gap-2">
-        <RiStarSFill color="#E0AAFF" />
-        <RiStarSFill color="#E0AAFF" />
-        <RiStarSFill color="#E0AAFF" />
-        <RiStarSFill color="#E0AAFF" />
-        <RiStarSFill color="#E0AAFF" />
+    <div className="card grid h-[35vh] grid-rows-feedBackCard justify-between rounded-2xl border border-[#424242] p-6">
+      <div className="mb-8 flex gap-2">
+        {Array(5)
+          .fill(null)
+          .map((_, index) => (
+            <RiStarSFill key={index} color="#E0AAFF" />
+          ))}
       </div>
       <p className="text-xl">{text}</p>
       <div className="flex items-center gap-4 self-end">

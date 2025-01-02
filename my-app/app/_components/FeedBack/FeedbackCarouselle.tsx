@@ -1,4 +1,4 @@
-import { feedBack } from "@/app/data/feedback";
+import { feedBack } from "@/app/data/feedbackData";
 import gsap from "gsap";
 import { useEffect, useRef, useState } from "react";
 import FeedBackCard from "./FeedBackCard";
