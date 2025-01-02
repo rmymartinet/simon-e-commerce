@@ -8,7 +8,12 @@ import gsap from "gsap";
 import { FormProps } from "@/types/types";
 import Stars from "../Stars";
 
-const FormCalories = ({ data, inputData }: FormProps) => {
+const FormCalories = ({
+  showResults,
+  setShowResults,
+  data,
+  inputData,
+}: FormProps) => {
   const resultRef = useRef(null);
   const formRef = useRef(null);
   const backButtonRef = useRef(null);
@@ -32,7 +37,6 @@ const FormCalories = ({ data, inputData }: FormProps) => {
   } = inputData;
 
   const { grams, totalCalories, BMR } = data;
-  const [showResults, setShowResults] = useState(false);
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -86,8 +90,12 @@ const FormCalories = ({ data, inputData }: FormProps) => {
         ease: "power2.out",
       });
     } else {
-      gsap.set(resultRef.current, { x: 2000 });
-      gsap.set(formRef.current, { opacity: 1 });
+      gsap.to(formRef.current, {
+        x: 0,
+        duration: 1,
+        ease: "power2.out",
+      });
+      gsap.to(resultRef.current, { x: 2000 });
     }
   }, [showResults]);
 
@@ -105,7 +113,8 @@ const FormCalories = ({ data, inputData }: FormProps) => {
         {showResults && (
           <button
             ref={backButtonRef}
-            className="bg-button absolute -left-[10%] top-0 -translate-x-1/2 rounded-2xl p-2 text-white hover:bg-[#9D4EDD]"
+            onClick={() => setShowResults(false)}
+            className="padding absolute left-1/2 top-0 z-50 -translate-x-1/2 rounded-2xl bg-button-gradient text-white"
           >
             Précedent
           </button>
@@ -114,8 +123,37 @@ const FormCalories = ({ data, inputData }: FormProps) => {
 
         <div
           ref={resultRef}
-          className="program-button-container absolute left-1/2 top-[60%] flex h-max w-full -translate-x-1/2 -translate-y-1/2 flex-col rounded-2xl border-2 border-red-400 p-2"
+          className="program-button-container absolute left-1/2 top-[60%] mt-[30vh] flex h-max w-screen -translate-x-1/2 -translate-y-1/2 flex-col rounded-2xl border-2 border-red-400 p-2 md:w-screen lg:w-full"
         >
+          <Stars
+            yposition="-top-10"
+            xposition="left-0"
+            height="h-20"
+            weight="w-full"
+            isTop={false}
+          />
+          <Stars
+            yposition="-bottom-10"
+            xposition="left-0"
+            height="h-20"
+            weight="w-full"
+            isTop={false}
+          />
+          <Stars
+            yposition="top-0"
+            xposition="-right-10"
+            height="h-full"
+            weight="w-20"
+            isTop={true}
+          />
+
+          <Stars
+            yposition="top-0"
+            xposition="-left-10"
+            height="h-full"
+            weight="w-20"
+            isTop={true}
+          />
           <div className="flex flex-col gap-4">
             <CaloriesCard
               showResults={showResults}
@@ -135,7 +173,7 @@ const FormCalories = ({ data, inputData }: FormProps) => {
         </div>
         <form
           ref={formRef}
-          className="program-background relative flex h-max w-screen flex-col gap-4 rounded-xl p-8 lg:w-full"
+          className="program-background relative flex w-screen flex-col gap-4 rounded-xl p-8 lg:w-full"
           action="submit"
           onSubmit={handleSubmit}
         >
@@ -228,7 +266,6 @@ const FormCalories = ({ data, inputData }: FormProps) => {
               <span className="text-red-400">{errors.weight}</span>
             )}
           </div>
-
           <div className="flex flex-col">
             <label htmlFor="targetWeight" className="mb-2">
               Poids que vous souhaitez atteindre (kg)
@@ -244,7 +281,6 @@ const FormCalories = ({ data, inputData }: FormProps) => {
               <span className="text-red-400">{errors.targetWeight}</span>
             )}
           </div>
-
           <div className="flex flex-col">
             <label htmlFor="activities" className="mb-2">
               Niveau d&apos;Activité

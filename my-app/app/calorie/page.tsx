@@ -2,12 +2,10 @@
 
 import { useEffect, useRef, useState, useMemo } from "react";
 import FormCalories from "../_components/Calories/FormCalories";
-import NutritionSteps from "../_components/Calories/NutritionSteps";
 import Question from "../_components/Calories/Questions";
-import AvailableOffers from "../_components/AvailableOffers";
-import { coachingIncludes9Mounth, programIncludes } from "../data/cardPrice";
 import { useAnimation } from "../AnimationContext";
 import gsap from "gsap";
+import AvailableOfferContainer from "../_components/AvailableOfferContainer";
 
 export default function Calorie() {
   const [genre, setGenre] = useState("female");
@@ -20,6 +18,7 @@ export default function Calorie() {
   const [weightChange, setWeightChange] = useState(0.5);
   const { isAnimating } = useAnimation();
   const containerRef = useRef(null);
+  const [showResults, setShowResults] = useState(false);
 
   const calculateBMR = (
     weight: number,
@@ -146,16 +145,22 @@ export default function Calorie() {
   return (
     <div
       ref={containerRef}
-      className="mt-40 flex min-h-screen flex-col items-center justify-center gap-20 overflow-hidden"
+      className="mt-[30vh] flex min-h-screen flex-col items-center justify-center gap-20 overflow-hidden"
     >
-      <FormCalories data={data} inputData={inputState} />
-      <NutritionSteps />
-      <div className="flex flex-col items-center gap-10">
+      <FormCalories
+        data={data}
+        inputData={inputState}
+        showResults={showResults}
+        setShowResults={setShowResults}
+      />
+      <div
+        className={`${showResults ? "mt-[30vh]" : ""} flex flex-col items-center gap-10`}
+      >
         <div className="flex flex-col items-center gap-4">
-          <h1 className="text-center text-4xl lg:text-5xl">
+          <h1 className="text-center text-4xl font-bold lg:text-5xl">
             Vous voulez gagner du temps ?
           </h1>
-          <span className="text-center text-slate-400">
+          <span className="text-textOpacity text-center text-lg font-semibold">
             Vous vous êtes sûrement posé ces questions
           </span>
         </div>
@@ -168,20 +173,7 @@ export default function Calorie() {
           <Question question="Combien de calories manger ?" />
           <Question question="Combien de protéines consommer ?" />
         </div>
-        <div className="mt-20 flex flex-col gap-10 lg:flex-row lg:gap-40">
-          <AvailableOffers
-            title="Programmes"
-            follow="Sans suivi"
-            subtitle="Adapté à votre niveau"
-            features={programIncludes}
-          />
-          <AvailableOffers
-            title="Coaching"
-            follow="Avec suivi"
-            subtitle="Suivi sur mesure"
-            features={coachingIncludes9Mounth}
-          />
-        </div>
+        <AvailableOfferContainer />
       </div>
     </div>
   );
