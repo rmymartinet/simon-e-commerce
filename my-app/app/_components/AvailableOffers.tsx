@@ -4,6 +4,7 @@ import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import { AvailableOffersProps } from "@/types/types";
 import Stars from "./Stars";
+import useNavigation from "@/utils/navigationUtils";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -26,6 +27,8 @@ const AvailableOffers = ({
     });
   }, []);
 
+  const { handlePricingNavigation } = useNavigation();
+
   return (
     <div className="card-box-shadow relative flex flex-col gap-10 overflow-hidden rounded-3xl border-card p-10">
       <Stars
@@ -46,7 +49,10 @@ const AvailableOffers = ({
         </span>
       </div>
       <span>{subtitle}</span>
-      <button className="rounded-lg bg-button-gradient py-2 font-medium text-white">
+      <button
+        onClick={handlePricingNavigation}
+        className="rounded-lg bg-button-gradient py-2 font-medium text-white"
+      >
         Commencer
       </button>
       <ul className="flex flex-col gap-2">
