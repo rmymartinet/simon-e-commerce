@@ -7,7 +7,7 @@ import FeaturesContainer from "../_components/Features/FeaturesContainer";
 import ItemsFeatures from "../_components/Features/ItemsFeatures";
 import FeedBackContainer from "../_components/FeedBack/FeedBackContainer";
 import Filter from "../_components/Filter";
-import { featuresCoaching, featuresProgram } from "../data/features";
+import { featuresCoaching, featuresProgram } from "../data/featuresData";
 
 export default function Pricing() {
   const [filterName, setFilterName] = useState("programmes");
@@ -18,10 +18,11 @@ export default function Pricing() {
       <div className="flex flex-col items-center justify-center gap-20">
         <div className="mb-10 flex flex-col items-center gap-4">
           <h1 className="md:text-title text-center text-5xl font-bold">
-            Des plans conçus pour répondre à vos besoins
+            Des solutions conçues pour vous
           </h1>
-          <p className="text-center text-lg font-semibold text-textOpacity md:text-start">
-            Des solutions pensées pour chaque étape de ton parcours{" "}
+          <p className="text-subtle text-center text-lg font-medium md:text-start">
+            Choisissez entre nos programmes en autonomie ou notre suivi
+            personnalisé
           </p>
         </div>
         <Filter filterName={filterName} setFilterName={setFilterName} />
@@ -29,7 +30,7 @@ export default function Pricing() {
       </div>
       {filterName === "programmes" && (
         <FeaturesContainer
-          title="Inclus dans tous les programmes"
+          title="Bonus inclus dans tous nos programmes"
           text="sans suivi"
           coaching={false}
         >
@@ -45,7 +46,7 @@ export default function Pricing() {
       )}
       {filterName === "coaching" && (
         <FeaturesContainer
-          title="Inclus dans tous les coachings"
+          title="Bonus inclus dans tous nos coachings"
           text="avec suivi"
           coaching={true}
         >
@@ -60,7 +61,7 @@ export default function Pricing() {
         </FeaturesContainer>
       )}
       <FeedBackContainer />
-      <Faq />
+      <Faq filterName={filterName} />
     </div>
   );
 }
