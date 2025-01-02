@@ -1,4 +1,4 @@
-import { coachingData, programData } from "@/app/data/cardPriceContainer";
+import { coachingData, programData } from "@/app/data/cardPriceContainerData";
 import Stars from "../Stars";
 import CardPrice from "./CardPrice";
 
