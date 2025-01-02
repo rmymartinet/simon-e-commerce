@@ -15,7 +15,7 @@ const FeaturesContainer = ({
     <div className="relative mt-40 flex justify-end gap-10 self-end pb-[24vh]">
       <div className="animate-bg-purple absolute -left-[900px] bottom-0 h-1/2 w-1/2"></div>
       <div className="flex h-full w-full flex-col gap-28 lg:w-[70vw]">
-        <div className="flex flex-col gap-4">
+        <div className="flex flex-col items-center gap-4 lg:items-start">
           <h1 className="text-center text-5xl font-bold md:text-start">
             {title}
           </h1>
@@ -32,7 +32,7 @@ const FeaturesContainer = ({
             <div className="absolute inset-0 -z-10 h-full w-full rounded-xl bg-[#0b0d14]"></div>
           </div>
         </div>
-        <div className="flex flex-col gap-32 md:grid md:grid-flow-row md:grid-cols-2">
+        <div className="flex flex-col gap-32 lg:grid lg:grid-flow-row lg:grid-cols-2">
           {children}
         </div>
       </div>
