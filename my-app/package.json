@@ -3,11 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "test": "jest"
   },
   "dependencies": {
     "@auth/prisma-adapter": "^2.7.4",
@@ -42,6 +43,7 @@
     "sanity": "^3.65.1",
     "stripe": "^17.4.0",
     "styled-components": "^6.1.13",
+    "sweetalert2": "^11.15.3",
     "three": "^0.171.0",
     "zod": "^3.23.8"
   },
