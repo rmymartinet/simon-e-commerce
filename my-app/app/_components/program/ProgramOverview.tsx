@@ -120,117 +120,81 @@ const ProgramOverview = () => {
   return (
     <div
       id="program"
-      className="relative mt-[20vh] flex w-screen flex-col items-center gap-20 overflow-hidden md:mb-0 md:w-max"
+      className="relative mt-[20vh] flex w-screen flex-col items-center gap-20 overflow-hidden"
     >
-      <div className="flex items-center overflow-hidden text-sm font-bold">
-        <div className="program-title-gradient-l h-[2px] w-60 rounded-full"></div>
-        <div className="relative">
-          <div className="bg-pg-title absolute left-1/2 top-1/2 -z-10 h-4 w-[9rem] -translate-x-1/2 -translate-y-1/2 blur-lg"></div>
-          <p className="px-4 text-lg text-[#f690ff]">Programmes</p>
+      <div className="flex w-full flex-col gap-20">
+        <div className="flex items-center justify-center overflow-hidden text-sm font-bold">
+          <div className="program-title-gradient-l h-[2px] w-60 rounded-full"></div>
+          <div className="relative">
+            <div className="bg-pg-title absolute left-1/2 top-1/2 -z-10 h-4 w-[9rem] -translate-x-1/2 -translate-y-1/2 blur-lg"></div>
+            <p className="px-4 text-lg text-[#f690ff]">Programmes</p>
+          </div>
+          <div className="program-title-gradient-r h-[2px] w-60 rounded-full"></div>
         </div>
-        <div className="program-title-gradient-r h-[2px] w-60 rounded-full"></div>
+        <div className="flex flex-col items-center justify-center gap-4 md:gap-0">
+          <h1 className="text-center text-xl font-bold md:text-3xl">
+            Des programmes faits pour vous
+          </h1>
+          <p className="text-subtle text-center font-medium md:text-lg">
+            Débutant, intermédiaire ou confirmé : progressez à votre rythme
+          </p>
+        </div>
       </div>
-      <div className="flex flex-col items-center justify-center gap-4 md:gap-0">
-        <h1 className="text-center text-xl font-bold md:text-3xl">
-          Des programmes faits pour vous
-        </h1>
-        <p className="text-center font-medium text-textOpacity md:text-lg">
-          Débutant, intermédiaire ou confirmé : progressez à votre rythme
-        </p>
-      </div>
-      <div className="flex h-[50vh] w-screen items-center justify-center overflow-hidden md:h-max md:py-10">
-        <div className="program-background absolute -left-20 bottom-0 w-[150vw] rounded-2xl p-3 md:left-0 md:w-max lg:relative">
-          <Stars
-            yposition="-top-10"
-            xposition="left-0"
-            height="h-20"
-            weight="w-full"
-            isTop={false}
-          />
-          <Stars
-            yposition="-bottom-10"
-            xposition="left-0"
-            height="h-20"
-            weight="w-full"
-            isTop={false}
-          />
-          <Stars
-            yposition="top-0"
-            xposition="-right-10"
-            height="h-full"
-            weight="w-20"
-            isTop={true}
+      <div className="program-background relative w-[200vw] rounded-2xl md:w-[80vw] md:p-3">
+        <Stars
+          yposition="-top-10"
+          xposition="left-0"
+          height="h-20"
+          weight="w-full"
+          isTop={false}
+        />
+        <Stars
+          yposition="-bottom-10"
+          xposition="left-0"
+          height="h-20"
+          weight="w-full"
+          isTop={false}
+        />
+        <Stars
+          yposition="top-0"
+          xposition="-right-10"
+          height="h-full"
+          weight="w-20"
+          isTop={true}
+        />
+
+        <Stars
+          yposition="top-0"
+          xposition="-left-10"
+          height="h-full"
+          weight="w-20"
+          isTop={true}
+        />
+        <div className="relative overflow-hidden">
+          <Image
+            src="/images/mac_background.png"
+            alt=""
+            width={2000}
+            height={2000}
+            className="h-full w-full rounded-lg object-fill"
+            quality={100}
           />
 
-          <Stars
-            yposition="top-0"
-            xposition="-left-10"
-            height="h-full"
-            weight="w-20"
-            isTop={true}
-          />
-
-          <div className="absolute -left-10 top-0 -z-10 h-full w-20">
-            <div className="relative flex h-full w-full gap-4">
-              {Array.from({ length: 100 }, (_, index) => {
-                const randomPositionY =
-                  Math.floor(Math.random() * 99) + 1 + "%";
-                const randomPositionX =
-                  Math.floor(Math.random() * 99) + 1 + "%";
-
-                return (
-                  <div
-                    key={index}
-                    className="absolute h-[1px] w-[1px] rounded-full bg-white opacity-20"
-                    style={{ top: randomPositionY, left: randomPositionX }}
-                  />
-                );
-              })}
-            </div>
-          </div>
-          <div className="absolute -right-10 top-0 -z-10 h-full w-20">
-            <div className="relative flex h-full w-full gap-4">
-              {Array.from({ length: 100 }, (_, index) => {
-                const randomPositionY =
-                  Math.floor(Math.random() * 99) + 1 + "%";
-                const randomPositionX =
-                  Math.floor(Math.random() * 99) + 1 + "%";
-
-                return (
-                  <div
-                    key={index}
-                    className="absolute h-[1px] w-[1px] rounded-full bg-white opacity-20"
-                    style={{ top: randomPositionY, left: randomPositionX }}
-                  />
-                );
-              })}
-            </div>
-          </div>
-          <div className="relative flex h-[48vh] overflow-hidden rounded-lg border-card lg:h-[80vh] lg:w-[80vw]">
-            <Image
-              src="/images/mac_background.png"
-              alt=""
-              width={2000}
-              height={2000}
-              className="h-full w-full object-fill"
-              quality={100}
+          {videos.map((video, index) => (
+            <video
+              ref={(el) => {
+                videoRefs.current[index] = el;
+              }}
+              src={video}
+              key={index}
+              muted
+              preload="auto"
+              className="absolute -right-[20vw] top-1/2 z-50 h-[80%] -translate-y-1/2 rounded-lg object-cover shadow-lg md:left-1/2 md:top-1/2 md:h-[70%] md:-translate-x-1/2 md:rounded-xl"
             />
-            {videos.map((video, index) => (
-              <video
-                ref={(el) => {
-                  videoRefs.current[index] = el;
-                }}
-                src={video}
-                key={index}
-                muted
-                preload="auto"
-                className="absolute left-[70%] top-1/2 z-50 -translate-x-1/2 -translate-y-1/2 overflow-hidden rounded-xl object-cover shadow-2xl lg:left-1/2 lg:h-[70%] lg:w-[70%]"
-              ></video>
-            ))}
-          </div>
+          ))}
         </div>
       </div>
-      <div className="program-button-container absolute bottom-6 left-1/2 z-50 grid -translate-x-1/2 grid-cols-4 gap-2 rounded-xl p-2">
+      <div className="program-button-container absolute bottom-5 left-1/2 z-50 hidden -translate-x-1/2 grid-cols-4 gap-2 rounded-xl p-2 lg:grid">
         {logo.map((log, index) => (
           <button
             ref={(el) => {
