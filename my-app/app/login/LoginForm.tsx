@@ -9,7 +9,7 @@ import { FaGithub } from "react-icons/fa6";
 import { FcGoogle } from "react-icons/fc";
 
 export function LoginForm() {
-  const [isLogin, setIsLogin] = useState(true); // Gérer l'état pour basculer entre connexion et inscription
+  const [isLogin, setIsLogin] = useState(true);
   const [state, loginAction] = useActionState(login, undefined);
   const [signupState, signupAction] = useActionState(signup, undefined);
 
@@ -128,7 +128,7 @@ function SubmitButton({ isLogin }: { isLogin: boolean }) {
     <button
       disabled={pending}
       type="submit"
-      className="bg-button-gradient rounded-md px-4 py-2 font-bold text-white"
+      className="rounded-md bg-button-gradient px-4 py-2 font-bold text-white"
     >
       {isLogin ? "Se connecter" : "S'inscrire"}
     </button>

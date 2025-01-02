@@ -4,8 +4,10 @@ import { useEffect } from "react";
 import Footer from "./_components/Footer/Footer";
 import NavBar from "./_components/Nav/NavBar";
 import { AnimationProvider } from "./AnimationContext";
+import { usePathname } from "next/navigation";
 import "./globals.css";
-import LoadingPage from "./_components/LoadingPage";
+import { CartProvider } from "./context/CartContext";
+import { CheckoutProvider } from "./context/CheckoutContext";
 
 export default function RootLayout({
   children,
@@ -15,19 +17,29 @@ export default function RootLayout({
   useEffect(() => {
     (async () => {
       const LocomotiveScroll = (await import("locomotive-scroll")).default;
-      const locomotiveScroll = new LocomotiveScroll();
+      new LocomotiveScroll();
     })();
   }, []);
+
+  const pathname = usePathname();
+  const isDiplayNavBar =
+    pathname !== "/studio" &&
+    pathname !== "/studio/preview" &&
+    pathname !== "/success" &&
+    pathname !== "/cancel";
 
   return (
     <html lang="en">
       <body id="main-container" className="antialiased">
-        <AnimationProvider>
-          <LoadingPage />
-          <NavBar />
-          {children}
-          <Footer />
-        </AnimationProvider>
+        <CartProvider>
+          <CheckoutProvider>
+            <AnimationProvider>
+              {isDiplayNavBar && <NavBar />}
+              {children}
+              {pathname !== "/studio" && <Footer />}
+            </AnimationProvider>
+          </CheckoutProvider>
+        </CartProvider>
       </body>
     </html>
   );
