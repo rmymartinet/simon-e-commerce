@@ -1,4 +1,9 @@
-import { coachingIncludes3Month, coachingIncludes6Month, coachingIncludes9Month, programIncludes } from "./cardPrice";
+import {
+  coachingIncludes3Month,
+  coachingIncludes6Month,
+  coachingIncludes9Month,
+  programIncludes,
+} from "./cardPriceData";
 
 export const coachingData = [
   {

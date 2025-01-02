@@ -1,4 +1,4 @@
-import { coachingIncludes9Month, programIncludes } from "../data/cardPrice";
+import { coachingIncludes9Month, programIncludes } from "../data/cardPriceData";
 import AvailableOffers from "./AvailableOffers";
 
 const AvailableOfferContainer = () => {
@@ -17,7 +17,7 @@ const AvailableOfferContainer = () => {
           {" "}
           Trouvez l’offre qui vous correspond{" "}
         </h1>
-        <p className="text-subtle text-lg font-semibold">
+        <p className="text-lg font-semibold text-subtle">
           Choisissez entre programmes autonomes et coaching personnalisé.{" "}
         </p>
       </div>
