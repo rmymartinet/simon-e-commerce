@@ -1,7 +1,9 @@
-//This files is sorted alphabetically
-
 export interface AddToCartButtonProps {
   productData: ProductDataProps;
+}
+
+export interface AuthContextType {
+  user: { id: string; name: string; email: string } | null;
 }
 
 export interface AvailableOffersProps {
@@ -29,23 +31,11 @@ export interface CardPriceProps {
   filterName: string;
 }
 
-export interface CheckoutData {
-  productData: ProductDataProps; // Remplacez `any` par le type exact de vos produits si possible
-  filterName: string;
-}
-
-export interface CheckoutContextValue {
-  checkoutData: CheckoutData | null;
-  setCheckoutData: (data: CheckoutData) => void;
-}
-
 export interface CartContextProps {
-  cart: Item[];
-  setCart: React.Dispatch<React.SetStateAction<Item[]>>;
-  isShoppingOpen: boolean;
-  setIsShoppingOpen: (isShoppingOpen: boolean) => void;
-  tempQuantity: number;
-  setTempQuantity: (tempQuantity: number) => void;
+  cart: CartItemProps[];
+  setCart: React.Dispatch<React.SetStateAction<CartItemProps[]>>;
+  isOpen: boolean; // Ajoutez cette ligne
+  setIsOpen: (isOpen: boolean) => void;
   updateCartQuantity: (itemId: string, newQuantity: number) => void;
 }
 
@@ -53,8 +43,19 @@ export interface CartItemProps {
   id: string;
   type: string;
   price: number;
-  quantity: number;
+  quantity?: number;
   titlePlan: string;
+  img?: string;
+}
+
+export interface CheckoutContextValue {
+  checkoutData: CheckoutData | null;
+  setCheckoutData: (data: CheckoutData) => void;
+}
+
+export interface CheckoutData {
+  productData: ProductDataProps;
+  filterName: string;
 }
 
 export interface CircleChartProps {
@@ -83,19 +84,6 @@ export interface FeedBackCardProps {
   firstName: string;
   imgUrl: string;
   text: string;
-}
-
-export interface AuthContextType {
-  user: { id: string; name: string; email: string } | null;
-}
-
-export interface useAddToCartProps {
-  type: string;
-  id: string;
-  titlePlan: string;
-  img: string;
-  price: number;
-  month: number;
 }
 
 export interface FeaturesContainerProps {
@@ -224,6 +212,7 @@ export interface Post {
 
 export interface ProductDataProps {
   type: string;
+  id: string;
   priceId?: string;
   imageUrl: string;
   mostPopular?: boolean;
@@ -258,4 +247,13 @@ export interface StepCardProps {
   content: string;
   bgClass?: string;
   children: React.ReactNode;
+}
+
+export interface useAddToCartProps {
+  type: string;
+  id: string;
+  titlePlan: string;
+  img: string;
+  price: number;
+  month: number;
 }
