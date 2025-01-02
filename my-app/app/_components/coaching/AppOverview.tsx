@@ -34,20 +34,6 @@ const AppOverview = () => {
         stagger: 0.5,
       },
     );
-
-    gsap.to(neonTitleRef.current, {
-      scrollTrigger: {
-        trigger: neonTitleRef.current,
-        start: "top center",
-        end: "bottom center",
-        once: false,
-        scrub: 1,
-      },
-
-      y: 300,
-      duration: 2,
-      scale: width < 498 ? 1 : 1.5,
-    });
   }, []);
 
   return (
@@ -56,7 +42,7 @@ const AppOverview = () => {
         Une seule application, tout votre entraînement
       </h1>
       <div className="flex flex-col items-center gap-4 md:flex-row">
-        <p className="font-medium text-textOpacity md:text-lg">
+        <p className="text-subtle font-medium md:text-lg">
           Simplifiez vos entraînements avec VirtualGym
         </p>
         <div className="h-[5vh] overflow-hidden rounded-xl">
@@ -73,13 +59,13 @@ const AppOverview = () => {
       <div className="relative w-full">
         <h1
           ref={neonTitleRef}
-          className="text-neon absolute left-1/2 top-40 w-full -translate-x-1/2 -translate-y-1/2 text-center text-8xl font-black lg:text-[12rem]"
+          className="text-neon sticky left-0 top-1/2 mt-40 w-full -translate-y-1/2 text-center text-8xl font-black lg:text-[12rem]"
         >
           Tout en 1
         </h1>
         <div
           ref={iphoneContainerRef}
-          className="grid grid-cols-3 gap-10 overflow-hidden px-2"
+          className="flex flex-col gap-10 overflow-hidden px-2 md:grid md:grid-cols-3"
         >
           <div className="absolute flex flex-wrap gap-4">
             {Array.from({ length: 10 }, (_, index) => (
