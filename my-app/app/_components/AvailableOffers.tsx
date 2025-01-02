@@ -4,7 +4,7 @@ import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import { AvailableOffersProps } from "@/types/types";
 import Stars from "./Stars";
-import useNavigation from "@/utils/navigationUtils";
+import useNavigation from "@/hooks/useNavigation";
 
 gsap.registerPlugin(ScrollTrigger);
 
