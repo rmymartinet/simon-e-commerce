@@ -3,7 +3,7 @@ import AvailableOffers from "./AvailableOffers";
 
 const AvailableOfferContainer = () => {
   return (
-    <section className="mt-[20vh] flex flex-col items-center gap-20">
+    <section className="mt-[20vh] flex w-screen flex-col items-center gap-20 overflow-hidden">
       <div className="flex items-center justify-center overflow-hidden text-sm font-bold">
         <div className="program-title-gradient-l h-[2px] w-60 rounded-full"></div>
         <div className="relative">
@@ -13,11 +13,10 @@ const AvailableOfferContainer = () => {
         <div className="program-title-gradient-r h-[2px] w-60 rounded-full"></div>
       </div>
       <div className="flex flex-col items-center gap-4">
-        <h1 className="text-3xl font-bold">
-          {" "}
+        <h1 className="text-center text-3xl font-bold">
           Trouvez l’offre qui vous correspond{" "}
         </h1>
-        <p className="text-lg font-semibold text-subtle">
+        <p className="text-center text-lg font-semibold text-subtle">
           Choisissez entre programmes autonomes et coaching personnalisé.{" "}
         </p>
       </div>
