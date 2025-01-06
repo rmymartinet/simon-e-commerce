@@ -64,7 +64,7 @@ const Header = () => {
       <div className="absolute bottom-20 right-20 z-40 flex flex-col">
         <p className="text-pretty text-2xl font-bold uppercase">2025</p>
       </div>
-      <div className="h-[100vh] w-[100vw] overflow-hidden rounded-2xl">
+      <div className="h-[100vh] w-[100vw] overflow-hidden">
         <video
           autoPlay
           loop
