@@ -3,7 +3,7 @@
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { useRef } from "react";
-import { useCart } from "../context/CartContext";
+import { useCart } from "../../context/CartContext";
 import { IoClose } from "react-icons/io5";
 import { useRemoveItem } from "@/hooks/useRemoveItem";
 import { CartItemProps } from "@/types/types";
