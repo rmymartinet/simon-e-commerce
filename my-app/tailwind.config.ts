@@ -1,3 +1,5 @@
+import { feedBack } from "./app/data/feedbackData";
+
 /* eslint-disable */
 const config: Config = {
   content: [
@@ -10,7 +12,8 @@ const config: Config = {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
-        textOpacity: "#6a6b6c",
+        subtle: "#6e7681",
+        muted: "#8b949e",
         card: "#000000cf",
       },
       gridTemplateColumns: {
@@ -19,9 +22,10 @@ const config: Config = {
         connexionModal: "1fr max-content 1fr",
       },
       gridTemplateRows: {
-        cardPrice: "150px max-content max-content",
+        cardPrice: "120px max-content max-content",
         featuresCard: "280px max-content",
         feedBackContainer: "max-content 1fr",
+        feedBackCard: "max-content 1fr max-content",
       },
       gridColumn: {
         "start-1-end-2": "1 / 2",
@@ -30,9 +34,6 @@ const config: Config = {
         "start-3-end-4": "3 / 4",
       },
 
-      backgroundColor: {
-        glassmorph: "rgba(255, 255, 255, 0.35)",
-      },
       backgroundImage: {
         "button-gradient": "linear-gradient(135deg, #a26ff4, #512e99)",
       },
