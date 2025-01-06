@@ -1,26 +1,27 @@
 "use client";
 
-import { useAnimation } from "@/app/AnimationContext";
-import gsap from "gsap";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { useEffect, useRef, useState } from "react";
-import { BsBucketFill } from "react-icons/bs";
+import { useRef, useState } from "react";
 import {
   PiInstagramLogoFill,
   PiLinkedinLogoFill,
   PiYoutubeLogoFill,
 } from "react-icons/pi";
+import { FaCartShopping } from "react-icons/fa6";
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
+import { AiFillTikTok } from "react-icons/ai";
+import CartSideBar from "../Cart/CartSideBar";
+import { useCart } from "@/app/context/CartContext";
+import useAuth from "@/hooks/useAuth";
+
+gsap.registerPlugin(useGSAP);
 
 const NavBar = () => {
-  const [isSticky, setIsSticky] = useState(true);
-  const [lastScrollY, setLastScrollY] = useState(0);
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const navRef = useRef<HTMLDivElement | null>(null);
   const navLinksRef = useRef<(HTMLLIElement | null)[]>([]);
-  const { isAnimating } = useAnimation();
-
-  const path = usePathname();
+  const navRightRef = useRef<HTMLDivElement | null>(null);
 
   const navLinks = [
     { title: "Home", link: "/" },
@@ -29,69 +30,30 @@ const NavBar = () => {
     { title: "Blog", link: "/blog" },
   ];
 
-  const isHomePage = path === "/";
+  const { isOpen, setIsOpen } = useCart();
+  const { isAuthenticated } = useAuth();
 
-  const handleScroll = () => {
-    if (window.scrollY > lastScrollY) {
-      // Si on descend la page, enlever sticky
-      setIsSticky(false);
-    } else {
-      // Si on remonte la page, rendre la barre sticky
-      setIsSticky(true);
-    }
-    setLastScrollY(window.scrollY);
+  const handleOpenCart = () => {
+    setIsOpen(true);
   };
 
-  useEffect(() => {
-    window.addEventListener("scroll", handleScroll);
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, [lastScrollY]);
-
-  useEffect(() => {
-    console.log(lastScrollY);
-    window.addEventListener("scroll", handleScroll);
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, [lastScrollY]);
-
-  useEffect(() => {
-    if (isSticky) {
-      gsap.to(navRef.current, {
-        y: 0,
+  useGSAP(() => {
+    if (isOpen == false) {
+      gsap.to(navRightRef.current, {
         opacity: 1,
-        duration: 1,
-        ease: "power3.out",
+        scale: 1,
+        duration: 0.5,
+        ease: "power2.out",
       });
     } else {
-      gsap.to(navRef.current, {
-        y: -100,
+      gsap.to(navRightRef.current, {
         opacity: 0,
-        duration: 1,
-        ease: "power3.out",
+        scale: 0,
+        duration: 0.5,
+        ease: "power2.out",
       });
     }
-  }, [isSticky]);
-
-  useEffect(() => {
-    if (!isAnimating) {
-      gsap.to(navRef.current, {
-        y: 0,
-        opacity: 1,
-        duration: 1,
-        ease: "power2.Out",
-      });
-    } else {
-      gsap.to(navRef.current, {
-        y: -100,
-        opacity: 0,
-        duration: 1,
-        ease: "power2.Out",
-      });
-    }
-  }, [isAnimating]);
+  }, [isOpen]);
 
   const handleMouseEnter = (index: number) => {
     setHoveredIndex(index);
@@ -102,53 +64,97 @@ const NavBar = () => {
   };
 
   const socialIcons = [
-    { icon: <PiYoutubeLogoFill size={20} />, label: "YouTube" },
-    { icon: <PiInstagramLogoFill size={20} />, label: "Instagram" },
-    { icon: <PiLinkedinLogoFill size={20} />, label: "LinkedIn" },
+    {
+      icon: <PiYoutubeLogoFill size={24} />,
+      label: "YouTube",
+      link: "https://www.youtube.com/channel/UC9ZJ3JY2JQzr3v7e7vJ1J8A",
+    },
+    {
+      icon: <PiInstagramLogoFill size={24} />,
+      label: "Instagram",
+      link: "https://www.instagram.com/simonmrtz/",
+    },
+    {
+      icon: <PiLinkedinLogoFill size={24} />,
+      label: "LinkedIn",
+      link: "https://www.instagram.com/simonmrtz/",
+    },
+    {
+      icon: <AiFillTikTok size={24} />,
+      label: "TikTok",
+      link: "https://www.tiktok.com/@simonmrtnt",
+    },
   ];
 
   return (
-    <nav
-      ref={navRef}
-      className={`fixed top-0 z-50 flex w-screen items-center justify-between px-10 py-4 text-xl opacity-0 ${isHomePage ? "text-white" : ""} transition-all duration-200 ease-linear ${isSticky && window.scrollY !== 0 ? "nav-bg" : ""}`}
-    >
-      <div className="flex gap-4">
-        <p className="font-semibold">SM Coaching</p>
-        <div className="mt-4 flex items-center gap-4 md:mt-0">
-          {socialIcons.map(({ icon, label }, idx) => (
-            <span key={idx} aria-label={label}>
-              {icon}
-            </span>
+    <nav>
+      <div
+        ref={navRef}
+        className={`padding program-button-container fixed left-1/2 top-5 z-[9999] flex -translate-x-1/2 items-center overflow-hidden rounded-button border border-[#3a3a3a] text-xl`}
+      >
+        <ul className="flex rounded-full">
+          {navLinks.map((link, index) => (
+            <li
+              key={index}
+              className={`relative cursor-pointer px-4 transition-all duration-200 ease-linear ${
+                hoveredIndex === index ? "scale-105" : ""
+              }`}
+              onMouseEnter={() => handleMouseEnter(index)}
+              onMouseLeave={handleMouseLeave}
+              ref={(el) => {
+                navLinksRef.current[index] = el;
+              }}
+            >
+              <Link href={link.link}>{link.title}</Link>
+            </li>
           ))}
+        </ul>
+        <div className="flex gap-2">
+          <div className="ml-6 flex items-center gap-8">
+            <Link
+              href="/calorie"
+              className="bg-button bg-button-gradient text-base font-medium text-white"
+            >
+              Calories
+            </Link>
+          </div>
         </div>
       </div>
-      <ul
-        className={`${
-          isSticky && window.scrollY === 0 ? "bg-[#d1d1d12b]" : ""
-        } absolute left-1/2 flex -translate-x-1/2 justify-items-center overflow-hidden rounded-full`}
+      <CartSideBar />
+      <div
+        ref={navRightRef}
+        className={`padding program-button-container fixed right-5 top-5 z-[9999] flex items-center gap-6 rounded-button border border-[#3a3a3a] text-xl`}
       >
-        {navLinks.map((link, index) => (
-          <li
-            key={index}
-            className={`cursor-pointer rounded-full px-4 py-2 transition-all duration-200 ease-linear ${
-              hoveredIndex === index ? "black-glassmorph" : ""
-            }`}
-            onMouseEnter={() => handleMouseEnter(index)}
-            onMouseLeave={handleMouseLeave}
-            ref={(el) => {
-              navLinksRef.current[index] = el;
-            }}
+        <div className="flex items-center gap-8 rounded-full bg-[#eee]">
+          <Link
+            href={isAuthenticated ? `/dashboard` : "/login"}
+            className="rounded-[0.675rem] bg-[#eee] px-[0.875rem] py-[0.625rem] text-base font-medium text-black"
           >
-            <Link href={link.link}>{link.title}</Link>
-          </li>
-        ))}
-      </ul>
-      <div className="flex items-center gap-8">
-        <button className="rounded-md bg-button px-2 py-1 text-base text-white">
-          Calculer vos calories
+            {isAuthenticated ? "Mon compte" : "Connexion"}
+          </Link>
+        </div>
+        <button
+          onClick={handleOpenCart}
+          className="z-50 grid place-content-center"
+        >
+          <FaCartShopping color="white" />
         </button>
-        <BsBucketFill color={`${isHomePage ? "white" : "black"}`} />
-        <button className="">Log in</button>
+      </div>
+      <div
+        className={`padding program-button-container fixed left-5 top-5 z-[9999] flex items-center gap-6 rounded-button border border-[#3a3a3a]`}
+      >
+        <div className="padding flex gap-6">
+          {socialIcons.map((icon, index) => (
+            <Link
+              href={icon.link}
+              key={index}
+              className="grid place-content-center"
+              title={icon.label}
+            >
+              {icon.icon}
+            </Link>
+          ))}
+        </div>
       </div>
     </nav>
   );
