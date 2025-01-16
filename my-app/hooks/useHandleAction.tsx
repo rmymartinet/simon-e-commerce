@@ -18,7 +18,7 @@ export const useHandleAction = () => {
     productData,
     filterName,
   }: {
-    productData: CartItemProps;
+    productData: CartItemProps[] | CartItemProps;
     filterName: string;
   }) => {
     const products = Array.isArray(productData) ? productData : [productData];
@@ -88,13 +88,13 @@ export const useHandleAction = () => {
         router.push("/login");
         break;
       case !isAuthenticated && filterName === "programmes":
-        setCheckoutData({ productData: productData, filterName });
+        setCheckoutData({ productData: products[0], filterName });
         router.push("/choose-auth");
         break;
 
       default:
         console.error(
-          `Le produit "${productData.titlePlan}" n'a pas de priceId.`,
+          `Le produit "${Array.isArray(productData) ? productData[0].titlePlan : productData.titlePlan}" n'a pas de priceId.`,
         );
     }
   };
