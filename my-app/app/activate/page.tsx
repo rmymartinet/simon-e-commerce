@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect, useState, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 
 const ActivatePage = () => {
@@ -122,4 +122,10 @@ const ActivatePage = () => {
   return null;
 };
 
-export default ActivatePage;
+const ActivatePageWrapper = () => (
+  <Suspense fallback={<div>Loading...</div>}>
+    <ActivatePage />
+  </Suspense>
+);
+
+export default ActivatePageWrapper;
