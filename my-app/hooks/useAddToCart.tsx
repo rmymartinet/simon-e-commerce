@@ -1,5 +1,5 @@
 import { useCart } from "@/app/context/CartContext";
-import { CartItemProps, useAddToCartProps } from "@/types/types";
+import { CartItemProps } from "@/types/types";
 import Swal from "sweetalert2";
 
 export const useAddToCart = () => {
@@ -7,12 +7,12 @@ export const useAddToCart = () => {
 
   const addToCart = ({
     type,
-    id,
     titlePlan,
-    img,
+    imageUrl,
     price,
+    priceId,
     month,
-  }: useAddToCartProps) => {
+  }: CartItemProps) => {
     const isExistingProduct = cart.findIndex(
       (item: CartItemProps) => item.price === price,
     );
@@ -25,14 +25,13 @@ export const useAddToCart = () => {
         timer: 1500,
       });
     } else {
-      console.log("cart", cart);
       const newProduct = {
         type,
-        id,
         titlePlan,
         price,
+        priceId,
         month,
-        img,
+        imageUrl,
         quantity: 1,
       };
       cart.push(newProduct);

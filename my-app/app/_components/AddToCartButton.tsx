@@ -15,10 +15,10 @@ const AddToCartButton = ({ productData }: AddToCartButtonProps) => {
     }
     addToCart({
       type: productData.type,
-      id: productData.priceId,
       titlePlan: productData.titlePlan,
       price: productData.price,
-      img: productData.imageUrl,
+      priceId: productData.priceId,
+      imageUrl: productData.imageUrl,
       month: productData.month,
     });
   };
