@@ -79,10 +79,10 @@ const BeforeAfterPhoto = () => {
       <div
         className={`relative flex ${isClicked ? "h-screen w-screen lg:h-[50vh]" : "h-full w-full"} w-full flex-wrap items-center justify-center gap-10 overflow-hidden rounded-xl`}
       >
-        <div className="glassmorph absolute left-[280px] top-[510px] h-10 w-10 rounded-full"></div>
+        {/* <div className="glassmorph absolute left-[280px] top-[510px] h-10 w-10 rounded-full"></div>
         <div className="glassmorph absolute left-[440px] top-[510px] h-10 w-10 rounded-full"></div>
         <div className="glassmorph absolute left-[630px] top-[500px] h-10 w-10 rounded-full"></div>
-        <div className="glassmorph absolute left-[780px] top-[535px] h-10 w-10 rounded-full"></div>
+        <div className="glassmorph absolute left-[780px] top-[535px] h-10 w-10 rounded-full"></div> */}
 
         {names.map((_, index) => {
           const url = imagesUrls[index % imagesUrls.length];
