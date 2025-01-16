@@ -1,6 +1,5 @@
-import { feedBack } from "./app/data/feedbackData";
-
 /* eslint-disable */
+import { Config } from "tailwindcss";
 const config: Config = {
   content: [
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",
@@ -40,26 +39,6 @@ const config: Config = {
       borderRadius: {
         button: "1.125rem",
       },
-
-      typography: (theme) => ({
-        DEFAULT: {
-          css: {
-            maxWidth: "100%",
-            h1: {
-              fontSize: theme("fontSize.5xl"), // Taille du titre h1
-              fontWeight: theme("fontWeight.semibold"), // Poids du titre h3
-            },
-            h2: {
-              fontSize: theme("fontSize.4xl"), // Taille du titre h2
-              fontWeight: theme("fontWeight.medium"), // Poids du titre h3
-            },
-            h3: {
-              fontSize: theme("fontSize.3xl"), // Taille du titre h3
-              fontWeight: theme("fontWeight.medium"), // Poids du titre h3
-            },
-          },
-        },
-      }),
     },
   },
   plugins: [require("@tailwindcss/typography")],
