@@ -7,7 +7,6 @@ import {
   PiLinkedinLogoFill,
   PiYoutubeLogoFill,
 } from "react-icons/pi";
-import { FaCartShopping } from "react-icons/fa6";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { AiFillTikTok } from "react-icons/ai";
@@ -15,7 +14,6 @@ import useAuth from "@/hooks/useAuth";
 import { IoClose } from "react-icons/io5";
 import MobileCart from "../Cart/MobileCart";
 import { IoPerson } from "react-icons/io5";
-import { set } from "sanity";
 
 gsap.registerPlugin(useGSAP);
 
