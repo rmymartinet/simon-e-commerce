@@ -8,23 +8,29 @@ const ChooseAuth = () => {
   const { handleCheckout } = usePayment();
   const { checkoutData } = useCheckout();
 
-  const allPriceIds = checkoutData
-    ? Object.values(checkoutData.productData).map(
-        (product: { id: string }) => product.id,
-      )
-    : [];
+  console.log(checkoutData);
 
-  const allTitles = checkoutData
-    ? Object.values(checkoutData.productData).map(
+  let allPriceIds: string[] = [];
+  let allTitles: string[] = [];
+  let allMonths: number[] = [];
+
+  if (checkoutData) {
+    if (Array.isArray(checkoutData.productData)) {
+      allPriceIds = checkoutData.productData.map(
+        (product: { priceId: string }) => product.priceId,
+      );
+      allTitles = checkoutData.productData.map(
         (product: { titlePlan: string }) => product.titlePlan,
-      )
-    : [];
-
-  const allMonths = checkoutData
-    ? Object.values(checkoutData.productData).map(
+      );
+      allMonths = checkoutData.productData.map(
         (product: { month: number }) => product.month,
-      )
-    : [];
+      );
+    } else {
+      allPriceIds = [checkoutData.productData.priceId || ""];
+      allTitles = [checkoutData.productData.titlePlan];
+      allMonths = [checkoutData.productData.month];
+    }
+  }
 
   return (
     <section className="flex min-h-screen flex-col items-center justify-center">
