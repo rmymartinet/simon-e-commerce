@@ -1,4 +1,4 @@
-import { ProductDataProps } from "@/types/types";
+import { CartItemProps } from "@/types/types";
 import useAuth from "./useAuth";
 import { usePayment } from "./usePayment";
 import useFecthUserData from "./useFetchUserData";
@@ -18,7 +18,7 @@ export const useHandleAction = () => {
     productData,
     filterName,
   }: {
-    productData: ProductDataProps;
+    productData: CartItemProps;
     filterName: string;
   }) => {
     const products = Array.isArray(productData) ? productData : [productData];
@@ -40,26 +40,29 @@ export const useHandleAction = () => {
         break;
 
       case isAuthenticated && filterName === "coaching":
-        if (productData.priceId) {
-          console.log("PRODUCTS", productData);
+        if (products[0].priceId) {
           handleCheckout(
-            productData.priceId,
-            productData.titlePlan,
-            productData.month,
+            products[0].priceId,
+            products[0].titlePlan,
+            products[0].month,
             true,
             false,
           );
         } else {
           console.error(
-            `Le produit "${productData.titlePlan}" n'a pas de priceId.`,
+            `Le produit "${products[0].titlePlan}" n'a pas de priceId.`,
           );
         }
         break;
 
       case isAuthenticated && filterName === "programmes":
         if (products.length > 1) {
-          const allPriceIds = products.map((product) => product.id);
-          const allTitles = products.map((product) => product.titlePlan);
+          const allPriceIds = products
+            .map((product) => product.priceId)
+            .filter((id): id is string => id !== undefined);
+          const allTitles = products
+            .map((product) => product.titlePlan)
+            .filter((title): title is string => title !== undefined);
 
           handleCheckout(allPriceIds, allTitles, 0, false, false);
         } else if (products.length === 1) {
@@ -85,8 +88,6 @@ export const useHandleAction = () => {
         router.push("/login");
         break;
       case !isAuthenticated && filterName === "programmes":
-        console.log("PRODUCTS", productData);
-
         setCheckoutData({ productData: productData, filterName });
         router.push("/choose-auth");
         break;
