@@ -14,7 +14,9 @@ const MobileCart = ({
   const { cart } = useCart();
 
   return (
-    <div className={`${position} ${xPostion} ${yPostion} flex w-max flex-col`}>
+    <div
+      className={`${position} ${xPostion} ${yPostion} z-[9999] flex w-max flex-col`}
+    >
       <div className="absolute -bottom-4 -right-4 grid h-6 w-6 place-content-center rounded-full bg-violet-400 text-sm text-white">
         {cart.length}
       </div>
