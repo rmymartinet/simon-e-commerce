@@ -15,7 +15,7 @@ export default function Cancel() {
         Payment Cancelled 😢
       </h1>
       <p className="leading-7">
-        La bonne nouvelle, c'est que vous pouvez réessayer 😊
+        La bonne nouvelle, c&apos;est que vous pouvez réessayer 😊
       </p>
       <div className="mt-5">
         <Link href="/pricing">
