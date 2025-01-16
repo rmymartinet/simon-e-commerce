@@ -1,5 +1,5 @@
-import { revealRotateEl } from "@/utils/Animation";
 import { ItemsFeaturesProps } from "@/types/types";
+import { revealRotateEl } from "@/utils/Animation";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { useRef } from "react";
@@ -22,7 +22,7 @@ const ItemsFeatures = ({ logo, title, paragraph }: ItemsFeaturesProps) => {
     >
       <div>{logo}</div>
       <h2 className="text-2xl">{title}</h2>
-      <p className="w-full text-pretty text-center text-textOpacity lg:w-[24vw] lg:text-start">
+      <p className="text-textOpacity w-full text-pretty text-center lg:w-[24vw] lg:text-start">
         {paragraph}
       </p>
     </div>
