@@ -57,7 +57,7 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
   const updateCartQuantity = (itemId: string, newQuantity: number) => {
     setCart((prevCart) =>
       prevCart.map((item) =>
-        item.id === itemId
+        item.priceId === itemId
           ? { ...item, tempQuantity: Math.max(1, newQuantity) } // Empêche la quantité d'être inférieure à 1
           : item,
       ),
