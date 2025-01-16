@@ -5,13 +5,13 @@ export const useRemoveItem = () => {
   const { cart, setCart } = useCart();
 
   const removeItem = (titlePlan: string) => {
-    const findItem = cart.find(
+    const itemIndex = cart.findIndex(
       (item: CartItemProps) => item.titlePlan === titlePlan,
     );
 
-    if (findItem) {
+    if (itemIndex !== -1) {
       const newCart = [...cart];
-      newCart.splice(findItem, 1);
+      newCart.splice(itemIndex, 1);
       setCart(newCart);
     }
   };
