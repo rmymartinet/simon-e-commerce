@@ -6,7 +6,10 @@ import { prisma } from "@/app/_lib/prisma";
 import bcrypt from "bcrypt";
 import { loginSchema, signupSchema } from "../_lib/zod";
 
-export async function login(prevState: any, formData: FormData) {
+export async function login(
+  prevState: Record<string, unknown>,
+  formData: FormData,
+) {
   const result = loginSchema.safeParse(Object.fromEntries(formData));
 
   if (!result.success) {
@@ -47,7 +50,10 @@ export async function login(prevState: any, formData: FormData) {
   redirect("/dashboard");
 }
 
-export async function signup(prevState: any, formData: FormData) {
+export async function signup(
+  prevState: Record<string, unknown>,
+  formData: FormData,
+) {
   const result = signupSchema.safeParse(Object.fromEntries(formData));
 
   if (!result.success) {
