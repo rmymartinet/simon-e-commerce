@@ -68,7 +68,7 @@ const CartSideBar = () => {
             <div className="relative flex w-full justify-between">
               <div className="h-[100px] overflow-hidden rounded-md">
                 <Image
-                  src={item.img}
+                  src={item.imageUrl || ""}
                   width={300}
                   height={300}
                   alt=""
