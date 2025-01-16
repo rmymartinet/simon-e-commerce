@@ -28,6 +28,7 @@
     "canvas-confetti": "^1.9.3",
     "charts.css": "^1.1.0",
     "crypto": "^1.0.1",
+    "dotenv": "^16.4.7",
     "framer-motion": "^11.11.17",
     "gsap": "^3.12.5",
     "jose": "^5.9.6",
@@ -50,6 +51,7 @@
   "devDependencies": {
     "@types/bcrypt": "^5.0.2",
     "@types/canvas-confetti": "^1.6.4",
+    "@types/dotenv": "^6.1.1",
     "@types/jest": "^29.5.14",
     "@types/node": "^20",
     "@types/nodemailer": "^6.4.17",
