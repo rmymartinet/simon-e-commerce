@@ -13,13 +13,12 @@ export async function POST(req: NextRequest) {
     }
 
     try {
-      // Si priceId est un tableau, on le mappe pour créer les line_items
       const lineItems = Array.isArray(priceId)
         ? priceId.map((id) => ({
-            price: id, // Assurez-vous que `id` est une chaîne
+            price: id,
             quantity: 1,
           }))
-        : [{ price: priceId, quantity: 1 }]; // Cas d'un seul prix
+        : [{ price: priceId, quantity: 1 }];
 
       const titlePlanString = Array.isArray(titlePlan)
         ? titlePlan.filter((item) => item).join(", ") || "N/A"
