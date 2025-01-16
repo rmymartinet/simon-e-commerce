@@ -1,4 +1,3 @@
-import { CiMail } from "react-icons/ci";
 import {
   PiInstagramLogoFill,
   PiLinkedinLogoFill,
