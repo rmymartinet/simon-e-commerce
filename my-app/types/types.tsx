@@ -39,14 +39,12 @@ export interface CartContextProps {
   updateCartQuantity: (itemId: string, newQuantity: number) => void;
 }
 
-export interface CartItemProps {
-  id: string;
-  type: string;
-  price: number;
+export type CartItemProps = Pick<
+  ProductDataProps,
+  "type" | "price" | "priceId" | "titlePlan" | "imageUrl" | "month"
+> & {
   quantity?: number;
-  titlePlan: string;
-  img?: string;
-}
+};
 
 export interface CheckoutContextValue {
   checkoutData: CheckoutData | null;
@@ -212,14 +210,13 @@ export interface Post {
 
 export interface ProductDataProps {
   type: string;
-  id: string;
   priceId?: string;
   imageUrl: string;
   mostPopular?: boolean;
   titlePlan: string;
   month: number;
   price: number;
-  description: string;
+  description?: string;
   discount?: string;
   includes?: string[];
   bgColor?: boolean;
@@ -247,13 +244,4 @@ export interface StepCardProps {
   content: string;
   bgClass?: string;
   children: React.ReactNode;
-}
-
-export interface useAddToCartProps {
-  type: string;
-  id: string;
-  titlePlan: string;
-  img: string;
-  price: number;
-  month: number;
 }

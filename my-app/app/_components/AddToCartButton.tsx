@@ -1,7 +1,7 @@
 import React from "react";
 import { useAddToCart } from "@/hooks/useAddToCart";
 import { useCart } from "../context/CartContext";
-import { AddToCartButtonProps } from "@/types/types";
+import { AddToCartButtonProps, CartItemProps } from "@/types/types";
 import useWindowWidth from "@/hooks/useWindowWidth";
 
 const AddToCartButton = ({ productData }: AddToCartButtonProps) => {
@@ -13,14 +13,17 @@ const AddToCartButton = ({ productData }: AddToCartButtonProps) => {
     if (width > 1024) {
       setIsOpen(true);
     }
-    addToCart({
+
+    const cartItem: CartItemProps = {
       type: productData.type,
       titlePlan: productData.titlePlan,
       price: productData.price,
       priceId: productData.priceId,
       imageUrl: productData.imageUrl,
       month: productData.month,
-    });
+      quantity: 1,
+    };
+    addToCart(cartItem);
   };
 
   return (

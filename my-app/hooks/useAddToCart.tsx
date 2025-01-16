@@ -12,6 +12,7 @@ export const useAddToCart = () => {
     price,
     priceId,
     month,
+    quantity,
   }: CartItemProps) => {
     const isExistingProduct = cart.findIndex(
       (item: CartItemProps) => item.price === price,
@@ -32,7 +33,7 @@ export const useAddToCart = () => {
         priceId,
         month,
         imageUrl,
-        quantity: 1,
+        quantity,
       };
       cart.push(newProduct);
     }
