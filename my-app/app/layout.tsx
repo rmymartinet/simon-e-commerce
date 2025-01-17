@@ -25,9 +25,8 @@ export default function RootLayout({
   }, []);
 
   const pathname = usePathname();
-  const isDiplayNavBar =
-    pathname !== "/studio" &&
-    pathname !== "/studio/preview" &&
+  const isDisplayNavBar =
+    !/^\/studio/.test(pathname) &&
     pathname !== "/success" &&
     pathname !== "/cancel";
 
@@ -39,16 +38,15 @@ export default function RootLayout({
         <CartProvider>
           <CheckoutProvider>
             <AnimationProvider>
-              {isDiplayNavBar && width < 1024 ? <MobileNav /> : <NavBar />}
-              {isDiplayNavBar && width < 1024 && (
-                <MobileCart
-                  position="fixed"
-                  xPostion="right-5"
-                  yPostion="top-10"
-                />
-              )}
+              {isDisplayNavBar ? (
+                width < 1024 ? (
+                  <MobileNav />
+                ) : (
+                  <NavBar />
+                )
+              ) : null}
               {children}
-              {pathname !== "/studio" && <Footer />}
+              {isDisplayNavBar && <Footer />}
             </AnimationProvider>
           </CheckoutProvider>
         </CartProvider>
