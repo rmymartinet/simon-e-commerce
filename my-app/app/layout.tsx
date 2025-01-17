@@ -45,6 +45,7 @@ export default function RootLayout({
                   <NavBar />
                 )
               ) : null}
+              {width < 1024 && <MobileCart />}
               {children}
               {isDisplayNavBar && <Footer />}
             </AnimationProvider>
