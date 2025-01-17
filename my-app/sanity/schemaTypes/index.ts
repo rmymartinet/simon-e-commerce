@@ -1,2 +1,3 @@
-import { postType } from "./postType";
+import { postType } from "./post";
+
 export const schemaTypes = [postType];

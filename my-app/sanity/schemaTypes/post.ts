@@ -6,7 +6,7 @@ export const postType = defineType({
   type: "document",
   fields: [
     defineField({
-      name: "image",
+      name: "mainImage",
       type: "image",
     }),
     defineField({
