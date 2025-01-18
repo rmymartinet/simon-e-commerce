@@ -10,6 +10,7 @@ export default async function middleware(req: NextRequest) {
   const isProtectedRoute = protectedRoutes.includes(path);
   const isPublicRoute = publicRoutes.includes(path);
 
+  // @ts-expect-error TypeScript ne reconnaît pas `get`
   const cookie = cookies().get("session")?.value;
   console.log("cookie", cookie);
   const session = await decrypt(cookie);
