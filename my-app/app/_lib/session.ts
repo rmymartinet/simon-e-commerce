@@ -35,8 +35,9 @@ export async function createSession(userId: string) {
   // @ts-expect-error TypeScript ne reconnaît pas `set`
   cookies().set("session", session, {
     httpOnly: true,
+    sameSite: "none",
+    path: "/",
     secure: true,
-    expires: expiresAt,
   });
 }
 
