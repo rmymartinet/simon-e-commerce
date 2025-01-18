@@ -32,9 +32,8 @@ export async function createSession(userId: string) {
   const expiresAt = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000);
   const session = await encrypt({ userId, expiresAt });
 
-  const cookieStore = cookies();
   // @ts-expect-error TypeScript ne reconnaît pas `set`
-  cookieStore().set("session", session, {
+  cookies().set("session", session, {
     httpOnly: true,
     secure: true,
     expires: expiresAt,

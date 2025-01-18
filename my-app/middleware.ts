@@ -10,10 +10,8 @@ export default async function middleware(req: NextRequest) {
   const isProtectedRoute = protectedRoutes.includes(path);
   const isPublicRoute = publicRoutes.includes(path);
 
-  const cookieStore = cookies();
-  // @ts-expect-error TypeScript
-  const cookie = cookieStore.get("session")?.value;
-  console.log("cookie", cookie);
+  // @ts-expect-error TypeScript ne reconnaît pas `set`
+  const cookie = cookies().get("session")?.value;
   const session = await decrypt(cookie);
 
   if (isProtectedRoute && !session?.userId) {
