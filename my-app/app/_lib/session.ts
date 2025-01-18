@@ -37,7 +37,6 @@ export async function createSession(userId: string) {
     httpOnly: true,
     sameSite: "none",
     path: "/",
-    secure: true,
   });
 }
 
