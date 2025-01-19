@@ -12,7 +12,9 @@ export default async function middleware(req: NextRequest) {
 
   // @ts-expect-error TypeScript ne reconnaît pas `set`
   const cookie = cookies().get("session")?.value;
+  console.log(cookie);
   const session = await decrypt(cookie);
+  console.log(session);
 
   if (isProtectedRoute && !session?.userId) {
     return NextResponse.redirect(new URL("/login", req.nextUrl));
