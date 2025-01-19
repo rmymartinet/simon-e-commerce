@@ -221,7 +221,7 @@ export default function Dashboard() {
                 )}
               </div> */}
             </div>
-            {isProgram === "program" ? (
+            {/* {isProgram === "program" ? (
               <div className="program-button-container flex h-[40vh] flex-col gap-4 overflow-y-auto rounded-xl border-card p-6 lg:h-full">
                 {programPurchases.length > 0 ? (
                   programPurchases.map(
@@ -318,7 +318,7 @@ export default function Dashboard() {
                   </div>
                 </div>
               </div>
-            )}
+            )} */}
           </div>
         </div>
       </div>
