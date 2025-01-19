@@ -13,6 +13,8 @@ type SubscriptionData = {
   titlePlan: string;
 };
 
+console.log("HELLLLO");
+
 const WEBHOOK_SECRET = process.env.NEXT_STRIPE_WEBHOOK_SECRET!;
 
 function handleError(error: unknown) {
@@ -38,8 +40,6 @@ async function handleSubscription(
 ) {
   const startDate = new Date(session.created * 1000);
   const months = parseInt(session.metadata?.month || "0", 10);
-
-  console.log("LE TYPEEE", typeof session.metadata?.month);
 
   if (isNaN(months) || months <= 0) {
     console.error("Invalid months metadata:", session.metadata?.month);
@@ -84,7 +84,7 @@ async function handleProgram(
   existingUser: { id: string },
   session: Stripe.Checkout.Session,
 ) {
-  console.log("session", session);
+  console.log("existingUser", existingUser);
   await prisma.user.update({
     where: { id: existingUser.id },
     data: {
@@ -98,13 +98,12 @@ async function handleProgram(
     titlePlan: session.metadata?.titlePlan || "",
   };
 
-  console.log("session", session);
   return prisma.purchase.create({
     data: {
       userId: existingUser.id,
       amount: session.amount_total || 0,
       status: "completed",
-      customerId: session.customer ? String(session.customer) : "", // Vérifier le type de customerId
+      customerId: session.customer ? String(session.customer) : "",
       userPurchaseData,
       createdAt: new Date(),
     },
@@ -182,6 +181,7 @@ export async function POST(req: Request) {
           await handleSubscription(existingUser, session);
         } else {
           await handleProgram(existingUser, session);
+
         }
       } else {
         await handleNewUser(session);

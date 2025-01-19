@@ -1,96 +1,98 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { logout } from "../login/actions";
 import Image from "next/image";
-import useFecthUserData from "@/hooks/useFetchUserData";
+import useAuth from "@/hooks/useAuth";
 
 export default function Dashboard() {
-  const { userData } = useFecthUserData();
-  const [isProgram, setIsProgram] = useState<string>("program");
+  const { userData } = useAuth();
 
-  useEffect(() => {
-    console.log("USERDATA", userData);
-  }, [userData]);
+  console.log("USERDATA", userData);
+  const [isProgram, setIsProgram] = useState<string>("program");
 
   /*
 !TODO : GERER LE PROFIL
   */
 
-  function calculateNextPayment(startDate: string, endDate: string) {
-    const start = new Date(startDate);
-    const end = new Date(endDate);
-    const currentDate = new Date();
+  // function calculateNextPayment(startDate: string, endDate: string) {
+  //   const start = new Date(startDate);
+  //   const end = new Date(endDate);
+  //   const currentDate = new Date();
 
-    if (isNaN(start.getTime()) || isNaN(end.getTime())) {
-      return "Invalid Date";
-    }
+  //   if (isNaN(start.getTime()) || isNaN(end.getTime())) {
+  //     return "Invalid Date";
+  //   }
 
-    if (currentDate < start) return start;
-    if (currentDate > end) return "Abonnement expiré";
+  //   if (currentDate < start) return start;
+  //   if (currentDate > end) return "Abonnement expiré";
 
-    const nextPaymentDate = new Date(start);
+  //   const nextPaymentDate = new Date(start);
 
-    while (nextPaymentDate <= currentDate) {
-      nextPaymentDate.setMonth(nextPaymentDate.getMonth() + 1);
-    }
+  //   while (nextPaymentDate <= currentDate) {
+  //     nextPaymentDate.setMonth(nextPaymentDate.getMonth() + 1);
+  //   }
 
-    if (nextPaymentDate > end) return "Dernier paiement effectué";
+  //   if (nextPaymentDate > end) return "Dernier paiement effectué";
 
-    return nextPaymentDate;
-  }
+  //   return nextPaymentDate;
+  // }
 
-  const defaultSubscription = {
-    amount: 0,
-    subscriptionData: {
-      subscriptionPlan: "N/A",
-      startDate: "N/A",
-      endDate: "N/A",
-    },
-  };
-  const allPurchases = userData?.Purchase || [];
-  const programPurchases = allPurchases.filter(
-    (purchase: { userPurchaseData: { titlePlan: string } }) =>
-      purchase.userPurchaseData !== null,
-  );
+  // const defaultSubscription = {
+  //   amount: 0,
+  //   subscriptionData: {
+  //     subscriptionPlan: "N/A",
+  //     startDate: "N/A",
+  //     endDate: "N/A",
+  //   },
+  // };
+  // const allPurchases = userData?.Purchase || [];
+  // const programPurchases = allPurchases.filter(
+  //   (purchase: { userPurchaseData: { titlePlan: string } }) =>
+  //     purchase.userPurchaseData !== null,
+  // );
 
-  //Parcour les données de l'utilisateur pour savoir si elle a un abonnement
-  const subscriptionPurchase =
-    allPurchases.find(
-      (purchase: {
-        subscriptionData?: {
-          titlePlan: string;
-          startDate: string;
-          endDate: string;
-        };
-      }) => purchase.subscriptionData,
-    ) || defaultSubscription.subscriptionData;
-  console.log(subscriptionPurchase);
+  // interface Purchase {
+  //   subscriptionData?: {
+  //     titlePlan: string;
+  //     startDate: string;
+  //     endDate: string;
+  //     amount: number; // Ajout de la propriété 'amount' ici
+  //   };
+  //   userPurchaseData: {
+  //     titlePlan: string;
+  //   };
+  //   createdAt: string;
+  //   amount: number;
+  // }
 
-  const formattedDate = (date: string) => {
-    return new Date(date).toLocaleDateString("fr-FR");
-  };
+  // const subscriptionPurchase =
+  //   allPurchases.find((purchase: Purchase) => purchase.subscriptionData) ||
+  //   defaultSubscription.subscriptionData;
 
-  const subscriptionInfos = {
-    amount: subscriptionPurchase?.amount / 100 || defaultSubscription.amount,
-    subscriptionData: {
-      subscriptionPlan:
-        subscriptionPurchase?.subscriptionData?.titlePlan ??
-        defaultSubscription.subscriptionData.subscriptionPlan,
-      startDate:
-        formattedDate(subscriptionPurchase?.subscriptionData?.startDate) ||
-        defaultSubscription.subscriptionData.startDate,
-      endDate:
-        formattedDate(subscriptionPurchase?.subscriptionData?.endDate) ||
-        defaultSubscription.subscriptionData.endDate,
-    },
-    nextPaymentDate: calculateNextPayment(
-      subscriptionPurchase?.subscriptionData?.startDate,
-      subscriptionPurchase?.subscriptionData?.endDate,
-    ),
-  };
+  // function formattedDate(date: string | undefined) {
+  //   return date ? new Date(date).toLocaleDateString("fr-FR") : undefined;
+  // }
 
-  console.log("ALLPURCHASE", allPurchases);
+  // // Vérification des données avant d'y accéder
+  // const subscriptionInfos = {
+  //   amount: subscriptionPurchase?.amount / 100 || defaultSubscription.amount, // Assure-toi que amount est accessible
+  //   subscriptionData: {
+  //     subscriptionPlan:
+  //       subscriptionPurchase?.subscriptionData?.titlePlan ??
+  //       defaultSubscription.subscriptionData.subscriptionPlan,
+  //     startDate:
+  //       formattedDate(subscriptionPurchase?.subscriptionData?.startDate) ||
+  //       defaultSubscription.subscriptionData.startDate,
+  //     endDate:
+  //       formattedDate(subscriptionPurchase?.subscriptionData?.endDate) ||
+  //       defaultSubscription.subscriptionData.endDate,
+  //   },
+  //   nextPaymentDate: calculateNextPayment(
+  //     subscriptionPurchase?.subscriptionData?.startDate,
+  //     subscriptionPurchase?.subscriptionData?.endDate,
+  //   ),
+  // };
 
   if (!userData) {
     return (
@@ -173,7 +175,7 @@ export default function Dashboard() {
                 <strong className="text-xl">Achat</strong>
                 <strong className="pr-12 text-xl">Date</strong>
               </div>
-              <div className="px-6">
+              {/* <div className="px-6">
                 {allPurchases.length > 0 ? (
                   allPurchases.map(
                     (
@@ -217,7 +219,7 @@ export default function Dashboard() {
                 ) : (
                   <p className="text-center">Aucun achat trouvé.</p>
                 )}
-              </div>
+              </div> */}
             </div>
             {isProgram === "program" ? (
               <div className="program-button-container flex h-[40vh] flex-col gap-4 overflow-y-auto rounded-xl border-card p-6 lg:h-full">

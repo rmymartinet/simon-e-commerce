@@ -245,3 +245,34 @@ export interface StepCardProps {
   bgClass?: string;
   children: React.ReactNode;
 }
+
+export interface UserDataProps {
+  Purchase?: [];
+
+  subscriptionData?: {
+    titlePlan: string;
+    subscriptionId: string;
+    priceId: string;
+    startDate: string;
+    endDate: string;
+  };
+
+  activationToken: string | null;
+  activationTokenExpires: string | null;
+  createdAt: string;
+  customerId: string | null;
+  email: string;
+  emailVerified: string | null;
+  id: string;
+  image: string | null;
+  isSubscribed: boolean;
+  isTemporary: boolean;
+  lastActive: string | null;
+  name: string;
+  password: string;
+  priceId: string | null;
+  stripeCustomerId: string;
+  subscriptionEndDate: string;
+  subscriptionStartDate: string;
+  updatedAt: string;
+}

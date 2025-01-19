@@ -10,7 +10,6 @@ import {
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { AiFillTikTok } from "react-icons/ai";
-import useAuth from "@/hooks/useAuth";
 import { IoClose } from "react-icons/io5";
 import MobileCart from "../Cart/MobileCart";
 import { IoPerson } from "react-icons/io5";
@@ -25,7 +24,6 @@ const MobileNav = () => {
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
   const settingsPanelRef = useRef<HTMLDivElement | null>(null);
   const socialIconRefs = useRef<(HTMLAnchorElement | null)[]>([]);
-  const { isAuthenticated } = useAuth();
 
   const navLinks = [
     { title: "Home", link: "/" },
@@ -135,13 +133,13 @@ const MobileNav = () => {
                 ref={settingsPanelRef}
                 className="absolute -bottom-[100px] flex w-max flex-col gap-2 rounded-xl bg-white p-6"
               >
-                <Link
+                {/* <Link
                   onClick={() => setIsClicked(false)}
                   href={isAuthenticated ? `/dashboard` : "/login"}
                   className="text-sm font-medium text-black"
                 >
                   {isAuthenticated ? "Mon compte" : "Connexion"}
-                </Link>
+                </Link> */}
                 <p className="text-sm font-medium text-black">Déconnexion</p>
               </div>
             </div>

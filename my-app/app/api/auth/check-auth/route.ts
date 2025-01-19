@@ -1,25 +1,38 @@
+import { prisma } from "@/app/_lib/prisma";
+import { getSession } from "@/app/_lib/session";
 import { NextResponse } from "next/server";
-import { cookies } from "next/headers";
-import { decrypt } from "@/app/_lib/session";
 
 export async function GET() {
-  const cookieStore = await cookies();
-  const cookie = cookieStore.get("session")?.value;
+  console.log("GET request received"); // Journal pour suivre les appels à la fonction GET
 
-  // Si le cookie est absent ou invalide, retour 'false' pour l'état d'authentification
-  if (!cookie) {
-    return NextResponse.json({ isAuthenticated: false });
-  }
+  await new Promise((resolve) => setTimeout(resolve, 800));
 
   try {
-    const session = await decrypt(cookie);
-    if (session && session.userId) {
-      return NextResponse.json({ isAuthenticated: true, user: session.userId });
-    } else {
+    const session = await getSession();
+
+    if (!session) {
+      console.log("No session found"); // Journal pour vérifier si la session est trouvée
       return NextResponse.json({ isAuthenticated: false });
     }
+
+    const userId = session.userId as string | undefined;
+
+    const isExistingUser = await prisma.user.findUnique({
+      where: { id: userId },
+    });
+
+    if (!isExistingUser) {
+      console.log("User not found"); // Journal pour vérifier si l'utilisateur est trouvé
+      return NextResponse.json({ isAuthenticated: false });
+    }
+
+    const userData = isExistingUser;
+
+    console.log("User authenticated:", userData); // Journal pour vérifier les données de l'utilisateur
+
+    return NextResponse.json({ isAuthenticated: true, userData });
   } catch (error) {
-    console.error("Error decrypting session:", error);
+    console.error("Failed to verify session", error);
     return NextResponse.json({ isAuthenticated: false });
   }
 }

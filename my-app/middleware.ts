@@ -10,17 +10,18 @@ export default async function middleware(req: NextRequest) {
   const isProtectedRoute = protectedRoutes.includes(path);
   const isPublicRoute = publicRoutes.includes(path);
 
-  // @ts-expect-error TypeScript ne reconnaît pas `set`
-  const cookie = cookies().get("session")?.value;
-  console.log(cookie);
-  const session = await decrypt(cookie);
-  console.log(session);
+  const cookieStore = await cookies();
+  const cookie = cookieStore.get("session")?.value;
+
+  const session = cookie ? await decrypt(cookie) : null;
 
   if (isProtectedRoute && !session?.userId) {
+    console.log("Redirecting to login page");
     return NextResponse.redirect(new URL("/login", req.nextUrl));
   }
 
   if (isPublicRoute && session?.userId) {
+    console.log("Redirecting to dashboard");
     return NextResponse.redirect(new URL("/dashboard", req.nextUrl));
   }
 

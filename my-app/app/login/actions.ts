@@ -1,6 +1,6 @@
 "use server";
 
-import { createSession, deleteSession } from "@/app/_lib/session";
+import { createSession, deleteSession, getSession } from "@/app/_lib/session";
 import { redirect } from "next/navigation";
 import { prisma } from "@/app/_lib/prisma";
 import bcrypt from "bcrypt";
@@ -45,6 +45,7 @@ export async function login(prevState: any, formData: FormData) {
   }
 
   await createSession(existingUser.id);
+  await getSession();
 
   redirect("/dashboard");
 }

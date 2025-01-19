@@ -1,11 +1,9 @@
 import useAuth from "./useAuth";
-import useFetchUserData from "./useFetchUserData";
 import { loadStripe } from "@stripe/stripe-js";
 import { useState } from "react";
 
 export const usePayment = () => {
-  const { userId } = useAuth();
-  const { userData } = useFetchUserData();
+  const { userData } = useAuth();
   const stripePromise = loadStripe(
     process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!,
   );
@@ -33,7 +31,7 @@ export const usePayment = () => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          userId,
+          userId: userData?.id,
           priceId: priceIdsArray,
           subscription,
           guest,

@@ -1,18 +1,18 @@
 import { CartItemProps } from "@/types/types";
 import useAuth from "./useAuth";
 import { usePayment } from "./usePayment";
-import useFecthUserData from "./useFetchUserData";
 import Swal from "sweetalert2";
 import { useRouter } from "next/navigation";
 import { useCheckout } from "@/app/context/CheckoutContext";
 
 export const useHandleAction = () => {
-  const { isAuthenticated } = useAuth();
+  const { isAuthenticated, userData } = useAuth();
   const { handleCheckout } = usePayment();
-  const { userData } = useFecthUserData();
-  const isSubscribed = userData?.isSubscribed;
-  const router = useRouter();
   const { setCheckoutData } = useCheckout();
+
+  const isSubscribed = userData?.isSubscribed;
+
+  const router = useRouter();
 
   const handleAction = ({
     productData,
@@ -37,6 +37,8 @@ export const useHandleAction = () => {
           title: "Vous êtes déjà abonné",
           text: "Vous ne pouvez pas acheter un autre abonnement",
         });
+
+        console.error("Vous êtes déjà abonné");
         break;
 
       case isAuthenticated && filterName === "coaching":
@@ -48,6 +50,7 @@ export const useHandleAction = () => {
             true,
             false,
           );
+          console.log("products", products);
         } else {
           console.error(
             `Le produit "${products[0].titlePlan}" n'a pas de priceId.`,

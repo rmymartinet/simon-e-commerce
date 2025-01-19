@@ -9,9 +9,7 @@ import "./globals.css";
 import { CartProvider } from "./context/CartContext";
 import { CheckoutProvider } from "./context/CheckoutContext";
 import useWindowWidth from "@/hooks/useWindowWidth";
-import MobileNav from "./_components/Nav/MobileNav";
 import MobileCart from "./_components/Cart/MobileCart";
-import AuthProvider from "./context/AuthProvider";
 
 export default function RootLayout({
   children,
@@ -36,24 +34,23 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body id="main-container" className="antialiased">
-        <AuthProvider>
-          <CartProvider>
-            <CheckoutProvider>
-              <AnimationProvider>
-                {isDisplayNavBar ? (
-                  width < 1024 ? (
-                    <MobileNav />
-                  ) : (
-                    <NavBar />
-                  )
-                ) : null}
-                {width < 1024 && <MobileCart />}
-                {children}
-                {isDisplayNavBar && <Footer />}
-              </AnimationProvider>
-            </CheckoutProvider>
-          </CartProvider>
-        </AuthProvider>
+        <CartProvider>
+          <CheckoutProvider>
+            <AnimationProvider>
+              <NavBar />
+              {/* {isDisplayNavBar ? (
+                width < 1024 ? (
+                  <MobileNav />
+                ) : (
+                  <NavBar />
+                )
+              ) : null} */}
+              {width < 1024 && <MobileCart />}
+              {children}
+              {isDisplayNavBar && <Footer />}
+            </AnimationProvider>
+          </CheckoutProvider>
+        </CartProvider>
       </body>
     </html>
   );
