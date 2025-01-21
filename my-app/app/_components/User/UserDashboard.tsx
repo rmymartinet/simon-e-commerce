@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 import { useState } from "react";
@@ -8,7 +9,14 @@ import PurchaseHistory from "./PurchaseHistory";
 import UserProgramPanel from "./UserProgramPanel";
 import UserCoachingPanel from "./UserCoachingPanel";
 
-const UserDashboard = ({
+interface UserDashboardProps {
+  userData: any; // Replace 'any' with the appropriate type
+  allPurchases: any; // Replace 'any' with the appropriate type
+  programPurchases: any; // Replace 'any' with the appropriate type
+  subscriptionInfos: any; // Replace 'any' with the appropriate type
+}
+
+const UserDashboard: React.FC<UserDashboardProps> = ({
   userData,
   allPurchases,
   programPurchases,

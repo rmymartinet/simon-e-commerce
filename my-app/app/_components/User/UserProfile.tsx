@@ -1,4 +1,9 @@
-const UserProfile = ({ userData }) => {
+interface UserData {
+  name: string;
+  email: string;
+}
+
+const UserProfile = ({ userData }: { userData: UserData }) => {
   return (
     <div className="program-button-container flex flex-col rounded-xl p-10">
       <p className="mb-4 text-xl font-bold">Profil</p>

@@ -1,7 +1,6 @@
 "use client";
 
 import { usePayment } from "@/hooks/usePayment";
-import { LoginForm } from "../login/LoginForm";
 import { useCheckout } from "../context/CheckoutContext";
 
 const ChooseAuth = () => {
@@ -38,9 +37,9 @@ const ChooseAuth = () => {
         Connectez-vous pour régler vos achats plus rapidement.
       </h1>
       <div className="mt-[10vh] flex w-full flex-col items-center justify-between px-4 lg:flex-row lg:px-[20vw]">
-        <div className="program-button-container flex flex-col gap-2 rounded-xl p-4 lg:p-10">
+        {/* <div className="program-button-container flex flex-col gap-2 rounded-xl p-4 lg:p-10">
           <LoginForm />
-        </div>
+        </div> */}
         <div className="mt-10 h-[1px] w-full bg-slate-400 lg:mt-0 lg:h-[40vh] lg:w-[1px]"></div>
         <div className="mt-10 flex flex-col items-center gap-2 lg:mt-0">
           <h1 className="text-xl font-semibold">
