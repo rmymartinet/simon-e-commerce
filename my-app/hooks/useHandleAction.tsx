@@ -22,8 +22,6 @@ export default function useHandleAction() {
           const res = await fetch(`/api/auth/getUserEmail`);
           const data = await res.json();
           setUserData(data);
-
-          console.log("User data:", data);
         } catch (error) {
           console.error("Failed to fetch user data:", error);
         }
