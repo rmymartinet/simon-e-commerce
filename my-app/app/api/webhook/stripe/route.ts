@@ -256,18 +256,6 @@ export async function POST(req: Request) {
               subscriptionId: null,
             },
           });
-        } else if (event.type === "customer.subscription.updated") {
-          // Logique pour la mise à jour de la souscription
-          console.log("Subscription updated for user:", user.id);
-          await prisma.purchase.updateMany({
-            where: {
-              userId: user.id,
-              subscriptionId: subscription.id,
-            },
-            data: {
-              subscriptionStatus: subscription.status,
-            },
-          });
         } else if (event.type === "customer.subscription.created") {
           await prisma.user.update({
             where: { id: user.id },
@@ -283,15 +271,14 @@ export async function POST(req: Request) {
           // const product = await stripe.products.retrieve(
           //   subscription.plan.product,
           // );
-
-          const subscriptionData: SubscriptionData = {
+          const subscriptionData = {
             startDate: new Date(
               subscription.current_period_start * 1000,
             ).toISOString(),
             endDate: new Date(
               subscription.current_period_end * 1000,
             ).toISOString(),
-            subscriptionStatus: subscription.status,
+            status: subscription.status, // Ajoute le champ `status` ici
             titlePlan: "3mois",
           };
 
@@ -299,12 +286,13 @@ export async function POST(req: Request) {
             data: {
               userId: user.id,
               subscriptionId: subscription.id,
-              amount: 3333,
-              status: "completed",
+              amount: 3333.0,
+              status: subscription.status,
               customerId: subscription.customer as string,
-              subscriptionData,
-              subscriptionStatus: subscription.status,
               createdAt: new Date(),
+              subscriptionData: {
+                create: subscriptionData, // Crée la relation SubscriptionData avec les bons champs
+              },
             },
           });
         }
@@ -322,3 +310,17 @@ export async function POST(req: Request) {
     return new Response("Internal server error", { status: 500 });
   }
 }
+
+// else if (event.type === "customer.subscription.updated") {
+//           // Logique pour la mise à jour de la souscription
+//           console.log("Subscription updated for user:", user.id);
+//           await prisma.purchase.updateMany({
+//             where: {
+//               userId: user.id,
+//               subscriptionId: subscription.id,
+//             },
+//             data: {
+//               subscriptionStatus: subscription.status,
+//             },
+//           });
+//         }
