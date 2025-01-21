@@ -13,11 +13,13 @@ import gsap from "gsap";
 import { AiFillTikTok } from "react-icons/ai";
 import CartSideBar from "../Cart/CartSideBar";
 import { useCart } from "@/app/context/CartContext";
-import useAuth from "@/hooks/useAuth";
+import { useSession } from "next-auth/react";
 
 gsap.registerPlugin(useGSAP);
 
 const NavBar = () => {
+  const { data: session } = useSession();
+
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const navRef = useRef<HTMLDivElement | null>(null);
   const navLinksRef = useRef<(HTMLLIElement | null)[]>([]);
@@ -31,7 +33,6 @@ const NavBar = () => {
   ];
 
   const { isOpen, setIsOpen } = useCart();
-  const { isAuthenticated } = useAuth();
 
   const handleOpenCart = () => {
     setIsOpen(true);
@@ -127,10 +128,10 @@ const NavBar = () => {
       >
         <div className="flex items-center gap-8 rounded-full bg-[#eee]">
           <Link
-            href={isAuthenticated ? `/dashboard` : "/login"}
+            href={session ? `/dashboard` : "/login"}
             className="rounded-[0.675rem] bg-[#eee] px-[0.875rem] py-[0.625rem] text-base font-medium text-black"
           >
-            {isAuthenticated ? "Mon compte" : "Connexion"}
+            {session ? "Mon compte" : "Connexion"}
           </Link>
         </div>
         <button
