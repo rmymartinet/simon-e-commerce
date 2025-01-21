@@ -7,6 +7,12 @@ generator client {
   provider = "prisma-client-js"
 }
 
+enum Role {
+  USER
+  ADMIN
+  GUEST
+}
+
 model User {
   id                     String          @id @default(cuid())
   name                   String?
@@ -16,7 +22,7 @@ model User {
   lastActive             DateTime?
   activationToken        String?
   activationTokenExpires DateTime?
-  password               String
+  password               String?
   image                  String?
   accounts               Account[]
   sessions               Session[]
@@ -30,6 +36,7 @@ model User {
   isSubscribed           Boolean         @default(false)
   createdAt              DateTime        @default(now())
   updatedAt              DateTime        @updatedAt
+  role                   Role            @default(USER)
 }
 
 model Account {
