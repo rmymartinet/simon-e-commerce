@@ -1,14 +1,12 @@
-import useAuth from "./useAuth";
+import { UserDataProps } from "@/types/types";
 import { loadStripe } from "@stripe/stripe-js";
 import { useState } from "react";
 
-export const usePayment = () => {
-  const { userData } = useAuth();
+export const usePayment = ({ userData }: { userData: UserDataProps }) => {
   const stripePromise = loadStripe(
     process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!,
   );
 
-  const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   const handleCheckout = async (
@@ -18,7 +16,6 @@ export const usePayment = () => {
     subscription: boolean,
     guest: boolean,
   ) => {
-    setLoading(true);
     setError(null);
 
     const priceIdsArray = Array.isArray(priceId) ? priceId : [priceId];
@@ -45,7 +42,6 @@ export const usePayment = () => {
 
       if (data.sessionId) {
         const stripe = await stripePromise;
-
         await stripe?.redirectToCheckout({
           sessionId: data.sessionId,
         });
@@ -54,12 +50,12 @@ export const usePayment = () => {
         setError("Failed to create checkout session");
       }
     } catch (error) {
-      console.error("Error during checkout:", error);
+      if (process.env.NODE_ENV === "development") {
+        console.error("Error during checkout:", error);
+      }
       setError("An error occurred during checkout");
-    } finally {
-      setLoading(false);
     }
   };
 
-  return { handleCheckout, loading, error };
+  return { handleCheckout, error };
 };

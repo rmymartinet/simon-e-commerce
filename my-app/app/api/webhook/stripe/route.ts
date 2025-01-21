@@ -13,8 +13,6 @@ type SubscriptionData = {
   titlePlan: string;
 };
 
-console.log("HELLLLO");
-
 const WEBHOOK_SECRET = process.env.NEXT_STRIPE_WEBHOOK_SECRET!;
 
 function handleError(error: unknown) {
@@ -181,7 +179,6 @@ export async function POST(req: Request) {
           await handleSubscription(existingUser, session);
         } else {
           await handleProgram(existingUser, session);
-
         }
       } else {
         await handleNewUser(session);
