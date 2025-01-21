@@ -10,7 +10,7 @@ import { CartProvider } from "./context/CartContext";
 import { CheckoutProvider } from "./context/CheckoutContext";
 import useWindowWidth from "@/hooks/useWindowWidth";
 import MobileCart from "./_components/Cart/MobileCart";
-
+import SectionWrapper from "@/app/context/SessionWrapper";
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -32,26 +32,28 @@ export default function RootLayout({
   const { width } = useWindowWidth();
 
   return (
-    <html lang="en">
-      <body id="main-container" className="antialiased">
-        <CartProvider>
-          <CheckoutProvider>
-            <AnimationProvider>
-              <NavBar />
-              {/* {isDisplayNavBar ? (
+    <SectionWrapper>
+      <html lang="en">
+        <body id="main-container" className="antialiased">
+          <CartProvider>
+            <CheckoutProvider>
+              <AnimationProvider>
+                <NavBar />
+                {/* {isDisplayNavBar ? (
                 width < 1024 ? (
                   <MobileNav />
                 ) : (
                   <NavBar />
                 )
               ) : null} */}
-              {width < 1024 && <MobileCart />}
-              {children}
-              {isDisplayNavBar && <Footer />}
-            </AnimationProvider>
-          </CheckoutProvider>
-        </CartProvider>
-      </body>
-    </html>
+                {width < 1024 && <MobileCart />}
+                {children}
+                {isDisplayNavBar && <Footer />}
+              </AnimationProvider>
+            </CheckoutProvider>
+          </CartProvider>
+        </body>
+      </html>
+    </SectionWrapper>
   );
 }
