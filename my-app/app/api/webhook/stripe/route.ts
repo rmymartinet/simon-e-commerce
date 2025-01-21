@@ -15,15 +15,15 @@ type SubscriptionData = {
 
 const WEBHOOK_SECRET = process.env.NEXT_STRIPE_WEBHOOK_SECRET!;
 
-function handleError(error: unknown) {
-  console.error("Error handling webhook event:", error);
-  return new Response("Webhook processing error", { status: 400 });
-}
+// function handleError(error: unknown) {
+//   console.error("Error handling webhook event:", error);
+//   return new Response("Webhook processing error", { status: 400 });
+// }
 
-function validateEmail(email: string): boolean {
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  return emailRegex.test(email);
-}
+// function validateEmail(email: string): boolean {
+//   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+//   return emailRegex.test(email);
+// }
 
 function generateToken(length = 64): { token: string; expires: Date } {
   return {
@@ -35,6 +35,7 @@ function generateToken(length = 64): { token: string; expires: Date } {
 async function handleSubscription(
   existingUser: { id: string },
   session: Stripe.Checkout.Session,
+  subscriptionId: string,
 ) {
   const startDate = new Date(session.created * 1000);
   const months = parseInt(session.metadata?.month || "0", 10);
@@ -45,12 +46,13 @@ async function handleSubscription(
   }
 
   const endDate = new Date(startDate);
-  endDate.setMonth(endDate.getMonth() + months); // Ajoute les mois à la date de début
-  const endDateString = endDate.toISOString(); // Convertit la date de fin en chaîne de caractères
+  endDate.setMonth(endDate.getMonth() + months);
+  const endDateString = endDate.toISOString();
 
   await prisma.user.update({
     where: { id: existingUser.id },
     data: {
+      subscriptionId,
       isSubscribed: true,
       subscriptionStartDate: startDate,
       subscriptionEndDate: endDate,
@@ -68,6 +70,7 @@ async function handleSubscription(
 
   return prisma.purchase.create({
     data: {
+      subscriptionId,
       userId: existingUser.id,
       amount: session.amount_total || 0,
       status: "completed",
@@ -82,7 +85,6 @@ async function handleProgram(
   existingUser: { id: string },
   session: Stripe.Checkout.Session,
 ) {
-  console.log("existingUser", existingUser);
   await prisma.user.update({
     where: { id: existingUser.id },
     data: {
@@ -138,8 +140,34 @@ async function handleNewUser(session: Stripe.Checkout.Session) {
   console.log(`Activation email sent to ${email}: ${activationLink}`);
 }
 
+async function getUserAndSubscription(event: Stripe.Event) {
+  const subscription = event.data.object as Stripe.Subscription;
+  const customerId = subscription.customer as string;
+
+  const user = await prisma.user.findFirst({
+    where: {
+      stripeCustomerId: customerId,
+    },
+  });
+
+  console.log("User found for subscription:", user);
+
+  if (!user) {
+    console.error("User not found for subscription:", subscription.id);
+    return null;
+  }
+
+  return { user, subscription };
+}
+
 export async function POST(req: Request) {
   const body = await req.text();
+
+  if (!body) {
+    console.error("Empty body received");
+    return new Response("Empty body", { status: 400 });
+  }
+
   const sig = req.headers.get("stripe-signature");
 
   if (!sig) {
@@ -156,39 +184,141 @@ export async function POST(req: Request) {
       status: 400,
     });
   }
+
   try {
-    if (event.type === "checkout.session.completed") {
-      const session = await stripe.checkout.sessions.retrieve(
-        (event.data.object as Stripe.Checkout.Session).id,
-        { expand: ["line_items"] },
-      );
+    switch (event.type) {
+      case "checkout.session.completed":
+        const session = await stripe.checkout.sessions.retrieve(
+          (event.data.object as Stripe.Checkout.Session).id,
+          {
+            expand: ["line_items"],
+          },
+        );
 
-      if (!session.metadata) {
-        throw new Error("Missing metadata in checkout session.");
-      }
+        const subscriptionId = session.subscription as string; // Récupération de l'ID de la souscription
 
-      const email = session.customer_details?.email || "";
-      if (!validateEmail(email)) {
-        throw new Error("Invalid email format.");
-      }
+        const email = session.customer_details?.email || "";
+        const existingUser = await prisma.user.findUnique({
+          where: { email },
+        });
 
-      const existingUser = await prisma.user.findUnique({ where: { email } });
-
-      if (existingUser) {
-        if (session.metadata?.subscription === "true") {
-          await handleSubscription(existingUser, session);
+        if (existingUser) {
+          if (session.metadata?.subscription) {
+            await handleSubscription(existingUser, session, subscriptionId);
+          } else {
+            await handleProgram(existingUser, session);
+            console.log("Program purchased");
+          }
         } else {
-          await handleProgram(existingUser, session);
+          await handleNewUser(session);
         }
-      } else {
-        await handleNewUser(session);
-      }
-    } else {
-      console.log(`Unhandled event type: ${event.type}`);
-    }
 
-    return new Response("Webhook processed successfully", { status: 200 });
+        return new Response("Webhook processed successfully", { status: 200 });
+
+      case "customer.subscription.deleted":
+      case "customer.subscription.updated":
+      case "customer.subscription.created":
+      case "invoice.created":
+        const userAndSubscription = await getUserAndSubscription(event);
+
+        if (!userAndSubscription) {
+          console.log(
+            "User not found for subscription, skipping update/delete",
+          );
+          return new Response("User not found for subscription", {
+            status: 404,
+          });
+        }
+
+        const { user, subscription } = userAndSubscription;
+
+        if (!user) {
+          console.log("No user found for subscription, skipping update/delete");
+          return new Response("User not found for subscription", {
+            status: 404,
+          });
+        }
+
+        if (event.type === "customer.subscription.deleted") {
+          console.log("Subscription deleted for user:", user.id);
+          await prisma.purchase.deleteMany({
+            where: {
+              userId: user.id,
+              subscriptionId: subscription.id,
+            },
+          });
+
+          await prisma.user.update({
+            where: { id: user.id },
+            data: {
+              isSubscribed: false,
+              subscriptionEndDate: new Date(),
+              subscriptionId: null,
+            },
+          });
+        } else if (event.type === "customer.subscription.updated") {
+          // Logique pour la mise à jour de la souscription
+          console.log("Subscription updated for user:", user.id);
+          await prisma.purchase.updateMany({
+            where: {
+              userId: user.id,
+              subscriptionId: subscription.id,
+            },
+            data: {
+              subscriptionStatus: subscription.status,
+            },
+          });
+        } else if (event.type === "customer.subscription.created") {
+          await prisma.user.update({
+            where: { id: user.id },
+            data: {
+              isSubscribed: true,
+              subscriptionEndDate: new Date(
+                subscription.current_period_end * 1000,
+              ),
+              subscriptionId: subscription.id,
+            },
+          });
+
+          // const product = await stripe.products.retrieve(
+          //   subscription.plan.product,
+          // );
+
+          const subscriptionData: SubscriptionData = {
+            startDate: new Date(
+              subscription.current_period_start * 1000,
+            ).toISOString(),
+            endDate: new Date(
+              subscription.current_period_end * 1000,
+            ).toISOString(),
+            subscriptionStatus: subscription.status,
+            titlePlan: "3mois",
+          };
+
+          await prisma.purchase.create({
+            data: {
+              userId: user.id,
+              subscriptionId: subscription.id,
+              amount: 3333,
+              status: "completed",
+              customerId: subscription.customer as string,
+              subscriptionData,
+              subscriptionStatus: subscription.status,
+              createdAt: new Date(),
+            },
+          });
+        }
+
+        return new Response("Webhook processed successfully", { status: 200 });
+
+      default:
+        console.log(`Unhandled event type: ${event.type}`);
+        return new Response(`Unhandled event type: ${event.type}`, {
+          status: 200,
+        });
+    }
   } catch (error) {
-    return handleError(error);
+    console.error("Error processing webhook:", error);
+    return new Response("Internal server error", { status: 500 });
   }
 }
