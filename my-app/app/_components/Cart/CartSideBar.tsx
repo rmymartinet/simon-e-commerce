@@ -8,7 +8,7 @@ import { IoClose } from "react-icons/io5";
 import { useRemoveItem } from "@/hooks/useRemoveItem";
 import { CartItemProps } from "@/types/types";
 import Image from "next/image";
-import { useHandleAction } from "@/hooks/useHandleAction";
+import useHandleAction from "@/hooks/useHandleAction";
 
 gsap.registerPlugin(useGSAP);
 

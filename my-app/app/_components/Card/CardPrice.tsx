@@ -6,7 +6,7 @@ import Price from "./Price";
 import useWindowWidth from "@/hooks/useWindowWidth";
 import Divider from "../Divider";
 import AddToCartButton from "../AddToCartButton";
-import { useHandleAction } from "@/hooks/useHandleAction";
+import useHandleAction from "@/hooks/useHandleAction";
 import Image from "next/image";
 
 const CardPrice = ({ productData, filterName }: CardPriceProps) => {
