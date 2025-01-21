@@ -15,7 +15,8 @@ function UserCoachingPanel({
     <div className="program-button-container rounded-xl border-card">
       <div className="flex justify-between p-6">
         <strong className="text-xl">Votre abonnement</strong>
-        {subscriptionInfos.nextPaymentDate === "Abonnement expiré" ? (
+        {subscriptionInfos.nextPaymentDate === "Abonnement expiré" ||
+        subscriptionInfos.nextPaymentDate === "No subscription" ? (
           <div className="flex items-center gap-2 text-red-500">
             <div className="h-3 w-3 animate-pulse rounded-full bg-red-600 transition-all duration-100"></div>
             Aucun abonnement en cours
