@@ -10,23 +10,32 @@ export default async function Dashboard() {
   if (!session || !session.user) return redirect("/login");
 
   const userData = await prisma.user.findUnique({
-    where: {
-      email: session.user.email || undefined,
-    },
+    where: { email: session.user.email ?? undefined },
     include: {
       Purchase: {
-        orderBy: {
-          createdAt: "desc",
+        select: {
+          id: true,
+          amount: true,
+          createdAt: true,
+          userPurchaseData: true,
+          subscriptionData: true,
         },
       },
     },
   });
 
-  console.log(userData);
+  console.log("USERDATA", userData);
 
-  function calculateNextPayment(startDate: string, endDate: string) {
-    const start = new Date(startDate);
-    const end = new Date(endDate);
+  function formattedDate(date: Date | string | undefined) {
+    return date ? new Date(date).toLocaleDateString("fr-FR") : undefined;
+  }
+
+  function calculateNextPayment(
+    startDate: Date | string | undefined,
+    endDate: Date | string | undefined,
+  ) {
+    const start = startDate ? new Date(startDate) : new Date();
+    const end = endDate ? new Date(endDate) : new Date();
     const currentDate = new Date();
 
     if (isNaN(start.getTime()) || isNaN(end.getTime())) {
@@ -47,61 +56,50 @@ export default async function Dashboard() {
     return nextPaymentDate;
   }
 
-  const defaultSubscription = {
-    amount: 0,
-    subscriptionData: {
-      subscriptionPlan: "N/A",
-      startDate: "N/A",
-      endDate: "N/A",
-    },
-  };
   const allPurchases = userData?.Purchase || [];
+
+  console.log("ALLPURCHASE", allPurchases);
   const programPurchases = allPurchases.filter(
-    (purchase: { userPurchaseData: { titlePlan: string } }) =>
-      purchase.userPurchaseData !== null,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    (purchase: { userPurchaseData: any; subscriptionData: any }) =>
+      purchase.userPurchaseData && purchase.userPurchaseData.titlePlan,
   );
 
-  interface Purchase {
-    subscriptionData?: {
-      titlePlan: string;
-      startDate: string;
-      endDate: string;
-      amount: number; // Ajout de la propriété 'amount' ici
-    };
-    userPurchaseData: {
-      titlePlan: string;
-    };
-    createdAt: string;
-    amount: number;
-  }
-
   const subscriptionPurchase =
-    allPurchases.find((purchase: Purchase) => purchase.subscriptionData) ||
-    defaultSubscription.subscriptionData;
+    allPurchases.find((purchase) => purchase.subscriptionData) || null;
 
-  function formattedDate(date: string | undefined) {
-    return date ? new Date(date).toLocaleDateString("fr-FR") : undefined;
-  }
+  const subscriptionInfos = subscriptionPurchase
+    ? {
+        amount: (subscriptionPurchase.amount ?? 0) / 100,
+        subscriptionPlan:
+          subscriptionPurchase.subscriptionData?.titlePlan ?? "N/A",
+        startDate: formattedDate(
+          subscriptionPurchase.subscriptionData?.startDate,
+        ),
+        endDate: formattedDate(subscriptionPurchase.subscriptionData?.endDate),
+        nextPaymentDate: calculateNextPayment(
+          subscriptionPurchase.subscriptionData?.startDate,
+          subscriptionPurchase.subscriptionData?.endDate,
+        ),
+        isSubscribed: true,
+      }
+    : {
+        amount: 0,
+        subscriptionPlan: "N/A",
+        startDate: "N/A",
+        endDate: "N/A",
+        nextPaymentDate: "N/A",
+        isSubscribed: false,
+      };
 
-  // Vérification des données avant d'y accéder
-  const subscriptionInfos = {
-    amount: subscriptionPurchase?.amount / 100 || defaultSubscription.amount, // Assure-toi que amount est accessible
-    subscriptionData: {
-      subscriptionPlan:
-        subscriptionPurchase?.subscriptionData?.titlePlan ??
-        defaultSubscription.subscriptionData.subscriptionPlan,
-      startDate:
-        formattedDate(subscriptionPurchase?.subscriptionData?.startDate) ||
-        defaultSubscription.subscriptionData.startDate,
-      endDate:
-        formattedDate(subscriptionPurchase?.subscriptionData?.endDate) ||
-        defaultSubscription.subscriptionData.endDate,
-    },
-    nextPaymentDate: calculateNextPayment(
-      subscriptionPurchase?.subscriptionData?.startDate,
-      subscriptionPurchase?.subscriptionData?.endDate,
-    ),
-  };
+  if (!userData)
+    return (
+      <div className="grid h-screen place-content-center">
+        <div className="animate-pulse duration-150 ease-linear">
+          Chargement...
+        </div>
+      </div>
+    );
 
   return (
     <div className="mt-40 flex flex-col gap-20 px-4 lg:px-20">
