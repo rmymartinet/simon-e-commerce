@@ -11,6 +11,7 @@ type SubscriptionData = {
   endDate: string;
   subscriptionStatus: string;
   titlePlan: string;
+  status: string;
 };
 
 const WEBHOOK_SECRET = process.env.NEXT_STRIPE_WEBHOOK_SECRET!;
@@ -66,6 +67,7 @@ async function handleSubscription(
     endDate: endDateString,
     subscriptionStatus: "active",
     titlePlan: session.metadata?.titlePlan || "",
+    status: session.metadata?.status || "",
   };
 
   return prisma.purchase.create({
@@ -75,8 +77,9 @@ async function handleSubscription(
       amount: session.amount_total || 0,
       status: "completed",
       customerId: session.customer ? String(session.customer) : "",
-      subscriptionData,
-      subscriptionStatus: "active",
+      subscriptionData: {
+        create: subscriptionData,
+      },
       createdAt: new Date(),
     },
   });
@@ -95,7 +98,7 @@ async function handleProgram(
   });
 
   const userPurchaseData = {
-    titlePlan: session.metadata?.titlePlan || "",
+    titlePlan: session.metadata?.titlePlan as string,
   };
 
   return prisma.purchase.create({
@@ -104,7 +107,9 @@ async function handleProgram(
       amount: session.amount_total || 0,
       status: "completed",
       customerId: session.customer ? String(session.customer) : "",
-      userPurchaseData,
+      userPurchaseData: {
+        create: userPurchaseData, 
+      },
       createdAt: new Date(),
     },
   });
