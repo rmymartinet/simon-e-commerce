@@ -1,9 +1,6 @@
-interface UserData {
-  name: string;
-  email: string;
-}
+import { UserDataProps } from "@/types/types";
 
-const UserProfile = ({ userData }: { userData: UserData }) => {
+const UserProfile = ({ userData }: { userData: UserDataProps }) => {
   return (
     <div className="program-button-container flex flex-col rounded-xl p-10">
       <p className="mb-4 text-xl font-bold">Profil</p>

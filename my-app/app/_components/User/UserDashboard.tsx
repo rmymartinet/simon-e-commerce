@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 import { useState } from "react";
@@ -8,22 +7,22 @@ import UserFilter from "./UserFIlter";
 import PurchaseHistory from "./PurchaseHistory";
 import UserProgramPanel from "./UserProgramPanel";
 import UserCoachingPanel from "./UserCoachingPanel";
+import {
+  PurchaseItemProps,
+  SubscriptionInfosProps,
+  UserDataProps,
+} from "@/types/types";
 
-interface UserDashboardProps {
-  userData: any; // Replace 'any' with the appropriate type
-  allPurchases: any; // Replace 'any' with the appropriate type
-  programPurchases: any; // Replace 'any' with the appropriate type
-  subscriptionInfos: any; // Replace 'any' with the appropriate type
-}
-
-const UserDashboard: React.FC<UserDashboardProps> = ({
+const UserDashboard = ({
   userData,
   allPurchases,
-  programPurchases,
   subscriptionInfos,
+}: {
+  userData: UserDataProps;
+  allPurchases: PurchaseItemProps[];
+  subscriptionInfos: SubscriptionInfosProps;
 }) => {
   const [isProgram, setIsProgram] = useState("program");
-
 
   return (
     <div className="relative flex flex-col gap-10">
@@ -42,7 +41,7 @@ const UserDashboard: React.FC<UserDashboardProps> = ({
         <PurchaseHistory allPurchases={allPurchases} />
 
         {isProgram === "program" ? (
-          <UserProgramPanel programPurchases={programPurchases} />
+          <UserProgramPanel userData={userData} />
         ) : (
           <UserCoachingPanel subscriptionInfos={subscriptionInfos} />
         )}

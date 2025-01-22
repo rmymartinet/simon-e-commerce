@@ -1,15 +1,15 @@
-import { SubscriptionInfos } from "@/types/types";
+import { SubscriptionInfosProps } from "@/types/types";
 
 function UserCoachingPanel({
   subscriptionInfos,
 }: {
-  subscriptionInfos: SubscriptionInfos;
+  subscriptionInfos: SubscriptionInfosProps;
 }) {
   return (
     <div className="program-button-container rounded-xl border-card">
       <div className="flex justify-between p-6">
         <strong className="text-xl">Votre abonnement</strong>
-        {subscriptionInfos.nextPaymentDate === "Abonnement expiré" ||
+        {subscriptionInfos.nextPaymentDate === "expired" ||
         subscriptionInfos.nextPaymentDate === "N/A" ? (
           <div className="flex items-center gap-2 text-red-500">
             <div className="h-3 w-3 animate-pulse rounded-full bg-red-600 transition-all duration-100"></div>
@@ -35,9 +35,7 @@ function UserCoachingPanel({
         <div className="flex flex-col items-end justify-between border-b border-slate-400 p-6">
           <p className="self-start text-xl font-semibold">Prochain paiement</p>
           <p className="text-3xl font-bold text-violet-300">
-            {typeof subscriptionInfos.nextPaymentDate === "string"
-              ? subscriptionInfos.nextPaymentDate
-              : subscriptionInfos.nextPaymentDate}
+            {subscriptionInfos.nextPaymentDate}
           </p>
         </div>
         <div className="flex flex-col items-end justify-between border-b border-r border-slate-400 p-6">

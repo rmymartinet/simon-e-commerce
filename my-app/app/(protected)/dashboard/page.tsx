@@ -43,7 +43,7 @@ export default async function Dashboard() {
     }
 
     if (currentDate < start) return start;
-    if (currentDate > end) return "Abonnement expiré";
+    if (currentDate > end) return "expired";
 
     const nextPaymentDate = new Date(start);
 
@@ -51,24 +51,16 @@ export default async function Dashboard() {
       nextPaymentDate.setMonth(nextPaymentDate.getMonth() + 1);
     }
 
-    if (nextPaymentDate > end) return "Dernier paiement effectué";
+    if (nextPaymentDate > end) return "expired";
 
     return nextPaymentDate;
   }
 
   const allPurchases = userData?.Purchase || [];
 
-  console.log("ALLPURCHASE", allPurchases);
-  const programPurchases = allPurchases.filter(
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    (purchase: { userPurchaseData: any; subscriptionData: any }) =>
-      purchase.userPurchaseData && purchase.userPurchaseData.titlePlan,
-  );
 
   const subscriptionPurchase =
     allPurchases.find((purchase) => purchase.subscriptionData) || null;
-
-
 
   const subscriptionInfos = subscriptionPurchase
     ? {
@@ -130,7 +122,6 @@ export default async function Dashboard() {
       <UserDashboard
         userData={userData}
         allPurchases={allPurchases}
-        programPurchases={programPurchases}
         subscriptionInfos={subscriptionInfos}
       />
     </div>

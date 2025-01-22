@@ -1,16 +1,9 @@
+import { PurchaseItem } from "@/types/types";
+
 const PurchaseHistory = ({
   allPurchases,
 }: {
-  allPurchases: {
-    subscriptionData?: {
-      titlePlan: string;
-      startDate: string;
-      endDate: string;
-    };
-    userPurchaseData: { titlePlan: string };
-    createdAt: string;
-    amount: number;
-  }[];
+  allPurchases: PurchaseItem[];
 }) => {
   return (
     <div className="program-button-container relative flex h-[40vh] flex-col overflow-y-auto rounded-xl border-card pb-6 lg:h-full">
@@ -23,43 +16,29 @@ const PurchaseHistory = ({
       </div>
       <div className="px-6">
         {allPurchases.length > 0 ? (
-          allPurchases.map(
-            (
-              purchase: {
-                subscriptionData?: {
-                  titlePlan: string;
-                  startDate: string;
-                  endDate: string;
-                };
-                userPurchaseData: { titlePlan: string };
-                createdAt: string;
-                amount: number;
-              },
-              index: number,
-            ) => (
-              <div
-                key={index}
-                className={`flex justify-between p-4 font-bold ${
-                  index % 2 !== 0
-                    ? "program-button-container rounded-md"
-                    : "bg-inherit"
-                }`}
-              >
-                <p>
-                  {purchase.subscriptionData?.titlePlan ||
-                    purchase.userPurchaseData.titlePlan}
-                  {purchase.subscriptionData ? " (abonnement)" : ""}
-                </p>
-                <p>
-                  {purchase.subscriptionData?.startDate
-                    ? new Date(
-                        purchase.subscriptionData.startDate,
-                      ).toLocaleDateString("fr-FR")
-                    : new Date(purchase.createdAt).toLocaleDateString("fr-FR")}
-                </p>
-              </div>
-            ),
-          )
+          allPurchases.map((purchase, index) => (
+            <div
+              key={index}
+              className={`flex justify-between p-4 font-bold ${
+                index % 2 !== 0
+                  ? "program-button-container rounded-md"
+                  : "bg-inherit"
+              }`}
+            >
+              <p>
+                {purchase.subscriptionData?.titlePlan ||
+                  purchase.userPurchaseData?.titlePlan}
+                {purchase.subscriptionData ? " (abonnement)" : ""}
+              </p>
+              <p>
+                {purchase.subscriptionData?.startDate
+                  ? new Date(
+                      purchase.subscriptionData.startDate,
+                    ).toLocaleDateString("fr-FR")
+                  : new Date(purchase.createdAt).toLocaleDateString("fr-FR")}
+              </p>
+            </div>
+          ))
         ) : (
           <p className="text-center">Aucun achat trouvé.</p>
         )}
