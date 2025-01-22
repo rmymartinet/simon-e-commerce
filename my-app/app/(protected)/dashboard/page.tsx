@@ -42,7 +42,7 @@ export default async function Dashboard() {
       return "Invalid Date";
     }
 
-    if (currentDate < start) return start;
+    if (currentDate < start) return start.toLocaleDateString("fr-FR");
     if (currentDate > end) return "expired";
 
     const nextPaymentDate = new Date(start);
@@ -53,11 +53,9 @@ export default async function Dashboard() {
 
     if (nextPaymentDate > end) return "expired";
 
-    return nextPaymentDate;
+    return nextPaymentDate.toLocaleDateString("fr-FR");
   }
-
   const allPurchases = userData?.Purchase || [];
-
 
   const subscriptionPurchase =
     allPurchases.find((purchase) => purchase.subscriptionData) || null;
