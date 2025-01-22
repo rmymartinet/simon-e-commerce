@@ -102,7 +102,7 @@ model Purchase {
   status           String
   customerId       String
   subscriptionData SubscriptionData?
-  userPurchaseData UserPurchaseData?
+  userPurchaseData ProgramData?
   createdAt        DateTime          @default(now())
   updatedAt        DateTime          @updatedAt
   subscriptionId   String?
@@ -118,7 +118,7 @@ model SubscriptionData {
   status     String
 }
 
-model UserPurchaseData {
+model ProgramData {
   id         String   @id @default(cuid())
   purchaseId String   @unique
   purchase   Purchase @relation(fields: [purchaseId], references: [id], onDelete: Cascade)
