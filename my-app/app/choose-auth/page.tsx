@@ -1,35 +1,35 @@
 "use client";
 
-import { usePayment } from "@/hooks/usePayment";
+// import { usePayment } from "@/hooks/usePayment";
 import { useCheckout } from "../context/CheckoutContext";
 
 const ChooseAuth = () => {
-  const { handleCheckout } = usePayment();
+  // const { handleCheckout } = usePayment();
   const { checkoutData } = useCheckout();
 
   console.log(checkoutData);
 
-  let allPriceIds: string[] = [];
-  let allTitles: string[] = [];
-  let allMonths: number[] = [];
+  // let allPriceIds: string[] = [];
+  // let allTitles: string[] = [];
+  // let allMonths: number[] = [];
 
-  if (checkoutData) {
-    if (Array.isArray(checkoutData.productData)) {
-      allPriceIds = checkoutData.productData.map(
-        (product: { priceId: string }) => product.priceId,
-      );
-      allTitles = checkoutData.productData.map(
-        (product: { titlePlan: string }) => product.titlePlan,
-      );
-      allMonths = checkoutData.productData.map(
-        (product: { month: number }) => product.month,
-      );
-    } else {
-      allPriceIds = [checkoutData.productData.priceId || ""];
-      allTitles = [checkoutData.productData.titlePlan];
-      allMonths = [checkoutData.productData.month];
-    }
-  }
+  // if (checkoutData) {
+  //   if (Array.isArray(checkoutData.productData)) {
+  //     allPriceIds = checkoutData.productData.map(
+  //       (product: { priceId: string }) => product.priceId,
+  //     );
+  //     allTitles = checkoutData.productData.map(
+  //       (product: { titlePlan: string }) => product.titlePlan,
+  //     );
+  //     allMonths = checkoutData.productData.map(
+  //       (product: { month: number }) => product.month,
+  //     );
+  //   } else {
+  //     allPriceIds = [checkoutData.productData.priceId || ""];
+  //     allTitles = [checkoutData.productData.titlePlan];
+  //     allMonths = [checkoutData.productData.month];
+  //   }
+  // }
 
   return (
     <section className="flex min-h-screen flex-col items-center justify-center">
@@ -48,7 +48,7 @@ const ChooseAuth = () => {
           <p className="text-center">
             Poursuivez ainsi. Vous créerez un compte Sm Coaching ultérieurement.
           </p>
-          <button
+          {/* <button
             className="padding program-button-container mt-4 rounded-lg text-lg font-semibold"
             onClick={() => {
               if (allPriceIds) {
@@ -65,7 +65,7 @@ const ChooseAuth = () => {
             }}
           >
             Continuer en tant qu&apos;invité
-          </button>
+          </button> */}
         </div>
       </div>
     </section>
