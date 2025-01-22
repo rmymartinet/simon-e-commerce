@@ -123,5 +123,4 @@ model UserPurchaseData {
   purchaseId String   @unique
   purchase   Purchase @relation(fields: [purchaseId], references: [id], onDelete: Cascade)
   titlePlan  String
-  details    String?
 }
