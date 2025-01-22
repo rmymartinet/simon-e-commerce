@@ -246,42 +246,57 @@ export interface StepCardProps {
   children: React.ReactNode;
 }
 
+export interface PurchaseItemProps {
+  id: string;
+  createdAt: Date;
+  amount: number;
+  subscriptionData: SubscriptionDataProps | null;
+  userPurchaseData: ProgramDataPros | null;
+}
+
+export interface SubscriptionDataProps {
+  id: string;
+  purchaseId: string;
+  titlePlan: string;
+  startDate: Date;
+  endDate: Date;
+  status: string;
+}
+
+export interface ProgramDataPros {
+  id: string;
+  purchaseId: string;
+  titlePlan: string;
+}
+
 export interface UserDataProps {
-  Purchase?: [];
-
-  subscriptionData?: {
-    titlePlan: string;
-    subscriptionId: string;
-    priceId: string;
-    startDate: string;
-    endDate: string;
-  };
-
+  Purchase: PurchaseItemProps[];
   activationToken: string | null;
-  activationTokenExpires: string | null;
-  createdAt: string;
+  activationTokenExpires: Date | null;
+  createdAt: Date;
   customerId: string | null;
   email: string;
-  emailVerified: string | null;
+  emailVerified: Date | null;
   id: string;
   image: string | null;
   isSubscribed: boolean;
   isTemporary: boolean;
-  lastActive: string | null;
-  name: string;
-  password: string;
+  lastActive: Date | null;
+  name: string | null;
+  password: string | null;
   priceId: string | null;
-  stripeCustomerId: string;
-  subscriptionEndDate: string;
-  subscriptionStartDate: string;
-  updatedAt: string;
+  stripeCustomerId: string | null;
+  subscriptionEndDate: Date | null;
+  subscriptionStartDate: Date | null;
+  subscriptionId: string | null;
+  updatedAt: Date;
 }
 
-export interface SubscriptionInfos {
+export interface SubscriptionInfosProps {
   amount: number;
   subscriptionPlan: string;
-  startDate: string;
-  endDate: string;
+  startDate: string | undefined;
+  endDate: string | undefined;
   nextPaymentDate: string;
   isSubscribed: boolean;
 }
