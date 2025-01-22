@@ -4,7 +4,7 @@ import { useState } from "react";
 import Image from "next/image";
 import UserProfile from "./UserProfile";
 import UserFilter from "./UserFIlter";
-import PurchaseHistory from "./PurchaseHistory";
+import UserPurchaseHistory from "./UserPurchaseHistory";
 import UserProgramPanel from "./UserProgramPanel";
 import UserCoachingPanel from "./UserCoachingPanel";
 import {
@@ -38,7 +38,7 @@ const UserDashboard = ({
       <UserProfile userData={userData} />
       <UserFilter isProgram={isProgram} setIsProgram={setIsProgram} />
       <div className="relative flex flex-col-reverse gap-10 lg:grid lg:grid-cols-2">
-        <PurchaseHistory allPurchases={allPurchases} />
+        <UserPurchaseHistory allPurchases={allPurchases} />
 
         {isProgram === "program" ? (
           <UserProgramPanel userData={userData} />

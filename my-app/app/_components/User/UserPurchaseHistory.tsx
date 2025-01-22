@@ -1,9 +1,9 @@
-import { PurchaseItem } from "@/types/types";
+import { PurchaseItemProps } from "@/types/types";
 
-const PurchaseHistory = ({
+const UserPurchaseHistory = ({
   allPurchases,
 }: {
-  allPurchases: PurchaseItem[];
+  allPurchases: PurchaseItemProps[];
 }) => {
   return (
     <div className="program-button-container relative flex h-[40vh] flex-col overflow-y-auto rounded-xl border-card pb-6 lg:h-full">
@@ -47,4 +47,4 @@ const PurchaseHistory = ({
   );
 };
 
-export default PurchaseHistory;
+export default UserPurchaseHistory;
