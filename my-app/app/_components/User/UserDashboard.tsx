@@ -24,6 +24,7 @@ const UserDashboard: React.FC<UserDashboardProps> = ({
 }) => {
   const [isProgram, setIsProgram] = useState("program");
 
+
   return (
     <div className="relative flex flex-col gap-10">
       <div className="absolute right-0 top-0 -z-10 h-[20%] w-[90%]">

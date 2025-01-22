@@ -68,6 +68,8 @@ export default async function Dashboard() {
   const subscriptionPurchase =
     allPurchases.find((purchase) => purchase.subscriptionData) || null;
 
+
+
   const subscriptionInfos = subscriptionPurchase
     ? {
         amount: (subscriptionPurchase.amount ?? 0) / 100,

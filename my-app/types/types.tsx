@@ -276,3 +276,12 @@ export interface UserDataProps {
   subscriptionStartDate: string;
   updatedAt: string;
 }
+
+export interface SubscriptionInfos {
+  amount: number;
+  subscriptionPlan: string;
+  startDate: string;
+  endDate: string;
+  nextPaymentDate: string;
+  isSubscribed: boolean;
+}

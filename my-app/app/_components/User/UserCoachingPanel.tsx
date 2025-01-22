@@ -1,22 +1,16 @@
+import { SubscriptionInfos } from "@/types/types";
+
 function UserCoachingPanel({
   subscriptionInfos,
 }: {
-  subscriptionInfos: {
-    nextPaymentDate: string | Date;
-    amount: number;
-    subscriptionData: {
-      subscriptionPlan: string;
-      startDate: string;
-      endDate: string;
-    };
-  };
+  subscriptionInfos: SubscriptionInfos;
 }) {
   return (
     <div className="program-button-container rounded-xl border-card">
       <div className="flex justify-between p-6">
         <strong className="text-xl">Votre abonnement</strong>
         {subscriptionInfos.nextPaymentDate === "Abonnement expiré" ||
-        subscriptionInfos.nextPaymentDate === "No subscription" ? (
+        subscriptionInfos.nextPaymentDate === "N/A" ? (
           <div className="flex items-center gap-2 text-red-500">
             <div className="h-3 w-3 animate-pulse rounded-full bg-red-600 transition-all duration-100"></div>
             Aucun abonnement en cours
@@ -35,7 +29,7 @@ function UserCoachingPanel({
             <p className="text-slate-200">(Avec engagement)</p>
           </div>
           <p className="text-5xl font-bold">
-            {subscriptionInfos.subscriptionData.subscriptionPlan}
+            {subscriptionInfos.subscriptionPlan}
           </p>
         </div>
         <div className="flex flex-col items-end justify-between border-b border-slate-400 p-6">
@@ -43,7 +37,7 @@ function UserCoachingPanel({
           <p className="text-3xl font-bold text-violet-300">
             {typeof subscriptionInfos.nextPaymentDate === "string"
               ? subscriptionInfos.nextPaymentDate
-              : subscriptionInfos.nextPaymentDate.toLocaleDateString("fr-FR")}
+              : subscriptionInfos.nextPaymentDate}
           </p>
         </div>
         <div className="flex flex-col items-end justify-between border-b border-r border-slate-400 p-6">
@@ -62,13 +56,13 @@ function UserCoachingPanel({
             <p className="text-center">
               Début:{" "}
               <span className="text-xl font-bold">
-                {subscriptionInfos.subscriptionData.startDate}
+                {subscriptionInfos.startDate}
               </span>
             </p>
             <p className="text-center text-violet-300">
               Fin:{" "}
               <span className="text-xl font-bold">
-                {subscriptionInfos.subscriptionData.endDate}
+                {subscriptionInfos.endDate}
               </span>
             </p>
           </div>
