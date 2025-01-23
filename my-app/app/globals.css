@@ -374,6 +374,23 @@ body {
   );
 }
 
+.prose-custom {
+  color: white;
+}
+
+.prose-custom h1,
+.prose-custom h2,
+.prose-custom h3,
+.prose-custom h4,
+.prose-custom h5,
+.prose-custom h6,
+.prose-custom p,
+.prose-custom a,
+.prose-custom li,
+.prose-custom blockquote {
+  color: white;
+}
+
 .radial-bg {
   background: radial-gradient(
     ellipse 90% 70% at 50% 30%,

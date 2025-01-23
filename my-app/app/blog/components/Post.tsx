@@ -33,7 +33,7 @@ const Post = ({ post }: { post: SanityDocument }) => {
           className="h-full w-full object-cover"
         />
       ) : null}
-      <section className="prose prose-xl">
+      <section className="prose-custom prose prose-xl">
         {post?.body ? (
           <div className="text-white">
             <PortableText value={post.body} />
