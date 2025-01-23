@@ -72,13 +72,13 @@ const AppOverview = () => {
               ></div>
             ))}
           </div>
-          <Iphone imgUrl="/images/virtualgym_app/home_app.png" title="Home" />
+          <Iphone imgUrl="/images/virtualgym_app/home_app.jpeg" title="Home" />
           <Iphone
             imgUrl="/images/virtualgym_app/user_interface.png"
             title="Entraînement"
           />
           <Iphone
-            imgUrl="/images/virtualgym_app/stat_app.png"
+            imgUrl="/images/virtualgym_app/stat_app.jpeg"
             title="Données"
           />
         </div>
