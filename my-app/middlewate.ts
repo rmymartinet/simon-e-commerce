@@ -1,4 +1,4 @@
-import { auth } from "@/auth";
+import { auth } from "@/app/_lib/auth";
 
 export default auth((req) => {
   if (!req.auth && req.nextUrl.pathname !== "/login") {
