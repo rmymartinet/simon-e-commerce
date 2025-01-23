@@ -61,7 +61,6 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       },
       authorize: async (credentials) => {
         try {
-          console.log("credentials)", credentials);
           const isValidCredentials = await singInSchema.parseAsync(credentials);
 
           const user = await getUserByEmail(isValidCredentials.email);
