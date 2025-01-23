@@ -28,7 +28,7 @@ const UserDashboard = ({
     <div className="relative flex flex-col gap-10">
       <div className="absolute right-0 top-0 -z-10 h-[20%] w-[90%]">
         <Image
-          src="/images/cube_mono.jpeg"
+          src="/images/wallpaper/cube_mono.jpeg"
           alt=""
           width={2000}
           height={2000}

@@ -20,7 +20,7 @@ const NutritionGrid = () => {
       <div className="absolute left-1/2 top-[65%] -z-[5px] h-[30%] w-full -translate-x-1/2 -translate-y-1/2 bg-gradient-to-t from-[#0b0d14] via-[#0b0d14]/95 to-black/0"></div>
       <div className="absolute left-0 -z-10 h-[60%] w-[90%] -translate-x-[30%]">
         <Image
-          src="/images/raycast_purple.jpeg"
+          src="/images/wallpaper/raycast_purple.jpeg"
           alt=""
           width={2000}
           height={2000}
@@ -68,7 +68,7 @@ const NutritionGrid = () => {
           <h1 className="z-50 mb-4 text-center text-3xl font-bold md:text-start">
             Une nutrition connectée à votre entraînement avec Food.
           </h1>
-          <p className="text-muted mt-4 text-pretty break-words text-center text-lg md:mt-0 md:text-start">
+          <p className="mt-4 text-pretty break-words text-center text-lg text-muted md:mt-0 md:text-start">
             Grâce à l’intégration de Food avec Virtual Gym, vous avez tout à
             portée de main :{" "}
             <span className="font-semibold text-white">suivez vos progrès</span>{" "}
@@ -126,7 +126,7 @@ const NutritionGrid = () => {
               {data.map((item, index) => (
                 <div
                   key={index}
-                  className="flex items-center gap-4 text-textOpacity"
+                  className="text-textOpacity flex items-center gap-4"
                 >
                   <div className="grid place-content-center rounded-full border-card p-2">
                     <FaCheck color="green" />
@@ -150,7 +150,7 @@ const NutritionGrid = () => {
           </div>
           <div className="z-10 px-6 py-2">
             <h3 className="text-xl font-semibold">Objectif : Perdre 13kg</h3>
-            <p className="text-sm text-textOpacity">Commencer le 1 Jan 2025</p>
+            <p className="text-textOpacity text-sm">Commencer le 1 Jan 2025</p>
             <div className="mt-6 flex flex-col gap-2">
               <div className="flex w-32 flex-col items-center gap-2 rounded-xl border-card bg-[#6e6e6e32] px-10 py-4">
                 <strong>83 kg</strong>

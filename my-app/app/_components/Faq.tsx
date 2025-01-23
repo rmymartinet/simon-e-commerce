@@ -7,7 +7,7 @@ const Faq = ({ filterName }: { filterName: string }) => {
     <section className="relative self-center lg:w-[70%]">
       <div className="absolute right-0 top-[20%] -z-10 h-[60%] w-[90%] translate-x-1/2">
         <Image
-          src="/images/cube_mono.jpeg"
+          src="/images/wallapaper/cube_mono.jpeg"
           alt=""
           width={2000}
           height={2000}
@@ -16,7 +16,7 @@ const Faq = ({ filterName }: { filterName: string }) => {
       </div>
       <div className="mb-20 flex flex-col items-center justify-center">
         <h1 className="text-7xl font-bold">Faq</h1>
-        <p className="text-lg font-semibold text-textOpacity">
+        <p className="text-textOpacity text-lg font-semibold">
           Les questions les plus fréquemment posées.
         </p>
       </div>
