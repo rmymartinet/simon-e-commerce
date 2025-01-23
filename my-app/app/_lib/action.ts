@@ -10,6 +10,11 @@ async function hashPassword(plainPassword: string) {
   return hashedPassword;
 }
 
+/**
+ *
+ * !TODO add the user existing case
+ */
+
 const signUp = async (formData: FormData) => {
   return executeAction({
     actionFn: async () => {

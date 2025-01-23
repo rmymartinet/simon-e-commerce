@@ -12,8 +12,10 @@ export default async function SignInForm({
   const session = await auth();
   if (session) redirect("/dashboard");
 
-  const errorMessage = (await searchParams)?.error;
+  const params = await searchParams;
+  const errorMessage = params?.error;
 
+  
   return (
     <RegisterCard>
       <h1 className="text-xl font-medium text-black">Se connecter</h1>

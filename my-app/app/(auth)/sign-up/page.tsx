@@ -9,6 +9,11 @@ export default async function SignUpForm() {
   const session = await auth();
   if (session) redirect("/dashboard");
 
+  /**
+   *
+   * !TODO add the user existing case
+   */
+
   return (
     <RegisterCard>
       <h1 className="text-xl font-medium text-black">S&apos;insrire</h1>
