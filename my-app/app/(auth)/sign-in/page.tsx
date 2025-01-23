@@ -3,15 +3,16 @@ import RegisterCard from "@/app/_components/RegisterCard";
 import { auth, signIn } from "@/app/_lib/auth";
 import Link from "next/link";
 import { redirect } from "next/navigation";
-interface SignInProps {
-  searchParams: { error?: string };
-}
 
-export default async function SignInForm({ searchParams }: SignInProps) {
+export default async function SignInForm({
+  searchParams,
+}: {
+  searchParams: Promise<{ error: string }>;
+}) {
   const session = await auth();
   if (session) redirect("/dashboard");
 
-  const errorMessage = searchParams?.error;
+  const errorMessage = (await searchParams)?.error;
 
   return (
     <RegisterCard>
