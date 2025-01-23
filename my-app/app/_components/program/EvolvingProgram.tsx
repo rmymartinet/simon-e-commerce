@@ -34,7 +34,7 @@ const EvolvingProgram = () => {
           autoPlay
           playsInline
           preload="auto"
-          src="/videos/program/evolving_program.mov"
+          src="/videos/program/evolving_program.mp4"
           className="h-full w-full rounded-xl object-cover"
         />
       </div>

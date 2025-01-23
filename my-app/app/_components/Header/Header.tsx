@@ -70,7 +70,7 @@ const Header = () => {
           loop
           muted
           src={
-            width <= 498 ? "/videos/mobile_header.mov" : "/videos/header.mov"
+            width <= 498 ? "/videos/mobile_header.mp4" : "/videos/header.mp4"
           }
           className="h-full w-full object-cover brightness-[0.9] filter"
           preload="true"

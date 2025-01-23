@@ -11,10 +11,10 @@ const ProgramOverview = () => {
   const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
   const buttonRefs = useRef<(HTMLButtonElement | null)[]>([]);
   const videos = [
-    "/videos/program/presentation.mov",
-    "/videos/program/ppl.mov",
-    "/videos/program/week.mov",
-    "/videos/program/exercice.mov",
+    "/videos/program/presentation.mp4",
+    "/videos/program/ppl.mp4",
+    "/videos/program/week.mp4",
+    "/videos/program/exercice.mp4",
   ];
   const logo = [
     { logo: <CiCircleList size={25} /> },
@@ -135,7 +135,7 @@ const ProgramOverview = () => {
           <h1 className="text-center text-xl font-bold md:text-3xl">
             Des programmes faits pour vous
           </h1>
-          <p className="text-subtle text-center font-medium md:text-lg">
+          <p className="text-center font-medium text-subtle md:text-lg">
             Débutant, intermédiaire ou confirmé : progressez à votre rythme
           </p>
         </div>

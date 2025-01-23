@@ -26,7 +26,7 @@ const CoachingOverview = () => {
           <h1 className="text-center text-3xl font-bold">
             Un suivi sur-mesure
           </h1>
-          <p className="text-subtle text-center text-lg font-medium">
+          <p className="text-center text-lg font-medium text-subtle">
             Moins d&apos;effort pour 2x plus de résulats{" "}
           </p>
           <ColorShadowButton title="Voir les offres" color="#7cbdeb" />
@@ -73,7 +73,7 @@ const CoachingOverview = () => {
               quality={100}
             />
             <video
-              src="/videos/coaching/call.mov"
+              src="/videos/coaching/call.mp4"
               autoPlay
               loop
               muted
@@ -102,7 +102,7 @@ const CoachingOverview = () => {
           <div className="absolute right-16 top-0 rotate-12">
             <MdWhatsapp size={40} color="" />
           </div>
-          <Iphone video="/videos/coaching/call.mov" />
+          <Iphone video="/videos/coaching/call.mp4" />
           <div className="text-md z-50 rounded-2xl text-center font-bold">
             <h3 className="mb-4 text-xl font-bold">
               Des appels réguliers pour un vrai suivi
