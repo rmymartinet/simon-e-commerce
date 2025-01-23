@@ -7,7 +7,7 @@ const Faq = ({ filterName }: { filterName: string }) => {
     <section className="relative self-center lg:w-[70%]">
       <div className="absolute right-0 top-[20%] -z-10 h-[60%] w-[90%] translate-x-1/2">
         <Image
-          src="/images/wallapaper/cube_mono.jpeg"
+          src="/images/wallpaper/cube_mono.jpeg"
           alt=""
           width={2000}
           height={2000}
