@@ -16,14 +16,17 @@ const executeAction = async <T>({
       success: true,
       message: successMessage,
     };
-  } catch (error: any) {
+  } catch (error) {
+    if (error instanceof Error) {
+      throw new Error(error.message || "An unexpected error occurred.");
+    }
     if (isRedirectError(error)) {
       throw error;
     }
 
     return {
       success: false,
-      message: error.message || "An unexpected error occurred.",
+      message: (error as Error).message || "An unexpected error occurred.",
     };
   }
 };

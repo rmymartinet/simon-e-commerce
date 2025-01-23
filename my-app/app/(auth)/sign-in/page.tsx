@@ -40,6 +40,7 @@ export default async function SignInForm({
               redirect("/dashboard");
             }
           } catch (error) {
+            console.error(error);
             redirect(
               `/sign-in?error=${encodeURIComponent("Votre adresse mail ou mot de passe sont icorrect.")}`,
             );

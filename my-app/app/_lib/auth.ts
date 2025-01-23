@@ -79,8 +79,11 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
           }
 
           return user;
-        } catch (error: any) {
-          throw new Error(error.message || "An unexpected error occurred.");
+        } catch (error) {
+          if (error instanceof Error) {
+            throw new Error(error.message || "An unexpected error occurred.");
+          }
+          throw new Error("An unexpected error occurred.");
         }
       },
     }),
