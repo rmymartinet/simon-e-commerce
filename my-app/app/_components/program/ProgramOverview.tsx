@@ -172,14 +172,13 @@ const ProgramOverview = () => {
         />
         <div className="relative overflow-hidden">
           <Image
-            src="/images/mac_background.png"
+            src="/images/mac-screen/mac_background.png"
             alt=""
             width={2000}
             height={2000}
             className="h-full w-full rounded-lg object-fill"
             quality={100}
           />
-
           {videos.map((video, index) => (
             <video
               ref={(el) => {

@@ -65,7 +65,7 @@ const CoachingOverview = () => {
           />
           <div className="relative overflow-hidden">
             <Image
-              src="/images/bb.png"
+              src="/images/mac-screen/mac-bgs-blue.png"
               alt=""
               width={2000}
               height={2000}
