@@ -1,5 +1,5 @@
-import { auth } from "@/auth";
-import { signOut } from "@/auth";
+import { auth } from "@/app/_lib/auth";
+import { signOut } from "@/app/_lib/auth";
 import { redirect } from "next/navigation";
 import UserDashboard from "@/app/_components/User/UserDashboard";
 import { prisma } from "@/app/_lib/prisma";
@@ -92,7 +92,6 @@ export default async function Dashboard() {
         </div>
       </div>
     );
-
   return (
     <div className="mt-40 flex flex-col gap-20 px-4 lg:px-20">
       <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
@@ -103,13 +102,14 @@ export default async function Dashboard() {
           </h1>
 
           <form
+            method="post"
             action={async () => {
               "use server";
-              await signOut();
+              await signOut({ redirectTo: "/sign-in" });
             }}
             className="mt-4 w-max cursor-pointer rounded-md bg-button-gradient px-4 py-2 font-bold text-white"
           >
-            Déconnexion
+            <button type="submit">Déconnexion</button>
           </form>
         </div>
         <p className="text-pretty lg:w-[30vw]">

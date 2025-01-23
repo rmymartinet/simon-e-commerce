@@ -1,5 +1,5 @@
 import { prisma } from "@/app/_lib/prisma";
-import { auth } from "@/auth";
+import { auth } from "@/app/_lib/auth";
 import { NextResponse } from "next/server";
 
 export async function GET() {
@@ -34,6 +34,9 @@ export async function GET() {
     return NextResponse.json(user, { status: 200 });
   } catch (error) {
     console.error("Error retrieving user from database:", error);
-    return NextResponse.json({ error: (error as Error).message }, { status: 500 });
+    return NextResponse.json(
+      { error: (error as Error).message },
+      { status: 500 },
+    );
   }
 }
