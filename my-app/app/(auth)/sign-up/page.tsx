@@ -26,7 +26,7 @@ export default async function SignUpForm() {
           const res = await signUp(formData);
 
           if (res.success) {
-            redirect("/dashboard");
+            redirect("/sign-in");
           }
         }}
         className="flex w-full flex-col gap-4"
