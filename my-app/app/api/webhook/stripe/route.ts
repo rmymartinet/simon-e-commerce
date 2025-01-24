@@ -9,22 +9,11 @@ const stripe = new Stripe(process.env.NEXT_PUBLIC_STRIPE_SECRET_KEY!, {
 type SubscriptionData = {
   startDate: string;
   endDate: string;
-  subscriptionStatus: string;
   titlePlan: string;
   status: string;
 };
 
 const WEBHOOK_SECRET = process.env.NEXT_STRIPE_WEBHOOK_SECRET!;
-
-// function handleError(error: unknown) {
-//   console.error("Error handling webhook event:", error);
-//   return new Response("Webhook processing error", { status: 400 });
-// }
-
-// function validateEmail(email: string): boolean {
-//   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-//   return emailRegex.test(email);
-// }
 
 function generateToken(length = 64): { token: string; expires: Date } {
   return {
@@ -63,9 +52,8 @@ async function handleSubscription(
   });
 
   const subscriptionData: SubscriptionData = {
-    startDate: startDate.toISOString(), // Convertir la date en chaîne JSON-compatible
+    startDate: startDate.toISOString(),
     endDate: endDateString,
-    subscriptionStatus: "active",
     titlePlan: session.metadata?.titlePlan || "",
     status: session.metadata?.status || "",
   };
@@ -108,7 +96,7 @@ async function handleProgram(
       status: "completed",
       customerId: session.customer ? String(session.customer) : "",
       userPurchaseData: {
-        create: userPurchaseData, 
+        create: userPurchaseData,
       },
       createdAt: new Date(),
     },
@@ -200,7 +188,9 @@ export async function POST(req: Request) {
           },
         );
 
-        const subscriptionId = session.subscription as string; // Récupération de l'ID de la souscription
+        const subscriptionId = session.subscription as string;
+
+        console.log("Session completed:", session.id);
 
         const email = session.customer_details?.email || "";
         const existingUser = await prisma.user.findUnique({
@@ -272,10 +262,6 @@ export async function POST(req: Request) {
               subscriptionId: subscription.id,
             },
           });
-
-          // const product = await stripe.products.retrieve(
-          //   subscription.plan.product,
-          // );
           const subscriptionData = {
             startDate: new Date(
               subscription.current_period_start * 1000,
@@ -315,17 +301,3 @@ export async function POST(req: Request) {
     return new Response("Internal server error", { status: 500 });
   }
 }
-
-// else if (event.type === "customer.subscription.updated") {
-//           // Logique pour la mise à jour de la souscription
-//           console.log("Subscription updated for user:", user.id);
-//           await prisma.purchase.updateMany({
-//             where: {
-//               userId: user.id,
-//               subscriptionId: subscription.id,
-//             },
-//             data: {
-//               subscriptionStatus: subscription.status,
-//             },
-//           });
-//         }
