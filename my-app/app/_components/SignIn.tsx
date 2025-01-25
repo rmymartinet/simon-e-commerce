@@ -23,7 +23,6 @@ function SignIn({ errorMessage }: { errorMessage?: string }) {
               "credentials",
               formData,
             );
-
             if (!result.success) {
               redirect(`/sign-in?error=${encodeURIComponent(result.message)}`);
             } else {

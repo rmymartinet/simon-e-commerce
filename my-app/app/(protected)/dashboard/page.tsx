@@ -7,7 +7,7 @@ import { prisma } from "@/app/_lib/prisma";
 export default async function Dashboard() {
   const session = await auth();
 
-  if (!session || !session.user) return redirect("/login");
+  if (!session || !session.user) return redirect("/sign-in");
 
   const userData = await prisma.user.findUnique({
     where: { email: session.user.email ?? undefined },
@@ -23,8 +23,6 @@ export default async function Dashboard() {
       },
     },
   });
-
-  console.log("USERDATA", userData);
 
   function formattedDate(date: Date | string | undefined) {
     return date ? new Date(date).toLocaleDateString("fr-FR") : undefined;
