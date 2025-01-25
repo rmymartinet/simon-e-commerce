@@ -1,59 +1,37 @@
-"use client";
-
-import { useEffect } from "react";
-import Footer from "./_components/Footer/Footer";
-import NavBar from "./_components/Nav/NavBar";
 import { AnimationProvider } from "./AnimationContext";
-import { usePathname } from "next/navigation";
-import "./globals.css";
 import { CartProvider } from "./context/CartContext";
 import { CheckoutProvider } from "./context/CheckoutContext";
-import useWindowWidth from "@/hooks/useWindowWidth";
-import MobileCart from "./_components/Cart/MobileCart";
-import SectionWrapper from "@/app/context/SessionWrapper";
+import { SessionProvider } from "next-auth/react";
+import ConditionalNav from "./_components/Nav/ConditionalNav";
+import "./globals.css";
+import Footer from "./_components/Footer/Footer";
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  useEffect(() => {
-    (async () => {
-      const LocomotiveScroll = (await import("locomotive-scroll")).default;
-      new LocomotiveScroll();
-    })();
-  }, []);
-
-  const pathname = usePathname();
-  const isDisplayNavBar =
-    !/^\/studio/.test(pathname) &&
-    pathname !== "/success" &&
-    pathname !== "/cancel";
-
-  const { width } = useWindowWidth();
+  // useEffect(() => {
+  //   (async () => {
+  //     const LocomotiveScroll = (await import("locomotive-scroll")).default;
+  //     new LocomotiveScroll();
+  //   })();
+  // }, []);
 
   return (
-    <SectionWrapper>
-      <html lang="en">
-        <body id="main-container" className="antialiased">
-          <CartProvider>
-            <CheckoutProvider>
-              <AnimationProvider>
-                <NavBar />
-                {/* {isDisplayNavBar ? (
-                width < 1024 ? (
-                  <MobileNav />
-                ) : (
-                  <NavBar />
-                )
-              ) : null} */}
-                {width < 1024 && <MobileCart />}
+    <SessionProvider>
+      <CartProvider>
+        <CheckoutProvider>
+          <AnimationProvider>
+            <html lang="en">
+              <body id="main-container" className="antialiased">
+                <ConditionalNav />
                 {children}
-                {isDisplayNavBar && <Footer />}
-              </AnimationProvider>
-            </CheckoutProvider>
-          </CartProvider>
-        </body>
-      </html>
-    </SectionWrapper>
+                <Footer />
+              </body>
+            </html>
+          </AnimationProvider>
+        </CheckoutProvider>
+      </CartProvider>
+    </SessionProvider>
   );
 }

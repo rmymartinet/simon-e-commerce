@@ -1,3 +1,5 @@
+"use client";
+
 import { CheckoutContextValue, CheckoutData } from "@/types/types";
 import { createContext, useContext, useState, ReactNode } from "react";
 

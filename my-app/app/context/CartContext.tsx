@@ -1,3 +1,5 @@
+"use client";
+
 import { CartContextProps, CartItemProps } from "@/types/types";
 import {
   ReactNode,
