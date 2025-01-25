@@ -1,18 +1,21 @@
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useCheckout } from "@/app/context/CheckoutContext";
-import Swal from "sweetalert2";
 import { CartItemProps, UserDataProps } from "@/types/types";
 import { useEffect, useState } from "react";
 import { usePayment } from "./usePayment";
+import Swal from "sweetalert2";
 
 export default function useHandleAction() {
   const [userData, setUserData] = useState<UserDataProps | null>(null);
+  const [loading, setLoading] = useState(true);
+
   const { handleCheckout } = usePayment({
     userData: userData || ({} as UserDataProps),
   });
+
   const { setCheckoutData } = useCheckout();
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
   const router = useRouter();
 
   useEffect(() => {
@@ -24,14 +27,24 @@ export default function useHandleAction() {
           setUserData(data);
         } catch (error) {
           console.error("Failed to fetch user data:", error);
+        } finally {
+          setLoading(false);
         }
       }
     };
 
     if (session?.user?.email) {
       fetchUserData();
+    } else {
+      setLoading(false);
     }
   }, [session?.user?.email]);
+
+  useEffect(() => {
+    if (status === "authenticated" && !session?.user?.email) {
+      router.refresh();
+    }
+  }, [status, session?.user?.email, router]);
 
   const handleAction = ({
     productData,
@@ -107,11 +120,11 @@ export default function useHandleAction() {
         break;
 
       case !session && filterName === "coaching":
-        router.push("/login");
+        router.push("/sign-in");
         break;
       case !session && filterName === "programmes":
         setCheckoutData({ productData: products[0], filterName });
-        router.push("/choose-auth");
+        router.push("/sign-in");
         break;
 
       default:
@@ -123,5 +136,5 @@ export default function useHandleAction() {
     }
   };
 
-  return { handleAction };
+  return { handleAction, loading };
 }

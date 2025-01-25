@@ -11,7 +11,7 @@ import Image from "next/image";
 
 const CardPrice = ({ productData, filterName }: CardPriceProps) => {
   const { width } = useWindowWidth();
-  const { handleAction } = useHandleAction();
+  const { handleAction, loading } = useHandleAction();
 
   return (
     <>
@@ -63,8 +63,9 @@ const CardPrice = ({ productData, filterName }: CardPriceProps) => {
                   filterName,
                 })
               }
+              disabled={loading}
             >
-              Acheter
+              {loading ? "  Chargement..." : "Acheter"}
             </button>
             {filterName === "programmes" && (
               <AddToCartButton productData={productData} />
