@@ -20,8 +20,6 @@ export const usePayment = ({ userData }: { userData?: UserDataProps } = {}) => {
     const priceIdsArray = Array.isArray(priceId) ? priceId : [priceId];
     const titlePlanArray = Array.isArray(titlePlan) ? titlePlan : [titlePlan];
 
-    
-
     try {
       const response = await fetch(`/api/payments/create-checkout-session`, {
         method: "POST",

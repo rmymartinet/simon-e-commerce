@@ -1,28 +1,26 @@
-import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useCheckout } from "@/app/context/CheckoutContext";
 import { CartItemProps, UserDataProps } from "@/types/types";
 import { useEffect, useState } from "react";
 import { usePayment } from "./usePayment";
 import Swal from "sweetalert2";
+import { Session } from "next-auth";
 
-export default function useHandleAction() {
+export default function useHandleAction(session: Session | null) {
   const [userData, setUserData] = useState<UserDataProps | null>(null);
   const [loading, setLoading] = useState(true);
-
+  const router = useRouter();
   const { handleCheckout } = usePayment({
     userData: userData || ({} as UserDataProps),
   });
-
   const { setCheckoutData } = useCheckout();
-  const { data: session, status } = useSession();
-  const router = useRouter();
 
   useEffect(() => {
     const fetchUserData = async () => {
       if (session?.user?.email) {
+        console.log("session?.user?.email", session?.user?.email);
         try {
-          const res = await fetch(`/api/auth/getUserEmail`);
+          const res = await fetch(`/api/auth/userData`);
           const data = await res.json();
           setUserData(data);
         } catch (error) {
@@ -38,13 +36,7 @@ export default function useHandleAction() {
     } else {
       setLoading(false);
     }
-  }, [session?.user?.email]);
-
-  useEffect(() => {
-    if (status === "authenticated" && !session?.user?.email) {
-      router.refresh();
-    }
-  }, [status, session?.user?.email, router]);
+  }, [session]);
 
   const handleAction = ({
     productData,
@@ -82,7 +74,6 @@ export default function useHandleAction() {
             true,
             false,
           );
-          console.log("products", products);
         } else if (process.env.NODE_ENV === "development") {
           console.error(
             `Le produit "${products[0].titlePlan}" n'a pas de priceId.`,

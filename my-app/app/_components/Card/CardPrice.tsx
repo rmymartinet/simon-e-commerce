@@ -9,9 +9,9 @@ import AddToCartButton from "../AddToCartButton";
 import useHandleAction from "@/hooks/useHandleAction";
 import Image from "next/image";
 
-const CardPrice = ({ productData, filterName }: CardPriceProps) => {
+const CardPrice = ({ productData, filterName, session }: CardPriceProps) => {
   const { width } = useWindowWidth();
-  const { handleAction, loading } = useHandleAction();
+  const { handleAction, loading } = useHandleAction(session);
 
   return (
     <>

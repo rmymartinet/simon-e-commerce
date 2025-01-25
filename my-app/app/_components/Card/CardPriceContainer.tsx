@@ -1,8 +1,15 @@
 import { coachingData, programData } from "@/app/data/cardPriceContainerData";
 import Stars from "../Stars";
 import CardPrice from "./CardPrice";
+import { Session } from "next-auth";
 
-const CardPriceContainer = ({ filterName }: { filterName: string }) => {
+const CardPriceContainer = ({
+  filterName,
+  session,
+}: {
+  filterName: string;
+  session: Session | null;
+}) => {
   return (
     <>
       {filterName === "programmes" && (
@@ -43,6 +50,7 @@ const CardPriceContainer = ({ filterName }: { filterName: string }) => {
               key={data.titlePlan}
               productData={data}
               filterName={filterName}
+              session={session}
             />
           ))}
         </div>
@@ -84,6 +92,7 @@ const CardPriceContainer = ({ filterName }: { filterName: string }) => {
               key={data.titlePlan}
               productData={data}
               filterName={filterName}
+              session={session}
             />
           ))}
         </div>

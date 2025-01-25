@@ -1,3 +1,5 @@
+import { Session } from "next-auth";
+
 export interface AddToCartButtonProps {
   productData: ProductDataProps;
 }
@@ -29,6 +31,8 @@ export interface BlogCardProps {
 export interface CardPriceProps {
   productData: ProductDataProps;
   filterName: string;
+
+  session: Session | null;
 }
 
 export interface CartContextProps {
