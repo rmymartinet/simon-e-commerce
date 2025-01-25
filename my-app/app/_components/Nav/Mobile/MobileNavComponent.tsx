@@ -15,7 +15,6 @@ import { IoPerson } from "react-icons/io5";
 import MobileCart from "../../Cart/MobileCart";
 import { usePathname } from "next/navigation";
 import useWindowWidth from "@/hooks/useWindowWidth";
-import { useCart } from "@/app/context/CartContext";
 import { Session } from "next-auth";
 
 gsap.registerPlugin(useGSAP);
@@ -31,7 +30,6 @@ const MobileNavComponent = ({ session }: { session: Session | null }) => {
 
   const pathname = usePathname();
   const { width } = useWindowWidth();
-  const { cart } = useCart();
 
   const isDisplayNavBar =
     !/^\/studio/.test(pathname) &&
@@ -110,7 +108,6 @@ const MobileNavComponent = ({ session }: { session: Session | null }) => {
   const handleClick = () => {
     setIsClicked((prev) => !prev);
   };
-  const lastLinkTitle = navLinks.length - 1;
 
   return (
     <>
