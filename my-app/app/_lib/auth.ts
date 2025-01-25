@@ -19,7 +19,10 @@ async function verifyPassword(plainPassword: string, hashedPassword: string) {
 }
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
-  session: { strategy: "jwt" },
+  session: {
+    strategy: "jwt",
+    maxAge: 2 * 60 * 60,
+  },
   adapter: PrismaAdapter(prisma),
   trustHost: true,
   providers: [
