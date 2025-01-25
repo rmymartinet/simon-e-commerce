@@ -4,7 +4,7 @@ import SignInForm from "../sign-in/page";
 
 export default function page() {
   return (
-    <div className="flex h-screen flex-col items-center justify-center justify-items-center gap-20 lg:grid lg:grid-cols-3 lg:px-[10vw]">
+    <div className="flex h-screen flex-col items-center justify-center justify-items-center gap-20 lg:grid lg:grid-cols-3">
       <div className="flex flex-col gap-6">
         <h1 className="text-center text-3xl">
           Connectez-vous pour régler vos achats plus rapidement.

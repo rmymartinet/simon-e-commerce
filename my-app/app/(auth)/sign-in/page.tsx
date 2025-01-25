@@ -15,8 +15,10 @@ export default async function SignInForm({
   const errorMessage = params?.error;
 
   return (
-    <RegisterCard>
-      <SignIn errorMessage={errorMessage} />
-    </RegisterCard>
+    <>
+      <RegisterCard>
+        <SignIn errorMessage={errorMessage} />
+      </RegisterCard>
+    </>
   );
 }
