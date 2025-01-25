@@ -14,6 +14,9 @@ import { AiFillTikTok } from "react-icons/ai";
 import { useCart } from "@/app/context/CartContext";
 import CartSideBar from "../../Cart/CartSideBar";
 import { Session } from "next-auth";
+import { usePathname } from "next/navigation";
+import useWindowWidth from "@/hooks/useWindowWidth";
+
 gsap.registerPlugin(useGSAP);
 
 const NavComponent = ({ session }: { session: Session | null }) => {
@@ -21,7 +24,13 @@ const NavComponent = ({ session }: { session: Session | null }) => {
   const navRef = useRef<HTMLDivElement | null>(null);
   const navLinksRef = useRef<(HTMLLIElement | null)[]>([]);
   const navRightRef = useRef<HTMLDivElement | null>(null);
+  const pathname = usePathname();
+  const { width } = useWindowWidth();
 
+  const isDisplayNavBar =
+    !/^\/studio/.test(pathname) &&
+    pathname !== "/success" &&
+    pathname !== "/cancel";
   const navLinks = [
     { title: "Home", link: "/" },
     { title: "Offres", link: "/pricing" },
@@ -85,76 +94,80 @@ const NavComponent = ({ session }: { session: Session | null }) => {
   ];
 
   return (
-    <nav>
-      <div
-        ref={navRef}
-        className={`padding program-button-container fixed left-1/2 top-5 z-[9999] flex -translate-x-1/2 items-center overflow-hidden rounded-button border border-[#3a3a3a] text-xl`}
-      >
-        <ul className="flex rounded-full">
-          {navLinks.map((link, index) => (
-            <li
-              key={index}
-              className={`relative cursor-pointer px-4 transition-all duration-200 ease-linear ${
-                hoveredIndex === index ? "scale-105" : ""
-              }`}
-              onMouseEnter={() => handleMouseEnter(index)}
-              onMouseLeave={handleMouseLeave}
-              ref={(el) => {
-                navLinksRef.current[index] = el;
-              }}
-            >
-              <Link href={link.link}>{link.title}</Link>
-            </li>
-          ))}
-        </ul>
-        <div className="flex gap-2">
-          <div className="ml-6 flex items-center gap-8">
-            <Link
-              href="/calorie"
-              className="bg-button bg-button-gradient text-base font-medium text-white"
-            >
-              Calories
-            </Link>
-          </div>
-        </div>
-      </div>
-      <CartSideBar />
-      <div
-        ref={navRightRef}
-        className={`padding program-button-container fixed right-5 top-5 z-[9999] flex items-center gap-6 rounded-button border border-[#3a3a3a] text-xl`}
-      >
-        <div className="flex items-center gap-8 rounded-full bg-[#eee]">
-          <Link
-            href={session ? `/dashboard` : "/sign-in"}
-            className="rounded-[0.675rem] bg-[#eee] px-[0.875rem] py-[0.625rem] text-base font-medium text-black"
+    <>
+      {isDisplayNavBar && width > 1024 && (
+        <nav>
+          <div
+            ref={navRef}
+            className={`padding program-button-container fixed left-1/2 top-5 z-[9999] flex -translate-x-1/2 items-center overflow-hidden rounded-button border border-[#3a3a3a] text-xl`}
           >
-            {session ? "Mon compte" : "Connexion"}
-          </Link>
-        </div>
-        <button
-          onClick={handleOpenCart}
-          className="z-50 grid place-content-center"
-        >
-          <FaCartShopping color="white" />
-        </button>
-      </div>
-      <div
-        className={`padding program-button-container fixed left-5 top-5 z-[9999] flex items-center gap-6 rounded-button border border-[#3a3a3a]`}
-      >
-        <div className="padding flex gap-6">
-          {socialIcons.map((icon, index) => (
-            <Link
-              href={icon.link}
-              key={index}
-              className="grid place-content-center"
-              title={icon.label}
+            <ul className="flex rounded-full">
+              {navLinks.map((link, index) => (
+                <li
+                  key={index}
+                  className={`relative cursor-pointer px-4 transition-all duration-200 ease-linear ${
+                    hoveredIndex === index ? "scale-105" : ""
+                  }`}
+                  onMouseEnter={() => handleMouseEnter(index)}
+                  onMouseLeave={handleMouseLeave}
+                  ref={(el) => {
+                    navLinksRef.current[index] = el;
+                  }}
+                >
+                  <Link href={link.link}>{link.title}</Link>
+                </li>
+              ))}
+            </ul>
+            <div className="flex gap-2">
+              <div className="ml-6 flex items-center gap-8">
+                <Link
+                  href="/calorie"
+                  className="bg-button bg-button-gradient text-base font-medium text-white"
+                >
+                  Calories
+                </Link>
+              </div>
+            </div>
+          </div>
+          <CartSideBar />
+          <div
+            ref={navRightRef}
+            className={`padding program-button-container fixed right-5 top-5 z-[9999] flex items-center gap-6 rounded-button border border-[#3a3a3a] text-xl`}
+          >
+            <div className="flex items-center gap-8 rounded-full bg-[#eee]">
+              <Link
+                href={session ? `/dashboard` : "/sign-in"}
+                className="rounded-[0.675rem] bg-[#eee] px-[0.875rem] py-[0.625rem] text-base font-medium text-black"
+              >
+                {session ? "Mon compte" : "Connexion"}
+              </Link>
+            </div>
+            <button
+              onClick={handleOpenCart}
+              className="z-50 grid place-content-center"
             >
-              {icon.icon}
-            </Link>
-          ))}
-        </div>
-      </div>
-    </nav>
+              <FaCartShopping color="white" />
+            </button>
+          </div>
+          <div
+            className={`padding program-button-container fixed left-5 top-5 z-[9999] flex items-center gap-6 rounded-button border border-[#3a3a3a]`}
+          >
+            <div className="padding flex gap-6">
+              {socialIcons.map((icon, index) => (
+                <Link
+                  href={icon.link}
+                  key={index}
+                  className="grid place-content-center"
+                  title={icon.label}
+                >
+                  {icon.icon}
+                </Link>
+              ))}
+            </div>
+          </div>
+        </nav>
+      )}
+    </>
   );
 };
 
