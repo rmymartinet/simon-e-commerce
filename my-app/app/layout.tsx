@@ -3,8 +3,8 @@ import { CartProvider } from "./context/CartContext";
 import { CheckoutProvider } from "./context/CheckoutContext";
 import { SessionProvider } from "next-auth/react";
 import ConditionalNav from "./_components/Nav/ConditionalNav";
-import "./globals.css";
 import Footer from "./_components/Footer/Footer";
+import "./globals.css";
 export default function RootLayout({
   children,
 }: Readonly<{

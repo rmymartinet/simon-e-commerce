@@ -27,6 +27,7 @@ const MobileNavComponent = ({ session }: { session: Session | null }) => {
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
   const settingsPanelRef = useRef<HTMLDivElement | null>(null);
   const socialIconRefs = useRef<(HTMLAnchorElement | null)[]>([]);
+  const navActionRef = useRef<HTMLButtonElement | null>(null);
 
   const pathname = usePathname();
   const { width } = useWindowWidth();
@@ -68,7 +69,7 @@ const MobileNavComponent = ({ session }: { session: Session | null }) => {
   ];
 
   useEffect(() => {
-    gsap.set(navRef.current, { xPercent: -100 });
+    gsap.set(navActionRef.current, { opacity: 0 });
     gsap.set(socialIconRefs.current, { y: 100 });
   }, []);
 
@@ -78,6 +79,12 @@ const MobileNavComponent = ({ session }: { session: Session | null }) => {
       duration: 1,
       ease: "power2.out",
     });
+
+    gsap.to(navActionRef.current, {
+      opacity: 1,
+      duration: 0.5,
+    });
+
     gsap.to(navLinksRef.current, {
       x: isClicked ? 0 : -100,
       duration: 0.5,
@@ -112,10 +119,11 @@ const MobileNavComponent = ({ session }: { session: Session | null }) => {
   return (
     <>
       {isDisplayNavBar && width <= 1024 && (
-        <section>
+        <>
           <button
+            ref={navActionRef}
             onClick={handleClick}
-            className="fixed left-5 top-10 z-[9999999] flex flex-col gap-2"
+            className="fixed left-5 top-10 z-[9999999] flex flex-col gap-2 opacity-0"
           >
             {!isClicked ? (
               <>
@@ -128,7 +136,7 @@ const MobileNavComponent = ({ session }: { session: Session | null }) => {
           </button>
           <nav
             ref={navRef}
-            className="fixed inset-0 z-[999999] flex h-screen w-screen flex-col bg-black px-10 text-white"
+            className="fixed inset-0 z-[999999] flex h-[100dvh] w-screen -translate-x-[100%] flex-col bg-black px-10 text-white"
           >
             <div className="flex h-full flex-col items-center justify-center py-4">
               <div
@@ -198,7 +206,7 @@ const MobileNavComponent = ({ session }: { session: Session | null }) => {
               </div>
             </div>
           </nav>
-        </section>
+        </>
       )}
     </>
   );
