@@ -32,7 +32,6 @@ export default function Home() {
       <CoachingNutrition />
       <NutritionGrid />
       <BeforeAfterPhoto />
-      <AvailableOfferContainer />
     </section>
   );
 }
