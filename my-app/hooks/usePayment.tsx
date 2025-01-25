@@ -2,11 +2,10 @@ import { UserDataProps } from "@/types/types";
 import { loadStripe } from "@stripe/stripe-js";
 import { useState } from "react";
 
-export const usePayment = ({ userData }: { userData: UserDataProps }) => {
+export const usePayment = ({ userData }: { userData?: UserDataProps } = {}) => {
   const stripePromise = loadStripe(
     process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!,
   );
-
   const [error, setError] = useState<string | null>(null);
 
   const handleCheckout = async (
@@ -21,6 +20,8 @@ export const usePayment = ({ userData }: { userData: UserDataProps }) => {
     const priceIdsArray = Array.isArray(priceId) ? priceId : [priceId];
     const titlePlanArray = Array.isArray(titlePlan) ? titlePlan : [titlePlan];
 
+    
+
     try {
       const response = await fetch(`/api/payments/create-checkout-session`, {
         method: "POST",
@@ -28,13 +29,13 @@ export const usePayment = ({ userData }: { userData: UserDataProps }) => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          userId: userData?.id,
+          userId: userData?.id || undefined,
           priceId: priceIdsArray,
           subscription,
           guest,
           month,
           titlePlan: titlePlanArray,
-          email: userData?.email,
+          email: userData?.email || undefined,
         }),
       });
 
