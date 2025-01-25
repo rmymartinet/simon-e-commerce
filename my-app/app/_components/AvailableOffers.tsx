@@ -44,7 +44,7 @@ const AvailableOffers = ({
       ></div>
       <div className="flex justify-between gap-10">
         <h1 className="text-4xl font-medium">{title}</h1>
-        <span className="flex w-max items-center justify-center rounded-full px-4 py-2 shadow-inner">
+        <span className="flex w-max items-center justify-center rounded-full px-4 py-2 text-violet-400 shadow-inner">
           {follow}
         </span>
       </div>
