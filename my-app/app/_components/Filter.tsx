@@ -29,20 +29,20 @@ const Filter = ({ filterName, setFilterName }: FilterProps) => {
   }, [filterName]);
 
   return (
-    <div className="card relative overflow-hidden rounded-full p-2">
-      <div className="relative grid grid-cols-2 justify-items-center gap-10 p-4">
+    <div className="relative overflow-hidden rounded-full bg-[#151414]">
+      <div className="relative grid grid-cols-2 justify-items-center gap-10 px-4 py-2">
         <div
           ref={bgFilterRef}
-          className="absolute z-10 h-full w-1/2 rounded-full bg-button-gradient"
+          className="absolute z-10 h-full w-1/2 rounded-full bg-white"
         ></div>
         <button
-          className={`z-[99] cursor-pointer ${filterName === "programmes" ? "font-bold text-white" : "text-subtle font-medium"}`}
+          className={`z-[99] cursor-pointer ${filterName === "programmes" ? "text-black" : "text-white"} text-lg font-semibold`}
           onClick={() => setFilterName("programmes")}
         >
           Programmes
         </button>
         <button
-          className={`z-[99] cursor-pointer ${filterName === "coaching" ? "font-bold text-white" : "text-subtle font-medium"}`}
+          className={`z-[99] cursor-pointer ${filterName === "coaching" ? "text-black" : "text-white"} text-lg font-semibold`}
           onClick={() => setFilterName("coaching")}
         >
           Coaching
