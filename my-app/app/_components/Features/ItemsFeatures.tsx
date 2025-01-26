@@ -16,13 +16,10 @@ const ItemsFeatures = ({ logo, title, paragraph }: ItemsFeaturesProps) => {
   }, []);
 
   return (
-    <div
-      ref={containerRef}
-      className="flex w-max flex-col items-center gap-4 rounded-lg border-card px-20 lg:items-start lg:p-8"
-    >
-      <div>{logo}</div>
+    <div ref={containerRef} className="flex flex-col items-center gap-4 px-4">
+      <div className="rounded-full border-2 p-8">{logo}</div>
       <h2 className="text-2xl">{title}</h2>
-      <p className="text-textOpacity w-full text-pretty text-center lg:w-[24vw] lg:text-start">
+      <p className="max-w-lg whitespace-normal text-pretty break-words text-center">
         {paragraph}
       </p>
     </div>

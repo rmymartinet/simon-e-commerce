@@ -21,37 +21,37 @@ export const featuresProgram = [
     logo: <FaPersonCirclePlus size={35} />,
     title: "Auto-coaching",
     description:
-      "Apprends les bases du fitness avec des conseils clairs pour devenir autonome. Progresser et te débrouiller seul n’aura jamais été aussi simple.",
+      "Apprends les bases du fitness pour devenir autonome et progresser facilement.",
   },
   {
     logo: <TbArrowFork size={35} />,
     title: "Exercices Alternatifs",
     description:
-      "Des alternatives sont proposées pour éviter la monotonie et s'adapter aux besoins ou inconforts spécifiques, garantissant une progression continue et flexible.",
+      "Des alternatives pour éviter la monotonie et adapter tes entraînements à tes besoins.",
   },
   {
     logo: <FaScaleBalanced size={35} />,
     title: "Mode de Vie de Récupération",
     description:
-      "Optimise ta récupération grâce à des conseils sur l'hydratation, le sommeil et la gestion du stress pour maximiser les gains musculaires et éviter les blessures.",
+      "Optimise ta récupération avec des conseils sur l'hydratation, le sommeil et la gestion du stress.",
   },
   {
     logo: <GiProgression size={35} />,
     title: "Surcharge Progressive",
     description:
-      "Apprends à augmenter les charges de manière contrôlée pour développer efficacement tes muscles et ta force, en suivant une méthode structurée de progression.",
+      "Augmente les charges progressivement pour développer muscles et force efficacement.",
   },
   {
     logo: <GiShadowFollower size={35} />,
     title: "Suivi de l’Intensité",
     description:
-      "Ajuste l'intensité de tes entraînements en fonction de tes progrès, pour maximiser tes résultats tout en évitant le surentraînement.",
+      "Ajuste l'intensité de tes entraînements pour maximiser les résultats sans risquer le surentraînement.",
   },
   {
     logo: <MdOutlineTimer size={35} />,
     title: "Durée du Programme et Deloads",
     description:
-      "Comprends la structure du programme avec des phases de progression et de deload pour permettre à ton corps de se régénérer et éviter le surentraînement.",
+      "Structure du programme avec des phases de progression et de récupération pour éviter le surentraînement.",
   },
 ];
 
@@ -60,42 +60,42 @@ export const featuresCoaching = [
     logo: <IoMdBook size={35} />,
     title: "Programme d'entraînement sur-mesure",
     description:
-      "Profite d'un programme 100% adapté à ton objectif et à ton niveau. Nous prenons en compte tes besoins pour t'aider à progresser rapidement, sans risque de blessure.",
+      "Un programme 100% adapté à ton niveau et objectif pour progresser rapidement et en toute sécurité.",
   },
   {
     logo: <GiStairsGoal size={35} />,
     title: "Objectifs adaptés à votre niveau",
     description:
-      "Que tu sois débutant ou plus expérimenté, chaque programme est conçu pour te pousser à ton maximum, avec des objectifs réalistes et atteignables pour chaque étape de ta progression.",
+      "Des objectifs réalistes pour chaque étape de ta progression, que tu sois débutant ou avancé.",
   },
   {
     logo: <GiWeightLiftingUp size={35} />,
     title: "Suivi personnalisé",
     description:
-      "Bénéficie d'un suivi régulier et d'une analyse de tes performances pour t'assurer que tu restes sur la bonne voie et atteignes tes objectifs plus rapidement.",
+      "Un suivi régulier pour t'assurer de rester sur la bonne voie et atteindre tes objectifs plus vite.",
   },
   {
     logo: <FaBowlFood size={35} />,
     title: "Suivi nutritionnel",
     description:
-      "Recevoir des conseils nutritionnels sur-mesure pour maximiser tes performances et tes résultats. Une alimentation adaptée à tes entraînements pour une progression optimale.",
+      "Des conseils nutritionnels sur-mesure pour optimiser tes performances et résultats.",
   },
   {
     logo: <RiYoutubeFill size={35} />,
     title: "Vidéos de démonstration incluses",
     description:
-      "Des vidéos claires et détaillées pour t'aider à maîtriser chaque mouvement avec une technique irréprochable, tout en suivant ton propre rythme.",
+      "Des vidéos claires pour maîtriser chaque mouvement avec une technique parfaite à ton rythme.",
   },
   {
     logo: <GiNotebook size={35} />,
     title: "Fiches techniques des exercices",
     description:
-      "Accède à des fiches pratiques et précises pour comprendre chaque exercice en profondeur, t'assurer d'une exécution parfaite et éviter les erreurs.",
+      "Accède à des fiches pratiques pour exécuter chaque exercice de manière optimale.",
   },
   {
     logo: <GrGroup size={35} />,
     title: "Accès à la communauté privée",
     description:
-      "Rejoins une communauté de personnes motivées qui partagent leurs expériences, leurs astuces et s'entraident dans leurs parcours de remise en forme.",
+      "Rejoins une communauté motivée pour partager astuces, conseils et soutien dans ta transformation.",
   },
 ];
