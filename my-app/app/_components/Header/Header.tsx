@@ -1,7 +1,6 @@
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { useRef } from "react";
-import ColorShadowButton from "../ColorShadowButton";
 import useWindowWidth from "@/hooks/useWindowWidth";
 
 gsap.registerPlugin(useGSAP);
@@ -55,11 +54,22 @@ const Header = () => {
         ref={headerRef}
         className="absolute bottom-0 z-50 w-[100%] bg-gradient-to-t from-[#0b0d14] via-[#0b0d14]/60 to-black/0"
       ></div>
-      <div className="absolute left-1/2 top-1/2 z-50 flex w-full -translate-x-1/2 -translate-y-1/2 flex-col items-center rounded-xl">
-        <h1 className="text-center text-4xl font-bold uppercase md:text-5xl">
-          Sm coaching programme & coaching
-        </h1>
-        <ColorShadowButton title="Commencer maintenant" color="#c4b5fd" />
+      <div className="absolute bottom-0 left-4 z-50 flex w-full flex-col gap-6 rounded-xl md:bottom-4 md:flex-row md:items-center">
+        <div className="overflow-hidden">
+          <h1 className="w-full truncate text-4xl uppercase md:text-8xl">
+            Votre Coach
+          </h1>
+          <span className="block w-full truncate text-2xl md:text-6xl">
+            Coaching | Programmes
+          </span>
+        </div>
+        <p className="max-w-96">
+          Atteignez vos objectifs à votre rythme. Optez pour un{" "}
+          <strong>programme personnalisé</strong> si vous souhaitez progresser
+          en autonomie, ou choisissez un <strong>coaching sur-mesure</strong>{" "}
+          pour un accompagnement adapté à vos besoins. Vous avez le choix, vos
+          résultats sont la priorité.
+        </p>
       </div>
       <div className="absolute bottom-20 right-20 z-40 flex flex-col">
         <p className="text-pretty text-2xl font-bold uppercase">2025</p>
