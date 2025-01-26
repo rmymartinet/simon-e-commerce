@@ -15,23 +15,21 @@ function PrincingComponents({ session }: { session: Session | null }) {
 
   return (
     <>
-      <div className="flex flex-col items-center justify-center gap-20">
-        <div className="mb-10 flex flex-col items-center gap-4">
-          <h1 className="md:text-title text-center text-5xl font-bold">
-            Des solutions conçues pour vous
-          </h1>
-          <p className="text-center text-lg font-medium text-subtle md:text-start">
-            Choisissez entre nos programmes en autonomie ou notre suivi
-            personnalisé
-          </p>
+      <div className="flex w-full flex-col items-center justify-center gap-20">
+        <div className="mb-10 flex flex-col self-start">
+          <h1 className="mb-20 text-4xl lg:text-[8vw]">Tarifs simples</h1>
+          <h1 className="mb-20 text-4xl lg:text-[8vw]">Conçus pour vous.</h1>
+          {/* <p className="mt-4 text-center text-xl font-medium md:text-start">
+            Programme sans suivi. Coaching avec suivi.
+          </p> */}
         </div>
         <Filter filterName={filterName} setFilterName={setFilterName} />
         <CardPriceContainer filterName={filterName} session={session} />
       </div>
       {filterName === "programmes" && (
         <FeaturesContainer
-          title="Bonus inclus dans tous nos programmes"
-          text="sans suivi"
+          title="Avantages supplémentaires"
+          text="Progresse en toute autonomie grâce à un guide personnalisé qui s’adapte à tes objectifs. Suis un programme sur-mesure et évolue à ton rythme."
           coaching={false}
         >
           {featuresProgram.map((item, index) => (
@@ -46,8 +44,8 @@ function PrincingComponents({ session }: { session: Session | null }) {
       )}
       {filterName === "coaching" && (
         <FeaturesContainer
-          title="Bonus inclus dans tous nos coachings"
-          text="avec suivi"
+          title="Accès Premium"
+          text="Débloquez un potentiel illimité avec notre abonnement. Un accompagnement personnalisé et des résultats durables, à chaque étape."
           coaching={true}
         >
           {featuresCoaching.map((item, index) => (
