@@ -1,6 +1,6 @@
 export const data = [
   {
-    title: "Répartitissez vos aliments",
+    title: "Répartitissez",
     description: (
       <>
         Que ce soit pour{" "}
@@ -17,7 +17,7 @@ export const data = [
     ),
   },
   {
-    title: "Composez vos repas comme un expert",
+    title: "Composez",
     description: (
       <>
         Apprenez à sélectionner les bons aliments pour équilibrer vos
@@ -34,7 +34,7 @@ export const data = [
     ),
   },
   {
-    title: "Des menus savoureux et adaptés à vos objectifs",
+    title: "Adaptez",
     description: (
       <>
         Choisissez des recettes savoureuses qui respectent vos{" "}

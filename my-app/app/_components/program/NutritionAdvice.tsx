@@ -1,65 +1,139 @@
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { useRef } from "react";
 import ColorShadowButton from "../ColorShadowButton";
 import { data } from "@/app/data/nutritionAdviceData";
+import { useRef } from "react";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
 const NutritionAdvice = () => {
-  const numsRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const lineRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const titleRefs = useRef<(HTMLHeadingElement | null)[]>([]);
+  const textRefs = useRef<(HTMLParagraphElement | null)[]>([]);
+  const pinRef = useRef<HTMLSpanElement | null>(null);
+  const contentRef = useRef<HTMLDivElement | null>(null);
 
   useGSAP(() => {
-    numsRefs.current.forEach((num) => {
-      gsap.to(num, {
-        scrollTrigger: {
-          trigger: num,
-          start: "top 80%",
-          end: "bottom 80%",
-          scrub: 1,
-          once: false,
-        },
-        scale: 1.4,
+    lineRefs.current.forEach((el) => {
+      gsap.to(el, {
+        width: "100%",
         duration: 1,
-        border: "1px solid violet",
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: el,
+          start: "top bottom",
+          end: "bottom top",
+          once: true,
+        },
       });
     });
+
+    gsap.set(titleRefs.current, { y: 100 });
+
+    titleRefs.current.forEach((el) => {
+      ScrollTrigger.create({
+        trigger: el,
+        start: "top bottom",
+        onEnter: () => {
+          gsap.fromTo(
+            el,
+            { y: 100 },
+            {
+              duration: 1,
+              y: 0,
+              ease: "power2.out",
+            },
+          );
+        },
+        once: true,
+      });
+    });
+
+    textRefs.current.forEach((el) => {
+      ScrollTrigger.create({
+        trigger: el,
+        start: "top bottom",
+        onEnter: () => {
+          gsap.to(el, {
+            delay: 0.5,
+            duration: 1,
+            opacity: 1,
+            ease: "power2.out",
+          });
+        },
+        once: true,
+      });
+    });
+
+    // if (pinRef.current && contentRef.current) {
+    //   gsap.to(pinRef.current, {
+    //     scrollTrigger: {
+    //       trigger: contentRef.current,
+    //       start: "top 40px",
+    //       end: "bottom top",
+    //       pin: pinRef.current,
+    //       scrub: 0.5,
+    //     },
+    //   });
+    // }
   }, []);
 
   return (
-    <div className="mt-[20vh] flex w-screen flex-col items-center gap-20">
-      <div className="mb-20 flex flex-col items-center px-4 text-center md:mb-[10vh]">
-        <h1 className="text-xl font-bold lg:text-3xl">
-          Une nutrition adaptée pour des résultats durables
-        </h1>
-        <p className="font-medium text-subtle md:text-lg">
-          Manger intelligemment, c’est 50% du chemin vers vos objectifs
+    <div className="mt-[20vh] flex flex-col gap-20 px-4">
+      <div className="mb-10 flex flex-col md:mb-40">
+        <p className="max-w-5xl text-pretty break-words text-3xl lg:text-7xl">
+          Des conseils sur-mesure pour équilibrer vos repas et atteindre vos
+          objectifs durablement
         </p>
         <ColorShadowButton title="Voir les offres" color="#f690ff" />
       </div>
-      <div className="relative flex flex-col items-center gap-20">
-        {data.map((item, index) => (
-          <div
-            className="flex flex-col-reverse items-center gap-20 px-2 lg:grid lg:grid-cols-2 lg:px-40"
-            key={index}
-          >
-            <div className="flex flex-col gap-2 text-center lg:text-start">
-              <h1 className="text-2xl font-bold">{item.title}</h1>
-              <p className="text-pretty break-words text-lg text-muted">
-                {item.description}
-              </p>
-            </div>
-            <div
-              ref={(el) => {
-                numsRefs.current[index] = el;
-              }}
-              className="grid h-10 w-10 place-content-center justify-self-end rounded-full border-card p-6"
-            >
-              <strong>{index + 1} </strong>
-            </div>
-          </div>
-        ))}
+      <div
+        ref={contentRef}
+        className="flex flex-col gap-20 lg:grid lg:grid-cols-2"
+      >
+        <span ref={pinRef} className="max-w-lg md:font-medium lg:text-3xl">
+          Bien manger, c’est 70 % de vos objectifs atteints.
+        </span>
+        <div className="flex flex-col gap-14">
+          {data.map((item, index) => (
+            <>
+              <div className="h-[2px] bg-[#27262a]">
+                <div
+                  ref={(el) => {
+                    lineRefs.current[index] = el;
+                  }}
+                  className="h-full w-0 bg-muted"
+                ></div>
+              </div>
+              <div key={index} className="flex justify-between lg:mb-36">
+                <div className="flex flex-col gap-8">
+                  <div className="overflow-hidden">
+                    <h1
+                      ref={(el) => {
+                        titleRefs.current[index] = el;
+                      }}
+                      className="text-4xl lg:text-7xl"
+                    >
+                      {item.title}
+                    </h1>
+                  </div>
+                  <p
+                    ref={(el) => {
+                      textRefs.current[index] = el;
+                    }}
+                    className="md:text-md text-pretty break-words text-sm text-muted opacity-0 lg:text-lg"
+                  >
+                    {item.description}
+                  </p>
+                </div>
+                <span className="text-3xl text-muted lg:text-5xl">
+                  0{index + 1}
+                </span>
+              </div>
+            </>
+          ))}
+        </div>
       </div>
     </div>
   );

@@ -12,7 +12,7 @@ const config: Config = {
         background: "var(--background)",
         foreground: "var(--foreground)",
         subtle: "#6e7681",
-        muted: "#8b949e",
+        muted: "#8b8b8b",
         card: "#000000cf",
       },
       gridTemplateColumns: {
