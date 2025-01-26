@@ -1,117 +1,58 @@
-import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
-import { useRef, useState } from "react";
-import { FaArrowDown } from "react-icons/fa6";
+import { useEffect, useRef, useState } from "react";
+import { IoAdd } from "react-icons/io5";
 
-gsap.registerPlugin(useGSAP);
-
-const Accordion = ({ title, text }: { title: string; text: string }) => {
-  const [isOpen, setIsOpen] = useState(false);
-  const [isHover, setIsHover] = useState(false);
-  const textRef = useRef(null);
+const Accordion = ({
+  index,
+  title,
+  text,
+}: {
+  index: number;
+  title: string;
+  text: string;
+}) => {
+  const accordionRef = useRef(null);
+  const [isClicked, setIsClicked] = useState(false);
   const iconRef = useRef(null);
-  const titleRef = useRef(null);
-  const bgRef = useRef(null);
 
-  const handleClick = () => {
-    setIsOpen(!isOpen);
+  const handleIsClicked = () => {
+    setIsClicked(!isClicked);
   };
+  useEffect(() => {
+    gsap.to(accordionRef.current, {
+      height: isClicked ? "auto" : 0,
+      opacity: isClicked ? 1 : 0,
+      duration: 0.7,
+      ease: "power3.inOut",
+    });
 
-  useGSAP(() => {
-    if (isOpen) {
-      gsap.to(textRef.current, {
-        height: "auto",
-        opacity: 1,
-        duration: 0.7,
-        ease: "power3.inOut",
-      });
-      gsap.to(iconRef.current, {
-        backgroundColor: "black",
-        scale: 1.2,
-        duration: 0.7,
-        ease: "power3.inOut",
-      });
-      gsap.to(titleRef.current, {
-        color: "#9D4EDD",
-        duration: 0.7,
-        ease: "power3.inOut",
-      });
-    } else {
-      gsap.to(textRef.current, {
-        height: 0,
-        opacity: 0,
-        duration: 0.7,
-        ease: "power3.inOut",
-      });
-
-      gsap.to(titleRef.current, {
-        color: "#eee",
-        duration: 0.7,
-        ease: "power3.inOut",
-      });
-    }
-  }, [isOpen]);
-
-  useGSAP(() => {
-    if (isHover) {
-      gsap.to(bgRef.current, {
-        width: "20%",
-        duration: 0.5,
-        ease: "power3.inOut",
-      });
-      gsap.to(iconRef.current, {
-        backgroundColor: "black",
-        border: "1px solid black",
-        scale: 1.1,
-        duration: 0.5,
-        ease: "power3.inOut",
-      });
-    } else {
-      gsap.to(bgRef.current, {
-        width: 0,
-        duration: 0.5,
-        ease: "power3.inOut",
-      });
-      gsap.to(iconRef.current, {
-        border: "1px solid #424242",
-        backgroundColor: "",
-        scale: 1,
-        duration: 0.5,
-        ease: "power3.inOut",
-      });
-    }
-  }, [isHover]);
+    gsap.to(iconRef.current, {
+      rotate: isClicked ? 90 : 0,
+      duration: 0.7,
+      ease: "power3.inOut",
+    });
+  }, [isClicked]);
 
   return (
-    <div
-      className="program-button-container relative cursor-pointer overflow-hidden rounded-xl border border-[#424242] p-4"
-      onClick={handleClick}
-      onMouseEnter={() => setIsHover(true)}
-      onMouseLeave={() => setIsHover(false)}
-    >
-      {isHover && (
-        <div
-          ref={bgRef}
-          className="fixed-bg-purple absolute bottom-0 right-0 -z-10 h-full w-0"
-        ></div>
-      )}
-
-      <div className="flex flex-col gap-4">
-        <div className="flex items-center justify-between gap-16 md:gap-40">
-          <h1 ref={titleRef} className="text-base font-bold md:text-xl">
-            {title}
-          </h1>
-          <div ref={iconRef} className="cursor-pointer rounded-md p-2">
-            <FaArrowDown size={22} color="#424242" />
+    <>
+      <div
+        onClick={handleIsClicked}
+        className="flex w-full cursor-pointer flex-col items-center gap-6 overflow-hidden rounded-3xl py-6"
+      >
+        <div className="grid-cols-coachingNutrition grid w-full items-center justify-between gap-10">
+          <span className="text-3xl lg:text-xl">0{index + 1}</span>
+          <h1 className="text-2xl lg:text-4xl">{title}</h1>
+          <div ref={iconRef} className="rounded-full border border-muted">
+            <IoAdd className="text-2xl text-slate-700" />
           </div>
         </div>
-        <div
-          ref={textRef}
-          className="h-0 overflow-hidden text-pretty opacity-0 md:w-[70%]"
+        <p
+          ref={accordionRef}
+          className="h-0 max-w-[38vw] text-2xl opacity-0"
           dangerouslySetInnerHTML={{ __html: text }}
-        />
+        ></p>
       </div>
-    </div>
+    </>
   );
 };
 
