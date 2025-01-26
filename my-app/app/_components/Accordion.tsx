@@ -6,10 +6,12 @@ const Accordion = ({
   index,
   title,
   text,
+  logoColor = "text-slate-700",
 }: {
   index: number;
   title: string;
   text: string;
+  logoColor?: string;
 }) => {
   const accordionRef = useRef(null);
   const [isClicked, setIsClicked] = useState(false);
@@ -42,13 +44,13 @@ const Accordion = ({
         <div className="grid-cols-coachingNutrition grid w-full items-center justify-between gap-10">
           <span className="text-3xl lg:text-xl">0{index + 1}</span>
           <h1 className="text-2xl lg:text-4xl">{title}</h1>
-          <div ref={iconRef} className="rounded-full border border-muted">
-            <IoAdd className="text-2xl text-slate-700" />
+          <div ref={iconRef} className="rounded-full border border-muted p-2">
+            <IoAdd className={`text-2xl ${logoColor}`} />
           </div>
         </div>
         <p
           ref={accordionRef}
-          className="h-0 max-w-[38vw] text-2xl opacity-0"
+          className="h-0 text-2xl opacity-0"
           dangerouslySetInnerHTML={{ __html: text }}
         ></p>
       </div>
