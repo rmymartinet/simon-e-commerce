@@ -14,11 +14,13 @@ const config: Config = {
         subtle: "#6e7681",
         muted: "#8b8b8b",
         card: "#000000cf",
+        light: "#E0E0E0",
       },
       gridTemplateColumns: {
         custom: "20vw minmax(20vw, 1fr) minmax(20vw, 1fr)",
         blogCustom: "2fr 1fr",
         connexionModal: "1fr max-content 1fr",
+        coachingNutrition: "max-content 1fr max-content",
       },
       gridTemplateRows: {
         cardPrice: "120px max-content max-content",
