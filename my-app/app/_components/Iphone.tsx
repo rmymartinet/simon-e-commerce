@@ -35,7 +35,7 @@ const Iphone = ({
             />
           )}
           {video && (
-            <div className="absolute inset-0 left-1/2 top-1/2 -z-10 flex w-[87%] -translate-x-1/2 -translate-y-1/2 items-center justify-center lg:h-[95%] lg:w-[88%]">
+            <div className="absolute inset-0 left-1/2 top-1/2 -z-10 flex h-[80%] w-[87%] -translate-x-1/2 -translate-y-1/2 items-center justify-center lg:h-[95%] lg:w-[88%]">
               <video
                 autoPlay
                 playsInline
