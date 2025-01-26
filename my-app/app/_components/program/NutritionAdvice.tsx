@@ -97,7 +97,7 @@ const NutritionAdvice = () => {
         </span>
         <div className="flex flex-col gap-14">
           {data.map((item, index) => (
-            <>
+            <div key={index}>
               <div className="h-[2px] bg-[#27262a]">
                 <div
                   ref={(el) => {
@@ -106,7 +106,7 @@ const NutritionAdvice = () => {
                   className="h-full w-0 bg-muted"
                 ></div>
               </div>
-              <div key={index} className="flex justify-between lg:mb-36">
+              <div key={index} className="flex justify-between pt-6 lg:mb-36">
                 <div className="flex flex-col gap-8">
                   <div className="overflow-hidden">
                     <h1
@@ -131,7 +131,7 @@ const NutritionAdvice = () => {
                   0{index + 1}
                 </span>
               </div>
-            </>
+            </div>
           ))}
         </div>
       </div>
