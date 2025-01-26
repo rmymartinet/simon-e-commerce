@@ -1,19 +1,9 @@
-import Image from "next/image";
 import { faqCoachingData, faqProgramData } from "../data/faqData";
 import Accordion from "./Accordion";
 
 const Faq = ({ filterName }: { filterName: string }) => {
   return (
-    <section className="relative self-center lg:w-[70%]">
-      <div className="absolute right-0 top-[20%] -z-10 h-[60%] w-[90%] translate-x-1/2">
-        <Image
-          src="/images/wallpaper/cube_mono.jpeg"
-          alt=""
-          width={2000}
-          height={2000}
-          className="h-max w-max object-contain"
-        />
-      </div>
+    <section className="relative self-center">
       <div className="mb-20 flex flex-col items-center justify-center">
         <h1 className="text-7xl font-bold">Faq</h1>
         <p className="text-textOpacity text-lg font-semibold">
@@ -24,20 +14,28 @@ const Faq = ({ filterName }: { filterName: string }) => {
         {filterName === "programmes"
           ? faqProgramData.map(
               (item: { question: string; answer: string }, index: number) => (
-                <Accordion
-                  key={index}
-                  title={item.question}
-                  text={item.answer}
-                />
+                <div key={index}>
+                  <Accordion
+                    index={index}
+                    title={item.question}
+                    text={item.answer}
+                    logoColor="text-white"
+                  />
+                  <div className="h-[1px] w-full bg-muted"></div>
+                </div>
               ),
             )
           : faqCoachingData.map(
               (item: { question: string; answer: string }, index: number) => (
-                <Accordion
-                  key={index}
-                  title={item.question}
-                  text={item.answer}
-                />
+                <div key={index}>
+                  <Accordion
+                    index={index}
+                    title={item.question}
+                    text={item.answer}
+                    logoColor="text-white"
+                  />
+                  <div className="h-[1px] w-full bg-muted"></div>
+                </div>
               ),
             )}
       </div>
