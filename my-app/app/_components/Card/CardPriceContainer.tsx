@@ -11,40 +11,9 @@ const CardPriceContainer = ({
   session: Session | null;
 }) => {
   return (
-    <>
+    <div className="w-screen">
       {filterName === "programmes" && (
-        <div className="relative flex flex-col place-content-center items-center gap-4 px-4 md:gap-0 md:px-0 lg:grid lg:grid-cols-3">
-          <div className="animate-bg-purple absolute bottom-0 right-0 -z-10 h-full w-full"></div>
-          <Stars
-            yposition="-top-10"
-            xposition="left-0"
-            height="h-20"
-            weight="w-full"
-            isTop={false}
-          />
-          <Stars
-            yposition="-bottom-10"
-            xposition="left-0"
-            height="h-20"
-            weight="w-full"
-            isTop={false}
-          />
-          <Stars
-            yposition="top-0"
-            xposition="-right-10"
-            height="h-full"
-            weight="w-20"
-            isTop={true}
-          />
-
-          <Stars
-            yposition="top-0"
-            xposition="-left-10"
-            height="h-full"
-            weight="w-20"
-            isTop={true}
-          />
-
+        <div className="relative flex flex-col place-content-center items-center justify-items-center gap-4 md:gap-0 md:px-0 lg:flex-row lg:gap-4">
           {programData.map((data) => (
             <CardPrice
               key={data.titlePlan}
@@ -56,37 +25,7 @@ const CardPriceContainer = ({
         </div>
       )}
       {filterName === "coaching" && (
-        <div className="relative flex flex-col place-content-center items-center gap-4 px-4 md:px-0 lg:grid lg:grid-cols-3 lg:gap-0">
-          <div className="animate-bg-purple absolute bottom-0 right-0 -z-10 h-full w-full"></div>
-          <Stars
-            yposition="-top-10"
-            xposition="left-0"
-            height="h-20"
-            weight="w-full"
-            isTop={false}
-          />
-          <Stars
-            yposition="-bottom-10"
-            xposition="left-0"
-            height="h-20"
-            weight="w-full"
-            isTop={false}
-          />
-          <Stars
-            yposition="top-0"
-            xposition="-right-10"
-            height="h-full"
-            weight="w-20"
-            isTop={true}
-          />
-
-          <Stars
-            yposition="top-0"
-            xposition="-left-10"
-            height="h-full"
-            weight="w-20"
-            isTop={true}
-          />
+        <div className="relative flex flex-col justify-center gap-4 md:gap-0 md:px-0 lg:flex-row lg:gap-4">
           {coachingData.map((data) => (
             <CardPrice
               key={data.titlePlan}
@@ -97,7 +36,7 @@ const CardPriceContainer = ({
           ))}
         </div>
       )}
-    </>
+    </div>
   );
 };
 

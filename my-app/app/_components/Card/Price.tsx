@@ -7,7 +7,7 @@ const Price = ({
   mounth?: number;
   dayPrice?: string;
 }) => (
-  <div className="flex flex-col gap-2">
+  <div className="mb-10 flex flex-col gap-2">
     <div className="flex flex-1 items-center">
       <span className="mr-2 self-start text-2xl">€</span>
       <span className="mr-2 text-8xl font-semibold">{price}</span>
