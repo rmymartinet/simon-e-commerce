@@ -2,13 +2,19 @@ import FooterLinkSection from "./FooterLinkSection";
 
 const FooterLinks = () => {
   return (
-    <div className="flex flex-col items-start gap-20 md:flex-row">
+    <div className="grid grid-cols-2 gap-20 md:grid md:grid-cols-3">
       <FooterLinkSection
-        title="Produits"
-        links={["Fonctionnalités", "Tarifs"]}
+        title="Découvrir"
+        links={["Tarifs", "Infos", "Blog"]}
       />
-      <FooterLinkSection title="Entreprise" links={["Blog", "À propos"]} />
-      <FooterLinkSection title="Ressources" links={["Légal"]} />
+      <FooterLinkSection
+        title="Social"
+        links={["Instagram", "Tiktok", "Youtube", "Linkedin"]}
+      />
+      <FooterLinkSection
+        title="Ressources"
+        links={["Légal", "Termes et services"]}
+      />
     </div>
   );
 };
