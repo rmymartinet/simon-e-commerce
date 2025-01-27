@@ -1,9 +1,45 @@
+"use client";
+
+import { useGSAP } from "@gsap/react";
 import Image from "next/image";
+import gsap from "gsap";
+import { textSplitLinesScrollTrigger } from "@/utils/common/textAnimation";
+import { useRef } from "react";
+
+gsap.registerPlugin(useGSAP);
 
 export default function Infos() {
+  const firstParaRef = useRef<HTMLParagraphElement | null>(null);
+  const secondParaRef = useRef<HTMLParagraphElement | null>(null);
+  const thirdParaRef = useRef<HTMLParagraphElement | null>(null);
+  const headerRef = useRef<HTMLDivElement | null>(null);
+
+  useGSAP(() => {
+    gsap.set(headerRef.current, {
+      y: 100,
+    });
+
+    gsap.to(headerRef.current, {
+      y: 0,
+      delay: 2,
+      duration: 1,
+      ease: "power2.out",
+    });
+    if (firstParaRef.current && secondParaRef.current && thirdParaRef.current) {
+      textSplitLinesScrollTrigger(firstParaRef as React.RefObject<HTMLElement>);
+      textSplitLinesScrollTrigger(
+        secondParaRef as React.RefObject<HTMLElement>,
+      );
+      textSplitLinesScrollTrigger(thirdParaRef as React.RefObject<HTMLElement>);
+    }
+  }, []);
+
   return (
     <div className="relative mt-40 flex min-h-screen flex-col items-center justify-center gap-40 px-4">
-      <div className="relative flex flex-col gap-20 rounded-xl bg-white p-8 text-black lg:grid lg:grid-cols-2">
+      <div
+        ref={headerRef}
+        className="relative flex flex-col gap-20 rounded-xl bg-white p-8 text-black lg:grid lg:grid-cols-2"
+      >
         <div className="h-[60vh] w-max">
           <video
             src="/videos/infos/info.mov"
@@ -35,11 +71,14 @@ export default function Infos() {
           </div>
         </div>
       </div>
-      <div className="flex w-full flex-col items-center gap-8">
+      <div className="mt-20 flex w-full flex-col items-center gap-8">
         <div className="flex flex-col items-center gap-10 lg:items-start">
           <div className="flex flex-col gap-8">
             <h1 className="text-4xl lg:text-7xl">Du déclic à la passion</h1>
-            <p className="text-justify text-muted lg:text-2xl">
+            <p
+              ref={firstParaRef}
+              className="text-justify text-muted lg:text-2xl"
+            >
               Depuis mon plus jeune âge, je me voyais comme un{" "}
               <span className="font-bold text-white">garçon frêle</span>,
               manquant de{" "}
@@ -89,7 +128,10 @@ export default function Infos() {
         <div className="flex flex-col items-center gap-10 lg:items-start">
           <div className="flex flex-col gap-8">
             <h1 className="text-4xl lg:text-7xl">Du déclic à la passion</h1>
-            <p className="text-justify text-muted lg:text-2xl">
+            <p
+              ref={secondParaRef}
+              className="text-justify text-muted lg:text-2xl"
+            >
               La <span className="font-bold text-white">musculation</span>{" "}
               n&apos;est plus seulement une quête{" "}
               <span className="font-bold text-white">physique</span> pour moi,
@@ -130,7 +172,10 @@ export default function Infos() {
               <span className="font-bold text-white">préparation physique</span>
               .
             </p>
-            <p className="text-justify text-muted lg:text-2xl">
+            <p
+              ref={thirdParaRef}
+              className="text-justify text-muted lg:text-2xl"
+            >
               En tant que{" "}
               <span className="font-bold text-white">coach sportif</span> et{" "}
               <span className="font-bold text-white">
