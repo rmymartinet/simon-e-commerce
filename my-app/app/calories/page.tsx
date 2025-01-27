@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState, useMemo } from "react";
 import FormCalories from "../_components/Calories/FormCalories";
 import Question from "../_components/Calories/Questions";
-import { useAnimation } from "../AnimationContext";
+import { useAnimation } from "../context/AnimationContext";
 import gsap from "gsap";
 import AvailableOfferContainer from "../_components/AvailableOfferContainer";
 
