@@ -59,7 +59,7 @@ const BeforeAfterPhoto = () => {
   }, []);
 
   return (
-    <div className="relative mt-[20vh] flex flex-col items-center justify-center p-6">
+    <div className="relative mt-[20vh] flex w-full flex-col items-center justify-center p-4">
       <div className="relative mb-20 w-full justify-center gap-4 md:inline-flex lg:mb-40">
         <h1 className="text-4xl lg:text-6xl">Changer comme</h1>
         <div className="relative h-20 w-40 overflow-hidden pb-4 lg:w-72">
@@ -77,13 +77,8 @@ const BeforeAfterPhoto = () => {
         </div>
       </div>
       <div
-        className={`relative flex ${isClicked ? "h-screen w-screen lg:h-[50vh]" : "h-full w-full"} w-full flex-wrap items-center justify-center gap-10 overflow-hidden rounded-xl`}
+        className={`relative flex ${isClicked ? "h-screen w-screen lg:h-[50vh]" : "h-full w-full"} flex flex-wrap justify-evenly gap-10 overflow-hidden rounded-xl`}
       >
-        {/* <div className="glassmorph absolute left-[280px] top-[510px] h-10 w-10 rounded-full"></div>
-        <div className="glassmorph absolute left-[440px] top-[510px] h-10 w-10 rounded-full"></div>
-        <div className="glassmorph absolute left-[630px] top-[500px] h-10 w-10 rounded-full"></div>
-        <div className="glassmorph absolute left-[780px] top-[535px] h-10 w-10 rounded-full"></div> */}
-
         {names.map((_, index) => {
           const url = imagesUrls[index % imagesUrls.length];
           return (
