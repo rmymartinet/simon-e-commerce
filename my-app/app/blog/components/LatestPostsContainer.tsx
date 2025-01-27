@@ -1,12 +1,18 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import imageUrlBuilder from "@sanity/image-url";
 import { client } from "@/sanity/lib/client";
 import Images from "next/image";
 import { SanityDocument } from "next-sanity";
 import Link from "next/link";
 import useWindowWidth from "@/hooks/useWindowWidth";
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
+import { textSplitLines } from "@/utils/common/textAnimation";
+import { verticalDisplay } from "@/utils/common/moveYAxisEl";
+
+gsap.registerPlugin(useGSAP);
 
 function LatestPostsContainer({
   sanityPosts,
@@ -18,28 +24,76 @@ function LatestPostsContainer({
   const { width } = useWindowWidth();
   const sanityFilteredPosts = sanityPosts.slice(0, 3);
   const numberOfPosts = sanityPosts.length;
+  const titleRef = useRef<HTMLHeadingElement>(null);
+  const gridButtonRef = useRef<HTMLButtonElement>(null);
+  const listButtonRef = useRef<HTMLButtonElement>(null);
+  const lineRef = useRef<HTMLDivElement>(null);
+  const totalArticleRef = useRef<HTMLParagraphElement>(null);
+  const gridPostsContainerRef = useRef<HTMLDivElement>(null);
+
+  useGSAP(() => {
+    const gridPostsContainerRefChildren =
+      gridPostsContainerRef.current?.children;
+
+    if (gridPostsContainerRefChildren) {
+      gsap.from(gridPostsContainerRefChildren, {
+        duration: 1,
+        y: 100,
+        opacity: 0,
+        delay: 2,
+        stagger: 0.1,
+        ease: "power2.out",
+      });
+    }
+
+    verticalDisplay(titleRef as React.RefObject<HTMLElement>, 2);
+    verticalDisplay(gridButtonRef as React.RefObject<HTMLElement>, 2, 100);
+    verticalDisplay(listButtonRef as React.RefObject<HTMLElement>, 2, 100);
+    textSplitLines(totalArticleRef as React.RefObject<HTMLElement>, 2);
+
+    gsap.set(lineRef.current, {
+      width: 0,
+    });
+    gsap.to(lineRef.current, {
+      duration: 1,
+      width: "100%",
+      delay: 2,
+      ease: "power2.out",
+    });
+  }, []);
 
   return (
     <>
-      <h1 className="text-4xl md:text-[12vw]">Blog</h1>
-      <div className="mt-[18vh] flex gap-4">
+      <div className="overflow-hidden pb-2">
+        <h1 ref={titleRef} className="text-4xl lg:text-9xl">
+          Blog
+        </h1>
+      </div>
+      <div className="mt-[18vh] flex gap-4 overflow-hidden">
         <button
+          ref={gridButtonRef}
           onClick={() => setFilter("grid")}
           className={`rounded-full border border-white px-8 py-2 text-sm ${filter === "grid" ? "bg-white text-black" : ""} transition-all duration-150 ease-linear`}
         >
           Grid
         </button>
         <button
+          ref={listButtonRef}
           onClick={() => setFilter("list")}
           className={`rounded-full border border-white px-8 py-2 text-sm ${filter === "list" ? "bg-white text-black" : ""} transition-all duration-150 ease-linear`}
         >
           List
         </button>
       </div>
-      <div className="mb-10 mt-10 h-[2px] w-full bg-muted"></div>
-      <h3 className="mb-8 text-2xl">Tous les articles ( {numberOfPosts} )</h3>
+      <div ref={lineRef} className="mb-10 mt-10 h-[2px] w-full bg-muted"></div>
+      <h3 ref={totalArticleRef} className="mb-8 text-2xl">
+        Tous les articles ( {numberOfPosts} )
+      </h3>
       {filter === "grid" && (
-        <div className="mb-4 flex w-full flex-col lg:mb-[20vh] lg:flex-row">
+        <div
+          ref={gridPostsContainerRef}
+          className="mb-4 flex w-full flex-col lg:mb-[20vh] lg:flex-row"
+        >
           <div className="h-1/2 w-full border-2 border-red-400">
             {sanityPosts[0] && (
               <Images
