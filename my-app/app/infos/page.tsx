@@ -5,14 +5,16 @@ import Image from "next/image";
 import gsap from "gsap";
 import { textSplitLinesScrollTrigger } from "@/utils/common/textAnimation";
 import { useRef } from "react";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-gsap.registerPlugin(useGSAP);
+gsap.registerPlugin(useGSAP, ScrollTrigger);
 
 export default function Infos() {
   const firstParaRef = useRef<HTMLParagraphElement | null>(null);
   const secondParaRef = useRef<HTMLParagraphElement | null>(null);
   const thirdParaRef = useRef<HTMLParagraphElement | null>(null);
   const headerRef = useRef<HTMLDivElement | null>(null);
+  const ImgRef = useRef<HTMLDivElement | null>(null);
 
   useGSAP(() => {
     gsap.set(headerRef.current, {
@@ -32,6 +34,21 @@ export default function Infos() {
       );
       textSplitLinesScrollTrigger(thirdParaRef as React.RefObject<HTMLElement>);
     }
+
+    // gsap.set(ImgRef.current, {
+    //   clipPath: "polygon(0 0, 100% 0, 100% 100%, 0% 100%)",
+    // });
+
+    // gsap.to(ImgRef.current, {
+    //   clipPath: "polygon(0 0, 100% 0, 100% 0, 0 0)",
+    //   duration: 1,
+    //   ease: "power2.out",
+    //   scrollTrigger: {
+    //     trigger: ImgRef.current,
+    //     start: "top 80%",
+    //     end: "bottom 20%",
+    //   },
+    // });
   }, []);
 
   return (
@@ -115,13 +132,14 @@ export default function Infos() {
             </p>
           </div>
         </div>
-        <div className="flex w-full lg:mb-[20vh] lg:mt-[20vh]">
+        <div ref={ImgRef} className="flex w-full lg:mb-[20vh] lg:mt-[20vh]">
           <Image
             src="/images/about/photo-output.jpeg"
             alt=""
-            width={700}
-            height={700}
-            className="h-full w-full object-contain"
+            width={2000}
+            height={2000}
+            className="h-full w-full object-cover"
+            layout="responsive"
             quality={100}
           />
         </div>
