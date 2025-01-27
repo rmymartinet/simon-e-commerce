@@ -8,6 +8,7 @@ import { useRef } from "react";
 gsap.registerPlugin(useGSAP);
 
 const Filter = ({ filterName, setFilterName }: FilterProps) => {
+  const containerRef = useRef<HTMLDivElement | null>(null);
   const bgFilterRef = useRef<HTMLDivElement | null>(null);
 
   useGSAP(() => {
@@ -28,8 +29,23 @@ const Filter = ({ filterName, setFilterName }: FilterProps) => {
     }
   }, [filterName]);
 
+  useGSAP(() => {
+    gsap.set(containerRef.current, {
+      xPercent: -200,
+    });
+    gsap.to(containerRef.current, {
+      xPercent: 0,
+      delay: 2,
+      duration: 1,
+      ease: "power2.out",
+    });
+  }, []);
+
   return (
-    <div className="relative self-start overflow-hidden rounded-full border">
+    <div
+      ref={containerRef}
+      className="relative self-start overflow-hidden rounded-full border"
+    >
       <div className="relative grid grid-cols-2 justify-items-center gap-10 px-4 py-2">
         <div
           ref={bgFilterRef}

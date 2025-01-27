@@ -1,9 +1,9 @@
 import Image from "next/image";
 import Stars from "../Stars";
-import ColorShadowButton from "../ColorShadowButton";
 import useWindowWidth from "@/hooks/useWindowWidth";
 import { MdWhatsapp } from "react-icons/md";
 import Iphone from "../Iphone";
+import Button from "../Button";
 
 const CoachingOverview = () => {
   const { width } = useWindowWidth();
@@ -29,7 +29,7 @@ const CoachingOverview = () => {
           <p className="text-center text-lg font-medium text-subtle">
             Moins d&apos;effort pour 2x plus de résulats{" "}
           </p>
-          <ColorShadowButton title="Voir les offres" color="#7cbdeb" />
+          <Button href="/pricing" />
         </div>
       </div>
 
