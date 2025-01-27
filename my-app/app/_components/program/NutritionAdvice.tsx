@@ -1,9 +1,9 @@
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
-import ColorShadowButton from "../ColorShadowButton";
 import { data } from "@/app/data/nutritionAdviceData";
 import { useRef } from "react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import Button from "../Button";
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
@@ -81,12 +81,14 @@ const NutritionAdvice = () => {
 
   return (
     <div className="mt-[20vh] flex flex-col gap-20 px-4">
-      <div className="mb-10 flex flex-col md:mb-40">
+      <div className="mb-10 flex flex-col gap-20 md:mb-40">
         <p className="max-w-5xl text-pretty break-words text-3xl lg:text-7xl">
           Des conseils sur-mesure pour équilibrer vos repas et atteindre vos
           objectifs durablement
         </p>
-        <ColorShadowButton title="Voir les offres" color="#f690ff" />
+        <div className="self-center">
+          <Button href="/pricing" />
+        </div>
       </div>
       <div
         ref={contentRef}

@@ -1,7 +1,7 @@
-import Link from "next/link";
 import React, { useState } from "react";
+import Button from "./Button";
 
-function ProgramOffers() {
+function OffersOverview() {
   const [filter, setFilter] = useState("program");
 
   const programData = [
@@ -73,31 +73,23 @@ function ProgramOffers() {
         {filter === "program" &&
           programData.map((data, index) => (
             <div
+              key={index}
               className={`grid h-[40vh] w-full grid-rows-3 items-center justify-items-center gap-10 border-b border-t border-muted p-10 lg:items-start ${index === 1 ? "lg:border-l lg:border-r" : ""}`}
             >
               <h2 className="text-3xl">{data.title}</h2>
               <p className="text-center lg:text-start">{data.description}</p>
-              <Link
-                href="/pricing"
-                className="h-max w-max self-end rounded-full bg-white px-6 py-2 text-black"
-              >
-                Découvrir
-              </Link>
+              <Button href="/pricing" />
             </div>
           ))}
         {filter === "coaching" &&
           coachingData.map((data, index) => (
             <div
+              key={index}
               className={`grid h-[40vh] w-full grid-rows-3 items-center justify-items-center gap-10 border-b border-t border-muted p-10 lg:items-start ${index === 1 ? "lg:border-l lg:border-r" : ""}`}
             >
               <h2 className="text-3xl">{data.title}</h2>
               <p>{data.description}</p>
-              <Link
-                href="/pricing"
-                className="h-max w-max self-end rounded-full bg-white px-6 py-2 text-black"
-              >
-                Découvrir
-              </Link>
+              <Button href="/pricing" />
             </div>
           ))}
       </div>
@@ -105,4 +97,4 @@ function ProgramOffers() {
   );
 }
 
-export default ProgramOffers;
+export default OffersOverview;
