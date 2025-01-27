@@ -11,7 +11,7 @@ const CardPrice = ({ productData, filterName, session }: CardPriceProps) => {
 
   return (
     <>
-      <div className="relative flex h-full flex-col rounded-2xl border p-10 lg:w-[25vw]">
+      <div className="relative flex h-full w-full flex-col rounded-2xl border p-10">
         {productData.mostPopular && (
           <div className="absolute -right-10 -top-4 z-50 w-max -translate-x-1/2 rounded-full bg-button-gradient p-2 font-semibold">
             Plus populaire
@@ -46,11 +46,9 @@ const CardPrice = ({ productData, filterName, session }: CardPriceProps) => {
           <ul className="mt-8 flex flex-col gap-3">
             <p className="text-slate-300">Inclus:</p>
             {productData.includes?.map((include, index) => (
-              <li key={index} className="flex items-center gap-2">
-                <div className="card rounded-full p-1">
-                  <IoCheckmarkOutline color="violet" />
-                </div>
-                {include}
+              <li key={index} className="flex items-center gap-4">
+                <IoCheckmarkOutline color="violet" />
+                <p>{include}</p>
               </li>
             ))}
           </ul>

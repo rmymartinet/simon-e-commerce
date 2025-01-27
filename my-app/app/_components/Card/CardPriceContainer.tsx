@@ -1,5 +1,4 @@
 import { coachingData, programData } from "@/app/data/cardPriceContainerData";
-import Stars from "../Stars";
 import CardPrice from "./CardPrice";
 import { Session } from "next-auth";
 
@@ -13,7 +12,7 @@ const CardPriceContainer = ({
   return (
     <div className="w-screen">
       {filterName === "programmes" && (
-        <div className="relative flex flex-col place-content-center items-center justify-items-center gap-4 md:gap-0 md:px-0 lg:flex-row lg:gap-4">
+        <div className="relative flex w-full flex-col items-center justify-items-center gap-4 px-4 md:gap-0 lg:grid lg:grid-cols-3 lg:gap-4">
           {programData.map((data) => (
             <CardPrice
               key={data.titlePlan}
@@ -25,7 +24,7 @@ const CardPriceContainer = ({
         </div>
       )}
       {filterName === "coaching" && (
-        <div className="relative flex flex-col justify-center gap-4 md:gap-0 md:px-0 lg:flex-row lg:gap-4">
+        <div className="relative flex w-full flex-col items-center justify-items-center gap-4 px-4 md:gap-0 lg:grid lg:grid-cols-3 lg:gap-4">
           {coachingData.map((data) => (
             <CardPrice
               key={data.titlePlan}

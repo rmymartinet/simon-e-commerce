@@ -29,7 +29,7 @@ const Filter = ({ filterName, setFilterName }: FilterProps) => {
   }, [filterName]);
 
   return (
-    <div className="relative overflow-hidden rounded-full bg-[#151414]">
+    <div className="relative self-start overflow-hidden rounded-full border">
       <div className="relative grid grid-cols-2 justify-items-center gap-10 px-4 py-2">
         <div
           ref={bgFilterRef}

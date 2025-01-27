@@ -15,17 +15,17 @@ function PrincingComponents({ session }: { session: Session | null }) {
 
   return (
     <>
-      <div className="flex w-full flex-col items-center justify-center gap-20">
-        <div className="mb-10 flex flex-col self-start">
-          <h1 className="mb-20 text-4xl lg:text-[8vw]">Tarifs simples</h1>
-          <h1 className="mb-20 text-4xl lg:text-[8vw]">Conçus pour vous.</h1>
-          {/* <p className="mt-4 text-center text-xl font-medium md:text-start">
-            Programme sans suivi. Coaching avec suivi.
-          </p> */}
+      <div className="flex w-full flex-col justify-center">
+        <div className="mb-10 flex flex-col">
+          <h1 className="text-4xl lg:text-8xl">Tarifs simples</h1>
+          <h1 className="text-4xl lg:text-8xl">Conçus pour vous.</h1>
         </div>
-        <Filter filterName={filterName} setFilterName={setFilterName} />
-        <CardPriceContainer filterName={filterName} session={session} />
+        <p className="text-center text-xl font-medium md:text-start lg:mt-4">
+          Programme sans suivi. Coaching avec suivi.
+        </p>
       </div>
+      <Filter filterName={filterName} setFilterName={setFilterName} />
+      <CardPriceContainer filterName={filterName} session={session} />
       {filterName === "programmes" && (
         <FeaturesContainer
           title="Avantages supplémentaires"
