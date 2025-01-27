@@ -1,3 +1,4 @@
+import useWindowWidth from "@/hooks/useWindowWidth";
 import gsap from "gsap";
 import { useEffect, useRef, useState } from "react";
 import { IoAdd } from "react-icons/io5";
@@ -6,7 +7,6 @@ const Accordion = ({
   index,
   title,
   text,
-  logoColor = "text-slate-700",
 }: {
   index: number;
   title: string;
@@ -35,22 +35,27 @@ const Accordion = ({
     });
   }, [isClicked]);
 
+  const { width } = useWindowWidth();
+
   return (
     <>
       <div
         onClick={handleIsClicked}
         className="flex w-full cursor-pointer flex-col items-center gap-6 overflow-hidden rounded-3xl py-6"
       >
-        <div className="grid-cols-coachingNutrition grid w-full items-center justify-between gap-10">
-          <span className="text-3xl lg:text-xl">0{index + 1}</span>
-          <h1 className="text-2xl lg:text-4xl">{title}</h1>
-          <div ref={iconRef} className="rounded-full border border-muted p-2">
-            <IoAdd className={`text-2xl ${logoColor}`} />
+        <div className="flex w-full items-center justify-between gap-10 lg:grid lg:grid-cols-coachingNutrition">
+          {width > 1024 && <span className="lg:text-xl">0{index + 1}</span>}
+          <h1 className="lg:text-2xl">{title}</h1>
+          <div
+            ref={iconRef}
+            className="rounded-full border border-muted lg:p-2"
+          >
+            <IoAdd className="text-2xl text-white" />
           </div>
         </div>
         <p
           ref={accordionRef}
-          className="h-0 text-2xl opacity-0"
+          className="h-0 self-start text-sm opacity-0 lg:text-2xl"
           dangerouslySetInnerHTML={{ __html: text }}
         ></p>
       </div>
