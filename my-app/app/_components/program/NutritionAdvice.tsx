@@ -22,7 +22,7 @@ const NutritionAdvice = () => {
         ease: "power2.out",
         scrollTrigger: {
           trigger: el,
-          start: "top bottom",
+          start: "top 120%",
           end: "bottom top",
           once: true,
         },
@@ -34,7 +34,7 @@ const NutritionAdvice = () => {
     titleRefs.current.forEach((el) => {
       ScrollTrigger.create({
         trigger: el,
-        start: "top bottom",
+        start: "top 120%",
         onEnter: () => {
           gsap.fromTo(
             el,
