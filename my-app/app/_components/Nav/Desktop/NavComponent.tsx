@@ -33,7 +33,7 @@ const NavComponent = ({ session }: { session: Session | null }) => {
     pathname !== "/cancel";
   const navLinks = [
     { title: "Home", link: "/" },
-    { title: "Offres", link: "/pricing" },
+    { title: "Tarifs", link: "/pricing" },
     { title: "Infos", link: "/infos" },
     { title: "Blog", link: "/blog" },
   ];
@@ -105,7 +105,7 @@ const NavComponent = ({ session }: { session: Session | null }) => {
               {navLinks.map((link, index) => (
                 <li
                   key={index}
-                  className={`relative cursor-pointer px-4 transition-all duration-200 ease-linear ${
+                  className={`relative cursor-pointer px-4 text-white mix-blend-difference transition-all duration-200 ease-linear ${
                     hoveredIndex === index ? "scale-105" : ""
                   }`}
                   onMouseEnter={() => handleMouseEnter(index)}
@@ -121,7 +121,7 @@ const NavComponent = ({ session }: { session: Session | null }) => {
             <div className="flex gap-2">
               <div className="ml-6 flex items-center gap-8">
                 <Link
-                  href="/calorie"
+                  href="/calories"
                   className="bg-button bg-button-gradient text-base font-medium text-white"
                 >
                   Calories
