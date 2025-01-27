@@ -1,13 +1,11 @@
 "use client";
 
-import useNavigation from "@/hooks/useNavigation";
-import FooterContact from "./FooterContact";
 import FooterLinks from "./FooterLinks";
 import { usePathname } from "next/navigation";
+import Button from "../Button";
 
 const Footer = () => {
   const pathname = usePathname();
-  const { handlePricingNavigation } = useNavigation();
 
   // Déplacer la logique dans le composant
   const isDisplayNavBar =
@@ -19,9 +17,6 @@ const Footer = () => {
     <>
       {isDisplayNavBar && (
         <footer className="relative mt-40 flex min-h-screen w-full flex-col justify-between">
-          <h1 className="mt-40 text-center text-[calc(100vw/6.9)] font-bold uppercase text-[#151515]">
-            sm coaching
-          </h1>
           <div className="mb-20 mt-20 h-[1px] w-full bg-muted"></div>
           <div className="flex flex-col justify-between px-4">
             <div className="mb-[20vh] flex flex-col justify-between gap-20 lg:flex-row lg:gap-0">
@@ -29,12 +24,7 @@ const Footer = () => {
                 <h1 className="text-2xl font-medium md:text-3xl">
                   Commencer dès maintenant
                 </h1>
-                <button
-                  onClick={handlePricingNavigation}
-                  className="padding h-max w-max rounded-lg bg-button-gradient text-xl"
-                >
-                  Commencer
-                </button>
+                <Button href="/pricing" />
               </div>
               <FooterLinks />
             </div>
