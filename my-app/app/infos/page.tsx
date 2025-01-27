@@ -1,136 +1,157 @@
+import Image from "next/image";
+
 export default function Infos() {
   return (
-    <div className="relative mt-40 flex min-h-screen flex-col items-center justify-center gap-40">
-      <div className="relative w-[80%] overflow-hidden rounded-3xl">
-        <video
-          src="/videos/header_bg.mp4"
-          className="h-full w-full object-contain"
-          loop
-          muted
-          autoPlay
-          controls
-        ></video>
-
-        {/* <div className="absolute left-20 top-40 flex w-[70%] flex-col">
-          <h1 className="text-9xl font-semibold uppercase text-white mix-blend-difference">
-            simon
-          </h1>
-          <h1 className="self-end text-9xl font-semibold uppercase text-white mix-blend-difference">
-            martinet
-          </h1>
-        </div> */}
+    <div className="relative mt-40 flex min-h-screen flex-col items-center justify-center gap-40 px-4">
+      <div className="relative flex flex-col gap-20 rounded-xl bg-white p-8 text-black lg:grid lg:grid-cols-2">
+        <div className="h-[60vh] w-max">
+          <video
+            src="/videos/infos/info.mov"
+            className="h-full w-full object-contain"
+            loop
+            muted
+            autoPlay
+            controls
+          ></video>
+        </div>
+        <div className="relative grid">
+          <div className="flex items-center gap-6 border-b border-muted py-6">
+            <span className="text-2xl font-medium">01</span>
+            <span className="text-2xl font-medium lg:text-5xl">
+              Diplomé Staps
+            </span>
+          </div>
+          <div className="flex items-center gap-6 border-b border-muted py-6">
+            <span className="text-2xl font-medium">02</span>
+            <span className="text-2xl font-medium lg:text-5xl">
+              Préparateur physique
+            </span>
+          </div>
+          <div className="flex items-center gap-6 border-b border-muted py-6">
+            <span className="text-2xl font-medium">03</span>
+            <span className="text-2xl font-medium lg:text-5xl">
+              Coach Basic fit
+            </span>
+          </div>
+        </div>
       </div>
-      <div className="relative flex gap-20">
-        <div className="fixed-bg-purple absolute right-0 top-0 -z-20 h-[80%] w-full" />
-        <div className="relative rounded-xl border border-white p-10">
-          <span className="text-xl font-medium">Diplomé Staps</span>
+      <div className="flex w-full flex-col items-center gap-8">
+        <div className="flex flex-col items-center gap-10 lg:items-start">
+          <div className="flex flex-col gap-8">
+            <h1 className="text-4xl lg:text-7xl">Du déclic à la passion</h1>
+            <p className="text-justify text-muted lg:text-2xl">
+              Depuis mon plus jeune âge, je me voyais comme un{" "}
+              <span className="font-bold text-white">garçon frêle</span>,
+              manquant de{" "}
+              <span className="font-bold text-white">confiance</span> en lui.
+              Mon frère, passionné de{" "}
+              <span className="font-bold text-white">sport</span>, avait réussi
+              à transformer son{" "}
+              <span className="font-bold text-white">physique</span>, et cette{" "}
+              <span className="font-bold text-white">métamorphose</span>{" "}
+              m&apos;a profondément inspiré. Cela m&apos;a conduit à me poser
+              une question qui ne cessait de me hanter :{" "}
+              <span className="italic">
+                &quot;De quoi suis-je réellement capable ?&quot;
+              </span>{" "}
+              À 17 ans, j&apos;ai décidé de ne plus rester dans
+              l&apos;incertitude. En découvrant la{" "}
+              <span className="font-bold text-white">musculation</span>,
+              j&apos;ai trouvé bien plus qu&apos;un moyen de me transformer{" "}
+              <span className="font-bold text-white">physiquement</span> :
+              j&apos;ai trouvé une{" "}
+              <span className="font-bold text-white">passion</span> et une
+              <span className="font-bold text-white">discipline</span> qui
+              m&apos;ont appris le{" "}
+              <span className="font-bold text-white">dépassement de soi</span>{" "}
+              et m&apos;ont changé à jamais. Cette quête de mon{" "}
+              <span className="font-bold text-white">potentiel</span>, portée
+              par une envie irrésistible de devenir la{" "}
+              <span className="font-bold text-white">meilleure version</span> de
+              moi-même, m&apos;a permis de comprendre que le{" "}
+              <span className="font-bold text-white">corps</span> et l&apos;
+              <span className="font-bold text-white">esprit</span> sont
+              indissociables dans cette{" "}
+              <span className="font-bold text-white">transformation</span>.
+            </p>
+          </div>
         </div>
-        <div className="rounded-xl border border-white p-10">
-          <span className="text-xl font-medium">Préparateur physique</span>
-        </div>
-        <div className="rounded-xl border border-white p-10">
-          <span className="text-xl font-medium">Coach Basic-Fit</span>
-        </div>
-      </div>
-      <div className="grid grid-cols-2 place-items-center gap-20 px-20">
-        <div className="flex flex-col gap-4">
-          <p className="text-pretty">
-            J’ai commencé la <strong>musculation</strong> à 17 ans, poussé par
-            plusieurs raisons : je me trouvais trop <strong>maigre</strong>,
-            trop <strong>fragile</strong>, et je manquais de{" "}
-            <strong>confiance en moi</strong>.
-          </p>
-
-          <p className="text-pretty">
-            Puis, en 2017, j’ai découvert une vidéo de{" "}
-            <strong>Calum Von Moger</strong>, et là, ce fut le{" "}
-            <strong>déclic</strong>, un véritable{" "}
-            <strong>coup de foudre</strong> pour le{" "}
-            <strong>bodybuilding</strong>. Dès ce moment, je savais que je
-            voulais m’inscrire en <strong>salle</strong>.
-          </p>
-
-          <p className="text-pretty">
-            Mais, sans savoir vraiment par où commencer, je me suis lancé, porté
-            par une envie irrépressible de pousser les limites de mon{" "}
-            <strong>potentiel physique</strong> et de voir mon corps{" "}
-            <strong>évoluer</strong>. Je me suis entraîné <strong>seul</strong>,
-            sans expérience, sans guide… et comme beaucoup, j’ai commis cette
-            erreur de vouloir aller trop vite.
-          </p>
-
-          <p className="text-pretty">
-            C’est pourquoi mes progrès n’ont pas été aussi rapides que je
-            l’avais espéré. J’ai alors pris la décision de ne pas brûler les
-            étapes : je me suis plongé dans la <strong>théorie</strong>, en{" "}
-            <strong>musculation</strong>, mais aussi en{" "}
-            <strong>nutrition</strong>, qui est essentielle pour progresser.
-          </p>
-
-          <p className="text-pretty">
-            Je voulais comprendre le pourquoi de chaque{" "}
-            <strong>exercice</strong>, le rôle de chaque{" "}
-            <strong>aliment</strong>. Ce n’était plus qu’une simple activité,
-            c’était devenu une véritable <strong>passion</strong>.
-          </p>
-
-          <p className="text-pretty">
-            Cette <strong>soif de savoir</strong> m’a poussé à m’inscrire, après
-            le lycée, en <strong>études supérieures de sport</strong>.
-          </p>
-        </div>
-        <div className="overflow-hidden rounded-3xl">
-          <img
-            src="/images/about/about_simon.webp"
+        <div className="flex w-full lg:mb-[20vh] lg:mt-[20vh]">
+          <Image
+            src="/images/about/photo-output.jpeg"
             alt=""
-            className="h-full w-full object-cover"
+            width={700}
+            height={700}
+            className="h-full w-full object-contain"
+            quality={100}
           />
         </div>
-      </div>
-
-      <div className="grid grid-cols-2 place-items-center gap-20 px-20">
-        <div className="overflow-hidden rounded-3xl">
-          <img
-            src="/images/about/about_simon.webp"
-            alt=""
-            className="h-full w-full object-cover"
-          />
-        </div>
-        <div className="flex flex-col gap-4">
-          <p className="text-pretty">
-            Ainsi à l&apos;âge de <strong>18 ans</strong>, j&apos;ai suivi un
-            cursus <strong>STAPS</strong> en faculté, cela m&apos;a permis
-            d&apos;avoir des connaissances sur la{" "}
-            <strong>préparation physique</strong>, <strong>mentale</strong>...
-            Mais il n&apos;y avait pas assez de spécialisation sur ce que
-            j&apos;aimais vraiment, en l&apos;occurrence la{" "}
-            <strong>musculation</strong> et la <strong>nutrition</strong>,
-            c&apos;est pourquoi je me suis renseigné sur ces domaines, en dehors
-            des cours, par <strong>passion</strong>.
-          </p>
-
-          <p className="text-pretty">
-            J&apos;ai donc effectué une <strong>Licence STAPS</strong> avec pour
-            option <strong>Entrainement Sportif</strong> et{" "}
-            <strong>Haltérophilie</strong>, comprenant plusieurs{" "}
-            <strong>stages</strong>, dans des structures sportives, afin de
-            pratiquer mon futur métier en qualité de{" "}
-            <strong>préparateur physique</strong> et{" "}
-            <strong>coach sportif</strong>.
-          </p>
-
-          <p className="text-pretty">
-            Depuis le début de cette <strong>passion</strong> jusqu&apos;à
-            l&apos;obtention de mon <strong>diplôme</strong> en{" "}
-            <strong>2022</strong>, j&apos;ai acquis de l&apos;
-            <strong>enseignement</strong>, de l&apos;
-            <strong>expérience</strong> et du <strong>vécu</strong>, me
-            permettant d&apos;évoluer <strong>physiquement</strong> et{" "}
-            <strong>mentalement</strong> et c&apos;est la raison pour laquelle
-            j&apos;ai envie de transmettre ma passion et vous aider à réaliser
-            votre <strong>idéal</strong> en atteignant vos{" "}
-            <strong>objectifs</strong>.
-          </p>
+        <div className="flex flex-col items-center gap-10 lg:items-start">
+          <div className="flex flex-col gap-8">
+            <h1 className="text-4xl lg:text-7xl">Du déclic à la passion</h1>
+            <p className="text-justify text-muted lg:text-2xl">
+              La <span className="font-bold text-white">musculation</span>{" "}
+              n&apos;est plus seulement une quête{" "}
+              <span className="font-bold text-white">physique</span> pour moi,
+              mais une véritable{" "}
+              <span className="font-bold text-white">philosophie de vie</span>,
+              un levier pour cultiver la{" "}
+              <span className="font-bold text-white">santé</span>, la{" "}
+              <span className="font-bold text-white">résilience</span> et la{" "}
+              <span className="font-bold text-white">confiance en soi</span>.
+              Dès l&apos;âge de{" "}
+              <span className="font-bold text-white">18 ans</span>, j&apos;ai
+              décidé de formaliser ma{" "}
+              <span className="font-bold text-white">passion</span> en suivant
+              une <span className="font-bold text-white">Licence STAPS</span>,
+              option{" "}
+              <span className="font-bold text-white">Entraînement Sportif</span>{" "}
+              et <span className="font-bold text-white">Haltérophilie</span>.
+              Durant cette période, j&apos;ai également obtenu mes{" "}
+              <span className="font-bold text-white">brevets fédéraux</span> en{" "}
+              <span className="font-bold text-white">musculation</span> et en{" "}
+              <span className="font-bold text-white">haltérophilie</span>, un
+              parcours qui m&apos;a permis de renforcer mes{" "}
+              <span className="font-bold text-white">connaissances</span> et de
+              poser les bases de ma{" "}
+              <span className="font-bold text-white">carrière</span>. Au fil des
+              années, mes{" "}
+              <span className="font-bold text-white">expériences</span> sur le
+              terrain m&apos;ont permis de développer une{" "}
+              <span className="font-bold text-white">approche complète</span> et{" "}
+              <span className="font-bold text-white">efficace</span> pour
+              accompagner chaque personne dans sa{" "}
+              <span className="font-bold text-white">transformation</span>.
+              Aujourd&apos;hui, je continue à approfondir mes{" "}
+              <span className="font-bold text-white">compétences</span> pour
+              rester à la pointe des dernières{" "}
+              <span className="font-bold text-white">avancées</span> en{" "}
+              <span className="font-bold text-white">musculation</span> et{" "}
+              <span className="font-bold text-white">préparation physique</span>
+              .
+            </p>
+            <p className="text-justify text-muted lg:text-2xl">
+              En tant que{" "}
+              <span className="font-bold text-white">coach sportif</span> et{" "}
+              <span className="font-bold text-white">
+                préparateur physique diplômé
+              </span>
+              , ma mission est claire : vous aider à révéler votre{" "}
+              <span className="font-bold text-white">potentiel</span>, atteindre
+              vos <span className="font-bold text-white">objectifs</span>, et
+              découvrir cette{" "}
+              <span className="font-bold text-white">force intérieure</span> et
+              cet <span className="font-bold text-white">équilibre</span> qui
+              peuvent transformer votre vie. Que ce soit pour vous sentir mieux{" "}
+              <span className="font-bold text-white">physiquement</span>,{" "}
+              <span className="font-bold text-white">mentalement</span> ou
+              améliorer votre{" "}
+              <span className="font-bold text-white">santé</span>, je suis là
+              pour vous <span className="font-bold text-white">guider</span> à
+              chaque étape de votre{" "}
+              <span className="font-bold text-white">parcours</span>.
+            </p>
+          </div>{" "}
         </div>
       </div>
     </div>
