@@ -2,6 +2,7 @@ import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { useRef } from "react";
 import useWindowWidth from "@/hooks/useWindowWidth";
+import { textSplitLines } from "@/utils/common/textAnimation";
 
 gsap.registerPlugin(useGSAP);
 
@@ -9,6 +10,9 @@ const Header = () => {
   const headerRef = useRef(null);
   const containerRef = useRef(null);
   const arrowRef = useRef(null);
+
+  const textLeftRef = useRef<HTMLDivElement>(null);
+  const textRightRef = useRef<HTMLParagraphElement>(null);
 
   const { width } = useWindowWidth();
 
@@ -45,6 +49,13 @@ const Header = () => {
     });
   }, []);
 
+  useGSAP(() => {
+    if (textLeftRef.current && textRightRef.current) {
+      textSplitLines(textLeftRef as React.RefObject<HTMLElement>, 2);
+      textSplitLines(textRightRef as React.RefObject<HTMLElement>, 2);
+    }
+  }, []);
+
   return (
     <div
       ref={containerRef}
@@ -55,7 +66,7 @@ const Header = () => {
         className="absolute bottom-0 z-50 w-[100%] bg-gradient-to-t from-[#0b0d14] via-[#0b0d14]/60 to-black/0"
       ></div>
       <div className="absolute bottom-0 left-4 z-50 flex w-full flex-col gap-6 rounded-xl md:bottom-4 md:flex-row md:items-center">
-        <div className="overflow-hidden">
+        <div ref={textLeftRef} className="overflow-hidden">
           <h1 className="w-full truncate text-4xl uppercase md:text-8xl">
             Votre Coach
           </h1>
@@ -63,7 +74,7 @@ const Header = () => {
             Coaching | Programmes
           </span>
         </div>
-        <p className="max-w-96">
+        <p ref={textRightRef} className="max-w-96">
           Atteignez vos objectifs à votre rythme. Optez pour un{" "}
           <strong>programme personnalisé</strong> si vous souhaitez progresser
           en autonomie, ou choisissez un <strong>coaching sur-mesure</strong>{" "}
