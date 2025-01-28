@@ -1,8 +1,18 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import Button from "./Button";
+import { useGSAP } from "@gsap/react";
+import { textSplitLinesScrollTrigger } from "@/utils/common/textAnimation";
+import gsap from "gsap";
+
+gsap.registerPlugin(useGSAP);
 
 function OffersOverview() {
   const [filter, setFilter] = useState("program");
+  const titleRef = useRef<HTMLHeadingElement>(null);
+
+  useGSAP(() => {
+    textSplitLinesScrollTrigger(titleRef as React.RefObject<HTMLElement>);
+  }, []);
 
   const programData = [
     {
@@ -42,7 +52,7 @@ function OffersOverview() {
 
   return (
     <div className="mt-[20vh] flex h-screen w-full flex-col items-center gap-8 lg:mt-[30vh]">
-      <h1 className="mb-20 ml-4 self-start text-4xl lg:text-7xl">
+      <h1 ref={titleRef} className="mb-20 ml-4 self-start text-4xl lg:text-7xl">
         Des plans pensés pour vous
       </h1>
       <div className="grid grid-cols-2 text-xl">
