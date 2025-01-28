@@ -1,19 +1,11 @@
 import React from "react";
 import { useAddToCart } from "@/hooks/useAddToCart";
-import { useCart } from "../context/CartContext";
 import { AddToCartButtonProps, CartItemProps } from "@/types/types";
-import useWindowWidth from "@/hooks/useWindowWidth";
 
 const AddToCartButton = ({ productData }: AddToCartButtonProps) => {
   const addToCart = useAddToCart();
-  const { setIsOpen } = useCart();
-  const { width } = useWindowWidth();
 
   const handleClick = () => {
-    if (width > 1024) {
-      setIsOpen(true);
-    }
-
     const cartItem: CartItemProps = {
       type: productData.type,
       titlePlan: productData.titlePlan,
