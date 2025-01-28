@@ -1,2 +1,2 @@
-my-app/public/videos/infos/info.mov filter=lfs diff=lfs merge=lfs -text
 my-app/public/videos/infos/info.mp4 filter=lfs diff=lfs merge=lfs -text
+my-app/public/videos/infos/info.mov filter=lfs diff=lfs merge=lfs -text
