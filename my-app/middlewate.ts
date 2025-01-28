@@ -1,8 +1,9 @@
-import { auth } from "@/app/_lib/auth";
+export { auth as middleware } from "@/app/_lib/auth";
 
-export default auth((req) => {
-  if (!req.auth && req.nextUrl.pathname !== "/sign-in") {
-    const newUrl = new URL("/sign-in", req.nextUrl.origin);
-    return Response.redirect(newUrl);
-  }
-});
+export const config = {
+  matcher: [
+    "/studio/:path*",
+    "/((?!_next|[^?]*\\.(?:html?|css|js(?!on)|jpe?g|webp|png|gif|svg|ttf|woff2?|ico|csv|docx?|xlsx?|zip|webmanifest)).*)",
+    "/(api|trpc)(.*)",
+  ],
+};
