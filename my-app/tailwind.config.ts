@@ -19,7 +19,7 @@ const config: Config = {
       gridTemplateColumns: {
         custom: "20vw minmax(20vw, 1fr) minmax(20vw, 1fr)",
         blogCustom: "2fr 1fr",
-        connexionModal: "1fr max-content 1fr",
+        blogHeader: "2fr max-content 1fr",
         coachingNutrition: "max-content 1fr max-content",
       },
       gridTemplateRows: {
