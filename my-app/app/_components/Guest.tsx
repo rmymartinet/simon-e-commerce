@@ -4,6 +4,7 @@ import { usePayment } from "@/hooks/usePayment";
 import { useCheckout } from "../context/CheckoutContext";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import { ProductDataProps } from "@/types/types";
 
 const Guest = () => {
   const { handleCheckout } = usePayment();
@@ -22,18 +23,20 @@ const Guest = () => {
   if (checkoutData) {
     if (Array.isArray(checkoutData.productData)) {
       allPriceIds = checkoutData.productData.map(
-        (product: { priceId: string }) => product.priceId,
+        (product: ProductDataProps) => product.priceId || "",
       );
       allTitles = checkoutData.productData.map(
-        (product: { titlePlan: string }) => product.titlePlan,
+        (product: ProductDataProps) => product.titlePlan || "",
       );
       allMonths = checkoutData.productData.map(
-        (product: { month: number }) => product.month,
+        (product: ProductDataProps) => product.month || 0,
       );
     } else {
-      allPriceIds = [checkoutData.productData.priceId || ""];
-      allTitles = [checkoutData.productData.titlePlan];
-      allMonths = [checkoutData.productData.month];
+      allPriceIds = [
+        (checkoutData.productData as ProductDataProps).priceId || "",
+      ];
+      allTitles = [(checkoutData.productData as ProductDataProps).titlePlan];
+      allMonths = [(checkoutData.productData as ProductDataProps).month];
     }
   }
 
