@@ -34,21 +34,6 @@ export default function Infos() {
       );
       textSplitLinesScrollTrigger(thirdParaRef as React.RefObject<HTMLElement>);
     }
-
-    // gsap.set(ImgRef.current, {
-    //   clipPath: "polygon(0 0, 100% 0, 100% 100%, 0% 100%)",
-    // });
-
-    // gsap.to(ImgRef.current, {
-    //   clipPath: "polygon(0 0, 100% 0, 100% 0, 0 0)",
-    //   duration: 1,
-    //   ease: "power2.out",
-    //   scrollTrigger: {
-    //     trigger: ImgRef.current,
-    //     start: "top 80%",
-    //     end: "bottom 20%",
-    //   },
-    // });
   }, []);
 
   return (
@@ -58,14 +43,14 @@ export default function Infos() {
         className="relative flex flex-col gap-20 rounded-xl bg-white p-8 text-black lg:grid lg:grid-cols-2"
       >
         <div className="h-[60vh] w-max">
-          {/* <video
+          <video
             src="/videos/infos/info.mp4"
             className="h-full w-full object-contain"
             loop
             muted
             autoPlay
             controls
-          ></video> */}
+          ></video>
         </div>
         <div className="relative grid">
           <div className="flex items-center gap-6 border-b border-muted py-6">
