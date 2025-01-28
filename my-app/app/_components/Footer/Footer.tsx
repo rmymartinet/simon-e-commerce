@@ -2,6 +2,7 @@
 
 import FooterLinks from "./FooterLinks";
 import { usePathname } from "next/navigation";
+import { FaArrowUp } from "react-icons/fa6";
 import Button from "../Button";
 
 const Footer = () => {
@@ -13,6 +14,13 @@ const Footer = () => {
     pathname !== "/success" &&
     pathname !== "/cancel" &&
     pathname !== "/checkout";
+
+  const handleBackToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
 
   return (
     <>
@@ -32,8 +40,14 @@ const Footer = () => {
           </div>
           <div className="flex justify-between px-4 pb-4 text-sm md:text-lg">
             <p className="uppercase">sm coaching ©2025</p>
-            <p className="">All Rights Reserved</p>
-            <p className="">Remonter</p>
+            <p className="">Tout droit reservé</p>
+            <button
+              className="flex items-center gap-2"
+              onClick={handleBackToTop}
+            >
+              <p>Remonter</p>
+              <FaArrowUp size={12} />
+            </button>
           </div>
         </footer>
       )}
