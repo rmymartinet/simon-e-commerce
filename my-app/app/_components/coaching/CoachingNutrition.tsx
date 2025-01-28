@@ -43,7 +43,7 @@ const CoachingNutrition = () => {
       </div>
       <div className="flex flex-col gap-20 lg:grid lg:grid-cols-2">
         {width > 1024 && (
-          <div className="border-2 border-red-400">
+          <div className="">
             <p>( A effectuer )</p>
             <span className="max-w-lg text-light lg:text-[20vw]">01</span>
           </div>
@@ -75,10 +75,16 @@ const CoachingNutrition = () => {
         </div>
       </div>
       <div className="">
-        {width > 1024 && (
+        {width > 1024 ? (
           <div className="grid grid-cols-2 items-center">
             <span className="max-w-lg text-light lg:text-[20vw]">02</span>
-            <p className="text-7xl">( Communiquer vos repas en temps réel )</p>
+            <p className="text-7xl">
+              ( Communiquer moi vos repas en temps réel )
+            </p>
+          </div>
+        ) : (
+          <div className="mb-10">
+            <p className="text-4xl">Communiquer moi vos repas en temps réel</p>
           </div>
         )}
         <div className="h-[110vh]">
