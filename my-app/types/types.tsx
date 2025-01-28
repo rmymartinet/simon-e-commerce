@@ -38,8 +38,6 @@ export interface CardPriceProps {
 export interface CartContextProps {
   cart: CartItemProps[];
   setCart: React.Dispatch<React.SetStateAction<CartItemProps[]>>;
-  isOpen: boolean; // Ajoutez cette ligne
-  setIsOpen: (isOpen: boolean) => void;
   updateCartQuantity: (itemId: string, newQuantity: number) => void;
 }
 
@@ -56,7 +54,7 @@ export interface CheckoutContextValue {
 }
 
 export interface CheckoutData {
-  productData: ProductDataProps;
+  productData: ProductDataProps[];
   filterName: string;
 }
 

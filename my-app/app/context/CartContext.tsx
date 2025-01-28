@@ -54,7 +54,6 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
   };
 
   const [cart, setCart] = useState<CartItemProps[]>(getInitialCart);
-  const [isOpen, setIsOpen] = useState<boolean>(false);
 
   const updateCartQuantity = (itemId: string, newQuantity: number) => {
     setCart((prevCart) =>
@@ -84,8 +83,6 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
       value={{
         cart,
         setCart,
-        isOpen,
-        setIsOpen,
         updateCartQuantity,
       }}
     >
