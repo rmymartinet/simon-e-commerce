@@ -4,6 +4,7 @@ import { data } from "@/app/data/nutritionAdviceData";
 import { useRef } from "react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Button from "../Button";
+import { textSplitLinesScrollTrigger } from "@/utils/common/textAnimation";
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
@@ -11,8 +12,13 @@ const NutritionAdvice = () => {
   const lineRefs = useRef<(HTMLDivElement | null)[]>([]);
   const titleRefs = useRef<(HTMLHeadingElement | null)[]>([]);
   const textRefs = useRef<(HTMLParagraphElement | null)[]>([]);
-  const pinRef = useRef<HTMLSpanElement | null>(null);
   const contentRef = useRef<HTMLDivElement | null>(null);
+
+  const textRef = useRef<HTMLParagraphElement>(null);
+
+  useGSAP(() => {
+    textSplitLinesScrollTrigger(textRef as React.RefObject<HTMLElement>);
+  }, []);
 
   useGSAP(() => {
     lineRefs.current.forEach((el) => {
@@ -22,7 +28,7 @@ const NutritionAdvice = () => {
         ease: "power2.out",
         scrollTrigger: {
           trigger: el,
-          start: "top 120%",
+          start: "top 80%",
           end: "bottom top",
           once: true,
         },
@@ -65,39 +71,21 @@ const NutritionAdvice = () => {
         once: true,
       });
     });
-
-    // if (pinRef.current && contentRef.current) {
-    //   gsap.to(pinRef.current, {
-    //     scrollTrigger: {
-    //       trigger: contentRef.current,
-    //       start: "top 40px",
-    //       end: "bottom top",
-    //       pin: pinRef.current,
-    //       scrub: 0.5,
-    //     },
-    //   });
-    // }
   }, []);
 
   return (
     <div className="mt-[20vh] flex flex-col gap-20 px-4">
-      <div className="mb-10 flex flex-col gap-20 md:mb-40">
+      <div ref={textRef} className="mb-10 flex flex-col gap-20">
         <p className="max-w-5xl text-pretty break-words text-3xl lg:text-7xl">
           Des conseils sur-mesure pour équilibrer vos repas et atteindre vos
           objectifs durablement
         </p>
-        <div className="self-center">
-          <Button href="/pricing" />
-        </div>
       </div>
-      <div
-        ref={contentRef}
-        className="flex flex-col gap-20 lg:grid lg:grid-cols-2"
-      >
-        <span ref={pinRef} className="max-w-lg md:font-medium lg:text-3xl">
-          Bien manger, c’est 70 % de vos objectifs atteints.
-        </span>
-        <div className="flex flex-col gap-14">
+      <div className="self-center md:mb-40">
+        <Button href="/pricing" />
+      </div>
+      <div ref={contentRef} className="flex flex-col gap-20">
+        <div className="flex flex-col gap-14 self-end lg:w-1/2">
           {data.map((item, index) => (
             <div key={index}>
               <div className="h-[2px] bg-[#27262a]">

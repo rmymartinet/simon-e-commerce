@@ -1,11 +1,27 @@
 import useWindowWidth from "@/hooks/useWindowWidth";
+import { useGSAP } from "@gsap/react";
+import { textSplitLinesScrollTrigger } from "@/utils/common/textAnimation";
+import gsap from "gsap";
+import { useRef } from "react";
+
+gsap.registerPlugin(useGSAP);
 
 const ProgramOverview = () => {
   const { width } = useWindowWidth();
+  const titlesContainerRef = useRef<HTMLDivElement>(null);
+
+  useGSAP(() => {
+    textSplitLinesScrollTrigger(
+      titlesContainerRef as React.RefObject<HTMLElement>,
+    );
+  }, []);
 
   return (
     <div className="mt-[70vh] flex w-screen flex-col items-center overflow-hidden lg:mt-0">
-      <div className="flex flex-col items-center justify-center gap-4 md:gap-8">
+      <div
+        ref={titlesContainerRef}
+        className="flex flex-col items-center justify-center gap-4 md:gap-8"
+      >
         <h1 className="text-center text-4xl md:text-7xl">
           Programmes adaptés à votre niveau
         </h1>

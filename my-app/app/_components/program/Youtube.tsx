@@ -4,14 +4,18 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 import BackgroundYoutubeImg from "./BackgroundYoutubeImg";
 import { IoLogoYoutube } from "react-icons/io";
+import { textSplitLinesScrollTrigger } from "@/utils/common/textAnimation";
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
 const Youtube = () => {
   const iphoneRef = useRef<HTMLDivElement>(null);
   const imagesRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const titleRef = useRef<HTMLHeadingElement>(null);
 
   useGSAP(() => {
+    textSplitLinesScrollTrigger(titleRef as React.RefObject<HTMLElement>);
+
     imagesRefs.current.forEach((img) => {
       gsap.to(img, {
         scrollTrigger: {
@@ -29,8 +33,8 @@ const Youtube = () => {
 
   return (
     <div className="mt-[20vh] w-full px-4">
-      <div className="mb-10 flex flex-col gap-4 md:mb-40">
-        <div className="flex items-center gap-2">
+      <div ref={titleRef} className="mb-10 flex flex-col gap-4 md:mb-40">
+        <div className="flex items-start gap-2">
           <IoLogoYoutube className="text-3xl lg:text-7xl" />
           <p className="max-w-5xl text-pretty break-words text-3xl lg:text-7xl">
             Youtube
