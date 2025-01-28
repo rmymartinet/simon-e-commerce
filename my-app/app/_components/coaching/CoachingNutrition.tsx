@@ -34,7 +34,7 @@ const CoachingNutrition = () => {
   return (
     <div className="mt-[20vh] flex w-full flex-col gap-20 px-4">
       <div className="mb-10 flex flex-col gap-20 md:mb-20">
-        <p className="max-w-5xl text-pretty break-words text-3xl lg:text-7xl">
+        <p className="max-w-5xl text-pretty break-words text-center text-3xl lg:text-start lg:text-7xl">
           Un suivi nutritionnels personnalisé adpaté à vos besoins
         </p>
         <div className="self-center">
@@ -74,19 +74,20 @@ const CoachingNutrition = () => {
           </div>
         </div>
       </div>
-      <div className="grid grid-cols-2">
+      <div className="">
         {width > 1024 && (
-          <div>
-            <p className="text-3xl">( Communiquer en tant reel )</p>
+          <div className="grid grid-cols-2 items-center">
             <span className="max-w-lg text-light lg:text-[20vw]">02</span>
+            <p className="text-7xl">( Communiquer vos repas en temps réel )</p>
           </div>
         )}
-        <div>
+        <div className="h-[110vh]">
           <Image
-            src=""
+            src="/images/food_app/iphone_food_app.png"
             alt="Food app"
-            width={400}
-            height={400}
+            width={2000}
+            height={2000}
+            quality={100}
             className="h-full w-full object-cover"
           />
         </div>
