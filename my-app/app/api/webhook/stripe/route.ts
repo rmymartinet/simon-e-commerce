@@ -291,7 +291,9 @@ export async function POST(req: Request) {
         return new Response("Webhook processed successfully", { status: 200 });
 
       default:
-        console.log(`Unhandled event type: ${event.type}`);
+        if (process.env.NODE_ENV === "development") {
+          console.log(`Unhandled event type: ${event.type}`);
+        }
         return new Response(`Unhandled event type: ${event.type}`, {
           status: 200,
         });
