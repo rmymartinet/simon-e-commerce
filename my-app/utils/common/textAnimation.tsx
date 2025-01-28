@@ -12,7 +12,7 @@ export const textVerticalDisplay = (
     const tl = gsap.timeline();
     tl.fromTo(
       ref.current,
-      { y: 100 },
+      { y: 100, filter: "blur(10px)" },
       {
         duration: 1,
         y: 0,
@@ -46,6 +46,7 @@ export function textSplitLines(
     });
 
     gsap.from(split.lines, {
+      filter: "blur(10px)",
       duration: 1,
       y: 100,
       opacity: 0,
@@ -79,6 +80,8 @@ export function textSplitLinesScrollTrigger(ref: React.RefObject<HTMLElement>) {
 
     gsap.set(split.lines, {
       y: 100,
+      filter: "blur(10px)",
+
       opacity: 0,
     });
 
@@ -88,6 +91,7 @@ export function textSplitLinesScrollTrigger(ref: React.RefObject<HTMLElement>) {
         start: "top 80%",
       },
       duration: 1,
+      filter: "blur(0px)",
       y: 0,
       opacity: 1,
       stagger: 0.05,
