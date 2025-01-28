@@ -13,11 +13,10 @@ const AppDetails = () => {
 
   useGSAP(() => {
     gsap.set(iphone2Ref.current, { opacity: 0, y: 100 });
-
     ScrollTrigger.create({
       trigger: containerRef.current,
-      start: "top top",
-      end: "bottom top",
+      start: "top center",
+      end: "center center",
       scrub: true,
       onEnter: () => {
         gsap.to(iphone1Ref.current, {
@@ -54,7 +53,7 @@ const AppDetails = () => {
   return (
     <div
       ref={containerRef}
-      className="relative mt-[70vh] flex h-[300vh] w-screen flex-col items-center gap-40 px-2"
+      className="relative mt-[70vh] flex h-[200vh] w-screen flex-col items-center gap-40 px-2 lg:h-[300vh]"
     >
       <div className="sticky top-1/2 flex -translate-y-1/2 flex-col">
         <div

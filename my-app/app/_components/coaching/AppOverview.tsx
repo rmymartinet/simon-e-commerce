@@ -2,31 +2,33 @@ import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Image from "next/image";
+import { textSplitLinesScrollTrigger } from "@/utils/common/textAnimation";
+import { useRef } from "react";
 
 gsap.registerPlugin(useGSAP, ScrollTrigger);
 
 const AppOverview = () => {
+  const titleContainerRef = useRef<HTMLDivElement>(null);
+
+  useGSAP(() => {
+    textSplitLinesScrollTrigger(
+      titleContainerRef as React.RefObject<HTMLElement>,
+    );
+  }, []);
+
   return (
     <div className="mt-[20vh] flex w-screen flex-col">
-      <div className="flex flex-col items-center gap-6 px-4">
+      <div
+        ref={titleContainerRef}
+        className="mb-20 flex flex-col items-center gap-6 px-4"
+      >
         <h1 className="max-w-7xl whitespace-normal break-words text-center text-4xl lg:text-7xl">
-          Une seule application, tout votre entraînement
+          Une seule application, tout vos entraînements
         </h1>
 
-        <div className="mb-40 flex items-center gap-4">
-          <p className="font-medium text-muted md:text-4xl">
-            Simplifiez vos entraînements avec VirtualGym
-          </p>
-          <div className="h-[30px] overflow-hidden rounded-xl lg:h-[5vh]">
-            <Image
-              src="/images/virtualgym_app/virtuagym.webp"
-              alt=""
-              width={100}
-              height={100}
-              className="h-full w-full object-cover"
-            />
-          </div>
-        </div>
+        <p className="font-medium text-muted md:text-4xl">
+          Simplifiez vos entraînements avec VirtualGym
+        </p>
       </div>
       <Image
         src="/images/virtualgym_app/hand_iphone.png"
