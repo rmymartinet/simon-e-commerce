@@ -1,9 +1,12 @@
-"use client";
+"use server";
 
-import Link from "next/link";
 import { FaCheck } from "react-icons/fa";
+import Button from "../_components/Button";
+import { auth } from "../_lib/auth";
 
-export default function SuccessPage() {
+export default async function SuccessPage() {
+  const session = await auth();
+
   return (
     <main className="min-w-screen flex h-screen flex-col items-center justify-center gap-10">
       <div className="w-max rounded-full bg-green-300 p-8">
@@ -13,15 +16,14 @@ export default function SuccessPage() {
           </div>
         </div>
       </div>
-      <h1 className="mb-3 scroll-m-20 text-5xl font-semibold tracking-tight transition-colors first:mt-0">
+      <h1 className="mb-3 scroll-m-20 text-center text-5xl font-semibold tracking-tight transition-colors first:mt-0">
         Bienvenue sur SM Coaching 🎉
       </h1>
-      <p>Vous allez être redirigé vers votre dashboard dans 5 secondes</p>
-      <Link href="/dashboard" className="mt-4">
-        <button className="bg-button rounded-md px-4 py-1 font-semibold text-white">
-          Aller dans mon dashboard
-        </button>
-      </Link>
+      {session ? (
+        <Button title="Allez sur mon dashboard" href="/dashboard" />
+      ) : (
+        <Button href="/" />
+      )}
     </main>
   );
 }

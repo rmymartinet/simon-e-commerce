@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { IoCloseOutline } from "react-icons/io5";
+import Button from "../_components/Button";
 
 export default function Cancel() {
   return (
@@ -11,18 +12,14 @@ export default function Cancel() {
           </div>
         </div>
       </div>
-      <h1 className="mb-3 scroll-m-20 text-5xl font-semibold tracking-tight transition-colors first:mt-0">
-        Payment Cancelled 😢
+      <h1 className="mb-3 scroll-m-20 text-center text-5xl font-semibold tracking-tight transition-colors first:mt-0">
+        Paiement Échoué😢
       </h1>
       <p className="leading-7">
         La bonne nouvelle, c&apos;est que vous pouvez réessayer 😊
       </p>
       <div className="mt-5">
-        <Link href="/pricing">
-          <button className="rounded-md bg-button px-4 py-1 font-semibold text-white">
-            Retourner à la page de paiement
-          </button>
-        </Link>
+        <Button title="Réessayer" href="/pricing" />
       </div>
     </main>
   );
