@@ -58,14 +58,14 @@ export default function Infos() {
         className="relative flex flex-col gap-20 rounded-xl bg-white p-8 text-black lg:grid lg:grid-cols-2"
       >
         <div className="h-[60vh] w-max">
-          <video
+          {/* <video
             src="/videos/infos/info.mp4"
             className="h-full w-full object-contain"
             loop
             muted
             autoPlay
             controls
-          ></video>
+          ></video> */}
         </div>
         <div className="relative grid">
           <div className="flex items-center gap-6 border-b border-muted py-6">
