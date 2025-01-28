@@ -59,7 +59,7 @@ export default function Infos() {
       >
         <div className="h-[60vh] w-max">
           <video
-            src="/videos/infos/info.mov"
+            src="/videos/infos/info.mp4"
             className="h-full w-full object-contain"
             loop
             muted
