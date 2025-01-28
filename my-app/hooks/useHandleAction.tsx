@@ -114,7 +114,7 @@ export default function useHandleAction(session: Session | null) {
         router.push("/sign-in");
         break;
       case !session && filterName === "programmes":
-        setCheckoutData({ productData: products[0], filterName });
+        setCheckoutData({ productData: products, filterName });
         router.push("/choose-auth");
         break;
 
