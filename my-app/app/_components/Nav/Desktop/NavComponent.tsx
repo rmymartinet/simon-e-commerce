@@ -11,11 +11,10 @@ import { FaCartShopping } from "react-icons/fa6";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { AiFillTikTok } from "react-icons/ai";
-import { useCart } from "@/app/context/CartContext";
-import CartSideBar from "../../Cart/CartSideBar";
 import { Session } from "next-auth";
 import { usePathname } from "next/navigation";
 import useWindowWidth from "@/hooks/useWindowWidth";
+import { useCart } from "@/app/context/CartContext";
 
 gsap.registerPlugin(useGSAP);
 
@@ -26,6 +25,9 @@ const NavComponent = ({ session }: { session: Session | null }) => {
   const navRightRef = useRef<HTMLDivElement | null>(null);
   const pathname = usePathname();
   const { width } = useWindowWidth();
+  const cart = useCart();
+
+  const numberOfProducts = cart.cart.length;
 
   const isDisplayNavBar =
     !/^\/studio/.test(pathname) &&
@@ -37,30 +39,6 @@ const NavComponent = ({ session }: { session: Session | null }) => {
     { title: "Infos", link: "/infos" },
     { title: "Blog", link: "/blog" },
   ];
-
-  const { isOpen, setIsOpen } = useCart();
-
-  const handleOpenCart = () => {
-    setIsOpen(true);
-  };
-
-  useGSAP(() => {
-    if (isOpen == false) {
-      gsap.to(navRightRef.current, {
-        opacity: 1,
-        scale: 1,
-        duration: 0.5,
-        ease: "power2.out",
-      });
-    } else {
-      gsap.to(navRightRef.current, {
-        opacity: 0,
-        scale: 0,
-        duration: 0.5,
-        ease: "power2.out",
-      });
-    }
-  }, [isOpen]);
 
   const handleMouseEnter = (index: number) => {
     setHoveredIndex(index);
@@ -129,7 +107,6 @@ const NavComponent = ({ session }: { session: Session | null }) => {
               </div>
             </div>
           </div>
-          <CartSideBar />
           <div
             ref={navRightRef}
             className={`padding program-button-container fixed right-5 top-5 z-[9999] flex items-center gap-6 rounded-button border border-[#3a3a3a] text-xl`}
@@ -142,12 +119,18 @@ const NavComponent = ({ session }: { session: Session | null }) => {
                 {session ? "Mon compte" : "Connexion"}
               </Link>
             </div>
-            <button
-              onClick={handleOpenCart}
-              className="z-50 grid place-content-center"
-            >
-              <FaCartShopping color="white" />
-            </button>
+            <Link href="/checkout">
+              <div className="relative">
+                <button className="z-50 grid place-content-center">
+                  <FaCartShopping color="white" />
+                </button>
+                {numberOfProducts > 0 && (
+                  <div className="absolute -bottom-3 -right-4 grid h-4 w-4 place-content-center rounded-full bg-button-gradient p-3 text-sm font-bold text-white">
+                    {numberOfProducts}
+                  </div>
+                )}
+              </div>
+            </Link>
           </div>
           <div
             className={`padding program-button-container fixed left-5 top-5 z-[9999] flex items-center gap-6 rounded-button border border-[#3a3a3a]`}

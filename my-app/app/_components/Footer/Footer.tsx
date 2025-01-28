@@ -11,7 +11,8 @@ const Footer = () => {
   const isDisplayNavBar =
     !/^\/studio/.test(pathname) &&
     pathname !== "/success" &&
-    pathname !== "/cancel";
+    pathname !== "/cancel" &&
+    pathname !== "/checkout";
 
   return (
     <>

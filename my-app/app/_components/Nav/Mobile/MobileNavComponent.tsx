@@ -12,13 +12,14 @@ import gsap from "gsap";
 import { AiFillTikTok } from "react-icons/ai";
 import { IoClose } from "react-icons/io5";
 import { IoPerson } from "react-icons/io5";
-import MobileCart from "../../Cart/MobileCart";
 import { usePathname } from "next/navigation";
 import useWindowWidth from "@/hooks/useWindowWidth";
+import { Session } from "next-auth";
+import { FaCartShopping } from "react-icons/fa6";
 
 gsap.registerPlugin(useGSAP);
 
-const MobileNavComponent = () => {
+const MobileNavComponent = ({ session }: { session: Session | null }) => {
   const navRef = useRef<HTMLDivElement | null>(null);
   const navLinksRef = useRef<(HTMLDivElement | null)[]>([]);
   const navRightRef = useRef<HTMLDivElement | null>(null);
@@ -143,21 +144,22 @@ const MobileNavComponent = () => {
                 className="mt-40 flex w-full items-center justify-between gap-6 text-xl"
               >
                 <Link
-                  href="/dashboard"
+                  href={session ? "/dashboard" : "/sign-in"}
                   className="relative flex items-center gap-8"
                 >
                   <button onClick={() => setIsClicked(false)}>
                     <IoPerson className="text-3xl" />
                   </button>
                 </Link>
-                <button
-                  onClick={() => {
-                    setIsClicked(false);
-                  }}
-                  className="z-50 grid place-content-center"
-                >
-                  <MobileCart position="relative" />
-                </button>
+
+                <Link href="/checkout">
+                  <button
+                    className="z-50 grid place-content-center"
+                    onClick={() => setIsClicked(false)}
+                  >
+                    <FaCartShopping color="white" />
+                  </button>
+                </Link>
               </div>
               <ul className="flex h-full w-screen flex-col justify-center gap-10">
                 {navLinks.map((link, index) => (
