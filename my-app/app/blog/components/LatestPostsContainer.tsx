@@ -92,21 +92,29 @@ function LatestPostsContainer({
       {filter === "grid" && (
         <div
           ref={gridPostsContainerRef}
-          className="mb-4 flex w-full flex-col lg:mb-[20vh] lg:flex-row"
+          className="grid-cols-blogHeader grid justify-items-center"
         >
-          <div className="h-1/2 w-full border-2 border-red-400">
-            {sanityPosts[0] && (
-              <Images
-                src={builder.image(sanityPosts[0].mainImage).url()}
-                alt=""
-                width={300}
-                height={300}
-                className="h-full w-full object-cover"
-              />
-            )}
+          <div className="h-1/2">
+            <Link
+              key={sanityPosts[0]._id}
+              href={`/blog/${sanityPosts[0].slug.current}`}
+            >
+              <div className="max-h-[70vh] overflow-hidden">
+                {sanityPosts[0] && (
+                  <Images
+                    src={builder.image(sanityPosts[0].mainImage).url()}
+                    alt=""
+                    width={1000}
+                    height={1000}
+                    quality={100}
+                    className="h-full w-full object-contain"
+                  />
+                )}
+              </div>
+            </Link>
             <div className="flex justify-between">
               <div className="mt-10 flex flex-col gap-10">
-                <div className="w-max rounded-full border border-black px-8 py-2 text-sm">
+                <div className="w-max rounded-full border border-white px-8 py-2 text-sm">
                   {sanityPosts[0].tags}
                 </div>
                 <h2 className="text-4xl">{sanityPosts[0].title}</h2>
@@ -114,47 +122,61 @@ function LatestPostsContainer({
               <span className="text-black">{sanityPosts[0]._createdAt}</span>
             </div>
           </div>
-          <div className="ml-6 mr-6 h-full w-[2px] bg-red-400"></div>
-          <div className="mt-4 lg:mt-0 lg:w-2/3">
-            <div className="w-full border-2 border-red-400">
-              {sanityPosts[0] && (
-                <Images
-                  src={builder.image(sanityPosts[0].mainImage).url()}
-                  alt=""
-                  width={500}
-                  height={500}
-                  quality={100}
-                  className="h-full w-full object-cover"
-                />
-              )}
+          <div className="ml-20 mr-20 h-full w-[2px] bg-muted"></div>
+          <div className="mt-4 lg:mt-0">
+            <div className="w-full">
+              <Link
+                key={sanityPosts[1]._id}
+                href={`/blog/${sanityPosts[1].slug.current}`}
+              >
+                <div className="h-[40vh]">
+                  {sanityPosts[1] && (
+                    <Images
+                      src={builder.image(sanityPosts[1].mainImage).url()}
+                      alt=""
+                      width={500}
+                      height={500}
+                      quality={100}
+                      className="h-full w-full object-contain"
+                    />
+                  )}
+                </div>
+              </Link>
               <div className="flex justify-between">
                 <div className="mt-10 flex flex-col gap-10">
-                  <div className="w-max rounded-full border border-black px-8 py-2 text-sm">
-                    {sanityPosts[0].tags}
+                  <div className="w-max rounded-full border border-white px-8 py-2 text-sm">
+                    {sanityPosts[1].tags}
                   </div>
-                  <h2 className="text-4xl">{sanityPosts[0].title}</h2>
+                  <h2 className="text-2xl">{sanityPosts[1].title}</h2>
                 </div>
-                <span className="text-black">{sanityPosts[0]._createdAt}</span>
+                <span className="text-black">{sanityPosts[1]._createdAt}</span>
               </div>
             </div>
-            <div className="mt-6 w-full border-2 border-red-400">
-              {sanityPosts[0] && (
-                <Images
-                  src={builder.image(sanityPosts[0].mainImage).url()}
-                  alt=""
-                  width={500}
-                  height={500}
-                  className="h-full w-full object-cover"
-                />
-              )}
+            <div className="mt-6 w-full">
+              <div className="h-[40vh]">
+                <Link
+                  key={sanityPosts[2]._id}
+                  href={`/blog/${sanityPosts[2].slug.current}`}
+                >
+                  {sanityPosts[2] && (
+                    <Images
+                      src={builder.image(sanityPosts[2].mainImage).url()}
+                      alt=""
+                      width={500}
+                      height={500}
+                      className="h-full w-full object-contain"
+                    />
+                  )}
+                </Link>
+              </div>
               <div className="flex justify-between">
                 <div className="mt-10 flex flex-col gap-10">
-                  <div className="w-max rounded-full border border-black px-8 py-2 text-sm">
-                    {sanityPosts[0].tags}
+                  <div className="w-max rounded-full border border-white px-8 py-2 text-sm">
+                    {sanityPosts[2].tags}
                   </div>
-                  <h2 className="text-4xl">{sanityPosts[0].title}</h2>
+                  <h2 className="text-2xl">{sanityPosts[2].title}</h2>
                 </div>
-                <span className="text-black">{sanityPosts[0]._createdAt}</span>
+                <span className="text-black">{sanityPosts[2]._createdAt}</span>
               </div>
             </div>
           </div>

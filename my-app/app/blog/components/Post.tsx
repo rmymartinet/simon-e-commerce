@@ -24,15 +24,19 @@ const Post = ({ post }: { post: SanityDocument }) => {
         </h1>
         <span>{formattedDate}</span>
       </div>
-      {post?.mainImage ? (
-        <Image
-          src={builder.image(post.mainImage).url()}
-          alt={post.title}
-          width={800}
-          height={600}
-          className="h-full w-full object-cover"
-        />
-      ) : null}
+      <div className="">
+        {post?.mainImage ? (
+          <Image
+            src={builder.image(post.mainImage).url()}
+            alt={post.title}
+            width={2000}
+            height={2000}
+            quality={100}
+            layout="responsive"
+            className="h-full w-full object-cover"
+          />
+        ) : null}
+      </div>
       <section className="prose-custom prose prose-xl">
         {post?.body ? (
           <div className="text-white">

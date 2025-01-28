@@ -9,7 +9,7 @@ const Posts = ({ posts = [] }: { posts: SanityDocument[] }) => {
   const builder = imageUrlBuilder(client);
 
   return (
-    <ul className="flex flex-col gap-8 border-2 border-red-400 md:grid md:grid-cols-2 lg:grid-cols-2 lg:px-0">
+    <ul className="flex flex-col gap-8 md:grid md:grid-cols-2 lg:grid-cols-2 lg:px-0">
       {posts.map((post) => (
         <li key={post._id} className="rounded-3xl">
           <Link
@@ -21,8 +21,9 @@ const Posts = ({ posts = [] }: { posts: SanityDocument[] }) => {
                 <Image
                   src={builder.image(post.mainImage).url()}
                   alt=""
-                  width={300}
-                  height={300}
+                  width={800}
+                  height={800}
+                  quality={100}
                   className="h-full w-full object-cover"
                 />
               </div>

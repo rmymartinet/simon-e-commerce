@@ -26,14 +26,9 @@ export const postType = defineType({
       validation: (rule) => rule.required(),
     }),
     defineField({
-      name: "teaser",
-      type: "string",
-      validation: (rule) => rule.required(),
-    }),
-    defineField({
       name: "resume",
-      type: "text",
-      validation: (rule) => rule.required(),
+      type: "array",
+      of: [{ type: "block" }, { type: "image" }],
     }),
     defineField({
       name: "minutesToRead",
