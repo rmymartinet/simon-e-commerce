@@ -51,11 +51,19 @@ function OffersOverview() {
   ];
 
   return (
-    <div className="mt-[20vh] flex h-screen w-full flex-col items-center gap-8 lg:mt-[30vh]">
-      <h1 ref={titleRef} className="mb-20 ml-4 self-start text-4xl lg:text-7xl">
+    <div className="mt-[20vh] flex w-full flex-col items-center px-4 lg:mt-[30vh]">
+      <h1
+        ref={titleRef}
+        className="self-start text-3xl md:text-4xl lg:text-7xl"
+      >
         Des plans pensés pour vous
       </h1>
-      <div className="grid grid-cols-2 text-xl">
+      <p className="font-medium text-muted md:text-3xl">
+        Choisissez l’autonomie avec un programme adapté ou optez pour un
+        coaching personnalisé avec un suivi dédié. Votre progression, à votre
+        rythme.
+      </p>
+      <div className="mb-10 mt-10 grid grid-cols-2 text-xl">
         <div className="flex flex-col gap-2">
           <button
             onClick={() => setFilter("program")}
@@ -84,10 +92,12 @@ function OffersOverview() {
           programData.map((data, index) => (
             <div
               key={index}
-              className={`grid h-[40vh] w-full grid-rows-3 items-center justify-items-center gap-10 border-b border-t border-muted p-10 lg:items-start ${index === 1 ? "lg:border-l lg:border-r" : ""}`}
+              className={`grid w-full grid-rows-3 items-center justify-items-center gap-10 border-b border-t border-muted p-10 lg:items-start ${index === 1 ? "lg:border-l lg:border-r" : ""}`}
             >
               <h2 className="text-3xl">{data.title}</h2>
-              <p className="text-center lg:text-start">{data.description}</p>
+              <p className="text-pretty text-center text-sm lg:text-base">
+                {data.description}
+              </p>
               <Button href="/pricing" />
             </div>
           ))}
@@ -95,10 +105,12 @@ function OffersOverview() {
           coachingData.map((data, index) => (
             <div
               key={index}
-              className={`grid h-[40vh] w-full grid-rows-3 items-center justify-items-center gap-10 border-b border-t border-muted p-10 lg:items-start ${index === 1 ? "lg:border-l lg:border-r" : ""}`}
+              className={`flex w-full flex-col items-center justify-items-center gap-10 border-b border-t border-muted p-10 lg:grid lg:grid-rows-3 lg:items-start lg:gap-0 ${index === 1 ? "lg:border-l lg:border-r" : ""}`}
             >
               <h2 className="text-3xl">{data.title}</h2>
-              <p>{data.description}</p>
+              <p className="text-pretty text-center text-sm lg:text-base">
+                {data.description}
+              </p>
               <Button href="/pricing" />
             </div>
           ))}
