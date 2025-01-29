@@ -14,7 +14,7 @@ export const coachingData = [
     price: 177,
     description:
       "Testez nos services et observez les premiers changements. Parfait pour initier votre transformation de style de vie.",
-    priceId: process.env.NEXT_PUBLIC_STRIPE_PRICE_ID!,
+    priceId: process.env.NEXT_PUBLIC_STRIPE_COACHING_BEGINNER_PRICE_ID!,
     includes: coachingIncludes3Month,
     imageUrl: "/images/about/about_simon.webp",
   },
@@ -26,7 +26,7 @@ export const coachingData = [
     price: 147,
     description:
       "Ancrez des habitudes saines et obtenez des résultats durables. Le meilleur équilibre entre durée et efficacité.",
-    priceId: process.env.NEXT_PUBLIC_STRIPE_PRICE_ID!,
+    priceId: process.env.NEXT_PUBLIC_STRIPE_COACHING_INTERMEDIATE_PRICE_ID!,
     mostPopular: true,
     includes: coachingIncludes6Month,
     imageUrl: "/images/about/about_simon.webp",
@@ -39,7 +39,7 @@ export const coachingData = [
     price: 137,
     description:
       "Transformez-vous totalement avec un suivi intensif. L'engagement ultime pour un changement profond et pérenne.",
-    priceId: process.env.NEXT_PUBLIC_STRIPE_PRICE_ID!,
+    priceId: process.env.NEXT_PUBLIC_STRIPE_COACHING_ADVANCED_PRICE_ID!,
     includes: coachingIncludes9Month,
     imageUrl: "/images/about/about_simon.webp",
   },
