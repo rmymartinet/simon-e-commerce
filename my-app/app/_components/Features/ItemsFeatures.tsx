@@ -17,9 +17,9 @@ const ItemsFeatures = ({ logo, title, paragraph }: ItemsFeaturesProps) => {
 
   return (
     <div ref={containerRef} className="flex flex-col items-center gap-4 px-4">
-      <div className="rounded-full border-2 p-8">{logo}</div>
-      <h2 className="text-2xl">{title}</h2>
-      <p className="max-w-lg whitespace-normal text-pretty break-words text-center">
+      <div className="rounded-full border-2 p-4 lg:p-6">{logo}</div>
+      <h2 className="text-center text-2xl">{title}</h2>
+      <p className="text-center font-medium text-muted md:text-3xl">
         {paragraph}
       </p>
     </div>
