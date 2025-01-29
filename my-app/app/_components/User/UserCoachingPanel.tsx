@@ -7,7 +7,7 @@ function UserCoachingPanel({
 }) {
   return (
     <div className="program-button-container rounded-xl border-card">
-      <div className="flex justify-between p-6">
+      <div className="flex flex-wrap justify-between p-6">
         <strong className="text-xl">Votre abonnement</strong>
         {subscriptionInfos.nextPaymentDate === "expired" ||
         subscriptionInfos.nextPaymentDate === "N/A" ? (
