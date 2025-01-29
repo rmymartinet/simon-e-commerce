@@ -16,6 +16,7 @@ import { usePathname } from "next/navigation";
 import useWindowWidth from "@/hooks/useWindowWidth";
 import { Session } from "next-auth";
 import { FaCartShopping } from "react-icons/fa6";
+import { useCart } from "@/app/context/CartContext";
 
 gsap.registerPlugin(useGSAP);
 
@@ -26,6 +27,9 @@ const MobileNavComponent = ({ session }: { session: Session | null }) => {
   const [isClicked, setIsClicked] = useState(false);
   const socialIconRefs = useRef<(HTMLAnchorElement | null)[]>([]);
   const navActionRef = useRef<HTMLButtonElement | null>(null);
+  const shoppingIconRef = useRef<HTMLDivElement | null>(null);
+  const menuRef = useRef<HTMLDivElement | null>(null);
+  const cart = useCart();
 
   const pathname = usePathname();
   const { width } = useWindowWidth();
@@ -35,6 +39,8 @@ const MobileNavComponent = ({ session }: { session: Session | null }) => {
     !/^\/studio/.test(pathname) &&
     pathname !== "/success" &&
     pathname !== "/cancel";
+
+  const numberOfProducts = cart.cart.length;
 
   const navLinks = [
     { title: "Home", link: "/" },
@@ -68,7 +74,6 @@ const MobileNavComponent = ({ session }: { session: Session | null }) => {
   ];
 
   useGSAP(() => {
-    gsap.set(navActionRef.current, { opacity: 1 });
     gsap.set(socialIconRefs.current, { y: 100 });
   }, []);
 
@@ -88,11 +93,6 @@ const MobileNavComponent = ({ session }: { session: Session | null }) => {
       stagger: 0.1,
     });
 
-    gsap.to(navActionRef.current, {
-      opacity: 1,
-      duration: 0.5,
-    });
-
     gsap.to(navLinksRef.current, {
       y: !isClicked ? -50 : 0,
       delay: !isClicked ? 0 : 0.5,
@@ -108,6 +108,20 @@ const MobileNavComponent = ({ session }: { session: Session | null }) => {
       ease: "power2.out",
       stagger: 0.1,
     });
+
+    gsap.to(shoppingIconRef.current, {
+      x: !isClicked ? 0 : -100,
+      delay: !isClicked ? 0.8 : 0.2,
+      duration: 0.8,
+      ease: "power2.out",
+    });
+
+    gsap.to(menuRef.current, {
+      x: !isClicked ? 0 : 100,
+      delay: !isClicked ? 0.8 : 0.2,
+      duration: 0.8,
+      ease: "power2.out",
+    });
   }, [isClicked]);
 
   const handleClick = () => {
@@ -118,26 +132,47 @@ const MobileNavComponent = ({ session }: { session: Session | null }) => {
     <>
       {isDisplayNavBar && width <= 1024 && (
         <>
-          <button
-            ref={navActionRef}
-            onClick={handleClick}
-            className="opacity-1 fixed right-5 top-10 z-[99999999] flex flex-col gap-2"
-          >
-            {!isClicked ? (
-              <div className="flex h-10 w-10 flex-col items-center justify-center gap-1 rounded-full border">
+          <div className="opacity-1 fixed top-10 z-[9999] flex w-full items-center justify-between gap-2 px-4">
+            <Link href="/checkout">
+              <div
+                ref={shoppingIconRef}
+                className="relative flex h-10 w-10 flex-col items-center justify-center gap-1 rounded-full border"
+              >
+                <button className="z-50 grid place-content-center">
+                  <FaCartShopping color="white" />
+                </button>
+                {numberOfProducts > 0 && (
+                  <div className="absolute -bottom-3 -right-2 grid h-4 w-4 place-content-center rounded-full bg-button-gradient p-3 text-sm font-bold text-white">
+                    {numberOfProducts}
+                  </div>
+                )}
+              </div>
+            </Link>
+            <button onClick={handleClick} className="flex flex-col gap-2">
+              <div
+                ref={menuRef}
+                className="flex h-10 w-10 flex-col items-center justify-center gap-1 rounded-full border"
+              >
                 <div className="h-[2px] w-4 rounded-full bg-white"></div>
                 <div className="h-[2px] w-4 rounded-full bg-white"></div>
               </div>
-            ) : (
-              <div className="flex h-10 w-10 flex-col items-center justify-center gap-1 rounded-full border">
-                <IoClose className="text-xl" />
-              </div>
-            )}
-          </button>
+            </button>
+          </div>
           <nav
             ref={navRef}
             className="fixed inset-0 z-[999999] flex h-[100dvh] w-screen -translate-y-[100%] flex-col bg-black px-10 text-white"
           >
+            <button
+              ref={navActionRef}
+              onClick={handleClick}
+              className="flex flex-col gap-2"
+            >
+              {isClicked && (
+                <div className="fixed right-4 top-10 grid h-10 w-10 flex-col place-content-center rounded-full border">
+                  <IoClose className="text-xl" />
+                </div>
+              )}
+            </button>
             <div className="flex h-full flex-col items-center justify-center py-4">
               <div
                 ref={navRightRef}
@@ -153,12 +188,16 @@ const MobileNavComponent = ({ session }: { session: Session | null }) => {
                 </Link>
 
                 <Link href="/checkout">
-                  <button
-                    className="z-50 grid place-content-center"
-                    onClick={() => setIsClicked(false)}
-                  >
-                    <FaCartShopping color="white" />
-                  </button>
+                  <div className="relative">
+                    <button className="z-50 grid place-content-center">
+                      <FaCartShopping color="white" />
+                    </button>
+                    {numberOfProducts > 0 && (
+                      <div className="absolute -bottom-3 -right-4 grid h-4 w-4 place-content-center rounded-full bg-button-gradient p-3 text-sm font-bold text-white">
+                        {numberOfProducts}
+                      </div>
+                    )}
+                  </div>
                 </Link>
               </div>
               <ul className="flex h-full w-screen flex-col justify-center gap-10">
