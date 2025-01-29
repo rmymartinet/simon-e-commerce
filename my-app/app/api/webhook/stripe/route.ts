@@ -38,7 +38,11 @@ async function handleSubscription(
 
   const endDate = new Date(startDate);
   endDate.setMonth(endDate.getMonth() + months);
-  const endDateString = endDate.toISOString();
+  const endDateTimestamp = Math.floor(endDate.getTime() / 1000);
+
+  await stripe.subscriptions.update(subscriptionId, {
+    cancel_at: endDateTimestamp,
+  });
 
   await prisma.user.update({
     where: { id: existingUser.id },
@@ -54,7 +58,7 @@ async function handleSubscription(
 
   const subscriptionData: SubscriptionData = {
     startDate: startDate.toISOString(),
-    endDate: endDateString,
+    endDate: endDate.toISOString(),
     titlePlan: session.metadata?.titlePlan || "",
     status: session.metadata?.status || "",
   };
@@ -93,7 +97,6 @@ async function handleProgram(
   const userPurchaseData = {
     titlePlan: session.metadata?.titlePlan as string,
   };
-
 
   return prisma.purchase.create({
     data: {
@@ -194,8 +197,6 @@ export async function POST(req: Request) {
 
         const subscriptionId = session.subscription as string;
 
-        console.log("Session completed:", session.id);
-
         const email = session.customer_details?.email || "";
         const existingUser = await prisma.user.findUnique({
           where: { email },
@@ -204,7 +205,7 @@ export async function POST(req: Request) {
         if (existingUser) {
           if (session.metadata?.subscription) {
             await handleSubscription(existingUser, session, subscriptionId);
-            await handleProgram(existingUser, session, clearCart);
+            await handleProgram(existingUser, session);
             await handleProgram(existingUser, session);
             console.log("Program purchased");
           }
