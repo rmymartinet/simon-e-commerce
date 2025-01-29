@@ -186,7 +186,6 @@ const MobileNavComponent = ({ session }: { session: Session | null }) => {
                     <IoPerson className="text-xl" />
                   </button>
                 </Link>
-
                 <Link href="/checkout">
                   <div className="relative">
                     <button className="z-50 grid place-content-center">
