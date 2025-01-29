@@ -51,19 +51,19 @@ function OffersOverview() {
   ];
 
   return (
-    <div className="mt-[20vh] flex w-full flex-col items-center px-4 lg:mt-[30vh]">
+    <div className="mt-[20vh] flex w-full flex-col px-4 lg:mt-[30vh]">
       <h1
         ref={titleRef}
         className="self-start text-3xl md:text-4xl lg:text-7xl"
       >
         Des plans pensés pour vous
       </h1>
-      <p className="font-medium text-muted md:text-3xl">
+      <p className="max-w-4xl font-medium text-muted md:text-xl">
         Choisissez l’autonomie avec un programme adapté ou optez pour un
         coaching personnalisé avec un suivi dédié. Votre progression, à votre
         rythme.
       </p>
-      <div className="mb-10 mt-10 grid grid-cols-2 text-xl">
+      <div className="mb-10 mt-10 grid grid-cols-2 self-center text-xl">
         <div className="flex flex-col gap-2">
           <button
             onClick={() => setFilter("program")}
