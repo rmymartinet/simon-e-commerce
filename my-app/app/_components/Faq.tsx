@@ -6,7 +6,7 @@ const Faq = ({ filterName }: { filterName: string }) => {
     <section className="relative self-center">
       <div className="mb-20 flex flex-col justify-center lg:items-center">
         <h1 className="text-3xl md:text-4xl lg:text-7xl">Faq</h1>
-        <p className="font-medium text-muted md:text-3xl">
+        <p className="font-medium text-muted md:text-xl">
           Les questions les plus fréquemment posées.
         </p>
       </div>
