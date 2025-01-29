@@ -33,7 +33,7 @@ function PrincingComponents({ session }: { session: Session | null }) {
         </div>
         <p
           ref={subtitleRef}
-          className="text-center text-xl font-medium md:text-start lg:mt-4"
+          className="text-start font-medium lg:mt-4 lg:text-xl"
         >
           Programme sans suivi. Coaching avec suivi.
         </p>
