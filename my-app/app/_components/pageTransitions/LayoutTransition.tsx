@@ -113,7 +113,7 @@ export function LayoutTransition({
           animate="animate"
           exit="exit"
         >
-          <motion.div className="fixed left-1/2 top-1/2 grid h-max w-max -translate-x-1/2 -translate-y-1/2 place-content-center">
+          <motion.div className="relative grid place-content-center">
             <motion.div
               variants={bgTitleIn}
               initial="initial"
