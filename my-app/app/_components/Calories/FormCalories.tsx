@@ -42,7 +42,6 @@ const FormCalories = ({
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    //newErrors est un objet vide avec des clés qui correspondent aux champs du formulaire
     const newErrors: { [key: string]: string } = {};
 
     if (!weight) newErrors.weight = "Veuillez entrer votre poids.";
@@ -101,8 +100,10 @@ const FormCalories = ({
 
   return (
     <div className="relative flex w-full flex-col items-center">
-      <div className={`flex items-end gap-2 ${showResults ? "mb-16" : "mb-8"}`}>
-        <h1 className="text-center text-4xl font-semibold lg:text-7xl">
+      <div
+        className={`flex flex-wrap items-end gap-2 ${showResults ? "mb-16" : "mb-8"}`}
+      >
+        <h1 className="text-center text-3xl font-semibold md:text-4xl lg:text-7xl">
           Calculez vos calories
         </h1>
         <IoFastFoodOutline size={40} />
