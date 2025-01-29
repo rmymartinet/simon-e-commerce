@@ -5,6 +5,8 @@ import { AddToCartButtonProps, CartItemProps } from "@/types/types";
 const AddToCartButton = ({ productData }: AddToCartButtonProps) => {
   const addToCart = useAddToCart();
 
+  console.log("productData", productData);
+
   const handleClick = () => {
     const cartItem: CartItemProps = {
       type: productData.type,
