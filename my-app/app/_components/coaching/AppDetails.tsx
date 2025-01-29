@@ -15,8 +15,8 @@ const AppDetails = () => {
     gsap.set(iphone2Ref.current, { opacity: 0, y: 100 });
     ScrollTrigger.create({
       trigger: containerRef.current,
-      start: "top center",
-      end: "center center",
+      start: "top top",
+      end: "+=150%",
       scrub: true,
       onEnter: () => {
         gsap.to(iphone1Ref.current, {
@@ -67,7 +67,8 @@ const AppDetails = () => {
             <h1 className="mb-4 text-center text-2xl font-bold md:text-start">
               Affinez chaque détail pour mieux performer
             </h1>
-            <p className="text-md mt-4 text-center text-muted md:mt-0 md:text-start">
+
+            <p className="text-md mt-4 hyphens-auto text-pretty text-justify text-muted md:mt-0 md:text-center lg:text-start">
               Vos programmes ne sont{" "}
               <span className="font-semibold text-white">pas figés</span> :
               ajustez chaque séance selon vos ressentis. En cas de besoin,{" "}
@@ -90,8 +91,7 @@ const AppDetails = () => {
             <h1 className="mb-4 text-center text-2xl font-bold md:text-start">
               Des démonstrations vidéo pour chaque mouvement
             </h1>
-
-            <p className="text-md mt-4 text-center text-muted md:mt-0 md:text-start">
+            <p className="text-md mt-4 hyphens-auto text-pretty text-justify text-muted md:mt-0 md:text-center lg:text-start">
               Ne restez jamais dans l&apos;incertitude : chaque mouvement est
               expliqué en vidéo dans{" "}
               <span className="font-semibold text-white">l’application</span>,
