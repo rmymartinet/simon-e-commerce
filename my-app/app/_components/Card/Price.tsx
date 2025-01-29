@@ -13,11 +13,15 @@ const Price = ({
       <span className="mr-2 text-8xl font-semibold">{price}</span>
       {mounth !== 0 ? (
         <div className="self-end">
-          <p className="text-base">/ mois</p>
-          <p className="text-base font-semibold">engagement {mounth} mois</p>
+          <p>/ mois</p>
+          <p className="text-sm font-semibold md:text-base">
+            engagement {mounth} mois
+          </p>
         </div>
       ) : (
-        <p className="self-end text-base font-semibold">sans engagement</p>
+        <p className="self-end text-sm font-semibold md:text-base">
+          sans engagement
+        </p>
       )}
     </div>
     {mounth !== 0 && (

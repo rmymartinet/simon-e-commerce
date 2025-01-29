@@ -27,14 +27,13 @@ function PrincingComponents({ session }: { session: Session | null }) {
   return (
     <>
       <div className="flex w-full flex-col justify-center">
-        <div ref={titleRef} className="mb-10 flex flex-col">
-          <h1 className="text-4xl lg:text-8xl">Tarifs simples</h1>
-          <h1 className="text-4xl lg:text-8xl">Conçus pour vous.</h1>
+        <div ref={titleRef} className="flex flex-col">
+          <h1 className="text-3xl md:text-4xl lg:text-7xl">Tarifs simples</h1>
+          <h1 className="text-3xl md:text-4xl lg:text-7xl">
+            Conçus pour vous.
+          </h1>
         </div>
-        <p
-          ref={subtitleRef}
-          className="text-start font-medium lg:mt-4 lg:text-xl"
-        >
+        <p ref={subtitleRef} className="font-medium text-muted md:text-3xl">
           Programme sans suivi. Coaching avec suivi.
         </p>
       </div>
@@ -58,7 +57,7 @@ function PrincingComponents({ session }: { session: Session | null }) {
       )}
       {filterName === "coaching" && (
         <FeaturesContainer
-          title="Accès Premium"
+          title="Accès Membre"
           text="Débloquez un potentiel illimité avec notre abonnement. Un accompagnement personnalisé et des résultats durables, à chaque étape."
           coaching={true}
         >

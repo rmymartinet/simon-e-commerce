@@ -46,19 +46,19 @@ const Filter = ({ filterName, setFilterName }: FilterProps) => {
       ref={containerRef}
       className="relative self-start overflow-hidden rounded-full border border-violet-300"
     >
-      <div className="relative grid grid-cols-2 justify-items-center gap-10 px-4 py-2">
+      <div className="relative grid grid-cols-2 justify-items-center gap-10 px-2 py-1 lg:px-4 lg:py-2">
         <div
           ref={bgFilterRef}
           className="absolute z-10 h-full w-1/2 rounded-full bg-violet-300"
         ></div>
         <button
-          className={`z-[99] cursor-pointer text-lg font-semibold`}
+          className={`z-[99] cursor-pointer font-semibold md:text-lg`}
           onClick={() => setFilterName("programmes")}
         >
           Programmes
         </button>
         <button
-          className={`z-[99] cursor-pointer text-lg font-semibold`}
+          className={`z-[99] cursor-pointer font-semibold md:text-lg`}
           onClick={() => setFilterName("coaching")}
         >
           Coaching
