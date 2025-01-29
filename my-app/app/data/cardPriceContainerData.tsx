@@ -64,7 +64,7 @@ export const programData = [
     price: 57,
     description:
       "Consolidez vos acquis et progressez à votre rythme. Une approche équilibrée pour des résultats visibles",
-    priceId: process.env.NEXT_PUBLIC_STRIPE_PROGRAM_BEGINNER_PRICE_ID!,
+    priceId: process.env.NEXT_PUBLIC_STRIPE_PROGRAM_INTERMEDIATE_PRICE_ID!,
     mostPopular: true,
     includes: programIncludes,
     imageUrl: "/images/card_program/intermediate.png",
@@ -76,7 +76,7 @@ export const programData = [
     price: 67,
     description:
       "Pour ceux qui veulent aller plus loin : un programme complet pour des objectifs ambitieux",
-    priceId: process.env.NEXT_PUBLIC_STRIPE_PROGRAM_BEGINNER_PRICE_ID!,
+    priceId: process.env.NEXT_PUBLIC_STRIPE_PROGRAM_ADVANCED_PRICE_ID!,
     includes: programIncludes,
     imageUrl: "/images/card_program/advanced.png",
   },
