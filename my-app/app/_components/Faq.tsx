@@ -4,9 +4,9 @@ import Accordion from "./Accordion";
 const Faq = ({ filterName }: { filterName: string }) => {
   return (
     <section className="relative self-center">
-      <div className="mb-20 flex flex-col items-center justify-center">
-        <h1 className="text-7xl font-bold">Faq</h1>
-        <p className="text-textOpacity text-lg font-semibold">
+      <div className="mb-20 flex flex-col justify-center lg:items-center">
+        <h1 className="text-3xl md:text-4xl lg:text-7xl">Faq</h1>
+        <p className="font-medium text-muted md:text-3xl">
           Les questions les plus fréquemment posées.
         </p>
       </div>
