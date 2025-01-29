@@ -21,11 +21,14 @@ const CoachingOverview = () => {
         <div className="flex flex-col items-center justify-center">
           <h1
             ref={titleRef}
-            className="text-3xl md:max-w-7xl md:text-4xl lg:text-7xl"
+            className="text-3xl md:max-w-7xl md:text-4xl lg:text-center lg:text-7xl"
           >
             Un coaching sur mesure, à votre image
           </h1>
-          <p ref={textRef} className="font-medium text-muted md:text-3xl">
+          <p
+            ref={textRef}
+            className="max-w-5xl font-medium text-muted md:text-xl lg:text-center"
+          >
             Planifions ensemble votre réussite : un premier échange sur
             WhatsApp, un rendez-vous dédié, et un suivi régulier pour rester sur
             la bonne voie.

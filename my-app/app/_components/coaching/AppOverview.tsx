@@ -28,11 +28,11 @@ const AppOverview = () => {
 
   return (
     <div className="mt-[20vh] flex w-screen flex-col px-4">
-      <div ref={titleContainerRef} className="mb-20 flex flex-col items-center">
+      <div ref={titleContainerRef} className="mb-20 flex flex-col">
         <h1 className="text-pretty break-words text-3xl md:text-4xl lg:max-w-5xl lg:text-start lg:text-7xl">
           Un programme évolutif, adapté à vous
         </h1>
-        <p className="font-medium text-muted md:text-3xl">
+        <p className="max-w-5xl font-medium text-muted md:text-xl">
           Accédez à votre programme sur Virtuagym, ajustez vos séances en temps
           réel et suivez votre évolution jour après jour.
         </p>
