@@ -9,9 +9,11 @@ gsap.registerPlugin(useGSAP);
 function OffersOverview() {
   const [filter, setFilter] = useState("program");
   const titleRef = useRef<HTMLHeadingElement>(null);
+  const textRef = useRef<HTMLParagraphElement>(null);
 
   useGSAP(() => {
     textSplitLinesScrollTrigger(titleRef as React.RefObject<HTMLElement>);
+    textSplitLinesScrollTrigger(textRef as React.RefObject<HTMLElement>);
   }, []);
 
   const programData = [
@@ -58,7 +60,7 @@ function OffersOverview() {
       >
         Des plans pensés pour vous
       </h1>
-      <p className="max-w-4xl font-medium text-muted md:text-xl">
+      <p ref={textRef} className="max-w-4xl font-medium text-muted md:text-xl">
         Choisissez l’autonomie avec un programme adapté ou optez pour un
         coaching personnalisé avec un suivi dédié. Votre progression, à votre
         rythme.
