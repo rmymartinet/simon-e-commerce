@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { IoCloseOutline } from "react-icons/io5";
 import Button from "../_components/Button";
 

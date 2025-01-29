@@ -10,7 +10,6 @@ import CoachingOverview from "./_components/coaching/CoachingOverview";
 import AppDetails from "./_components/coaching/AppDetails";
 import CoachingNutrition from "./_components/coaching/CoachingNutrition";
 import AppOverview from "./_components/coaching/AppOverview";
-import EvolvingProgram from "./_components/program/EvolvingProgram";
 import NutritionAdvice from "./_components/program/NutritionAdvice";
 import FeedBackCoaching from "./_components/coaching/FeedBackCoaching";
 import OffersOverview from "./_components/OffersOverview";
@@ -23,7 +22,6 @@ export default function Home() {
       <Header />
       <OffersOverview />
       <ProgramOverview />
-      {/* <EvolvingProgram /> */}
       <NutritionAdvice />
       <Youtube />
       <CoachingOverview />
