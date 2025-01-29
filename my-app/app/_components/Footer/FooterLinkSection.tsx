@@ -1,9 +1,11 @@
+import Link from "next/link";
+
 const FooterLinkSection = ({
   title,
   links,
 }: {
   title: string;
-  links: string[];
+  links: { title: string; link: string }[];
 }) => {
   return (
     <div className="flex flex-col gap-6">
@@ -12,7 +14,9 @@ const FooterLinkSection = ({
       </h3>
       <ul className="flex flex-col items-start gap-4 text-2xl font-medium text-muted">
         {links.map((link, idx) => (
-          <li key={idx}>{link}</li>
+          <li key={idx}>
+            <Link href={link.link}>{link.title}</Link>
+          </li>
         ))}
       </ul>
     </div>
