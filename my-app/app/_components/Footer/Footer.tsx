@@ -25,7 +25,7 @@ const Footer = () => {
   return (
     <>
       {isDisplayNavBar && (
-        <footer className="relative mt-40 flex min-h-screen w-full flex-col justify-between">
+        <footer className="relative mt-40 flex h-[50vh] w-full flex-col justify-between">
           <div className="flex flex-col justify-between px-4">
             <div className="mb-[20vh] flex flex-col justify-between gap-20 lg:flex-row lg:gap-0">
               <div className="relative flex h-max flex-col gap-6">
