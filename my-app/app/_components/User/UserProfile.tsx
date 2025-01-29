@@ -15,7 +15,6 @@ const UserProfile = ({ userData }: { userData: UserDataProps }) => {
       [name]: value,
     }));
   };
-  console.log("formData", formData);
 
   const handleUpdateProfile = () => {
     setIsEditing(false);
@@ -55,7 +54,7 @@ const UserProfile = ({ userData }: { userData: UserDataProps }) => {
             name="name"
             value={formData.name}
             onChange={handleInputChange}
-            className="rounded-md border p-1"
+            className="rounded-md border p-1 text-black"
           />
         ) : (
           <p>{userData.name || "Aucun"}</p>
@@ -69,7 +68,7 @@ const UserProfile = ({ userData }: { userData: UserDataProps }) => {
             name="email"
             value={formData.email}
             onChange={handleInputChange}
-            className="rounded-md border p-1"
+            className="rounded-md border p-1 text-black"
           />
         ) : (
           <p>{userData.email || "N/A"}</p>
