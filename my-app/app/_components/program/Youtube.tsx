@@ -41,7 +41,10 @@ const Youtube = () => {
         >
           Tous vos exercices en vidéo
         </h1>
-        <p ref={textRef} className="font-medium text-muted md:text-3xl">
+        <p
+          ref={textRef}
+          className="max-w-5xl font-medium text-muted md:text-xl"
+        >
           Accédez à mes vidéos exclusives sur YouTube pour perfectionner vos
           mouvements et exécuter chaque exercice avec précision. Disponible pour
           tous les membres et programmes.

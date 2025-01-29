@@ -25,7 +25,7 @@ const ProgramOverview = () => {
         <h1 className="text-3xl md:text-4xl lg:text-7xl">
           Programmes adaptés à votre niveau
         </h1>
-        <p className="font-medium text-muted md:text-3xl">
+        <p className="font-medium text-muted md:text-xl">
           Débutant, intermédiaire ou confirmé : progressez à votre rythme
         </p>
       </div>
