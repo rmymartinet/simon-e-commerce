@@ -1,6 +1,7 @@
 import { prisma } from "@/app/_lib/prisma";
 import Stripe from "stripe";
 import crypto from "crypto";
+import { sendProgramEmail } from "@/app/_lib/mailer";
 
 const stripe = new Stripe(process.env.NEXT_PUBLIC_STRIPE_SECRET_KEY!, {
   typescript: true,
@@ -85,9 +86,14 @@ async function handleProgram(
     },
   });
 
+  const email = session.customer_details?.email || "";
+  const programTitle = session.metadata?.titlePlan as string;
+  await sendProgramEmail(email, programTitle);
+
   const userPurchaseData = {
     titlePlan: session.metadata?.titlePlan as string,
   };
+
 
   return prisma.purchase.create({
     data: {
@@ -142,8 +148,6 @@ async function getUserAndSubscription(event: Stripe.Event) {
       stripeCustomerId: customerId,
     },
   });
-
-  console.log("User found for subscription:", user);
 
   if (!user) {
     console.error("User not found for subscription:", subscription.id);
@@ -200,7 +204,7 @@ export async function POST(req: Request) {
         if (existingUser) {
           if (session.metadata?.subscription) {
             await handleSubscription(existingUser, session, subscriptionId);
-          } else {
+            await handleProgram(existingUser, session, clearCart);
             await handleProgram(existingUser, session);
             console.log("Program purchased");
           }
