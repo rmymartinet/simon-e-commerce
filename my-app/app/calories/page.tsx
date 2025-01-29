@@ -2,10 +2,9 @@
 
 import { useEffect, useRef, useState, useMemo } from "react";
 import FormCalories from "../_components/Calories/FormCalories";
-import Question from "../_components/Calories/Questions";
 import { useAnimation } from "../context/AnimationContext";
 import gsap from "gsap";
-import AvailableOfferContainer from "../_components/AvailableOfferContainer";
+import OffersOverview from "../_components/OffersOverview";
 
 export default function Calorie() {
   const [genre, setGenre] = useState("female");
@@ -19,6 +18,16 @@ export default function Calorie() {
   const { isAnimating } = useAnimation();
   const containerRef = useRef(null);
   const [showResults, setShowResults] = useState(false);
+
+  const questions = [
+    "Comment perdre du poids ?",
+    "Comment perdre du gras ?",
+    "Comment gagner du muscle ?",
+    "Perdre du gras et gagner du muscle ?",
+    "Que manger pour maigrir ?",
+    "Combien de calories manger ?",
+    "Combien de protéines consommer ?",
+  ];
 
   const calculateBMR = (
     weight: number,
@@ -153,28 +162,26 @@ export default function Calorie() {
         showResults={showResults}
         setShowResults={setShowResults}
       />
-      <div
-        className={`${showResults ? "mt-[30vh]" : ""} flex flex-col items-center gap-10`}
-      >
-        <div className="flex flex-col items-center gap-4">
-          <h1 className="text-center text-4xl font-bold lg:text-5xl">
-            Vous voulez gagner du temps ?
-          </h1>
-          <span className="text-textOpacity text-center text-lg font-semibold">
-            Vous vous êtes sûrement posé ces questions
-          </span>
+      <div className={`${showResults ? "mt-[30vh]" : ""} flex flex-col px-4`}>
+        <h1 className="text-3xl md:text-4xl lg:text-7xl">
+          Vous voulez gagner du temps ?
+        </h1>
+        <p className="font-medium text-muted md:text-xl">
+          Vous vous êtes sûrement posé ces questions
+        </p>
+        <div className="mt-10 flex flex-col justify-center gap-4 lg:items-end">
+          {questions.map((quesiton, index) => (
+            <div
+              key={index}
+              className="flex w-full items-center gap-10 border-b border-muted py-8 lg:w-1/2"
+            >
+              <p className="text-muted lg:text-3xl">0{index + 1}</p>
+              <p className="lg:text-4xl">{quesiton}</p>{" "}
+            </div>
+          ))}
         </div>
-        <div className="flex flex-wrap items-center justify-center gap-4 px-20 text-sm">
-          <Question question="Comment perdre du poids ?" />
-          <Question question="Comment perdre du gras ?" />
-          <Question question="Comment gagner du muscle ?" />
-          <Question question="Perdre du gras et gagner du muscle ?" />
-          <Question question="Que manger pour maigrir ?" />
-          <Question question="Combien de calories manger ?" />
-          <Question question="Combien de protéines consommer ?" />
-        </div>
-        <AvailableOfferContainer />
       </div>
+      <OffersOverview />
     </div>
   );
 }
