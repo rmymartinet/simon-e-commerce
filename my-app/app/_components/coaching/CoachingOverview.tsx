@@ -6,9 +6,11 @@ import { useRef } from "react";
 
 const CoachingOverview = () => {
   const titleRef = useRef<HTMLHeadingElement>(null);
+  const textRef = useRef<HTMLParagraphElement>(null);
 
   useGSAP(() => {
     textSplitLinesScrollTrigger(titleRef as React.RefObject<HTMLElement>);
+    textSplitLinesScrollTrigger(textRef as React.RefObject<HTMLElement>);
   }, []);
   return (
     <div
@@ -16,21 +18,23 @@ const CoachingOverview = () => {
       className="relative mt-[20vh] flex flex-col items-center gap-20 overflow-hidden px-4"
     >
       <div className="flex flex-col gap-20">
-        <div className="flex flex-col items-center justify-center gap-10 lg:gap-20">
+        <div className="flex flex-col items-center justify-center">
           <h1
             ref={titleRef}
-            className="max-w-7xl whitespace-normal break-words text-center text-4xl lg:text-7xl"
+            className="text-3xl md:max-w-7xl md:text-4xl lg:text-7xl"
           >
-            Vous préférez être accompagné, vous êtes unique, votre coaching
-            aussi.
+            Un coaching sur mesure, à votre image
           </h1>
-          <p className="text-center text-xl text-muted">
-            Des appels réguliers pour un vrai suivi
+          <p ref={textRef} className="font-medium text-muted md:text-3xl">
+            Planifions ensemble votre réussite : un premier échange sur
+            WhatsApp, un rendez-vous dédié, et un suivi régulier pour rester sur
+            la bonne voie.
           </p>
-          <Button href="/pricing" />
+          <div className="mt-20">
+            <Button href="/pricing" />
+          </div>
         </div>
       </div>
-
       <div className="relative flex flex-col items-center justify-center gap-20">
         <div className="relative h-[70vh] lg:h-full lg:w-[90%]">
           <video

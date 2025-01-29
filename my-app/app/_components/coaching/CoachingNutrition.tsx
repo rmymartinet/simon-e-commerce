@@ -43,11 +43,16 @@ const CoachingNutrition = () => {
 
   return (
     <div className="mt-[20vh] flex w-full flex-col gap-20 px-4">
-      <div className="mb-10 flex flex-col gap-20 md:mb-20">
-        <p className="max-w-5xl text-pretty break-words text-center text-3xl lg:text-start lg:text-7xl">
-          Un suivi nutritionnels personnalisé adpaté à vos besoins
+      <div className="mb-10 flex flex-col md:mb-20">
+        <h1 className="text-pretty break-words text-3xl md:text-4xl lg:max-w-5xl lg:text-start lg:text-7xl">
+          Un suivi nutritionnel personnalisé adapté à vos besoins
+        </h1>
+        <p className="font-medium text-muted md:text-3xl">
+          Nous échangeons ensemble pour définir vos besoins, vos objectifs et
+          toutes les spécificités de votre mode de vie. Chaque détail compte
+          pour un accompagnement efficace et adapté.
         </p>
-        <div className="self-center">
+        <div className="mt-20 self-center">
           <Button href="/pricing" />
         </div>
       </div>
@@ -60,8 +65,8 @@ const CoachingNutrition = () => {
         )}
         <div className="flex flex-col gap-8">
           <div className="flex justify-between">
-            <p className="text-xl">Processus</p>
-            <p className="text-xl">Mise en place</p>
+            <p className="text-sm">Processus</p>
+            <p className="text-sm">Mise en place</p>
           </div>
           <div>
             {coachingNutritionData.map((item, index) => (
@@ -94,7 +99,11 @@ const CoachingNutrition = () => {
           </div>
         ) : (
           <div className="mb-10">
-            <p className="text-4xl">Communiquer moi vos repas en temps réel</p>
+            <p className="text-3xl md:text-4xl">Repas en temps réel </p>
+            <p className="font-medium text-muted md:text-3xl lg:text-center">
+              Grâce à l’application Food, recevez vos repas et partagez vos
+              ajustements en toute simplicité.
+            </p>
           </div>
         )}
         <div className="h-[110vh]">

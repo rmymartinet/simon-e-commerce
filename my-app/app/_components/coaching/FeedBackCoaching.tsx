@@ -5,7 +5,7 @@ function FeedBackCoaching() {
   return (
     <div className="grid place-content-center px-4">
       <div className="flex flex-col items-center gap-10">
-        <p className="max-w-5xl text-pretty text-center text-2xl lg:text-4xl">
+        <p className="whitespace-normal text-pretty text-center text-2xl md:max-w-5xl lg:text-4xl">
           {feedBack[1].feedback}
         </p>
         <div className="flex flex-col items-center gap-2">
