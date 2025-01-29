@@ -12,7 +12,7 @@ const FeaturesContainer = ({
           <h1 className="text-3xl md:text-4xl lg:text-center lg:text-7xl">
             {title}
           </h1>
-          <p className="max-w-7xl font-medium text-muted md:text-3xl lg:text-center">
+          <p className="max-w-5xl font-medium text-muted md:text-xl lg:text-center">
             {text}
           </p>
         </div>
