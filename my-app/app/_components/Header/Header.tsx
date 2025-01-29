@@ -74,7 +74,7 @@ const Header = () => {
             Coaching | Programmes
           </span>
         </div>
-        <p ref={textRightRef} className="max-w-96">
+        <p ref={textRightRef} className="max-w-80 text-sm lg:max-w-96">
           Atteignez vos objectifs à votre rythme. Optez pour un{" "}
           <strong>programme personnalisé</strong> si vous souhaitez progresser
           en autonomie, ou choisissez un <strong>coaching sur-mesure</strong>{" "}
