@@ -12,6 +12,7 @@ gsap.registerPlugin(ScrollTrigger, useGSAP);
 
 const CoachingNutrition = () => {
   const lineRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const imgRef = useRef<HTMLImageElement>(null);
 
   useGSAP(() => {
     lineRefs.current.forEach((el) => {
@@ -26,6 +27,15 @@ const CoachingNutrition = () => {
           once: true,
         },
       });
+    });
+
+    gsap.to(imgRef.current, {
+      scale: 1,
+      scrollTrigger: {
+        trigger: imgRef.current,
+        start: "top bottom",
+        end: "bottom center",
+      },
     });
   }, []);
 
@@ -89,12 +99,13 @@ const CoachingNutrition = () => {
         )}
         <div className="h-[110vh]">
           <Image
+            ref={imgRef}
             src="/images/food_app/iphone_food_app.png"
             alt="Food app"
             width={2000}
             height={2000}
             quality={100}
-            className="h-full w-full object-cover"
+            className="h-full w-full scale-75 object-cover"
           />
         </div>
       </div>

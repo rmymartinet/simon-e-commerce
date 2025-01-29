@@ -32,7 +32,7 @@ const CoachingOverview = () => {
       </div>
 
       <div className="relative flex flex-col items-center justify-center gap-20">
-        <div className="relative h-[70vh] lg:w-[90%]">
+        <div className="relative h-[70vh] lg:h-full lg:w-[90%]">
           <video
             src="/videos/coaching/whats_app_coaching.mov"
             loop
