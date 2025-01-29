@@ -79,7 +79,7 @@ const MobileNavComponent = ({ session }: { session: Session | null }) => {
 
   useGSAP(() => {
     gsap.to(navRef.current, {
-      yPercent: !isClicked ? 0 : 100,
+      yPercent: !isClicked ? 0 : 150,
       delay: !isClicked ? 0.3 : 0,
       duration: 0.8,
       ease: "power4.inOut",
@@ -160,7 +160,7 @@ const MobileNavComponent = ({ session }: { session: Session | null }) => {
           </div>
           <nav
             ref={navRef}
-            className="fixed inset-0 z-[999999] flex h-[100dvh] w-screen -translate-y-[100%] flex-col bg-black px-10 text-white"
+            className="fixed inset-0 z-[999999] flex h-[100dvh] w-screen -translate-y-[150%] flex-col bg-black px-10 text-white"
           >
             <button
               ref={navActionRef}
@@ -176,21 +176,21 @@ const MobileNavComponent = ({ session }: { session: Session | null }) => {
             <div className="flex h-full flex-col items-center justify-center py-4">
               <div
                 ref={navRightRef}
-                className="mt-40 flex w-full items-center justify-between gap-6 text-xl"
+                className="mb-8 mt-24 flex w-full items-center justify-between gap-6 text-xl"
               >
                 <Link
                   href={session ? "/dashboard" : "/sign-in"}
                   className="relative flex items-center gap-8"
                 >
                   <button onClick={() => setIsClicked(false)}>
-                    <IoPerson className="text-3xl" />
+                    <IoPerson className="text-xl" />
                   </button>
                 </Link>
 
                 <Link href="/checkout">
                   <div className="relative">
                     <button className="z-50 grid place-content-center">
-                      <FaCartShopping color="white" />
+                      <FaCartShopping color="white" className="text-xl" />
                     </button>
                     {numberOfProducts > 0 && (
                       <div className="absolute -bottom-3 -right-4 grid h-4 w-4 place-content-center rounded-full bg-button-gradient p-3 text-sm font-bold text-white">
@@ -214,7 +214,7 @@ const MobileNavComponent = ({ session }: { session: Session | null }) => {
                         }}
                         className="flex items-end justify-between"
                       >
-                        <p className="text-5xl">{link.title}</p>
+                        <p className="text-2xl">{link.title}</p>
                         <p className="text-2xl">0{index + 1}</p>
                       </div>
                     </Link>
@@ -222,7 +222,7 @@ const MobileNavComponent = ({ session }: { session: Session | null }) => {
                       ref={(el) => {
                         lineRefs.current[index] = el;
                       }}
-                      className="mt-4 h-[1px] w-0 bg-muted"
+                      className="mt-2 h-[1px] w-0 bg-muted"
                     ></div>
                   </li>
                 ))}
