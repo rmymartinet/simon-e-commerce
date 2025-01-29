@@ -17,19 +17,19 @@ const ProgramOverview = () => {
   }, []);
 
   return (
-    <div className="mt-[70vh] flex w-screen flex-col items-center overflow-hidden lg:mt-0">
+    <div className="mt-[20vh] flex w-screen flex-col items-center overflow-hidden px-4">
       <div
         ref={titlesContainerRef}
-        className="flex flex-col items-center justify-center gap-4 md:gap-8"
+        className="flex flex-col items-center justify-center"
       >
-        <h1 className="text-center text-4xl md:text-7xl">
+        <h1 className="text-3xl md:text-4xl lg:text-7xl">
           Programmes adaptés à votre niveau
         </h1>
-        <p className="text-center font-medium text-muted md:text-3xl">
+        <p className="font-medium text-muted md:text-3xl">
           Débutant, intermédiaire ou confirmé : progressez à votre rythme
         </p>
       </div>
-      <div className="mt-32 w-[90%]">
+      <div className="mt-32 lg:w-[90%]">
         <video
           src={
             width > 1024
@@ -42,7 +42,6 @@ const ProgramOverview = () => {
           playsInline
           className="h-full w-full object-contain"
         />
-        -
       </div>
     </div>
   );

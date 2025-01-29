@@ -76,7 +76,7 @@ const NutritionAdvice = () => {
   return (
     <div className="mt-[20vh] flex flex-col gap-20 px-4">
       <div ref={textRef} className="mb-10 flex flex-col gap-20">
-        <p className="max-w-5xl text-pretty break-words text-3xl lg:text-7xl">
+        <p className="max-w-5xl text-pretty break-words text-3xl md:text-4xl lg:text-7xl">
           Des conseils sur-mesure pour équilibrer vos repas et atteindre vos
           objectifs durablement
         </p>
@@ -103,7 +103,7 @@ const NutritionAdvice = () => {
                       ref={(el) => {
                         titleRefs.current[index] = el;
                       }}
-                      className="text-4xl lg:text-7xl"
+                      className="text-3xl md:text-4xl lg:text-7xl"
                     >
                       {item.title}
                     </h1>

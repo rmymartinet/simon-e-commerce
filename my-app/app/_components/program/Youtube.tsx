@@ -3,7 +3,6 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 import BackgroundYoutubeImg from "./BackgroundYoutubeImg";
-import { IoLogoYoutube } from "react-icons/io";
 import { textSplitLinesScrollTrigger } from "@/utils/common/textAnimation";
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
@@ -12,9 +11,11 @@ const Youtube = () => {
   const iphoneRef = useRef<HTMLDivElement>(null);
   const imagesRefs = useRef<(HTMLDivElement | null)[]>([]);
   const titleRef = useRef<HTMLHeadingElement>(null);
+  const textRef = useRef<HTMLParagraphElement>(null);
 
   useGSAP(() => {
     textSplitLinesScrollTrigger(titleRef as React.RefObject<HTMLElement>);
+    textSplitLinesScrollTrigger(textRef as React.RefObject<HTMLElement>);
 
     imagesRefs.current.forEach((img) => {
       gsap.to(img, {
@@ -32,16 +33,18 @@ const Youtube = () => {
   }, []);
 
   return (
-    <div className="mt-[20vh] w-full px-4">
-      <div ref={titleRef} className="mb-10 flex flex-col gap-4 md:mb-40">
-        <div className="flex items-start gap-2">
-          <IoLogoYoutube className="text-3xl lg:text-7xl" />
-          <p className="max-w-5xl text-pretty break-words text-3xl lg:text-7xl">
-            Youtube
-          </p>
-        </div>
-        <p className="max-w-5xl text-pretty break-words text-3xl lg:text-7xl">
-          Tous vos exercices en vidéo, accessibles uniquement aux membres
+    <div className="mt-[20vh] flex w-full flex-col px-4">
+      <div className="mb-10 flex flex-col md:mb-40">
+        <h1
+          ref={titleRef}
+          className="max-w-5xl text-pretty break-words text-3xl md:text-4xl lg:text-7xl"
+        >
+          Tous vos exercices en vidéo
+        </h1>
+        <p ref={textRef} className="font-medium text-muted md:text-3xl">
+          Accédez à mes vidéos exclusives sur YouTube pour perfectionner vos
+          mouvements et exécuter chaque exercice avec précision. Disponible pour
+          tous les membres et programmes.
         </p>
       </div>
       <BackgroundYoutubeImg iphoneRef={iphoneRef} imagesRefs={imagesRefs} />
