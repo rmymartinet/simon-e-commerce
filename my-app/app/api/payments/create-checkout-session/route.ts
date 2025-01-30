@@ -44,8 +44,6 @@ export async function POST(req: NextRequest) {
         },
       });
 
-      console.log("Subscription checkout session created:", session.id);
-
       return NextResponse.json({ sessionId: session.id });
     } catch (error) {
       console.error("Error creating subscription checkout session:", error);
