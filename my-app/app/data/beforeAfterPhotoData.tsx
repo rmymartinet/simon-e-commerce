@@ -51,7 +51,7 @@ export const imagesUrls = [
   },
 
   {
-    name: "pierre",
+    name: "maxence",
     firstMoutnh: "1mois",
     lastMoutnh: "4mois",
     result: "+4kg",
