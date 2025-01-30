@@ -55,6 +55,10 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
 
   const [cart, setCart] = useState<CartItemProps[]>(getInitialCart);
 
+  const clearCart = () => {
+    setCart([]);
+  };
+
   const updateCartQuantity = (itemId: string, newQuantity: number) => {
     setCart((prevCart) =>
       prevCart.map((item) =>
@@ -84,6 +88,7 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
         cart,
         setCart,
         updateCartQuantity,
+        clearCart,
       }}
     >
       {children}

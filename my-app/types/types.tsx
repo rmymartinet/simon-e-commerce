@@ -39,6 +39,8 @@ export interface CartContextProps {
   cart: CartItemProps[];
   setCart: React.Dispatch<React.SetStateAction<CartItemProps[]>>;
   updateCartQuantity: (itemId: string, newQuantity: number) => void;
+
+  clearCart: () => void;
 }
 
 export type CartItemProps = Pick<
