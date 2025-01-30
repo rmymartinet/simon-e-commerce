@@ -77,6 +77,7 @@ async function handleSubscription(
     },
   });
 }
+
 async function handleProgram(
   existingUser: { id: string },
   session: Stripe.Checkout.Session,
@@ -111,6 +112,7 @@ async function handleProgram(
     },
   });
 }
+
 async function handleNewUser(session: Stripe.Checkout.Session) {
   const { token: activationToken, expires: activationTokenExpires } =
     generateToken();
@@ -167,7 +169,6 @@ export async function POST(req: Request) {
     console.error("Empty body received");
     return new Response("Empty body", { status: 400 });
   }
-
   const sig = req.headers.get("stripe-signature");
 
   if (!sig) {
@@ -205,9 +206,8 @@ export async function POST(req: Request) {
         if (existingUser) {
           if (session.metadata?.subscription) {
             await handleSubscription(existingUser, session, subscriptionId);
+          } else {
             await handleProgram(existingUser, session);
-            await handleProgram(existingUser, session);
-            console.log("Program purchased");
           }
         } else {
           await handleNewUser(session);
@@ -221,7 +221,7 @@ export async function POST(req: Request) {
       case "invoice.created":
         const userAndSubscription = await getUserAndSubscription(event);
 
-        if (!userAndSubscription) {
+        if (!userAndSubscription && process.env.NODE_ENV === "development") {
           console.log(
             "User not found for subscription, skipping update/delete",
           );
@@ -233,14 +233,12 @@ export async function POST(req: Request) {
         const { user, subscription } = userAndSubscription;
 
         if (!user) {
-          console.log("No user found for subscription, skipping update/delete");
           return new Response("User not found for subscription", {
             status: 404,
           });
         }
 
         if (event.type === "customer.subscription.deleted") {
-          console.log("Subscription deleted for user:", user.id);
           await prisma.purchase.deleteMany({
             where: {
               userId: user.id,
