@@ -13,7 +13,7 @@ export const feedBack = [
   },
   {
     firstName: "Alex",
-    photo: "/images/feedback/tete6.png",
+    photo: "/images/feedback/alex.png",
     feedback: "Impeccable pour ton travail, vraiment professionnel.",
   },
   {
@@ -34,32 +34,4 @@ export const feedBack = [
     feedback:
       "Simon m’a accompagné dans ma transformation. J’ai perdu plus de 40 kg, retrouvé confiance en moi et une vision sereine de l’avenir. Merci Simon !",
   },
-  // {
-  //   firstName: "Sophie",
-  //   lastName: "Laurent",
-  //   photo: "/images/tete7.png",
-  //   feedback:
-  //     "Tout est super bien pensé. Même en ayant peu de temps, on peut progresser efficacement.",
-  // },
-  // {
-  //   firstName: "Julien",
-  //   lastName: "Simon",
-  //   photo: "/images/tete4.png",
-  //   feedback:
-  //     "Je cherchais quelque chose de simple et efficace, et c’est exactement ce que j’ai trouvé ici.",
-  // },
-  // {
-  //   firstName: "Camille",
-  //   lastName: "Rousseau",
-  //   photo: "/images/tete3.png",
-  //   feedback:
-  //     "L’approche est différente de tout ce que j’ai testé avant. Enfin quelque chose qui marche vraiment !",
-  // },
-  // {
-  //   firstName: "Maxime",
-  //   lastName: "Lemoine",
-  //   photo: "/images/tete2.png",
-  //   feedback:
-  //     "Les résultats sont bluffants. Je me sens bien mieux dans mon corps et dans ma tête.",
-  // },
 ];
