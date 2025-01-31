@@ -7,15 +7,12 @@ dotenv.config();
 const transporter = nodemailer.createTransport({
   service: "gmail",
   auth: {
-    user: process.env.EMAIL_USER, 
-    pass: process.env.EMAIL_PASSWORD, 
+    user: process.env.EMAIL_USER,
+    pass: process.env.EMAIL_PASSWORD,
   },
 });
 
-
-
 export async function sendProgramEmail(email: string, programTitle: string) {
-
   const pdfAdvanced =
     "https://asset.cloudinary.com/dnkhbxpji/ce505e576514b559f3f62ee1ef1c9dcc";
   const pdfIntermediate =
@@ -48,11 +45,13 @@ export async function sendProgramEmail(email: string, programTitle: string) {
   };
 
   try {
-     await transporter.sendMail(mailOptions);
+    await transporter.sendMail(mailOptions);
   } catch (error) {
-    console.error("Erreur lors de l'envoi de l'email:", error);
-    console.error("Code d'erreur:", error.code);
-    console.error("Message d'erreur:", error.message);
-    console.error("Stack d'erreur:", error.stack);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const err = error as any;
+    console.error("Erreur lors de l'envoi de l'email:", err);
+    console.error("Code d'erreur:", err.code);
+    console.error("Message d'erreur:", err.message);
+    console.error("Stack d'erreur:", err.stack);
   }
 }
