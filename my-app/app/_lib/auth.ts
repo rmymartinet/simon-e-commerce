@@ -85,95 +85,26 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     }),
   ],
   secret: process.env.NEXTAUTH_SECRET,
+  pages: {
+    signIn: "/sign-in",
+    signOut: "/sign-out",
+    error: "/auth/error", // Error code passed in query string as ?error=
+    verifyRequest: "/auth/verify-request", // (used for check email message)
+    newUser: null, // If set, new users will be directed here on first sign in
+  },
   callbacks: {
-    authorized: async ({ auth }) => {
-      return !!auth;
-    },
-    async signIn({ user, account }) {
-      const existingUser = await prisma.user.findUnique({
-        where: {
-          email: user.email as string,
-        },
-      });
-      if (existingUser) {
-        await prisma.account.upsert({
-          where: {
-            provider_providerAccountId: {
-              provider: account?.provider ?? "",
-              providerAccountId: account?.providerAccountId ?? "",
-            },
-          },
-          update: {
-            access_token: account?.access_token,
-            refresh_token: account?.refresh_token,
-            expires_at: account?.expires_at ?? null,
-            token_type: account?.token_type,
-            scope: account?.scope,
-            id_token: account?.id_token,
-            session_state: account?.session_state?.toString() ?? null,
-          },
-          create: {
-            userId: existingUser.id,
-            type: account?.type ?? "",
-            provider: account?.provider ?? "",
-            providerAccountId: account?.providerAccountId ?? "",
-            access_token: account?.access_token,
-            refresh_token: account?.refresh_token,
-            expires_at: account?.expires_at,
-            token_type: account?.token_type,
-            scope: account?.scope,
-            id_token: account?.id_token,
-            session_state: account?.session_state?.toString(),
-          },
-        });
-      } else {
-        await prisma.user.create({
-          data: {
-            email: user.email as string,
-            name: user.name as string,
-            image: user.image,
-            emailVerified: new Date(),
-            password: null,
-            accounts: {
-              create: {
-                type: account?.type ?? "",
-                provider: account?.provider ?? "",
-                providerAccountId: account?.providerAccountId ?? "",
-                access_token: account?.access_token ?? "",
-                refresh_token: account?.refresh_token ?? "",
-                expires_at: account?.expires_at ?? null,
-                token_type: account?.token_type ?? "",
-                scope: account?.scope ?? "",
-                id_token: account?.id_token ?? "",
-                session_state: account?.session_state?.toString() ?? null,
-              },
-            },
-          },
-        });
-      }
-      return true;
-    },
-    async session({ session, token }) {
-      if (token.sub && session.user) {
-        session.user.id = token.sub;
-        session.user.email = token.email ?? "";
-        session.user.name = token.name;
-        session.user.image = token.picture;
-      }
-      return session;
-    },
-    async jwt({ token, user, account }) {
-      if (account) {
-        token.accessToken = account.access_token;
-        token.idToken = account.id_token;
-      }
+    async jwt({ token, user }) {
       if (user) {
         token.id = user.id;
-        token.email = user.email;
-        token.name = user.name;
-        token.picture = user.image;
       }
       return token;
     },
+    async session({ session, token }) {
+      if (token) {
+        session.id = token.id;
+      }
+      return session;
+    },
   },
+  debug: process.env.NODE_ENV === "development",
 });
