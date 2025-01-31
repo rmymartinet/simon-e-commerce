@@ -13,7 +13,6 @@ async function hashPassword(plainPassword: string) {
   return hashedPassword;
 }
 
-// ✅ Server Action pour l'authentification par email/mot de passe
 export async function authenticate(formData: FormData) {
   try {
     const result: { success: boolean; message: string } = await signIn(
@@ -32,10 +31,8 @@ export async function authenticate(formData: FormData) {
   }
 }
 
-// ✅ Server Action pour l'authentification via Google
-
 export async function signInWithGoogle() {
-  return await signIn("google", { redirectTo: "/dashboard" });
+  return await signIn("google", { callbackUrl: "/dashboard" });
 }
 
 export async function signUp(formData: FormData) {
