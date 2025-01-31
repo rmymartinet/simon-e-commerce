@@ -2,8 +2,12 @@ import { SanityDocument } from "@sanity/client";
 import { sanityFetch } from "@/sanity/lib/fetch";
 import { postsQuery } from "@/sanity/lib/queries";
 import PostsContainer from "./components/PostsContainer";
+import { redirect } from "next/navigation";
 
 export default async function Page() {
+  redirect("/");
+  return null;
+
   const sanityPosts = await sanityFetch<SanityDocument[]>({
     query: postsQuery,
   });
