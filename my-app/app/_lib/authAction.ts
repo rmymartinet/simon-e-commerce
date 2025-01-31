@@ -53,8 +53,10 @@ export async function signUp(formData: FormData) {
       });
 
       if (existingUser) {
-        // En production, renvoyer une erreur générique
-        throw new Error("Email déjà pris"); // Message d'erreur simplifié pour la production
+        return {
+          success: false,
+          message: "L'adresse email est déjà utilisée.",
+        };
       }
 
       await prisma.user.create({
@@ -64,6 +66,8 @@ export async function signUp(formData: FormData) {
           password: pswHash,
         },
       });
+
+      return { success: true, message: "Inscription réussie" };
     },
 
     successMessage: "Inscription réussie",

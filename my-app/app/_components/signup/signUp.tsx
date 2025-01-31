@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useState } from "react";
 import { signUp } from "@/app/_lib/authAction";
 import { useRouter } from "next/navigation";
@@ -12,18 +14,16 @@ export default function SignUpForm() {
     const formData = new FormData(event.currentTarget);
 
     try {
-      await signUp(formData);
-      router.push("/sign-in");
-    } catch (error) {
-      if (error instanceof Error) {
-        if (error.message === "Email déjà pris") {
-          setErrorMessage("L'adresse email est déjà utilisée.");
-        } else {
-          setErrorMessage("Une erreur est survenue. Veuillez réessayer.");
-        }
+      const response = await signUp(formData);
+
+      if (response.success) {
+        setSuccessMessage(response.message);
+        router.push("/sign-in");
       } else {
-        setErrorMessage("Une erreur inconnue est survenue.");
+        setErrorMessage(response.message); 
       }
+    } catch {
+      setErrorMessage("Une erreur inconnue est survenue.");
     }
   };
 
