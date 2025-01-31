@@ -1,15 +1,11 @@
-import { signIn } from "@/app/_lib/auth";
+"use client";
+
 import { FcGoogle } from "react-icons/fc";
+import { signInWithGoogle } from "../_lib/authAction";
 
 function GoogleProvider() {
   return (
-    <form
-      action={async () => {
-        "use server";
-        await signIn("google", { redirectTo: "/dashboard" });
-      }}
-      className="w-full"
-    >
+    <form action={() => signInWithGoogle()} className="w-full">
       <div className="flex justify-center gap-4 rounded-lg border border-slate-200 bg-white p-2">
         <FcGoogle size={30} />
         <button type="submit" className="text-black">

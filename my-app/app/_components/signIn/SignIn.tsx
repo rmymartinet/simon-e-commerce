@@ -1,13 +1,11 @@
-import { redirect } from "next/navigation";
-import GoogleProvider from "./GoogleProvider";
-import { signIn } from "../_lib/auth";
+"use client";
+
 import Link from "next/link";
+import { authenticate } from "@/app/_lib/authAction";
 
 function SignIn({ errorMessage }: { errorMessage?: string }) {
   return (
     <>
-      <h1 className="text-xl font-medium text-black">Se connecter</h1>
-      <GoogleProvider />
       <div className="flex w-full flex-nowrap items-center">
         <div className="h-[1px] w-full bg-slate-200"></div>
         <p className="mx-2 whitespace-nowrap text-slate-400">
@@ -15,28 +13,7 @@ function SignIn({ errorMessage }: { errorMessage?: string }) {
         </p>
         <div className="h-[1px] w-full bg-slate-200"></div>
       </div>
-      <form
-        action={async (formData) => {
-          "use server";
-          try {
-            const result: { success: boolean; message: string } = await signIn(
-              "credentials",
-              formData,
-            );
-            if (!result.success) {
-              redirect(`/sign-in?error=${encodeURIComponent(result.message)}`);
-            } else {
-              redirect("/dashboard");
-            }
-          } catch (error) {
-            console.error(error);
-            redirect(
-              `/sign-in?error=${encodeURIComponent("Votre adresse mail ou mot de passe sont icorrect.")}`,
-            );
-          }
-        }}
-        className="flex w-full flex-col gap-4"
-      >
+      <form action={authenticate} className="flex w-full flex-col gap-4">
         <input
           name="email"
           type="email"

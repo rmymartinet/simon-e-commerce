@@ -42,15 +42,9 @@ const Guest = () => {
 
   return (
     <section className="flex w-full flex-col items-center justify-center md:gap-10">
-      <div className="mt-10 flex flex-col items-center gap-2 text-center lg:mt-0">
-        <h1 className="text-xl font-semibold">
-          Vous n’avez pas de compte Sm Coaching
-        </h1>
-        <p className="text-center">
-          Poursuivez ainsi. Vous créerez un compte Sm Coaching ultérieurement.
-        </p>
+      <div className="flex w-full flex-col items-center gap-2 text-center lg:mt-0">
         <button
-          className="padding program-button-container mt-4 rounded-lg text-lg font-semibold"
+          className="mt-4 w-full rounded-full border px-2 py-1 font-semibold lg:px-4 lg:py-2"
           onClick={() => {
             if (allPriceIds) {
               handleCheckout(
