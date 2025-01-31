@@ -48,8 +48,6 @@ export async function signUp(formData: FormData) {
       const validatedData = signUpSchema.parse({ name, email, password });
       const pswHash = await hashPassword(validatedData.password);
 
-      console.log(validatedData);
-
       const existingUser = await prisma.user.findUnique({
         where: { email: validatedData.email.toLocaleLowerCase() },
       });
