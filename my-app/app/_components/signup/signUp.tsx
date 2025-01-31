@@ -17,10 +17,9 @@ export default function SignUpForm() {
       const response = await signUp(formData);
 
       if (response.success) {
-        setSuccessMessage(response.message);
         router.push("/sign-in");
       } else {
-        setErrorMessage(response.message); 
+        setErrorMessage(response.message);
       }
     } catch {
       setErrorMessage("Une erreur inconnue est survenue.");
