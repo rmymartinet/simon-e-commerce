@@ -3,8 +3,9 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { useSelectedLayoutSegment } from "next/navigation";
 import { LayoutRouterContext } from "next/dist/shared/lib/app-router-context.shared-runtime";
-import { useContext, useEffect, useRef } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 
+// Hook pour récupérer la valeur précédente
 function usePreviousValue<T>(value: T): T | undefined {
   const prevValue = useRef<T | undefined>(undefined);
 
@@ -95,6 +96,31 @@ export function LayoutTransition({
   style,
 }: LayoutTransitionProps) {
   const segment = useSelectedLayoutSegment();
+  const [isTransitioning, setIsTransitioning] = useState(false);
+
+  const prevSegment = usePreviousValue(segment);
+
+  useEffect(() => {
+    if (segment !== prevSegment) {
+      // Bloquer le défilement en ajoutant overflow: hidden à html et body
+      document.documentElement.style.overflowY = "hidden"; // Empêcher le scroll sur le HTML
+      document.body.style.overflowY = "hidden"; // Empêcher le scroll sur le body
+      document.body.style.cursor = "wait"; // Changer le curseur en attente
+      setIsTransitioning(true);
+    }
+
+    // Après la fin de la transition, réinitialiser les styles
+    const timer = setTimeout(() => {
+      if (isTransitioning) {
+        document.documentElement.style.overflowY = "auto"; // Autoriser le scroll sur le HTML
+        document.body.style.overflowY = "auto"; // Autoriser le scroll sur le body
+        document.body.style.cursor = "default"; // Remettre le curseur normal
+        setIsTransitioning(false); // Fin de la transition
+      }
+    }, 3500); // Durée de l'animation (ici 3.5s)
+
+    return () => clearTimeout(timer);
+  }, [segment, prevSegment, isTransitioning]);
 
   return (
     <AnimatePresence mode="wait" initial={false}>
