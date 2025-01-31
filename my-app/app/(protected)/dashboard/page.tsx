@@ -24,6 +24,15 @@ export default async function Dashboard() {
     },
   });
 
+  if (!userData) {
+    document.cookie =
+      "next-auth.session-token=; Path=/; Expires=Thu, 01 Jan 1970 00:00:00 GMT";
+    document.cookie =
+      "next-auth.csrf-token=; Path=/; Expires=Thu, 01 Jan 1970 00:00:00 GMT";
+
+    return redirect("/sign-in");
+  }
+
   function formattedDate(date: Date | string | undefined) {
     return date ? new Date(date).toLocaleDateString("fr-FR") : undefined;
   }
