@@ -2,7 +2,6 @@
 
 import { signIn } from "@/app/_lib/auth";
 import { redirect } from "next/navigation";
-import { executeAction } from "./executeAction";
 import { prisma } from "./prisma";
 import { signUpSchema } from "./zod";
 
@@ -40,36 +39,31 @@ export async function signInWithGoogle() {
 }
 
 export async function signUp(formData: FormData) {
-  return executeAction({
-    actionFn: async () => {
-      const name = formData.get("name");
-      const email = formData.get("email");
-      const password = formData.get("password");
-      const validatedData = signUpSchema.parse({ name, email, password });
-      const pswHash = await hashPassword(validatedData.password);
+  const name = formData.get("name");
+  const email = formData.get("email");
+  const password = formData.get("password");
 
-      const existingUser = await prisma.user.findUnique({
-        where: { email: validatedData.email.toLocaleLowerCase() },
-      });
+  const validatedData = signUpSchema.parse({ name, email, password });
+  const pswHash = await hashPassword(validatedData.password);
 
-      if (existingUser) {
-        return {
-          success: false,
-          message: "L'adresse email est déjà utilisée.",
-        };
-      }
-
-      await prisma.user.create({
-        data: {
-          name: name as string,
-          email: validatedData.email.toLocaleLowerCase(),
-          password: pswHash,
-        },
-      });
-
-      return { success: true, message: "Inscription réussie" };
-    },
-
-    successMessage: "Inscription réussie",
+  const existingUser = await prisma.user.findUnique({
+    where: { email: validatedData.email.toLowerCase() },
   });
+
+  if (existingUser) {
+    return {
+      success: false,
+      message: "L'adresse email est déjà utilisée.",
+    };
+  }
+
+  await prisma.user.create({
+    data: {
+      name: name as string,
+      email: validatedData.email.toLowerCase(),
+      password: pswHash,
+    },
+  });
+
+  return { success: true, message: "Inscription réussie" };
 }

@@ -15,10 +15,12 @@ export default function SignUpForm() {
 
     try {
       const response = await signUp(formData);
+      console.log("Réponse de signUp:", response); // <-- Ajoute ce log
 
       if (response.success) {
         router.push("/sign-in");
       } else {
+        console.log("bonjour");
         setErrorMessage(response.message);
       }
     } catch {
