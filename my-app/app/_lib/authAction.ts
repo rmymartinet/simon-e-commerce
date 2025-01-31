@@ -32,7 +32,7 @@ export async function authenticate(formData: FormData) {
 }
 
 export async function signInWithGoogle() {
-  return await signIn("google", { callbackUrl: "/dashboard" });
+  return await signIn("google", { redirectTo: "/dashboard" });
 }
 
 export async function signUp(formData: FormData) {
@@ -56,6 +56,7 @@ export async function signUp(formData: FormData) {
 
   await prisma.user.create({
     data: {
+      firstname: firstname as string,
       name: name as string,
       email: validatedData.email.toLowerCase(),
       password: pswHash,

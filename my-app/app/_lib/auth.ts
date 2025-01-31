@@ -19,7 +19,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     maxAge: 2 * 60 * 60,
   },
   adapter: PrismaAdapter(prisma),
-  trustHost: true, 
+  trustHost: true,
   providers: [
     GitHubProvider({
       clientId: process.env.GITHUB_ID,

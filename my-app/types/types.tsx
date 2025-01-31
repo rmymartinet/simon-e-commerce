@@ -287,6 +287,7 @@ export interface UserDataProps {
   isTemporary: boolean;
   lastActive: Date | null;
   name: string | null;
+  firstName: string | null;
   password: string | null;
   priceId: string | null;
   stripeCustomerId: string | null;

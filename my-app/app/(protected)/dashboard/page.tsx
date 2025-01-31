@@ -105,7 +105,7 @@ export default async function Dashboard() {
         <div className="flex flex-col gap-2 font-semibold">
           <p className="text-violet-400">Votre dashboard</p>
           <h1 className="text-4xl font-black uppercase lg:text-6xl">
-            Bonjour, {userData?.name || "Utilisateur"}
+            Bonjour, {userData?.name || userData?.firstName || "Utilisateur"}
           </h1>
 
           <form
