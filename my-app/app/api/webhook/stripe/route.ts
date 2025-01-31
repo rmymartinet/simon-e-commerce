@@ -155,7 +155,9 @@ async function getUserAndSubscription(event: Stripe.Event) {
   });
 
   if (!user) {
-    console.error("User not found for subscription:", subscription.id);
+    if (process.env.NODE_ENV === "development") {
+      console.error("User not found for subscription:", subscription.id);
+    }
     return null;
   }
 
@@ -197,8 +199,8 @@ export async function POST(req: Request) {
         );
 
         const subscriptionId = session.subscription as string;
-
         const email = session.customer_details?.email || "";
+
         const existingUser = await prisma.user.findUnique({
           where: { email },
         });
@@ -230,7 +232,8 @@ export async function POST(req: Request) {
           });
         }
 
-        const { user, subscription } = userAndSubscription;
+        //le point d'escalamtion a la fin permet
+        const { user, subscription } = userAndSubscription!;
 
         if (!user) {
           return new Response("User not found for subscription", {
@@ -272,7 +275,7 @@ export async function POST(req: Request) {
             endDate: new Date(
               subscription.current_period_end * 1000,
             ).toISOString(),
-            status: subscription.status, // Ajoute le champ `status` ici
+            status: subscription.status,
             titlePlan: "3mois",
           };
 
@@ -285,7 +288,7 @@ export async function POST(req: Request) {
               customerId: subscription.customer as string,
               createdAt: new Date(),
               subscriptionData: {
-                create: subscriptionData, // Crée la relation SubscriptionData avec les bons champs
+                create: subscriptionData,
               },
             },
           });
