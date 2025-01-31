@@ -8,11 +8,6 @@ import bcrypt from "bcrypt";
 import { singInSchema } from "./zod";
 import { getUserByEmail } from "./user";
 
-/**
- *
- * !TODO changer trustHost
- */
-
 async function verifyPassword(plainPassword: string, hashedPassword: string) {
   const match = await bcrypt.compare(plainPassword, hashedPassword);
   return match;
@@ -24,7 +19,6 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     maxAge: 2 * 60 * 60,
   },
   adapter: PrismaAdapter(prisma),
-  trustHost: true,
   providers: [
     GitHubProvider({
       clientId: process.env.GITHUB_ID,
