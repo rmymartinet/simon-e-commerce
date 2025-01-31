@@ -90,7 +90,6 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     signOut: "/sign-out",
     error: "/auth/error", // Error code passed in query string as ?error=
     verifyRequest: "/auth/verify-request", // (used for check email message)
-    newUser: null, // If set, new users will be directed here on first sign in
   },
   callbacks: {
     async jwt({ token, user }) {
@@ -98,12 +97,6 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         token.id = user.id;
       }
       return token;
-    },
-    async session({ session, token }) {
-      if (token) {
-        session.id = token.id;
-      }
-      return session;
     },
   },
   debug: process.env.NODE_ENV === "development",
