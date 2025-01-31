@@ -53,10 +53,8 @@ export async function signUp(formData: FormData) {
       });
 
       if (existingUser) {
-        if (process.env.NODE_ENV === "production") {
-          throw new Error("Une erreur est survenue lors de l'inscription.");
-        }
-        throw new Error("L'adresse email est déjà utilisée.");
+        // En production, renvoyer une erreur générique
+        throw new Error("Email déjà pris"); // Message d'erreur simplifié pour la production
       }
 
       await prisma.user.create({
