@@ -53,6 +53,9 @@ export async function signUp(formData: FormData) {
       });
 
       if (existingUser) {
+        if (process.env.NODE_ENV === "production") {
+          throw new Error("Une erreur est survenue lors de l'inscription.");
+        }
         throw new Error("L'adresse email est déjà utilisée.");
       }
 
