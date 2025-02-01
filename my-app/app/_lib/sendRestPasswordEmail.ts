@@ -5,16 +5,17 @@ dotenv.config();
 
 const transporter = nodemailer.createTransport({
   service: "gmail",
-  socketTimeout: 10000,
   host: "smtp.gmail.com",
   port: 587,
-  requireTLS: true,
-  logger: true,
-  debug: true,
+  secure: false,
   auth: {
     user: process.env.EMAIL_USER,
     pass: process.env.EMAIL_PASSWORD,
   },
+  connectionTimeout: 20000,
+  socketTimeout: 20000,
+  logger: true,
+  debug: true,
 });
 
 export async function sendResetPasswordEmail(email: string, token: string) {
@@ -30,6 +31,7 @@ export async function sendResetPasswordEmail(email: string, token: string) {
 
   try {
     await transporter.sendMail(mailOptions);
+    console.log("Email de réinitialisation envoyé à :", email);
   } catch (error) {
     console.error(
       "Erreur lors de l'envoi de l'email de réinitialisation :",
