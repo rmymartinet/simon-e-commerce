@@ -1,37 +1,16 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useRef } from "react";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import Image from "next/image";
-import { IoClose } from "react-icons/io5";
-import { clientImg, imagesUrls, names } from "../data/beforeAfterPhotoData";
+import { imagesUrls, names } from "../data/beforeAfterPhotoData";
 
 gsap.registerPlugin(useGSAP);
 
 const BeforeAfterPhoto = () => {
   const chgRef = useRef<(HTMLDivElement | null)[]>([]);
   const namesRef = useRef<(HTMLDivElement | null)[]>([]);
-  const [index, setIndex] = useState(0);
-  const [isClickedIndex, setIsClickedIndex] = useState(0);
-  const [isClicked, setIsClicked] = useState(false);
-
-  const handleClickIndex = (index: number) => {
-    setIsClickedIndex(index);
-    setIsClicked(true);
-  };
-
-  const handleClose = () => {
-    setIsClicked(false);
-  };
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setIndex((prev) => (prev + 1) % 4);
-    }, 1500);
-
-    return () => clearInterval(interval);
-  }, []);
 
   useGSAP(() => {
     const tl = gsap.timeline({ repeat: -1 });
@@ -76,9 +55,7 @@ const BeforeAfterPhoto = () => {
           ))}
         </div>
       </div>
-      <div
-        className={`relative flex ${isClicked ? "h-screen w-screen lg:h-[50vh]" : "h-full w-full"} flex flex-wrap justify-evenly gap-10 overflow-hidden rounded-xl`}
-      >
+      <div className="relative flex h-full w-full flex-wrap justify-evenly gap-10 overflow-hidden rounded-xl">
         {names.map((_, index) => {
           const url = imagesUrls[index % imagesUrls.length];
           return (
@@ -87,8 +64,7 @@ const BeforeAfterPhoto = () => {
               ref={(el) => {
                 chgRef.current[index] = el;
               }}
-              className={`grid h-[350px] w-[300px] cursor-pointer grid-cols-2 ${isClicked ? "absolute w-full" : "flex"} overflow-hidden rounded-xl`}
-              onClick={() => handleClickIndex(index)}
+              className="grid h-[350px] w-[300px] cursor-pointer grid-cols-2 overflow-hidden rounded-xl"
             >
               <div className="flex flex-col items-center bg-black font-semibold text-white">
                 <div className="flex w-full flex-col gap-2 py-2">
@@ -128,56 +104,6 @@ const BeforeAfterPhoto = () => {
             </div>
           );
         })}
-        {isClicked && (
-          <button
-            onClick={handleClose}
-            className="absolute left-[20%] top-0 z-50 flex h-max w-max items-center gap-4 py-1 pl-1 pr-4 font-bold"
-          >
-            <div className="relative mt-4">
-              <button className="program-button-container padding flex items-center gap-4 rounded-xl font-bold">
-                <div className="w-full rounded-full bg-black p-1">
-                  <IoClose size={20} color="violet" />
-                </div>
-                <p className="font-bold">Fermer</p>{" "}
-              </button>
-              <div className="absolute inset-0 -z-10 h-full w-full rounded-xl bg-[#f690ff] blur-sm"></div>
-              <div className="absolute inset-0 -z-10 h-full w-full rounded-xl bg-[#0b0d14]"></div>
-            </div>
-          </button>
-        )}
-        {isClicked && (
-          <div className="glassmorph absolute inset-0 left-1/2 h-full w-full -translate-x-1/2 rounded-xl"></div>
-        )}
-        <div className="absolute left-1/2 top-1/2 flex h-screen -translate-x-1/2 -translate-y-1/2 flex-wrap gap-4">
-          {isClicked &&
-            clientImg.map((client, clientIndex) =>
-              isClickedIndex === clientIndex ? (
-                <div
-                  className="flex flex-col items-center justify-end gap-4 md:flex-row"
-                  key={clientIndex}
-                >
-                  <div className="card program-button-container h-[40vh] w-[70vw] rounded-xl lg:w-[18vw]">
-                    <Image
-                      src={client.before[`img${(index % 4) + 1}`]}
-                      alt={`Client ${clientIndex + 1}`}
-                      width={400}
-                      height={400}
-                      className="h-full w-full object-cover"
-                    />
-                  </div>
-                  <div className="card program-button-container h-[40vh] w-[70vw] rounded-xl lg:w-[18vw]">
-                    <Image
-                      src={client.after[`img${(index % 4) + 1}`]}
-                      alt={`Client ${clientIndex + 1}`}
-                      width={400}
-                      height={400}
-                      className="h-full w-full object-cover"
-                    />
-                  </div>
-                </div>
-              ) : null,
-            )}
-        </div>
       </div>
     </div>
   );
