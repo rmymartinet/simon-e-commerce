@@ -86,7 +86,7 @@ const BackgroundYoutubeImg = ({
         ref={iphoneRef}
         className="absolute left-1/2 top-1/2 z-50 -translate-x-1/2 -translate-y-1/2 opacity-100"
       >
-        <div className="relative h-full w-full scale-125 overflow-hidden">
+        <div className="relative h-full w-full overflow-hidden">
           <Iphone video="/videos/exercices/video1.mp4" />
         </div>
       </div>
