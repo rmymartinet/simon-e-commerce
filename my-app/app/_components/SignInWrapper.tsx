@@ -1,6 +1,6 @@
 import SignIn from "@/app/_components/signIn/SignIn";
 import RegisterCard from "./RegisterCard";
-import GoogleProvider from "./GoogleProvider";
+// import GoogleProvider from "./GoogleProvider";
 
 export default function SignInWrapper({
   errorMessage,
@@ -9,7 +9,7 @@ export default function SignInWrapper({
 }) {
   return (
     <RegisterCard>
-      <GoogleProvider />
+      {/* <GoogleProvider /> */}
       <SignIn errorMessage={errorMessage} />
     </RegisterCard>
   );
