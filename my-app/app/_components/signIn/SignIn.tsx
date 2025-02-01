@@ -9,7 +9,7 @@ function SignIn({ errorMessage }: { errorMessage?: string }) {
       <div className="flex w-full flex-nowrap items-center">
         <div className="h-[1px] w-full bg-slate-200"></div>
         <p className="mx-2 whitespace-nowrap text-slate-400">
-          Ou continuer avec son email
+          Continuer avec son email
         </p>
         <div className="h-[1px] w-full bg-slate-200"></div>
       </div>
@@ -37,6 +37,9 @@ function SignIn({ errorMessage }: { errorMessage?: string }) {
         )}
         <button className="mt-6 rounded-lg bg-button-gradient p-2 font-semibold text-white">
           Se connecter
+        </button>
+        <button className="mt-4 text-blue-400">
+          <Link href="/forgot-password">Mot de passe oublié ?</Link>
         </button>
         <button className="text-black">
           <Link href="/sign-up">Pas de compte? S&apos;inscrire</Link>

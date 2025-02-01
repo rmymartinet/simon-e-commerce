@@ -4,14 +4,7 @@ import { signIn } from "@/app/_lib/auth";
 import { redirect } from "next/navigation";
 import { prisma } from "./prisma";
 import { signUpSchema } from "./zod";
-
-import bcrypt from "bcrypt";
-
-async function hashPassword(plainPassword: string) {
-  const saltRounds = 10;
-  const hashedPassword = await bcrypt.hash(plainPassword, saltRounds);
-  return hashedPassword;
-}
+import { hashPassword } from "./hashPassword";
 
 export async function authenticate(formData: FormData) {
   try {
