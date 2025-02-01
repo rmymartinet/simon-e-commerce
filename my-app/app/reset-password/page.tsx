@@ -1,9 +1,13 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 
-export default function ResetPassword() {
+const Loading = () => {
+  return <div>Chargement...</div>;
+};
+
+const ResetPassword = () => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [message, setMessage] = useState("");
@@ -76,4 +80,14 @@ export default function ResetPassword() {
       {message && <p className="mt-4 text-sm text-green-500">{message}</p>}
     </div>
   );
-}
+};
+
+const Page = () => {
+  return (
+    <Suspense fallback={<Loading />}>
+      <ResetPassword />
+    </Suspense>
+  );
+};
+
+export default Page;
