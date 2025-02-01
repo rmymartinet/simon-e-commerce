@@ -12,7 +12,7 @@ const transporter = nodemailer.createTransport({
 });
 
 export async function sendResetPasswordEmail(email: string, token: string) {
-  const resetUrl = `http://localhost:3000/reset-password?token=${token}`;
+  const resetUrl = `https://www.smartinet-coaching.com/reset-password?token=${token}`;
 
   const mailOptions = {
     from: process.env.EMAIL_USER,
