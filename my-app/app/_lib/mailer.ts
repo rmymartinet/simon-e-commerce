@@ -1,57 +1,89 @@
-import nodemailer from "nodemailer";
+import { Resend } from "resend";
+import { EmailTemplateResetPassword } from "../_components/EmailTemplate/EmailTemplateResetPassword";
+import { EmailTemplateProgramContent } from "../_components/EmailTemplate/EmailTemplateProgramContent";
+
 import dotenv from "dotenv";
 
 dotenv.config();
 
-// Configure nodemailer avec le service SMTP de Gmail
-const transporter = nodemailer.createTransport({
-  service: "gmail",
-  auth: {
-    user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASSWORD,
-  },
-});
+const resend = new Resend(process.env.NEXT_RESEND_API_KEY);
 
-export async function sendProgramEmail(email: string, programTitle: string) {
-  const pdfAdvanced =
-    "https://asset.cloudinary.com/dnkhbxpji/ce505e576514b559f3f62ee1ef1c9dcc";
-  const pdfIntermediate =
-    "https://asset.cloudinary.com/dnkhbxpji/fa1add14f226724bf445fdcb490c8386";
-  const pdfBeginner =
-    "https://asset.cloudinary.com/dnkhbxpji/d3e19a9781fa2dcbeace055a38040c74";
+export async function sendProgramEmail(email: string, programTitles: string[]) {
+  const isProgramTitlesArray = Array.isArray(programTitles)
+    ? programTitles
+    : [programTitles];
 
-  let textContent = `Bonjour, voici ton programme acheté : ${programTitle}.`;
-  let htmlContent = `<p>Bonjour,</p><p>Voici ton programme acheté : <strong>${programTitle}</strong>.</p>`;
+  console.log("isProgramTitlesArray", isProgramTitlesArray);
 
-  if (programTitle.includes("Débutant")) {
-    textContent += `\n- Débutant : ${pdfBeginner}`;
-    htmlContent += `<p><a href="${pdfBeginner}">Télécharger le programme Débutant</a></p>`;
-  }
-  if (programTitle.includes("Intermédiaire")) {
-    textContent += `\n- Intermédiaire : ${pdfIntermediate}`;
-    htmlContent += `<p><a href="${pdfIntermediate}">Télécharger le programme Intermédiaire</a></p>`;
-  }
-  if (programTitle.includes("Avancé")) {
-    textContent += `\n- Avancé : ${pdfAdvanced}`;
-    htmlContent += `<p><a href="${pdfAdvanced}">Télécharger le programme Avancé</a></p>`;
-  }
-
-  const mailOptions = {
-    from: process.env.EMAIL_USER,
-    to: email,
-    subject: `Ton programme ${programTitle} est prêt !`,
-    text: textContent,
-    html: htmlContent,
+  const pdfLinks: { [key: string]: string } = {
+    Débutant:
+      "https://asset.cloudinary.com/dnkhbxpji/d3e19a9781fa2dcbeace055a38040c74",
+    Intermédiaire:
+      "https://asset.cloudinary.com/dnkhbxpji/fa1add14f226724bf445fdcb490c8386",
+    Avancé:
+      "https://asset.cloudinary.com/dnkhbxpji/ce505e576514b559f3f62ee1ef1c9dcc",
   };
 
+  // Construction de la liste des programmes avec les titres et URLs
+  const programs = isProgramTitlesArray
+    .map((title) => ({
+      title,
+      url: pdfLinks[title] || "",
+    }))
+    .filter((program) => program.url);
+
+  console.log("Programs", programs);
+
   try {
-    await transporter.sendMail(mailOptions);
+    const { data, error } = await resend.emails.send({
+      from: process.env.EMAIL_USER as string,
+      to: email,
+      subject: "Vos programmes disponibles",
+      react: EmailTemplateProgramContent({ programs: programs }),
+    });
+
+    if (error) {
+      console.error(
+        "Erreur lors de l'envoi de l'email pour les programmes :",
+        error,
+      );
+      throw new Error("Erreur lors de l'envoi de l'email des programmes.");
+    }
+
+    console.log("Email de programmes envoyé à :", email);
+    return data;
   } catch (error) {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const err = error as any;
-    console.error("Erreur lors de l'envoi de l'email:", err);
-    console.error("Code d'erreur:", err.code);
-    console.error("Message d'erreur:", err.message);
-    console.error("Stack d'erreur:", err.stack);
+    console.error("Erreur lors de l'envoi de l'email :", error);
+    throw new Error("Erreur lors de l'envoi de l'email des programmes.");
+  }
+}
+
+export async function sendResetPasswordEmail(email: string, token: string) {
+  const resetUrl = `https://www.smartinet-coaching.com/reset-password?token=${token}`;
+
+  try {
+    const { data, error } = await resend.emails.send({
+      from: process.env.EMAIL_USER as string,
+      to: email,
+      subject: "Réinitialisation du mot de passe",
+      react: await EmailTemplateResetPassword({
+        firstName: "Utilisateur",
+        resetUrl,
+      }),
+    });
+
+    if (error) {
+      console.error(
+        "Erreur lors de l'envoi de l'email de réinitialisation :",
+        error,
+      );
+      throw new Error("Erreur lors de l'envoi de l'email de réinitialisation.");
+    }
+
+    console.log("Email de réinitialisation envoyé à :", email);
+    return data;
+  } catch (error) {
+    console.error("Erreur lors de l'envoi de l'email :", error);
+    throw new Error("Erreur lors de l'envoi de l'email de réinitialisation.");
   }
 }

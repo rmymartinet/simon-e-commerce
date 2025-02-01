@@ -1,14 +1,13 @@
 import React from "react";
 
-interface EmailTemplateProps {
+interface EmailTemplateResetPasswordProps {
   firstName: string;
   resetUrl: string;
 }
 
-export const EmailTemplate: React.FC<EmailTemplateProps> = ({
-  firstName,
-  resetUrl,
-}) => {
+export const EmailTemplateResetPassword: React.FC<
+  EmailTemplateResetPasswordProps
+> = ({ firstName, resetUrl }) => {
   return (
     <div>
       <p>Bonjour {firstName},</p>
