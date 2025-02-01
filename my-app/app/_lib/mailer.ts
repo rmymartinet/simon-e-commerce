@@ -1,6 +1,9 @@
+"use server";
+
 import { Resend } from "resend";
+import React from "react";
 import { EmailTemplateResetPassword } from "../_components/EmailTemplate/EmailTemplateResetPassword";
-import { EmailTemplateProgramContent } from "../_components/EmailTemplate/EmailTemplateProgramContent";
+import EmailTemplateProgramContent from "../_components/EmailTemplate/EmailTemplateProgramContent";
 
 import dotenv from "dotenv";
 
@@ -8,12 +11,16 @@ dotenv.config();
 
 const resend = new Resend(process.env.NEXT_RESEND_API_KEY);
 
-export async function sendProgramEmail(email: string, programTitles: string[]) {
+export async function sendProgramEmail(
+  email: string,
+  programTitles: string[] | string,
+) {
+  console.log("Programmes demandéeeees :", programTitles);
   const isProgramTitlesArray = Array.isArray(programTitles)
     ? programTitles
-    : [programTitles];
+    : programTitles.split(",").map((title) => title.trim());
 
-  console.log("isProgramTitlesArray", isProgramTitlesArray);
+  console.log("DDDemandéeeees :", isProgramTitlesArray);
 
   const pdfLinks: { [key: string]: string } = {
     Débutant:
@@ -24,22 +31,28 @@ export async function sendProgramEmail(email: string, programTitles: string[]) {
       "https://asset.cloudinary.com/dnkhbxpji/ce505e576514b559f3f62ee1ef1c9dcc",
   };
 
-  // Construction de la liste des programmes avec les titres et URLs
-  const programs = isProgramTitlesArray
-    .map((title) => ({
-      title,
-      url: pdfLinks[title] || "",
-    }))
-    .filter((program) => program.url);
+  console.log("Programmes demandés :", isProgramTitlesArray);
 
-  console.log("Programs", programs);
+  // Construction de la liste des programmes avec les titres et URLs
+  const programs = isProgramTitlesArray.map((title) => {
+    console.log("Programme envoyé :", title);
+
+    const url = pdfLinks[title] || "";
+
+    console.log("Programme envoyé avec l'url :", url);
+    return { title, url };
+  });
+
+  console.log("Programmes envoyés à :", programs);
 
   try {
     const { data, error } = await resend.emails.send({
       from: process.env.EMAIL_USER as string,
       to: email,
       subject: "Vos programmes disponibles",
-      react: EmailTemplateProgramContent({ programs: programs }),
+      react: React.createElement(EmailTemplateProgramContent, {
+        programs: programs,
+      }),
     });
 
     if (error) {
@@ -66,9 +79,9 @@ export async function sendResetPasswordEmail(email: string, token: string) {
       from: process.env.EMAIL_USER as string,
       to: email,
       subject: "Réinitialisation du mot de passe",
-      react: await EmailTemplateResetPassword({
+      react: React.createElement(EmailTemplateResetPassword, {
         firstName: "Utilisateur",
-        resetUrl,
+        resetUrl: resetUrl,
       }),
     });
 

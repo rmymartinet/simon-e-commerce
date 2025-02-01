@@ -1,6 +1,6 @@
 import { prisma } from "@/app/_lib/prisma";
 import crypto from "crypto";
-import { sendResetPasswordEmail } from "@/app/_lib/sendRestPasswordEmail";
+import { sendResetPasswordEmail } from "./mailer";
 
 export async function generateResetToken(email: string) {
   const token = crypto.randomBytes(32).toString("hex");
