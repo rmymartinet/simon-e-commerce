@@ -5,10 +5,7 @@ import { NextRequest, NextResponse } from "next/server";
 export async function POST(req: NextRequest) {
   try {
     const { token, password } = await req.json();
-    console.log("Token:", token);
-    console.log("Password:", password);
 
-    // Vérifier si le token est valide et non expiré
     const user = await prisma.user.findFirst({
       where: {
         resetPasswordToken: token,
@@ -22,10 +19,8 @@ export async function POST(req: NextRequest) {
       return NextResponse.redirect("/404");
     }
 
-    // Hasher le nouveau mot de passe
     const hashedPassword = await hashPassword(password);
 
-    // Mettre à jour le mot de passe et invalider le token
     await prisma.user.update({
       where: { id: user.id },
       data: {
