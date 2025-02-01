@@ -1,31 +1,34 @@
-import nodemailer from "nodemailer";
+import { Resend } from "resend";
 import dotenv from "dotenv";
+import { EmailTemplate } from "../_components/EmailTemplate";
 
 dotenv.config();
 
+const resend = new Resend(process.env.NEXT_RESEND_API_KEY);
+
 export async function sendResetPasswordEmail(email: string, token: string) {
+  const resetUrl = `https://www.smartinet-coaching.com/reset-password?token=${token}`;
+
   try {
-    const resetUrl = `https://www.smartinet-coaching.com/reset-password?token=${token}`;
-
-    const transporter = nodemailer.createTransport({
-      service: "gmail",
-      port: 587,
-      auth: {
-        user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_PASSWORD,
-      },
-    });
-
-    const mailOptions = {
-      from: process.env.EMAIL_USER,
+    const { data, error } = await resend.emails.send({
+      from: process.env.EMAIL_USER as string,
       to: email,
       subject: "Réinitialisation du mot de passe",
-      text: `Vous avez demandé à réinitialiser votre mot de passe. Cliquez sur le lien suivant pour réinitialiser votre mot de passe : ${resetUrl}`,
-      html: `<p>Vous avez demandé à réinitialiser votre mot de passe. Cliquez sur le lien suivant pour réinitialiser votre mot de passe :</p><p><a href="${resetUrl}">Réinitialiser le mot de passe</a></p>`,
-    };
+      react: await EmailTemplate({ firstName: "Utilisateur", resetUrl }),
+    });
 
-    await transporter.sendMail(mailOptions);
+    if (error) {
+      console.error(
+        "Erreur lors de l'envoi de l'email de réinitialisation :",
+        error,
+      );
+      throw new Error("Erreur lors de l'envoi de l'email de réinitialisation.");
+    }
+
+    console.log("Email de réinitialisation envoyé à :", email);
+    return data;
   } catch (error) {
-    console.error("Erreur lors de l'envoi de l'email:", error);
+    console.error("Erreur lors de l'envoi de l'email :", error);
+    throw new Error("Erreur lors de l'envoi de l'email de réinitialisation.");
   }
 }
