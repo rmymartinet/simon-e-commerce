@@ -25,7 +25,7 @@ export async function POST(req: NextRequest) {
         : titlePlan || "N/A";
 
       const session = await stripe.checkout.sessions.create({
-        payment_method_types: ["card"],
+        payment_method_types: ["sepa_debit"],
         line_items: lineItems,
         metadata: {
           userId,
