@@ -10,11 +10,11 @@ const Iphone = ({
   imgUrl?: string;
 }) => {
   return (
-    <div className="flex flex-col items-center gap-10">
+    <div className="flex flex-col items-center gap-10 lg:scale-150">
       {title && (
         <h1 className="card padding rounded-xl text-xl font-bold">{title}</h1>
-      )}{" "}
-      <div className="relative z-50 h-[70vh] overflow-hidden">
+      )}
+      <div className="relative z-50 h-full overflow-hidden">
         <div className="relative h-full w-full overflow-hidden">
           <Image
             src="/images/iphonee.png"
@@ -35,7 +35,7 @@ const Iphone = ({
             />
           )}
           {video && (
-            <div className="absolute inset-0 left-1/2 top-1/2 -z-10 flex h-[80%] w-[87%] -translate-x-1/2 -translate-y-1/2 items-center justify-center overflow-hidden lg:h-[95%] lg:w-[88%]">
+            <div className="absolute inset-0 left-1/2 top-1/2 -z-10 flex h-[80%] w-full -translate-x-1/2 -translate-y-1/2 items-center justify-center overflow-hidden lg:h-[95%] lg:w-[88%]">
               <video
                 autoPlay
                 playsInline
