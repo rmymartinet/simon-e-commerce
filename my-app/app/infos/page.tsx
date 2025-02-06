@@ -42,7 +42,7 @@ export default function Infos() {
         ref={headerRef}
         className="relative flex flex-col gap-20 rounded-xl bg-white p-8 text-black lg:grid lg:grid-cols-2"
       >
-        <div className="h-[60vh] w-max">
+        <div className="h-[60vh] lg:w-[40vw]">
           <video
             src="/videos/infos/info.mp4"
             className="h-full w-full object-contain"
@@ -117,13 +117,16 @@ export default function Infos() {
             </p>
           </div>
         </div>
-        <div ref={ImgRef} className="flex w-full lg:mb-[20vh] lg:mt-[20vh]">
+        <div
+          ref={ImgRef}
+          className="flex w-full lg:mb-[20vh] lg:mt-[20vh] lg:px-72"
+        >
           <Image
             src="/images/about/photo-output.jpeg"
             alt=""
             width={2000}
             height={2000}
-            className="h-full w-full object-cover"
+            className="h-full w-full rounded-xl object-cover"
             layout="responsive"
             quality={100}
           />
