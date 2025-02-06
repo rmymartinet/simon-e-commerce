@@ -23,7 +23,7 @@ const CoachingOverview = () => {
             ref={titleRef}
             className="text-3xl md:max-w-7xl md:text-4xl lg:text-center lg:text-7xl"
           >
-            Un coaching sur mesure, à votre image
+            Un coaching sur-mesure, à votre image
           </h1>
           <p
             ref={textRef}
