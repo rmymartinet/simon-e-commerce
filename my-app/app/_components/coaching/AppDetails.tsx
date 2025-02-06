@@ -89,7 +89,7 @@ const AppDetails = () => {
           </div>
           <div className="flex flex-col gap-2 lg:w-[70%]">
             <h1 className="mb-4 text-center text-2xl font-bold md:text-start">
-              Des démonstrations vidéo pour chaque mouvement
+              Des démonstrations vidéos pour chaque mouvement
             </h1>
             <p className="text-md mt-4 hyphens-auto text-pretty text-justify text-muted md:mt-0 md:text-center lg:text-start">
               Ne restez jamais dans l&apos;incertitude : chaque mouvement est
@@ -100,7 +100,7 @@ const AppDetails = () => {
               <span className="font-semibold text-white">
                 ma chaîne YouTube
               </span>
-              . Vous n&apos;êtes jamais seuls pour progresser !
+              . Vous n&apos;êtes jamais seul pour progresser !
             </p>
           </div>
         </div>
