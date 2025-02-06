@@ -3,8 +3,7 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { useSelectedLayoutSegment } from "next/navigation";
 import { LayoutRouterContext } from "next/dist/shared/lib/app-router-context.shared-runtime";
-import { useContext, useEffect, useRef, useState } from "react";
-import { useGSAP } from "@gsap/react";
+import { useContext, useEffect, useRef } from "react";
 import { LayoutTransitionProps } from "@/types/types";
 
 function usePreviousValue<T>(value: T): T | undefined {
@@ -92,22 +91,6 @@ export function LayoutTransition({
 }: LayoutTransitionProps) {
   const segment = useSelectedLayoutSegment();
 
-  const [isAnimationStarted, setIsAnimationStarted] = useState<boolean>(false);
-
-  const handleDetected = () => {
-    setIsAnimationStarted(true);
-  };
-
-  useGSAP(() => {
-    if (isAnimationStarted) {
-      document.body.style.cursor = "wait";
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.cursor = "auto";
-      document.body.style.overflow = "visible";
-    }
-  }, [isAnimationStarted]);
-
   return (
     <AnimatePresence mode="wait" initial={false}>
       <motion.div className={className} style={style} key={segment}>
@@ -117,7 +100,6 @@ export function LayoutTransition({
           initial="initial"
           animate="animate"
           exit="exit"
-          onAnimationStart={handleDetected}
         />
         <motion.div
           className="fixed left-0 top-0 z-[99999] grid h-screen w-screen origin-top place-content-center bg-black"
