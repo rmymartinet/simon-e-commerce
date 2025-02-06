@@ -1,5 +1,5 @@
 export const programIncludes = [
-  "2 programmes inclus",
+  "2 types de programmes pour ce niveau",
   "Vidéos de démonstration incluses",
   "Exercices Alternatifs",
   "Mode de Vie de Récupération",
