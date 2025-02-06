@@ -1,6 +1,6 @@
 export const data = [
   {
-    title: "Répartitissez",
+    title: "Répartissez",
     description: (
       <>
         Que ce soit pour{" "}

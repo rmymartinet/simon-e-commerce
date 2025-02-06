@@ -10,7 +10,7 @@ const Iphone = ({
   imgUrl?: string;
 }) => {
   return (
-    <div className="flex flex-col items-center gap-10 lg:scale-150">
+    <div className="flex flex-col items-center gap-10">
       {title && (
         <h1 className="card padding rounded-xl text-xl font-bold">{title}</h1>
       )}

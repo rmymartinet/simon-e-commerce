@@ -9,7 +9,7 @@ const BackgroundYoutubeImg = ({
 }: BackgroundYoutubeImgProps) => {
   return (
     <div className="relative flex h-[80vh] flex-col items-center">
-      <div className="absolute flex h-full w-full justify-center gap-4">
+      <div className="absolute flex h-full w-full justify-center gap-4 overflow-hidden">
         {images.map((img, index) => (
           <div
             ref={(el) => {

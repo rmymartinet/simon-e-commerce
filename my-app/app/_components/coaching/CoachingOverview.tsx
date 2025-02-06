@@ -49,7 +49,7 @@ const CoachingOverview = () => {
             className="h-full w-full object-cover"
           ></video>
 
-          <div className="absolute left-1/2 top-1/2 z-50 -translate-x-1/2 -translate-y-1/2 xl:scale-125">
+          <div className="absolute left-1/2 top-1/2 z-50 -translate-x-1/2 -translate-y-1/2">
             <Iphone video="/videos/coaching/call.mp4" />
           </div>
         </div>
