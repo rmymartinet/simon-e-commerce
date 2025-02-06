@@ -39,7 +39,7 @@ const Footer = () => {
           </div>
           <div className="flex justify-between px-4 pb-4 text-sm md:text-lg">
             <p className="uppercase">sm coaching ©2025</p>
-            <p className="">Tout droit reservé</p>
+            <p className="">Tous droits reservés</p>
             <button
               className="flex items-center gap-2"
               onClick={handleBackToTop}
