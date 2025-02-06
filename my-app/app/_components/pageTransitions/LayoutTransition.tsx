@@ -4,10 +4,9 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useSelectedLayoutSegment } from "next/navigation";
 import { LayoutRouterContext } from "next/dist/shared/lib/app-router-context.shared-runtime";
 import { useContext, useEffect, useRef, useState } from "react";
-import { LayoutTransitionProps } from "@/types/types";
 import { useGSAP } from "@gsap/react";
+import { LayoutTransitionProps } from "@/types/types";
 
-// Hook pour récupérer la valeur précédente
 function usePreviousValue<T>(value: T): T | undefined {
   const prevValue = useRef<T | undefined>(undefined);
 

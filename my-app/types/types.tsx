@@ -1,4 +1,5 @@
 import { Session } from "next-auth";
+import { motion } from "framer-motion";
 
 export interface AddToCartButtonProps {
   productData: ProductDataProps;
@@ -304,4 +305,10 @@ export interface SubscriptionInfosProps {
   endDate: string | undefined;
   nextPaymentDate: string;
   isSubscribed: boolean;
+}
+
+export interface LayoutTransitionProps {
+  children: React.ReactNode;
+  className?: React.ComponentProps<typeof motion.div>["className"];
+  style?: React.ComponentProps<typeof motion.div>["style"];
 }
