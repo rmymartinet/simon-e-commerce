@@ -71,7 +71,7 @@ const BeforeAfterPhoto = () => {
                   <span className="border-b border-slate-400 pb-2 text-center text-xl">
                     {url.firstMoutnh}
                   </span>
-                  <span className="text-center text-xl">Résulats:</span>
+                  <span className="text-center text-xl">Résultats:</span>
                 </div>
 
                 {url.before && (
