@@ -59,7 +59,6 @@ const CoachingNutrition = () => {
       <div className="flex flex-col gap-20 lg:grid lg:grid-cols-2">
         {width > 1024 && (
           <div className="">
-            <p>( A effectuer )</p>
             <span className="max-w-lg text-light lg:text-[20vw]">01</span>
           </div>
         )}
@@ -93,9 +92,19 @@ const CoachingNutrition = () => {
         {width > 1024 ? (
           <div className="grid grid-cols-2 items-center">
             <span className="max-w-lg text-light lg:text-[20vw]">02</span>
-            <p className="text-7xl">
-              ( Communiquer moi vos repas en temps réel )
-            </p>
+            <div>
+              {" "}
+              <h2 className="text-4xl">
+                Communiquez moi vos repas en temps réel
+              </h2>
+              <p className="max-w-5xl font-medium text-muted md:text-xl">
+                Je vous transmets votre plan alimentaire directement dans
+                l’application Food. Vous pouvez ensuite l’ajuster selon votre
+                rythme de vie, et je m’assure derrière que tout est bien
+                optimisé pour vous. Un suivi flexible et personnalisé, au plus
+                proche de vos besoins
+              </p>
+            </div>
           </div>
         ) : (
           <div className="mb-10">
