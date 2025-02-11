@@ -46,7 +46,7 @@ const MobileNavComponent = ({ session }: { session: Session | null }) => {
     { title: "Home", link: "/" },
     { title: "Tarifs", link: "/pricing" },
     { title: "Infos", link: "/infos" },
-    // { title: "Blog", link: "/blog" },
+    { title: "Blog", link: "/blog" },
     { title: "Calories", link: "/calories" },
   ];
 
