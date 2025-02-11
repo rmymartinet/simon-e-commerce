@@ -44,7 +44,22 @@ export const postType = defineType({
     defineField({
       name: "body",
       type: "array",
-      of: [{ type: "block" }, { type: "image" }],
+      of: [
+        {
+          type: "block",
+          marks: {
+            annotations: [
+              {
+                type: "textColor",
+              },
+              {
+                type: "highlightColor",
+              },
+            ],
+          },
+        },
+        { type: "image" },
+      ],
     }),
   ],
 });
