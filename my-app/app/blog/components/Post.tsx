@@ -1,38 +1,24 @@
-import {
-  PortableText,
-  PortableTextMarkComponentProps,
-  PortableTextReactComponents,
-} from "@portabletext/react";
+import { PortableText, PortableTextReactComponents } from "@portabletext/react";
 import { client } from "@/sanity/lib/client";
 import imageUrlBuilder from "@sanity/image-url";
 import Image from "next/image";
 import { SanityDocument } from "@sanity/client";
-// import PostsCard from "./PostsCard";
-// import { sanityFetch } from "@/sanity/lib/fetch";
-// import { postsQuery } from "@/sanity/lib/queries";
-// import { useEffect, useState } from "react";
+import PostsCard from "./PostsCard";
 
 const builder = imageUrlBuilder(client);
 
-const Post = ({ post }: { post: SanityDocument }) => {
+const Post = ({
+  sanityPosts,
+  post,
+}: {
+  sanityPosts: SanityDocument[];
+  post: SanityDocument;
+}) => {
   const formattedDate = new Date(post.publishedAt).toLocaleDateString("fr-FR", {
     year: "numeric",
     month: "long",
     day: "numeric",
   });
-
-  // const [posts, setPost] = useState<SanityDocument[]>([]);
-
-  // useEffect(() => {
-  //   const reqSanityPosts = async () => {
-  //     const sanityPosts = await sanityFetch<SanityDocument[]>({
-  //       query: postsQuery,
-  //     });
-  //     setPost(sanityPosts);
-  //   };
-
-  //   reqSanityPosts();
-  // }, []);
 
   const myPortableTextComponents: Partial<PortableTextReactComponents> = {
     marks: {
@@ -70,6 +56,11 @@ const Post = ({ post }: { post: SanityDocument }) => {
       ),
     },
   };
+
+  const filteredPosts = sanityPosts.filter((p) => p.title !== post.title);
+  const shuffledPosts = filteredPosts.sort(() => 0.5 - Math.random());
+  const randomPosts = shuffledPosts.slice(0, 2);
+
   return (
     <main className="container mx-auto mt-40 flex flex-col items-center px-4 py-16">
       <div className="mb-10 flex flex-col gap-4 self-start">
@@ -101,9 +92,15 @@ const Post = ({ post }: { post: SanityDocument }) => {
         ) : null}
       </section>
       <div className="mb-20 mt-20 h-[1px] w-full bg-white" />
-      {/* {posts.map((post, index) => (
-        <PostsCard key={index} sanityPosts={post} />
-      ))} */}
+
+      <div className="flex flex-col gap-8">
+        <h1 className="text-7xl">Prochains articles</h1>
+        <div className="flex flex-col gap-10 lg:grid lg:grid-cols-2">
+          {randomPosts.map((post, index) => (
+            <PostsCard key={index} sanityPosts={post} />
+          ))}
+        </div>
+      </div>
     </main>
   );
 };

@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { SanityDocument } from "@sanity/client";
-import { postPathsQuery, postQuery } from "@/sanity/lib/queries";
+import { postPathsQuery, postQuery, postsQuery } from "@/sanity/lib/queries";
 import { sanityFetch } from "@/sanity/lib/fetch";
 import { client } from "@/sanity/lib/client";
 import React from "react";
@@ -18,7 +18,11 @@ const PostPage = async ({ params }: { params: any }) => {
     params,
   });
 
-  return <Post post={post} />;
+  const sanityPosts = await sanityFetch<SanityDocument[]>({
+    query: postsQuery,
+  });
+
+  return <Post post={post} sanityPosts={sanityPosts} />;
 };
 
 export default PostPage;
