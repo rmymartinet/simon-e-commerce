@@ -1,3 +1,5 @@
+"use client";
+
 import { PortableText, PortableTextReactComponents } from "@portabletext/react";
 import { client } from "@/sanity/lib/client";
 import imageUrlBuilder from "@sanity/image-url";
@@ -19,7 +21,6 @@ const Post = ({
     month: "long",
     day: "numeric",
   });
-
   const myPortableTextComponents: Partial<PortableTextReactComponents> = {
     marks: {
       textColor: ({ children, value }) => (
@@ -56,7 +57,6 @@ const Post = ({
       ),
     },
   };
-
   const filteredPosts = sanityPosts.filter((p) => p.title !== post.title);
   const shuffledPosts = filteredPosts.sort(() => 0.5 - Math.random());
   const randomPosts = shuffledPosts.slice(0, 2);

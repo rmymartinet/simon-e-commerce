@@ -8,14 +8,21 @@ import Post from "../components/Post";
 
 export async function generateStaticParams() {
   const posts = await client.fetch(postPathsQuery);
-
-  return posts;
+  return posts.map((post: { slug: string }) => ({ slug: post.slug }));
 }
 
-const PostPage = async ({ params }: { params: any }) => {
+const PostPage = async ({
+  params,
+}: {
+  params: { slug: string } | undefined;
+}) => {
+  if (!params) return null; // Vérifier que params est défini
+
+  const { slug } = await params; // Attendre params avant de l'utiliser
+
   const post = await sanityFetch<SanityDocument>({
     query: postQuery,
-    params,
+    params: { slug },
   });
 
   const sanityPosts = await sanityFetch<SanityDocument[]>({

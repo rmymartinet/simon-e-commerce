@@ -16,7 +16,6 @@ function FilterPosts({
 }) {
   const gridButtonRef = useRef<HTMLButtonElement>(null);
   const listButtonRef = useRef<HTMLButtonElement>(null);
-
   const uniqueTags = useMemo(() => {
     return Array.from(new Set(sanityTags.flatMap((tag) => tag.tags)));
   }, [sanityTags]);
