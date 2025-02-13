@@ -1,6 +1,6 @@
 import Link from "next/link";
 import React from "react";
-import Images from "next/image";
+import Image from "next/image";
 import imageUrlBuilder from "@sanity/image-url";
 import { client } from "@/sanity/lib/client";
 import { SanityDocument } from "next-sanity";
@@ -13,7 +13,7 @@ function PostsCard({ sanityPosts }: { sanityPosts: SanityDocument }) {
       <div className="h-[300px] overflow-hidden rounded-md">
         <Link key={sanityPosts._id} href={`/blog/${sanityPosts.slug.current}`}>
           {sanityPosts && (
-            <Images
+            <Image
               src={builder.image(sanityPosts.mainImage).url()}
               alt=""
               width={1000}
