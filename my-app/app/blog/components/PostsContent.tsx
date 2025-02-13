@@ -6,8 +6,6 @@ import Link from "next/link";
 import useWindowWidth from "@/hooks/useWindowWidth";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
-import { textSplitLines } from "@/utils/common/textAnimation";
-import { verticalDisplay } from "@/utils/common/moveYAxisEl";
 import PostsCard from "./PostsCard";
 import FilterPosts from "./FilterPosts";
 import Posts from "./Posts";
