@@ -77,7 +77,10 @@ function PostsContent({ sanityPosts }: { sanityPosts: SanityDocument[] }) {
     if (!listImgRefs.current[index]) return;
 
     setIsHover(index);
-    requestAnimationFrame(() => updateImageVisibility(index));
+
+    if (index !== isHover) {
+      requestAnimationFrame(() => updateImageVisibility(index));
+    }
   };
 
   const handleMouseLeave = () => {
