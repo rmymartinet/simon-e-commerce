@@ -15,7 +15,7 @@ const Posts = ({
   return (
     <>
       {filter === "grid" ? (
-        <ul className="flex flex-col gap-8 md:grid md:grid-cols-2 lg:px-0">
+        <ul className="flex flex-col gap-8 md:grid md:grid-cols-3 lg:px-0">
           {posts.map((post) => (
             <li key={post._id} className="rounded-3xl">
               <PostsCard sanityPosts={post} />

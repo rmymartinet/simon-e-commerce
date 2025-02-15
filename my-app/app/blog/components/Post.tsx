@@ -92,7 +92,6 @@ const Post = ({
         ) : null}
       </section>
       <div className="mb-20 mt-20 h-[1px] w-full bg-white" />
-
       <div className="flex flex-col gap-8">
         <h1 className="text-7xl">Prochains articles</h1>
         <div className="flex flex-col gap-10 lg:grid lg:grid-cols-2">

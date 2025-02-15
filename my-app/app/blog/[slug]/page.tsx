@@ -16,9 +16,9 @@ const PostPage = async ({
 }: {
   params: { slug: string } | undefined;
 }) => {
-  if (!params) return null; // Vérifier que params est défini
+  if (!params) return null;
 
-  const { slug } = await params; // Attendre params avant de l'utiliser
+  const { slug } = await params;
 
   const post = await sanityFetch<SanityDocument>({
     query: postQuery,

@@ -6,7 +6,6 @@ import Link from "next/link";
 import useWindowWidth from "@/hooks/useWindowWidth";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
-import PostsCard from "./PostsCard";
 import FilterPosts from "./FilterPosts";
 import Posts from "./Posts";
 import Image from "next/image";
@@ -101,20 +100,7 @@ function PostsContent({ sanityPosts }: { sanityPosts: SanityDocument[] }) {
         Tous les articles ({numberOfPosts})
       </h3>
       {filter === "grid" && filterByTag === "" && (
-        <div className="flex flex-col">
-          <div
-            ref={gridPostsContainerRef}
-            className="flex flex-col gap-20 lg:grid lg:grid-cols-3 lg:gap-10"
-          >
-            <PostsCard sanityPosts={sanityPosts[0]} />
-            <PostsCard sanityPosts={sanityPosts[1]} />
-            <PostsCard sanityPosts={sanityPosts[2]} />
-          </div>
-          {width > 1024 && (
-            <div className="mb-10 mt-10 h-[2px] w-full bg-muted"></div>
-          )}
-          <Posts posts={sanityPosts.slice(3)} filter={filter} />
-        </div>
+        <Posts posts={sanityPosts} filter={filter} />
       )}
       {filter === "grid" && filterByTag !== "" && (
         <div className="flex flex-col gap-20 lg:flex lg:flex-wrap lg:gap-10">
@@ -146,7 +132,6 @@ function PostsContent({ sanityPosts }: { sanityPosts: SanityDocument[] }) {
                 </h2>
                 <span className="text-black">{post._createdAt}</span>
               </Link>
-
               <div
                 ref={(el) => {
                   listImgRefs.current[index] = el;

@@ -4,12 +4,13 @@ import Image from "next/image";
 import imageUrlBuilder from "@sanity/image-url";
 import { client } from "@/sanity/lib/client";
 import { SanityDocument } from "next-sanity";
+import { MdKeyboardArrowRight } from "react-icons/md";
 
 function PostsCard({ sanityPosts }: { sanityPosts: SanityDocument }) {
   const builder = imageUrlBuilder(client);
 
   return (
-    <div className="h-full w-full">
+    <div className="border-primaryCardBorder hover:border-secondaryCardBorder group h-full w-full rounded-xl border bg-background p-5 transition-all duration-300 md:p-4">
       <div className="h-[300px] overflow-hidden rounded-md">
         <Link key={sanityPosts._id} href={`/blog/${sanityPosts.slug.current}`}>
           {sanityPosts && (
@@ -26,10 +27,19 @@ function PostsCard({ sanityPosts }: { sanityPosts: SanityDocument }) {
       </div>
       <div className="flex justify-between">
         <div className="mt-10 flex flex-col gap-10">
-          <div className="w-max rounded-full border border-white px-8 py-2 text-sm">
+          <div className="w-max rounded-full border border-white p-2 text-sm">
             {sanityPosts.tags}
           </div>
-          <h2 className="text-2xl">{sanityPosts.title}</h2>
+          <h2 className="md:text-xl">{sanityPosts.title}</h2>
+          <button className="flex items-center gap-1 justify-self-end">
+            <Link
+              href={`/blog/${sanityPosts.slug.current}`}
+              className="text-blue-400"
+            >
+              Read more
+            </Link>
+            <MdKeyboardArrowRight className="transform text-lg text-blue-400 transition-transform duration-300 group-hover:translate-x-1" />
+          </button>
         </div>
         <span className="text-black">{sanityPosts._createdAt}</span>
       </div>
