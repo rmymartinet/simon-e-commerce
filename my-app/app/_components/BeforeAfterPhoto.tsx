@@ -56,8 +56,7 @@ const BeforeAfterPhoto = () => {
         </div>
       </div>
       <div className="relative flex h-full w-full flex-wrap justify-evenly gap-10 overflow-hidden rounded-xl">
-        {names.map((_, index) => {
-          const url = imagesUrls[index % imagesUrls.length];
+        {imagesUrls.map((image, index) => {
           return (
             <div
               key={index}
@@ -69,17 +68,16 @@ const BeforeAfterPhoto = () => {
               <div className="flex flex-col items-center bg-black font-semibold text-white">
                 <div className="flex w-full flex-col gap-2 py-2">
                   <span className="border-b border-slate-400 pb-2 text-center text-xl">
-                    {url.firstMoutnh}
+                    {image.firstMoutnh}
                   </span>
                   <span className="text-center text-xl">Résultats:</span>
                 </div>
-
-                {url.before && (
+                {image.before && (
                   <Image
-                    src={url.before}
-                    alt={`Image avant ${url.name}`}
-                    width={400}
-                    height={400}
+                    src={image.before}
+                    alt={`Image avant ${image.name}`}
+                    width={500}
+                    height={500}
                     className="h-full w-full object-cover"
                   />
                 )}
@@ -87,16 +85,16 @@ const BeforeAfterPhoto = () => {
               <div className="flex flex-col items-center bg-black font-semibold text-white">
                 <div className="flex w-full flex-col gap-2 py-2">
                   <span className="border-b border-slate-400 pb-2 text-center text-xl">
-                    {url.lastMoutnh}
+                    {image.lastMoutnh}
                   </span>
-                  <span className="text-center text-xl">{url.result}</span>
+                  <span className="text-center text-xl">{image.result}</span>
                 </div>
-                {url.after && (
+                {image.after && (
                   <Image
-                    src={url.after}
-                    alt={`Image après ${url.name}`}
-                    width={400}
-                    height={400}
+                    src={image.after}
+                    alt={`Image après ${image.name}`}
+                    width={500}
+                    height={500}
                     className="h-full w-full object-cover"
                   />
                 )}

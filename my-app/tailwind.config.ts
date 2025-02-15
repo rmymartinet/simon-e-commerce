@@ -15,6 +15,9 @@ const config: Config = {
         muted: "#8b8b8b",
         card: "#000000cf",
         light: "#E0E0E0",
+        backgroundCard: "#141214",
+        primaryCardBorder: "#252325",
+        secondaryCardBorder: "#bebcbe",
       },
       gridTemplateColumns: {
         custom: "20vw minmax(20vw, 1fr) minmax(20vw, 1fr)",

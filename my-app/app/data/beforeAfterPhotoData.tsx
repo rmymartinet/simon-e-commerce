@@ -3,6 +3,7 @@ export const names = [
   "Manon",
   "Alex",
   "Dylan",
+  "Alexia",
   "Olivia",
   "Evan",
   "Caroline",
@@ -18,7 +19,7 @@ export const imagesUrls = [
     after: "/images/before_after/client1/2.jpeg",
   },
   {
-    name: "alexia",
+    name: "Alexia",
     firstMoutnh: "1mois",
     lastMoutnh: "3mois",
     result: "+7kg",
@@ -26,34 +27,34 @@ export const imagesUrls = [
     after: "/images/before_after/client2/img2.jpeg",
   },
   {
-    name: "théo",
+    name: "Clément",
     firstMoutnh: "1mois",
-    lastMoutnh: "3mois",
-    result: "+3kg",
-    before: "/images/before_after/client5/img1.jpeg",
-    after: "/images/before_after/client5/img2.jpeg",
-  },
-  {
-    name: "Evan",
-    firstMoutnh: "1mois",
-    lastMoutnh: "3mois",
-    result: "+3kg",
+    lastMoutnh: "4mois",
+    result: "+5kg",
     before: "/images/before_after/client3/img1.jpeg",
     after: "/images/before_after/client3/img2.jpeg",
   },
   {
-    name: "fanny",
+    name: "Fanny",
     firstMoutnh: "1mois",
     lastMoutnh: "5mois",
     result: "-15kg",
     before: "/images/before_after/client4/img1.jpeg",
     after: "/images/before_after/client4/img2.jpeg",
   },
+  {
+    name: "Théo",
+    firstMoutnh: "1mois",
+    lastMoutnh: "3mois",
+    result: "+3kg",
+    before: "/images/before_after/client5/img1.jpeg",
+    after: "/images/before_after/client5/img2.jpeg",
+  },
 
   {
-    name: "maxence",
+    name: "Maxence",
     firstMoutnh: "1mois",
-    lastMoutnh: "4mois",
+    lastMoutnh: "3mois",
     result: "+4kg",
     before: "/images/before_after/client6/img1.jpeg",
     after: "/images/before_after/client6/img2.jpeg",
@@ -65,97 +66,5 @@ export const imagesUrls = [
     result: "+6kg",
     before: "/images/before_after/client7/img1.jpeg",
     after: "/images/before_after/client7/img2.jpeg",
-  },
-];
-
-export const clientImg: {
-  before: { [key: string]: string };
-  after: { [key: string]: string };
-}[] = [
-  {
-    before: {
-      img1: "/images/before_after/client1/removebg/before/img1.png",
-      img2: "/images/before_after/client1/removebg/before/img2.png",
-      img3: "/images/before_after/client1/removebg/before/img3.png",
-      img4: "/images/before_after/client1/removebg/before/img4.png",
-    },
-    after: {
-      img1: "/images/before_after/client1/removebg/after/img1.png",
-      img2: "/images/before_after/client1/removebg/after/img2.png",
-      img3: "/images/before_after/client1/removebg/after/img3.png",
-      img4: "/images/before_after/client1/removebg/after/img4.png",
-    },
-  },
-  {
-    before: {
-      img1: "/images/before_after/client2/removebg/before/img1.png",
-      img2: "/images/before_after/client2/removebg/before/img2.png",
-      img3: "/images/before_after/client2/removebg/before/img3.png",
-      img4: "/images/before_after/client2/removebg/before/img4.png",
-    },
-    after: {
-      img1: "/images/before_after/client2/removebg/after/img1.png",
-      img2: "/images/before_after/client2/removebg/after/img2.png",
-      img3: "/images/before_after/client2/removebg/after/img3.png",
-      img4: "/images/before_after/client2/removebg/after/img4.png",
-    },
-  },
-  {
-    before: {
-      img1: "/images/before_after/client4/removebg/before/img1.png",
-      img2: "/images/before_after/client4/removebg/before/img2.png",
-      img3: "/images/before_after/client4/removebg/before/img3.png",
-      img4: "/images/before_after/client4/removebg/before/img4.png",
-    },
-    after: {
-      img1: "/images/before_after/client4/removebg/after/img1.png",
-      img2: "/images/before_after/client4/removebg/after/img2.png",
-      img3: "/images/before_after/client4/removebg/after/img3.png",
-      img4: "/images/before_after/client4/removebg/after/img4.png",
-    },
-  },
-  {
-    before: {
-      img1: "/images/before_after/client3/removebg/before/img1.png",
-      img2: "/images/before_after/client3/removebg/before/img2.png",
-      img3: "/images/before_after/client3/removebg/before/img3.png",
-      img4: "/images/before_after/client3/removebg/before/img4.png",
-    },
-    after: {
-      img1: "/images/before_after/client3/removebg/after/img1.png",
-      img2: "/images/before_after/client3/removebg/after/img2.png",
-      img3: "/images/before_after/client3/removebg/after/img3.png",
-      img4: "/images/before_after/client3/removebg/after/img4.png",
-    },
-  },
-
-  {
-    before: {
-      img1: "/images/before_after/client5/removebg/before/img1.png",
-      img2: "/images/before_after/client5/removebg/before/img2.png",
-      img3: "/images/before_after/client5/removebg/before/img3.png",
-      img4: "/images/before_after/client5/removebg/before/img4.png",
-    },
-    after: {
-      img1: "/images/before_after/client5/removebg/after/img1.png",
-      img2: "/images/before_after/client5/removebg/after/img2.png",
-      img3: "/images/before_after/client5/removebg/after/img3.png",
-      img4: "/images/before_after/client5/removebg/after/img4.png",
-    },
-  },
-
-  {
-    before: {
-      img1: "/images/before_after/client6/removebg/before/img1.png",
-      img2: "/images/before_after/client6/removebg/before/img2.png",
-      img3: "/images/before_after/client6/removebg/before/img3.png",
-      img4: "/images/before_after/client6/removebg/before/img4.png",
-    },
-    after: {
-      img1: "/images/before_after/client6/removebg/after/img1.png",
-      img2: "/images/before_after/client6/removebg/after/img2.png",
-      img3: "/images/before_after/client6/removebg/after/img3.png",
-      img4: "/images/before_after/client6/removebg/after/img4.png",
-    },
   },
 ];
