@@ -19,7 +19,8 @@
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: "Roboto", sans-serif;
+  font-family: "Helvetica Neue LT Pro", "Helvetica Neue", Helvetica, Arial,
+    sans-serif;
   overflow-x: hidden;
 }
 
@@ -41,85 +42,6 @@ body {
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
   background: #555;
-}
-
-/* Animations */
-@keyframes animate {
-  0% {
-    transform: translate(-50%, -75%) rotate(0deg);
-  }
-  100% {
-    transform: translate(-50%, -75%) rotate(360deg);
-  }
-}
-
-@keyframes bg-spin {
-  to {
-    --border-angle: 1turn;
-  }
-}
-
-@keyframes gradientAnimation {
-  0% {
-    background-position: 0% 0%;
-  }
-  50% {
-    background-position: 100% 100%;
-  }
-  100% {
-    background-position: 0% 0%;
-  }
-}
-
-@keyframes neon {
-  0% {
-    text-shadow:
-      -1px -1px 1px var(--shadow-color-light),
-      -1px 1px 1px var(--shadow-color-light),
-      1px -1px 1px var(--shadow-color-light),
-      1px 1px 1px var(--shadow-color-light),
-      0 0 3px var(--shadow-color-light),
-      0 0 10px var(--shadow-color-light),
-      0 0 20px var(--shadow-color-light),
-      0 0 30px var(--shadow-color),
-      0 0 40px var(--shadow-color),
-      0 0 50px var(--shadow-color),
-      0 0 70px var(--shadow-color),
-      0 0 100px var(--shadow-color),
-      0 0 200px var(--shadow-color);
-  }
-  50% {
-    text-shadow:
-      -1px -1px 1px var(--shadow-color-light),
-      -1px 1px 1px var(--shadow-color-light),
-      1px -1px 1px var(--shadow-color-light),
-      1px 1px 1px var(--shadow-color-light),
-      0 0 5px var(--shadow-color-light),
-      0 0 15px var(--shadow-color-light),
-      0 0 25px var(--shadow-color-light),
-      0 0 40px var(--shadow-color),
-      0 0 50px var(--shadow-color),
-      0 0 60px var(--shadow-color),
-      0 0 80px var(--shadow-color),
-      0 0 110px var(--shadow-color),
-      0 0 210px var(--shadow-color);
-  }
-  100% {
-    text-shadow:
-      -1px -1px 1px var(--shadow-color-light),
-      -1px 1px 1px var(--shadow-color-light),
-      1px -1px 1px var(--shadow-color-light),
-      1px 1px 1px var(--shadow-color-light),
-      0 0 3px var(--shadow-color-light),
-      0 0 10px var(--shadow-color-light),
-      0 0 20px var(--shadow-color-light),
-      0 0 30px var(--shadow-color),
-      0 0 40px var(--shadow-color),
-      0 0 50px var(--shadow-color),
-      0 0 70px var(--shadow-color),
-      0 0 100px var(--shadow-color),
-      0 0 200px var(--shadow-color);
-  }
 }
 
 /* Backgrounds */
@@ -408,6 +330,8 @@ body {
 .prose-custom p,
 .prose-custom a,
 .prose-custom li,
+.prose-custom span,
+.prose-custom strong,
 .prose-custom blockquote {
   color: white;
 }
