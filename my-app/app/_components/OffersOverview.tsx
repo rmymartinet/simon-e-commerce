@@ -107,7 +107,7 @@ function OffersOverview() {
           coachingData.map((data, index) => (
             <div
               key={index}
-              className={`flex w-full flex-col items-center justify-items-center gap-10 border-b border-t border-muted p-10 lg:grid lg:grid-rows-3 lg:items-start lg:gap-0 ${index === 1 ? "lg:border-l lg:border-r" : ""}`}
+              className={`flex w-full flex-col items-center justify-items-center gap-10 border-b border-t border-muted p-10 lg:grid lg:grid-rows-3 lg:items-start ${index === 1 ? "lg:border-l lg:border-r" : ""}`}
             >
               <h2 className="text-3xl">{data.title}</h2>
               <p className="text-pretty text-center text-sm lg:text-base">
