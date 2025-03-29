@@ -8,14 +8,12 @@ import Post from "../components/Post";
 
 export async function generateStaticParams() {
   const posts = await client.fetch(postPathsQuery);
-  return posts.map((post: { slug: string }) => ({ slug: post.slug }));
+  return posts.map((post: { slug: { current: string } }) => ({
+    slug: post.slug.current,
+  }));
 }
 
-const PostPage = async ({
-  params,
-}: {
-  params: { slug: string } | undefined;
-}) => {
+const PostPage = async ({ params }: { params: Promise<{ slug: string }> }) => {
   if (!params) return null;
 
   const { slug } = await params;
