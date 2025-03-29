@@ -312,3 +312,10 @@ export interface LayoutTransitionProps {
   className?: React.ComponentProps<typeof motion.div>["className"];
   style?: React.ComponentProps<typeof motion.div>["style"];
 }
+
+export interface SubscriptionData {
+  startDate: string;
+  endDate: string;
+  titlePlan: string;
+  status: string;
+}
