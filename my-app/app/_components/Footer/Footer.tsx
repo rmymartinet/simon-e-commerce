@@ -25,28 +25,42 @@ const Footer = () => {
   return (
     <>
       {isDisplayNavBar && (
-        <footer className="relative mt-40 flex h-[50vh] w-full flex-col justify-between">
-          <div className="flex flex-col justify-between px-4">
-            <div className="mb-[20vh] flex flex-col justify-between gap-20 lg:flex-row lg:gap-0">
-              <div className="relative flex h-max flex-col gap-6">
-                <h1 className="text-2xl font-medium md:text-3xl">
-                  Commencer dès maintenant
-                </h1>
-                <Button href="/pricing" />
-              </div>
+        <footer className="relative mt-40 flex min-h-[100dvh] flex-col justify-between px-4">
+          <div className="mt-4 flex w-full flex-col gap-20 text-sm md:grid md:grid-cols-3">
+            <div className="flex flex-col gap-4 uppercase">
+              <p className="text-gray-400">operating wordwide</p>
+              <span className="break-after-all whitespace-normal uppercase">
+                we connect ideas and people through immersive digital
+                narratives. explore visual worlds crafted to captivate and
+                resonate.
+              </span>
+              <p className="underline">contact@smartinet-coaching.com</p>
+            </div>
+            <div className="m-auto flex gap-40">
               <FooterLinks />
             </div>
+            <div className="flex flex-col gap-4 uppercase md:justify-self-end">
+              <p className="text-gray-400">all right reserved 2025</p>
+              <div className="flex items-center gap-2">
+                <button onClick={() => handleBackToTop()} className="uppercase">
+                  back on top
+                </button>
+                <FaArrowUp size={12} />
+              </div>
+              <p>privacy policy</p>
+              <p>made by rémy</p>
+            </div>
           </div>
-          <div className="flex justify-between px-4 pb-4 text-sm md:text-lg">
-            <p className="uppercase">sm coaching ©2025</p>
-            <p className="">Tous droits reservés</p>
-            <button
-              className="flex items-center gap-2"
-              onClick={handleBackToTop}
-            >
-              <p>Remonter</p>
-              <FaArrowUp size={12} />
-            </button>
+          <div className="relative mt-20 text-center text-[13vw] leading-none md:mt-0 md:text-[14vw]">
+            <h1 className="slice slice-top font-extrabold uppercase leading-none text-white">
+              smcoaching
+            </h1>
+            <h1 className="slice slice-mid font-extrabold uppercase leading-none text-white">
+              smcoaching
+            </h1>
+            <h1 className="font-extrabold uppercase leading-none text-white">
+              smcoaching
+            </h1>
           </div>
         </footer>
       )}

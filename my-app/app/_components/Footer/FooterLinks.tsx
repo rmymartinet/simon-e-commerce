@@ -47,7 +47,7 @@ const FooterLinks = () => {
   ];
 
   return (
-    <div className="grid grid-cols-2 gap-20 md:grid md:grid-cols-3">
+    <div className="flex flex-wrap gap-20 md:grid md:grid-cols-3">
       <FooterLinkSection title="Découvrir" links={pageLinks} />
       <FooterLinkSection title="Social" links={socialLinks} />
       <FooterLinkSection title="Ressources" links={legalLinks} />

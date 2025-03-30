@@ -426,3 +426,24 @@ body {
   --line-size: 2px;
   --color: #5520fa;
 }
+
+.slice {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+
+  width: max-content;
+  pointer-events: none;
+}
+
+.slice-top {
+  top: -40px;
+  clip-path: inset(0 0 84% 0); /* shows only the top 20% of the text */
+  opacity: 0.25;
+}
+
+.slice-mid {
+  top: -20px;
+  clip-path: inset(0 0 84% 0); /* shows only the top 40% of the text */
+  opacity: 0.5;
+}
