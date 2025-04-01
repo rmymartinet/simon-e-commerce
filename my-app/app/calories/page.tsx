@@ -40,14 +40,14 @@ export default function Calorie() {
   return (
     <div
       ref={containerRef}
-      className="mt-[30vh] flex min-h-screen flex-col items-center justify-center gap-20 overflow-hidden"
+      className="mt-[25vh] flex min-h-screen flex-col items-center justify-center gap-20 overflow-hidden"
     >
       <div className="mb-8 flex w-full flex-col flex-wrap items-center justify-center gap-2">
         <span className="mb-10 text-sm uppercase text-gray-500">Calories</span>
-        <h1 className="text-center text-xl font-semibold md:text-5xl">
+        <h1 className="text-center text-2xl font-semibold md:text-5xl">
           Calcul des besoins caloriques journaliers (TDEE).
         </h1>
-        <p>
+        <p className="text-center">
           Ce calculateur de macro est un outil unique qui permet de calculer tes
           apports caloriques personnalisés en fonction de tes dépenses
           énergiques et de ton alimentation.
