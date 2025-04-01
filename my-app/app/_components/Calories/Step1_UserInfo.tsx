@@ -60,8 +60,9 @@ const Step1_UserInfo = ({
       {/* Genre */}
       <div className="flex flex-col">
         <div className="mb-10 flex flex-col items-center gap-4 text-center">
-          <h2 className="text-2xl font-bold">
-            Étape 1 : informations générales
+          <h2 className="text-2xl">
+            <span className="font-bold text-violet-400">Étape 1</span> :
+            informations générales
           </h2>
           <p className="lg:max-w-[40vw]">
             Commence par renseigner tes données de base : âge, sexe, taille,

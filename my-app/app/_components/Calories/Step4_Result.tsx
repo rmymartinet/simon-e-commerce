@@ -60,8 +60,9 @@ const Step4_Result = ({
   return (
     <div className="relative flex w-screen flex-col gap-4 rounded-xl border border-[--border-color] bg-[--card-bg] p-8 lg:w-full">
       <div className="mb-10 flex flex-col items-center gap-4 text-center">
-        <h2 className="text-2xl font-bold">
-          Étape 4 : ton résultat personnalisé
+        <h2 className="text-2xl">
+          <span className="font-bold text-violet-400">Étape 4</span>: ton
+          résultat personnalisé
         </h2>
         <p className="lg:max-w-[40vw]">
           Voici tes besoins caloriques et ta répartition en macronutriments,

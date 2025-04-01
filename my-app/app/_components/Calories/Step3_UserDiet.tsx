@@ -38,8 +38,9 @@ const Step3_UserDiet = ({ setGoals }: Step3UserDietProps) => {
   return (
     <div className="relative flex w-screen flex-col gap-4 rounded-xl border border-[--border-color] bg-[--card-bg] p-8 lg:w-full">
       <div className="mb-10 flex flex-col items-center gap-4 text-center">
-        <h2 className="text-2xl font-bold">
-          Étape 3 : sélectionne ton programme alimentaire
+        <h2 className="text-2xl">
+          <span className="font-bold text-violet-400">Étape 3</span> :
+          sélectionne ton programme alimentaire
         </h2>
         <p className="lg:max-w-[40vw]">
           Sélectionne un type d’alimentation qui correspond à tes préférences ou
