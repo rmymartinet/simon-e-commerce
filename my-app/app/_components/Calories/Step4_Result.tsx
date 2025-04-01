@@ -1,0 +1,155 @@
+import React, { useState } from "react";
+
+type Props = {
+  goalsTraining: { carbs: number; proteins: number; fats: number } | null;
+  goalsRest: { carbs: number; proteins: number; fats: number } | null;
+  totalCaloriesTraining: number;
+  totalCaloriesRest: number;
+  formIsValid: boolean;
+  goals: { carbs: number; proteins: number; fats: number } | null;
+  isTrainingDay: boolean;
+  setIsTrainingDay: (isTrainingDay: boolean) => void;
+};
+
+const Step4_Result = ({
+  goalsTraining,
+  goalsRest,
+  totalCaloriesTraining,
+  totalCaloriesRest,
+  goals,
+  isTrainingDay,
+  setIsTrainingDay,
+}: Props) => {
+  const [mealsPerDay, setMealsPerDay] = useState(3);
+
+  // ✅ Utilise isTrainingDay local, pas includeTraining
+  const macros = isTrainingDay ? goalsTraining : goalsRest;
+  const totalCalories = isTrainingDay
+    ? totalCaloriesTraining
+    : totalCaloriesRest;
+
+  if (!macros || totalCalories === 0) {
+    return (
+      <div className="mt-10 text-center text-gray-500">
+        Sélectionne d’abord ton objectif et ton programme alimentaire.
+      </div>
+    );
+  }
+
+  const perMeal = {
+    carbs: (macros.carbs / mealsPerDay).toFixed(1),
+    proteins: (macros.proteins / mealsPerDay).toFixed(1),
+    fats: (macros.fats / mealsPerDay).toFixed(1),
+    calories: (totalCalories / mealsPerDay).toFixed(0),
+  };
+
+  const totalCarbs = isTrainingDay
+    ? goals && goals.carbs !== undefined
+      ? (totalCaloriesTraining * goals.carbs) / 100 / 4
+      : 0
+    : goals && goals.carbs !== undefined
+      ? (totalCaloriesRest * goals.carbs) / 100 / 4
+      : 0;
+
+  const totalProteins = isTrainingDay
+    ? goals && goals.proteins !== undefined
+      ? (totalCaloriesTraining * goals.proteins) / 100 / 4
+      : 0
+    : goals && goals.proteins !== undefined
+      ? (totalCaloriesRest * goals.proteins) / 100 / 4
+      : 0;
+
+  const totalFats = isTrainingDay
+    ? goals && goals.fats !== undefined
+      ? (totalCaloriesTraining * goals.fats) / 100 / 9
+      : 0
+    : goals && goals.fats !== undefined
+      ? (totalCaloriesRest * goals.fats) / 100 / 9
+      : 0;
+
+  return (
+    <div className="mt-10 w-full max-w-5xl rounded-lg border p-6 shadow">
+      <h2 className="mb-10 text-2xl font-bold">
+        Étape 4 : ton résultat personnalisé
+      </h2>
+      {/* Toggle entraînement ou repos */}
+      <div className="mb-6 flex items-center gap-6">
+        <label className="flex items-center gap-2 font-semibold">
+          <input
+            type="radio"
+            name="dayType"
+            checked={isTrainingDay}
+            onChange={() => setIsTrainingDay(true)}
+          />
+          Jour d&apos;entraînement
+        </label>
+        <label className="flex items-center gap-2 font-semibold">
+          <input
+            type="radio"
+            name="dayType"
+            checked={!isTrainingDay}
+            onChange={() => setIsTrainingDay(false)}
+          />
+          Jour de repos
+        </label>
+      </div>
+
+      {/* Tableau macros totales */}
+      <table className="mb-8 w-full table-auto border-collapse text-center">
+        <thead>
+          <tr className="bg-yellow-400 text-white">
+            <th className="p-3">Glucides (g)</th>
+            <th className="p-3">Protéines (g)</th>
+            <th className="p-3">Lipides (g)</th>
+            <th className="p-3">Total (kcal)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr className="bg-gray-50 font-semibold">
+            <td className="p-3">{totalCarbs.toFixed(2)}</td>
+            <td className="p-3">{totalProteins.toFixed(2)}</td>
+            <td className="p-3">{totalFats.toFixed(2)}</td>
+            <td className="p-3">{totalCalories.toFixed(2)}</td>
+          </tr>
+        </tbody>
+      </table>
+
+      {/* Sélection des repas */}
+      <div className="mb-6 text-center">
+        <label className="mr-4 font-semibold">Nombre de repas par jour :</label>
+        <select
+          value={mealsPerDay}
+          onChange={(e) => setMealsPerDay(Number(e.target.value))}
+          className="rounded border p-2"
+        >
+          {[1, 2, 3, 4, 5, 6].map((num) => (
+            <option key={num} value={num}>
+              {num} repas
+            </option>
+          ))}
+        </select>
+      </div>
+
+      {/* Tableau macros par repas */}
+      <table className="w-full table-auto border-collapse text-center">
+        <thead>
+          <tr className="bg-gray-200">
+            <th className="p-3">Glucides / repas</th>
+            <th className="p-3">Protéines / repas</th>
+            <th className="p-3">Lipides / repas</th>
+            <th className="p-3">Calories / repas</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr className="bg-gray-50">
+            <td className="p-3">{perMeal.carbs}</td>
+            <td className="p-3">{perMeal.proteins}</td>
+            <td className="p-3">{perMeal.fats}</td>
+            <td className="p-3">{perMeal.calories}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  );
+};
+export default Step4_Result;

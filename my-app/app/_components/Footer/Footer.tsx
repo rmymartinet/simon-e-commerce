@@ -3,7 +3,6 @@
 import FooterLinks from "./FooterLinks";
 import { usePathname } from "next/navigation";
 import { FaArrowUp } from "react-icons/fa6";
-import Button from "../Button";
 
 const Footer = () => {
   const pathname = usePathname();

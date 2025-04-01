@@ -116,6 +116,7 @@ export interface FormDataProps {
 }
 
 export interface FormInputData {
+  genre: string;
   setGenre: (genre: string) => void;
   age: number;
   setAge: (age: number) => void;
@@ -131,6 +132,14 @@ export interface FormInputData {
   setGoals: (goals: string) => void;
   weightChange: number;
   setWeightChange: (weightLoss: number) => void;
+  bodyFatMode: boolean;
+  setBodyFatMode: (mode: boolean) => void;
+  trainingDays: number;
+  setTrainingDays: (days: number) => void;
+  sessionDuration: number;
+  setSessionDuration: (duration: number) => void;
+  intensity: string;
+  setIntensity: (intensity: string) => void;
 }
 
 export interface FormProps {
@@ -319,3 +328,46 @@ export interface SubscriptionData {
   titlePlan: string;
   status: string;
 }
+
+export type Step2_UserGoalsProps = {
+  formState: {
+    genre: string;
+    age: number;
+    height: number;
+    weight: number;
+    activities: number;
+    bodyFatMode: string;
+    trainingDays: number;
+    sessionDuration: number;
+    intensity: number;
+  };
+  setTotalCalories: React.Dispatch<React.SetStateAction<number>>;
+  formIsValid: boolean;
+  setTotalCaloriesTraining: React.Dispatch<React.SetStateAction<number>>;
+  setTotalCaloriesRest: React.Dispatch<React.SetStateAction<number>>;
+  setTrainingMacros: React.Dispatch<
+    React.SetStateAction<{
+      carbs: number;
+      proteins: number;
+      fats: number;
+    } | null>
+  >;
+  setRestMacros: React.Dispatch<
+    React.SetStateAction<{
+      carbs: number;
+      proteins: number;
+      fats: number;
+    } | null>
+  >;
+  goals: {
+    carbs: number;
+    proteins: number;
+    fats: number;
+  } | null;
+  isTrainingDay: boolean;
+  setIsTrainingDay: React.Dispatch<React.SetStateAction<boolean>>;
+};
+
+export type Step3UserDietProps = {
+  setGoals: (macros: { carbs: number; proteins: number; fats: number }) => void;
+};
