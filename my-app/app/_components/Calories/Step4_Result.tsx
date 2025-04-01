@@ -69,9 +69,17 @@ const Step4_Result = ({
 
   return (
     <div className="mt-10 w-full max-w-5xl rounded-lg border p-6 shadow">
-      <h2 className="mb-10 text-2xl font-bold">
-        Étape 4 : ton résultat personnalisé
-      </h2>
+      <div className="mb-10 flex flex-col items-center gap-4 text-center">
+        <h2 className="text-2xl font-bold">
+          Étape 4 : ton résultat personnalisé
+        </h2>
+        <p className="lg:max-w-[40vw]">
+          Voici tes besoins caloriques et ta répartition en macronutriments,
+          adaptés aux jours d’entraînement et de repos. Tu peux aussi ajuster le
+          nombre de repas pour obtenir une répartition pratique à suivre au
+          quotidien.
+        </p>
+      </div>
       {/* Toggle entraînement ou repos */}
       <div className="mb-6 flex items-center gap-6">
         <label className="flex items-center gap-2 font-semibold">

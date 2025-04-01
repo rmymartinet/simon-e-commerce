@@ -37,9 +37,18 @@ const Step3_UserDiet = ({ setGoals }: Step3UserDietProps) => {
 
   return (
     <div className="flex flex-col gap-6">
-      <h2 className="text-2xl font-bold">
-        Étape 3 : sélectionne ton programme alimentaire
-      </h2>
+      <div className="mb-10 flex flex-col items-center gap-4 text-center">
+        <h2 className="text-2xl font-bold">
+          Étape 3 : sélectionne ton programme alimentaire
+        </h2>
+        <p className="lg:max-w-[40vw]">
+          Sélectionne un type d’alimentation qui correspond à tes préférences ou
+          à ta stratégie : équilibrée, cétogène, pauvre en glucides,
+          hyperprotéinée… Tu peux aussi créer ton propre ratio de
+          macronutriments (glucides, protéines, lipides) si tu veux un contrôle
+          total.
+        </p>
+      </div>
 
       <label>
         <span className="mb-2 block font-semibold">

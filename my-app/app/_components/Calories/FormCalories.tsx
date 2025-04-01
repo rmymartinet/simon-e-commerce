@@ -25,7 +25,6 @@ const FormCalories = () => {
     fats: number;
   } | null>(null);
 
-  
   const [totalCaloriesTraining, setTotalCaloriesTraining] = useState(0);
   const [totalCaloriesRest, setTotalCaloriesRest] = useState(0);
   const [trainingMacros, setTrainingMacros] = useState<{
@@ -54,17 +53,6 @@ const FormCalories = () => {
 
   return (
     <div className="relative flex w-full flex-col items-center">
-      <div className="mb-8 flex flex-wrap items-end gap-2">
-        <h1 className="text-center text-3xl font-semibold md:text-4xl lg:text-7xl">
-          Calcul des besoins caloriques journaliers (TDEE)
-        </h1>
-        <p>
-          Ce calculateur de macro est un outil unique qui permet de calculer tes
-          apports caloriques personnalisés en fonction de tes dépenses
-          énergiques et de ton alimentation.
-        </p>
-      </div>
-
       <div className="relative mb-20 flex flex-col gap-20 p-10">
         <Step1_UserInfo
           formState={formState}

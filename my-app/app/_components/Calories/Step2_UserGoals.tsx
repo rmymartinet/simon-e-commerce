@@ -133,9 +133,16 @@ const Step2_UserGoals = ({
 
   return (
     <div className="flex flex-col gap-6">
-      <h2 className="mb-10 text-2xl font-bold">
-        Étape 2 : choisis ton objectif
-      </h2>
+      <div className="mb-10 flex flex-col items-center gap-4 text-center">
+        <h2 className="text-2xl font-bold"> Étape 2 : choisis ton objectif</h2>
+        <p className="lg:max-w-[40vw]">
+          Choisis ton objectif : perdre de la graisse, prendre de la masse, ou
+          simplement maintenir ton poids. Tu peux aussi entrer un total
+          personnalisé si tu sais déjà ce que tu veux viser. Ensuite, ajuste le
+          niveau d’intensité de ton objectif pour un déficit ou un surplus
+          progressif ou plus rapide
+        </p>
+      </div>
       {/* Toggle Entraînement */}
       <div className="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-2">
         {/* Perte de graisse */}
