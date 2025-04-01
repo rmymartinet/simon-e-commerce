@@ -26,7 +26,6 @@
     "@supabase/supabase-js": "^2.47.5",
     "@tailwindcss/typography": "^0.5.15",
     "bcrypt": "^5.1.1",
-    "canvas-confetti": "^1.9.3",
     "charts.css": "^1.1.0",
     "crypto": "^1.0.1",
     "dotenv": "^16.4.7",
@@ -48,7 +47,6 @@
     "stripe": "^17.4.0",
     "styled-components": "^6.1.13",
     "sweetalert2": "^11.15.3",
-    "three": "^0.171.0",
     "update": "^0.7.4",
     "xxx": "^0.0.1",
     "zod": "^3.23.8"
