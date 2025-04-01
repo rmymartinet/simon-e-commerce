@@ -1,25 +1,5 @@
+import { Step1_UserInfoProps } from "@/types/types";
 import React from "react";
-
-type Props = {
-  formState: {
-    genre: string;
-    age: number;
-    height: number;
-    weight: number;
-    activities: number;
-    bodyFatMode: string;
-    trainingDays: number;
-    sessionDuration: number;
-    intensity: number;
-  };
-  updateField: (
-    field: keyof Props["formState"],
-    value: string | number,
-  ) => void;
-  errors: { [key: string]: string };
-  setErrors: (errors: { [key: string]: string }) => void;
-  setFormIsValid: (isValid: boolean) => void;
-};
 
 const Step1_UserInfo = ({
   formState,
@@ -27,7 +7,7 @@ const Step1_UserInfo = ({
   errors,
   setErrors,
   setFormIsValid,
-}: Props) => {
+}: Step1_UserInfoProps) => {
   const {
     age,
     height,
@@ -71,7 +51,7 @@ const Step1_UserInfo = ({
 
   return (
     <form
-      className="relative flex w-screen flex-col gap-4 rounded-xl border p-8 lg:w-full"
+      className="relative flex w-screen flex-col gap-4 rounded-xl border border-[--border-color] bg-[--card-bg] p-8 lg:w-full"
       onSubmit={(e) => {
         e.preventDefault();
         handleSubmit(e);

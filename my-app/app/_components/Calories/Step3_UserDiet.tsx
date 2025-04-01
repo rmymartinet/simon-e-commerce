@@ -36,7 +36,7 @@ const Step3_UserDiet = ({ setGoals }: Step3UserDietProps) => {
   };
 
   return (
-    <div className="flex flex-col gap-6">
+    <div className="relative flex w-screen flex-col gap-4 rounded-xl border border-[--border-color] bg-[--card-bg] p-8 lg:w-full">
       <div className="mb-10 flex flex-col items-center gap-4 text-center">
         <h2 className="text-2xl font-bold">
           Étape 3 : sélectionne ton programme alimentaire
@@ -67,7 +67,7 @@ const Step3_UserDiet = ({ setGoals }: Step3UserDietProps) => {
         </select>
       </label>
 
-      <div className="grid grid-cols-3 gap-4">
+      <div className="mt-6 grid grid-cols-3 gap-4">
         {(["carbs", "proteins", "fats"] as const).map((macro) => (
           <div key={macro} className="flex flex-col items-center">
             <label className="mb-1 font-medium">
@@ -83,17 +83,13 @@ const Step3_UserDiet = ({ setGoals }: Step3UserDietProps) => {
               max={100}
               value={macros[macro]}
               onChange={(e) => handleChange(macro, Number(e.target.value))}
-              className="w-20 rounded border p-2 text-center"
+              className="w-20 rounded border bg-white p-2 text-center text-[--background]"
               disabled={selectedDiet !== "Avec mon ratio personnalisé"}
             />
             <span>%</span>
           </div>
         ))}
       </div>
-
-      <button className="self-center rounded bg-button-gradient px-6 py-2 font-bold text-white">
-        CALCULER
-      </button>
     </div>
   );
 };

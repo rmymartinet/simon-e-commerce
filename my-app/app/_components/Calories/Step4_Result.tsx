@@ -1,15 +1,5 @@
+import { Step4_ResultProps } from "@/types/types";
 import React, { useState } from "react";
-
-type Props = {
-  goalsTraining: { carbs: number; proteins: number; fats: number } | null;
-  goalsRest: { carbs: number; proteins: number; fats: number } | null;
-  totalCaloriesTraining: number;
-  totalCaloriesRest: number;
-  formIsValid: boolean;
-  goals: { carbs: number; proteins: number; fats: number } | null;
-  isTrainingDay: boolean;
-  setIsTrainingDay: (isTrainingDay: boolean) => void;
-};
 
 const Step4_Result = ({
   goalsTraining,
@@ -19,7 +9,7 @@ const Step4_Result = ({
   goals,
   isTrainingDay,
   setIsTrainingDay,
-}: Props) => {
+}: Step4_ResultProps) => {
   const [mealsPerDay, setMealsPerDay] = useState(3);
 
   // ✅ Utilise isTrainingDay local, pas includeTraining
@@ -30,8 +20,8 @@ const Step4_Result = ({
 
   if (!macros || totalCalories === 0) {
     return (
-      <div className="mt-10 text-center text-gray-500">
-        Sélectionne d’abord ton objectif et ton programme alimentaire.
+      <div className="relative flex w-screen flex-col gap-4 rounded-xl border border-[--border-color] bg-[--card-bg] p-8 text-center text-red-400 lg:w-full">
+        Pour obtenir un résultat, veuillez remplir les étapes précédentes.
       </div>
     );
   }
@@ -68,7 +58,7 @@ const Step4_Result = ({
       : 0;
 
   return (
-    <div className="mt-10 w-full max-w-5xl rounded-lg border p-6 shadow">
+    <div className="relative flex w-screen flex-col gap-4 rounded-xl border border-[--border-color] bg-[--card-bg] p-8 lg:w-full">
       <div className="mb-10 flex flex-col items-center gap-4 text-center">
         <h2 className="text-2xl font-bold">
           Étape 4 : ton résultat personnalisé
