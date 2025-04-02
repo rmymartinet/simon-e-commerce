@@ -11,7 +11,7 @@ const Faq = ({ filterName }: { filterName: string }) => {
         subtitle="Les questions les plus fréquemment posées."
       />
 
-      <div className="mt-20 flex flex-col gap-4 overflow-hidden">
+      <div className="mt-20 flex flex-col gap-4 overflow-hidden md:px-40">
         {filterName === "programmes"
           ? faqProgramData.map(
               (item: { question: string; answer: string }, index: number) => (
@@ -22,7 +22,7 @@ const Faq = ({ filterName }: { filterName: string }) => {
                     text={item.answer}
                     logoColor="text-white"
                   />
-                  <div className="h-[1px] w-full bg-muted"></div>
+                  <div className="h-[1px] w-full bg-[--subtext]"></div>
                 </div>
               ),
             )
@@ -35,7 +35,7 @@ const Faq = ({ filterName }: { filterName: string }) => {
                     text={item.answer}
                     logoColor="text-white"
                   />
-                  <div className="h-[1px] w-full bg-muted"></div>
+                  <div className="h-[1px] w-full bg-[--subtext]"></div>
                 </div>
               ),
             )}

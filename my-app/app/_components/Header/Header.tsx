@@ -60,7 +60,7 @@ const Header = () => {
       <div className="z-50 mb-4 flex w-full flex-col items-center justify-center">
         <div
           ref={textLeftRef}
-          className="absolute left-1/2 top-4 -translate-x-1/2 overflow-hidden"
+          className="absolute left-1/2 top-5 -translate-x-1/2 overflow-hidden"
         >
           <h1 className="uppercase">Sm coaching</h1>
         </div>
@@ -69,11 +69,9 @@ const Header = () => {
             <h1 ref={titleRef} className="text-center text-7xl font-medium">
               Transforme-toi avec ou sans coach.
             </h1>
-            <div ref={buttonsContainerRef} className="mt-4 flex gap-10">
-              <Button variant="blackBg" size="default">
-                Commencer maintenant
-              </Button>
-              <button className="h-12 rounded bg-[#0000] px-6">About</button>
+            <div className="mt-4 flex gap-10">
+              <Button variant="blackBg">Commencer maintenant</Button>
+              <Button variant="glassmorph">About</Button>
             </div>
           </div>
           <ProgramOverview />
