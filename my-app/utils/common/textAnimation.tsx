@@ -28,7 +28,7 @@ export const textVerticalDisplay = (
 
 export function textSplitLines(
   ref: React.RefObject<HTMLElement>,
-  delay: number,
+  delay?: number,
 ) {
   if (ref.current) {
     const split = new SplitType(ref.current, {
@@ -39,6 +39,7 @@ export function textSplitLines(
       const wrapper = document.createElement("div");
       wrapper.style.overflow = "hidden";
       wrapper.style.display = "block";
+      wrapper.style.paddingBottom = "5px";
       if (line.parentNode) {
         line.parentNode.insertBefore(wrapper, line);
       }
@@ -46,7 +47,7 @@ export function textSplitLines(
     });
 
     gsap.from(split.lines, {
-      filter: "blur(10px)",
+      filter: "blur(70px)",
       duration: 1,
       y: 100,
       opacity: 0,
@@ -71,6 +72,8 @@ export function textSplitLinesScrollTrigger(ref: React.RefObject<HTMLElement>) {
       const wrapper = document.createElement("div");
       wrapper.style.overflow = "hidden";
       wrapper.style.display = "block";
+      wrapper.style.paddingBottom = "5px";
+
       if (line.parentNode) {
         line.parentNode.insertBefore(wrapper, line);
       }
@@ -80,22 +83,21 @@ export function textSplitLinesScrollTrigger(ref: React.RefObject<HTMLElement>) {
 
     gsap.set(split.lines, {
       y: 100,
-      filter: "blur(10px)",
-
+      filter: "blur(70px)",
       opacity: 0,
     });
 
     gsap.to(split.lines, {
       scrollTrigger: {
         trigger: ref.current,
-        start: "top 80%",
+        start: "top 70%",
       },
       duration: 1,
       filter: "blur(0px)",
       y: 0,
       opacity: 1,
       stagger: 0.05,
-      ease: "power3.out",
+      ease: "power2.out",
     });
 
     return () => {
