@@ -40,9 +40,50 @@ export default function Infos() {
     <div className="relative mt-40 flex min-h-screen flex-col items-center justify-center gap-40 px-4">
       <div
         ref={headerRef}
-        className="relative flex flex-col gap-20 rounded-xl bg-white p-8 text-black lg:grid lg:grid-cols-2"
+        className="relative flex flex-col-reverse items-center gap-16 lg:grid lg:grid-cols-2 lg:gap-24"
       >
-        <div className="h-[60vh] lg:w-[40vw]">
+        {/* Bloc Infos sous forme de timeline animée */}
+        <div className="flex flex-col gap-8">
+          {[
+            {
+              id: "01",
+              label: "Diplômé STAPS",
+              desc: "Licence STAPS en physiologie, biomécanique et entraînement sportif.",
+            },
+            {
+              id: "02",
+              label: "Préparateur physique",
+              desc: "Spécialisé en performance et prévention des blessures.",
+            },
+            {
+              id: "03",
+              label: "Coach Basic Fit",
+              desc: "Expérience terrain avec accompagnement quotidien en salle.",
+            },
+          ].map((item) => (
+            <div
+              key={item.id}
+              className="relative overflow-hidden rounded-xl border border-[--border-color] bg-[--card-bg] px-6 py-5 transition-all duration-300 hover:scale-[1.015]"
+            >
+              <div className="flex items-start gap-4">
+                <div className="text-xl font-semibold text-muted">
+                  {" "}
+                  {item.id}{" "}
+                </div>
+                <div className="flex flex-col gap-1">
+                  <h2 className="text-xl font-bold text-white lg:text-2xl">
+                    {item.label}
+                  </h2>
+                  <p className="text-sm leading-snug text-[--subtext] lg:text-base">
+                    {item.desc}
+                  </p>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div className="lg:max-[40vw] w-full max-w-[400px] overflow-hidden rounded-xl border border-[--border-color] bg-[--card-bg]">
           <video
             src="/videos/infos/info.mp4"
             className="h-full w-full object-contain"
@@ -50,27 +91,7 @@ export default function Infos() {
             muted
             autoPlay
             controls
-          ></video>
-        </div>
-        <div className="relative grid">
-          <div className="flex items-center gap-6 border-b border-muted py-6">
-            <span className="text-2xl font-medium">01</span>
-            <span className="text-2xl font-medium lg:text-5xl">
-              Diplomé Staps
-            </span>
-          </div>
-          <div className="flex items-center gap-6 border-b border-muted py-6">
-            <span className="text-2xl font-medium">02</span>
-            <span className="text-2xl font-medium lg:text-5xl">
-              Préparateur physique
-            </span>
-          </div>
-          <div className="flex items-center gap-6 border-b border-muted py-6">
-            <span className="text-2xl font-medium">03</span>
-            <span className="text-2xl font-medium lg:text-5xl">
-              Coach Basic fit
-            </span>
-          </div>
+          />
         </div>
       </div>
       <div className="mt-20 flex w-full flex-col items-center gap-8">
