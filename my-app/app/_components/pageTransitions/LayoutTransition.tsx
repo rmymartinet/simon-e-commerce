@@ -215,7 +215,7 @@ export function LayoutTransition({
           exit="exit"
         />
         <motion.div
-          className="fixed left-0 top-0 z-[99999] grid h-screen w-screen origin-top place-content-center bg-red-400"
+          className="fixed left-0 top-0 z-[99999] grid h-screen w-screen origin-top place-content-center bg-black"
           variants={slideIn}
           initial="initial"
           animate="animate"

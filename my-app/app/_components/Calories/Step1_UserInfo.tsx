@@ -1,4 +1,6 @@
 import { Step1_UserInfoProps } from "@/types/types";
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
 import React from "react";
 
 const Step1_UserInfo = ({
@@ -18,6 +20,8 @@ const Step1_UserInfo = ({
     sessionDuration,
     intensity,
   } = formState;
+
+  const formRef = React.useRef<HTMLFormElement>(null);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -49,8 +53,19 @@ const Step1_UserInfo = ({
     }
   };
 
+  useGSAP(() => {
+    gsap.from(formRef.current, {
+      y: 100,
+      filter: "blur(70px)",
+      duration: 1,
+      ease: "power2.Out",
+      opacity: 0,
+    });
+  }, []);
+
   return (
     <form
+      ref={formRef}
       className="relative flex w-screen flex-col gap-4 rounded-xl border border-[--border-color] bg-[--card-bg] p-8 lg:w-full"
       onSubmit={(e) => {
         e.preventDefault();

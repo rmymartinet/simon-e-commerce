@@ -164,7 +164,7 @@ const Step2_UserGoals = ({
             </h3>
           </label>
           <p
-            className={`${formIsValid ? "text-black" : ""} text-3xl font-semibold`}
+            className={`${formIsValid ? "text-black" : "text-[--subtext]"} text-3xl font-semibold`}
           >
             {!formIsValid ? "-" : Math.round(perteData[perteChoice])} kcal
           </p>
@@ -172,7 +172,7 @@ const Step2_UserGoals = ({
           {["lente", "moderee", "rapide"].map((option) => (
             <label
               key={option}
-              className={`flex items-center gap-2 ${formIsValid ? "text-black" : ""}`}
+              className={`flex items-center gap-2 ${formIsValid ? "text-black" : "text-[--subtext]"}`}
             >
               <input
                 type="radio"
@@ -204,7 +204,7 @@ const Step2_UserGoals = ({
             <h3 className="text-xl font-bold text-blue-700">Prise de masse</h3>
           </label>
           <p
-            className={`${formIsValid ? "text-black" : ""} text-3xl font-semibold`}
+            className={`${formIsValid ? "text-black" : "text-[--subtext]"} text-3xl font-semibold`}
           >
             {" "}
             {!formIsValid ? "-" : Math.round(gainData[gainChoice])} kcal
@@ -213,7 +213,7 @@ const Step2_UserGoals = ({
           {["prudente", "moderee", "extreme"].map((option) => (
             <label
               key={option}
-              className={`flex items-center gap-2 ${formIsValid ? "text-black" : ""}`}
+              className={`flex items-center gap-2 ${formIsValid ? "text-black" : "text-[--subtext]"}`}
             >
               <input
                 type="radio"
@@ -245,7 +245,7 @@ const Step2_UserGoals = ({
             <h3 className="text-xl font-bold text-blue-700">Maintien</h3>
           </label>
           <p
-            className={`${formIsValid ? "text-black" : ""} text-3xl font-semibold`}
+            className={`${formIsValid ? "text-black" : "text-[--subtext]"} text-3xl font-semibold`}
           >
             {!formIsValid ? "-" : Math.round(maintienData)} kcal
           </p>

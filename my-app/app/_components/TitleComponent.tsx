@@ -6,20 +6,19 @@ import { useGSAP } from "@gsap/react";
 import React from "react";
 
 const TitleComponent = ({
-  titleRef,
-  subtitleRef,
   titleIndication,
   title,
   subtitle,
   isTextSplitLines = true,
 }: {
-  titleRef: React.RefObject<HTMLDivElement | null>;
-  subtitleRef: React.RefObject<HTMLParagraphElement | null>;
   titleIndication?: string;
   title: string;
   subtitle: string;
   isTextSplitLines?: boolean;
 }) => {
+  const titleRef = React.useRef<HTMLDivElement>(null);
+  const subtitleRef = React.useRef<HTMLParagraphElement>(null);
+
   useGSAP(() => {
     if (titleRef.current && subtitleRef.current && isTextSplitLines) {
       textSplitLines(titleRef as React.RefObject<HTMLElement>);
@@ -38,10 +37,10 @@ const TitleComponent = ({
         </p>
       )}
 
-      <h1 className="text-3xl md:text-6xl">{title}</h1>
+      <h1 className="text-center text-3xl md:text-6xl">{title}</h1>
       <p
         ref={subtitleRef}
-        className="mt-2 font-medium text-[--subtext] md:text-xl"
+        className="mt-2 text-center font-medium text-[--subtext] md:max-w-5xl md:text-xl"
       >
         {subtitle}
       </p>

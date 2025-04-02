@@ -47,7 +47,6 @@ const Footer = () => {
                 <FaArrowUp size={12} />
               </div>
               <p>privacy policy</p>
-              <p>made by rémy</p>
             </div>
           </div>
           <div className="relative mt-20 text-center text-[13vw] leading-none md:mt-0 md:text-[14vw]">

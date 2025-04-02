@@ -1,19 +1,12 @@
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import { useGSAP } from "@gsap/react";
-import { textSplitLinesScrollTrigger } from "@/utils/common/textAnimation";
 import gsap from "gsap";
+import TitleComponent from "./TitleComponent";
 
 gsap.registerPlugin(useGSAP);
 
 function OffersOverview() {
   const [filter, setFilter] = useState("program");
-  const titleRef = useRef<HTMLHeadingElement>(null);
-  const textRef = useRef<HTMLParagraphElement>(null);
-
-  useGSAP(() => {
-    textSplitLinesScrollTrigger(titleRef as React.RefObject<HTMLElement>);
-    textSplitLinesScrollTrigger(textRef as React.RefObject<HTMLElement>);
-  }, []);
 
   const programData = [
     {
@@ -52,18 +45,14 @@ function OffersOverview() {
   ];
 
   return (
-    <div className="mt-[20vh] flex w-full flex-col px-4 lg:mt-[30vh]">
-      <h1
-        ref={titleRef}
-        className="self-start text-3xl md:text-4xl lg:text-7xl"
-      >
-        Des plans pensés pour vous
-      </h1>
-      <p ref={textRef} className="max-w-4xl font-medium text-muted md:text-xl">
-        Choisissez l’autonomie avec un programme adapté ou optez pour un
+    <div className="flex w-full flex-col px-4 lg:mt-[30vh]">
+      <TitleComponent
+        title="Nos offres pensés pour vous"
+        subtitle=" Choisissez l’autonomie avec un programme adapté ou optez pour un
         coaching personnalisé avec un suivi dédié. Votre progression, à votre
-        rythme.
-      </p>
+        rythme."
+        isTextSplitLines={false}
+      />
       <div className="mb-10 mt-10 grid grid-cols-2 self-center text-xl">
         <div className="flex flex-col gap-2">
           <button
