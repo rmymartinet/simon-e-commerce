@@ -31,11 +31,12 @@ const Filter = ({ filterName, setFilterName }: FilterProps) => {
 
   useGSAP(() => {
     gsap.set(containerRef.current, {
-      xPercent: -200,
+      yPercent: 200,
+      filter: "blur(70px)",
     });
     gsap.to(containerRef.current, {
-      xPercent: 0,
-      delay: 2,
+      yPercent: 0,
+      filter: "blur(0px)",
       duration: 1,
       ease: "power2.out",
     });

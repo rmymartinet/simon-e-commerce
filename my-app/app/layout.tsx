@@ -38,7 +38,7 @@ export default function RootLayout({
               </head>
               <body id="main-container" className="antialiased">
                 <ConditionalNav />
-                {children}
+                <LayoutTransition>{children}</LayoutTransition>
                 <Footer />
                 <LocomotiveScrollWrapper />
               </body>

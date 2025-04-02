@@ -22,12 +22,13 @@ const CardPriceContainer = ({
     if (cardContainerChildren) {
       gsap.set(cardContainerChildren, {
         yPercent: 100,
+        filter: "blur(70px)",
       });
 
       gsap.to(cardContainerChildren, {
         yPercent: 0,
-        delay: 2,
         duration: 1,
+        filter: "blur(0px)",
         ease: "power2.out",
         stagger: 0.1,
       });

@@ -9,7 +9,6 @@ import CoachingOverview from "./_components/coaching/CoachingOverview";
 import AppDetails from "./_components/coaching/AppDetails";
 import CoachingNutrition from "./_components/coaching/CoachingNutrition";
 import NutritionAdvice from "./_components/program/NutritionAdvice";
-import FeedBackCoaching from "./_components/coaching/FeedBackCoaching";
 
 gsap.registerPlugin(useGSAP);
 
@@ -21,7 +20,6 @@ export default function Home() {
       <Youtube />
       <CoachingOverview />
       <AppDetails />
-      {/* <FeedBackCoaching /> */}
       <CoachingNutrition />
       <BeforeAfterPhoto />
     </section>
