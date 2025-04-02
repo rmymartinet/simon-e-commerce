@@ -37,13 +37,13 @@ const Youtube = () => {
       <div className="mb-10 flex flex-col items-center md:mb-40">
         <h1
           ref={titleRef}
-          className="max-w-5xl text-pretty break-words text-3xl lg:text-4xl"
+          className="max-w-5xl text-pretty break-words text-center text-3xl lg:text-4xl"
         >
           Tous vos exercices en vidéo
         </h1>
         <p
           ref={textRef}
-          className="max-w-5xl text-center font-medium text-muted md:text-xl"
+          className="text-center font-medium text-[--subtext] md:max-w-5xl md:text-xl"
         >
           Accédez à mes vidéos exclusives sur YouTube pour perfectionner vos
           mouvements et exécuter chaque exercice avec précision. Disponible pour

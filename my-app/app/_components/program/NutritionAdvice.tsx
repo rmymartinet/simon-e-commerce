@@ -75,7 +75,7 @@ const NutritionAdvice = () => {
   return (
     <div className="mt-[20vh] flex flex-col gap-20 px-4">
       <div ref={textRef} className="flex flex-col items-center gap-20">
-        <p className="max-w-5xl text-pretty break-words text-center text-3xl lg:text-4xl">
+        <p className="max-w-5xl text-pretty break-words text-start text-3xl md:text-center lg:text-4xl">
           Des conseils sur-mesure pour équilibrer vos repas et atteindre vos
           objectifs durablement
         </p>
