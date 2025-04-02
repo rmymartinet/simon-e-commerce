@@ -3,6 +3,8 @@ import gsap from "gsap";
 import { useRef } from "react";
 import useWindowWidth from "@/hooks/useWindowWidth";
 import { textSplitLines } from "@/utils/common/textAnimation";
+import ProgramOverview from "../program/ProgramOverview";
+import { Button } from "../ui/button";
 
 gsap.registerPlugin(useGSAP);
 
@@ -59,17 +61,27 @@ const Header = () => {
   return (
     <div
       ref={containerRef}
-      className="relative flex h-screen w-screen flex-col justify-end overflow-hidden"
+      className="relative flex w-screen flex-col justify-end overflow-hidden"
     >
-      {/* <div
-        ref={headerRef}
-        className="absolute bottom-0 z-50 w-[100%] bg-gradient-to-t from-[#0b0d14] via-[#0b0d14]/60 to-black/0"
-      ></div> */}
-      <div className="z-50 mb-4 flex w-full flex-col items-center justify-between px-4 md:flex-row">
-        <div ref={textLeftRef} className="overflow-hidden">
+      <div className="z-50 mb-4 flex w-full flex-col items-center justify-center">
+        {/* <div ref={textLeftRef} className="overflow-hidden">
           <h1 className="text-4xl uppercase">Sm coaching</h1>
+        </div> */}
+        <div className="mt-[30vh] flex flex-col items-center gap-20">
+          <div className="flex flex-col items-center gap-6">
+            <h1 className="text-center text-7xl font-medium">
+              Transforme-toi avec ou sans coach.
+            </h1>
+            <div className="mt-4 flex gap-10">
+              <Button variant="blackBg" size="default">
+                Commencer maintenant
+              </Button>
+              <button className="h-12 rounded bg-[#0000] px-6">About</button>
+            </div>
+          </div>
+          <ProgramOverview />
         </div>
-        <div className="flex flex-col gap-4 md:flex-row">
+        {/* <div className="flex flex-col gap-4 md:flex-row">
           <div className="flex flex-col">
             <p className="text-sm md:text-end">
               Coaching. Programmes. Résultats
@@ -82,9 +94,9 @@ const Header = () => {
           <button className="w-full rounded-md bg-button-gradient px-4 py-2 font-semibold md:w-max">
             Commencer maintenant
           </button>
-        </div>
+        </div> */}
       </div>
-      <div className="absolute h-full w-full overflow-hidden">
+      <div className="absolute top-0 h-screen w-full overflow-hidden">
         <video
           autoPlay
           loop

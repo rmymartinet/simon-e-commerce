@@ -2,10 +2,11 @@ import React from "react";
 import { useAddToCart } from "@/hooks/useAddToCart";
 import { AddToCartButtonProps, CartItemProps } from "@/types/types";
 
-const AddToCartButton = ({ productData }: AddToCartButtonProps) => {
+const AddToCartButton = ({
+  productData,
+  isHighlighted,
+}: AddToCartButtonProps) => {
   const addToCart = useAddToCart();
-
-  console.log("productData", productData);
 
   const handleClick = () => {
     const cartItem: CartItemProps = {
@@ -21,10 +22,10 @@ const AddToCartButton = ({ productData }: AddToCartButtonProps) => {
   };
 
   return (
-    <div className="relative mt-4 w-full">
+    <div className="tex relative mt-4 w-full">
       <button
         onClick={handleClick}
-        className="program-button-container padding w-full rounded-xl bg-button-gradient font-bold"
+        className={`h-12 w-full rounded px-6 font-medium ${isHighlighted ? "bg-primary text-secondary" : "border border-[--border-color]"}`}
       >
         Ajouter au panier
       </button>

@@ -50,7 +50,7 @@ const Accordion = ({
             ref={iconRef}
             className="rounded-full border border-muted lg:p-2"
           >
-            <IoAdd className="text-2xl text-white" />
+            <IoAdd className="text-2xl text-muted" />
           </div>
         </div>
         <p

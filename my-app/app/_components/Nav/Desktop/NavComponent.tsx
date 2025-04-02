@@ -68,7 +68,7 @@ const NavComponent = ({ session }: { session: Session | null }) => {
         <nav onMouseLeave={handleMouseLeaveNav}>
           <div
             ref={navRef}
-            className="fixed left-4 top-5 z-[9999] flex items-center overflow-hidden text-xl"
+            className="fixed left-4 top-5 z-[9999] flex items-center overflow-hidden text-xl text-white mix-blend-difference"
           >
             <ul className="flex rounded-full">
               {navLinks.map((link, index) => (
@@ -86,7 +86,7 @@ const NavComponent = ({ session }: { session: Session | null }) => {
             </ul>
           </div>
 
-          <div className="padding fixed right-5 top-5 z-[9999] flex items-center gap-6 text-xl">
+          <div className="padding fixed right-5 top-5 z-[9999] flex items-center gap-6 text-xl text-white mix-blend-difference">
             <div
               className="flex cursor-pointer items-center gap-2"
               onMouseEnter={() => handleMouseEnter(navLinks.length)} // index juste après les liens de gauche

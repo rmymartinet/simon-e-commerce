@@ -2,10 +2,12 @@ const Price = ({
   price,
   mounth,
   dayPrice,
+  isHighlighted,
 }: {
   price: number;
   mounth?: number;
   dayPrice?: string;
+  isHighlighted: boolean;
 }) => (
   <div className="mb-10 flex flex-col gap-2">
     <div className="flex flex-1 items-center">
@@ -26,7 +28,9 @@ const Price = ({
     </div>
     {mounth !== 0 && (
       <div>
-        <p className="mt-6 pl-2 text-base font-semibold text-[#E0AAFF]">
+        <p
+          className={`mt-6 pl-2 text-base font-semibold ${isHighlighted ? "text-primary" : "text-[#E0AAFF]"}`}
+        >
           À moins de {dayPrice} €/jour
         </p>
       </div>

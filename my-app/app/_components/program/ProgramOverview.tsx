@@ -17,15 +17,15 @@ const ProgramOverview = () => {
   }, []);
 
   return (
-    <div className="mt-[20vh] flex w-screen flex-col items-center overflow-hidden px-4">
+    <div className="flex w-screen max-w-[80vw] flex-col items-center overflow-hidden rounded-2xl bg-[--background] p-10 px-4">
       <div
         ref={titlesContainerRef}
         className="flex flex-col items-center justify-center"
       >
-        <h1 className="text-3xl md:text-4xl lg:text-7xl">
+        <h1 className="text-3xl md:text-4xl">
           Programmes adaptés à votre niveau
         </h1>
-        <p className="font-medium text-muted md:text-xl">
+        <p className="font-medium text-muted">
           Débutant, intermédiaire ou confirmé : progressez à votre rythme
         </p>
       </div>

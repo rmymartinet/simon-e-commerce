@@ -14,14 +14,14 @@ const Iphone = ({
       {title && (
         <h1 className="card padding rounded-xl text-xl font-bold">{title}</h1>
       )}
-      <div className="relative z-50 h-full overflow-hidden">
+      <div className="relative z-50 h-full overflow-hidden lg:scale-150 xl:scale-100">
         <div className="relative h-full w-full overflow-hidden">
           <Image
             src="/images/iphonee.png"
             alt=""
             width={1000}
             height={1000}
-            className="z-20 h-full w-full object-cover"
+            className="scale z-20 h-full w-full object-cover"
             quality={100}
           />
           {imgUrl && (
@@ -30,7 +30,7 @@ const Iphone = ({
               alt=""
               width={1000}
               height={1000}
-              className="absolute inset-0 left-1/2 top-1/2 -z-10 flex h-[90%] w-[87%] -translate-x-1/2 -translate-y-1/2 items-center justify-center object-cover lg:h-[95%] lg:w-[88%]"
+              className="absolute inset-0 left-1/2 top-1/2 -z-10 flex h-[90%] w-[87%] -translate-x-1/2 -translate-y-1/2 items-center justify-center object-cover lg:h-[95%] lg:w-[90%]"
               quality={100}
             />
           )}

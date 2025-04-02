@@ -1,5 +1,4 @@
 import React, { useRef, useState } from "react";
-import Button from "./Button";
 import { useGSAP } from "@gsap/react";
 import { textSplitLinesScrollTrigger } from "@/utils/common/textAnimation";
 import gsap from "gsap";
@@ -100,7 +99,7 @@ function OffersOverview() {
               <p className="text-pretty text-center text-sm lg:text-base">
                 {data.description}
               </p>
-              <Button href="/pricing" />
+              {/* <Button href="/pricing" /> */}
             </div>
           ))}
         {filter === "coaching" &&
@@ -113,7 +112,7 @@ function OffersOverview() {
               <p className="text-pretty text-center text-sm lg:text-base">
                 {data.description}
               </p>
-              <Button href="/pricing" />
+              {/* <Button href="/pricing" /> */}
             </div>
           ))}
       </div>

@@ -1,52 +1,91 @@
 /* eslint-disable */
 import { Config } from "tailwindcss";
 const config: Config = {
-  content: [
+    darkMode: ["class"],
+    content: [
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
-    extend: {
-      colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
-        subtle: "#6e7681",
-        muted: "#8b8b8b",
-        card: "#000000cf",
-        light: "#E0E0E0",
-        backgroundCard: "#141214",
-        primaryCardBorder: "#252325",
-        secondaryCardBorder: "#bebcbe",
-      },
-      gridTemplateColumns: {
-        custom: "20vw minmax(20vw, 1fr) minmax(20vw, 1fr)",
-        blogCustom: "2fr 1fr",
-        blogHeader: "2fr max-content 1fr",
-        coachingNutrition: "max-content 1fr max-content",
-      },
-      gridTemplateRows: {
-        cardPrice: "120px max-content max-content",
-        featuresCard: "280px max-content",
-        feedBackContainer: "max-content 1fr",
-        feedBackCard: "max-content 1fr max-content",
-      },
-      gridColumn: {
-        "start-1-end-2": "1 / 2",
-        "start-2-end-4": "2 / 4",
-        "start-2-end-3": "2 / 3",
-        "start-3-end-4": "3 / 4",
-      },
-
-      backgroundImage: {
-        "button-gradient": "linear-gradient(135deg, #a26ff4, #512e99)",
-      },
-      borderRadius: {
-        button: "1.125rem",
-      },
-    },
+  	extend: {
+  		colors: {
+  			background: 'hsl(var(--background))',
+  			foreground: 'hsl(var(--foreground))',
+  			subtle: '#6e7681',
+  			muted: {
+  				DEFAULT: 'hsl(var(--muted))',
+  				foreground: 'hsl(var(--muted-foreground))'
+  			},
+  			card: {
+  				DEFAULT: 'hsl(var(--card))',
+  				foreground: 'hsl(var(--card-foreground))'
+  			},
+  			light: '#E0E0E0',
+  			backgroundCard: '#141214',
+  			primaryCardBorder: '#252325',
+  			secondaryCardBorder: '#bebcbe',
+  			popover: {
+  				DEFAULT: 'hsl(var(--popover))',
+  				foreground: 'hsl(var(--popover-foreground))'
+  			},
+  			primary: {
+  				DEFAULT: 'hsl(var(--primary))',
+  				foreground: 'hsl(var(--primary-foreground))'
+  			},
+  			secondary: {
+  				DEFAULT: 'hsl(var(--secondary))',
+  				foreground: 'hsl(var(--secondary-foreground))'
+  			},
+  			accent: {
+  				DEFAULT: 'hsl(var(--accent))',
+  				foreground: 'hsl(var(--accent-foreground))'
+  			},
+  			destructive: {
+  				DEFAULT: 'hsl(var(--destructive))',
+  				foreground: 'hsl(var(--destructive-foreground))'
+  			},
+  			border: 'hsl(var(--border))',
+  			input: 'hsl(var(--input))',
+  			ring: 'hsl(var(--ring))',
+  			chart: {
+  				'1': 'hsl(var(--chart-1))',
+  				'2': 'hsl(var(--chart-2))',
+  				'3': 'hsl(var(--chart-3))',
+  				'4': 'hsl(var(--chart-4))',
+  				'5': 'hsl(var(--chart-5))'
+  			}
+  		},
+  		gridTemplateColumns: {
+  			custom: '20vw minmax(20vw, 1fr) minmax(20vw, 1fr)',
+  			blogCustom: '2fr 1fr',
+  			blogHeader: '2fr max-content 1fr',
+  			coachingNutrition: 'max-content 1fr max-content'
+  		},
+  		gridTemplateRows: {
+  			cardPrice: '120px max-content max-content',
+  			featuresCard: '280px max-content',
+  			feedBackContainer: 'max-content 1fr',
+  			feedBackCard: 'max-content 1fr max-content'
+  		},
+  		gridColumn: {
+  			'start-1-end-2': '1 / 2',
+  			'start-2-end-4': '2 / 4',
+  			'start-2-end-3': '2 / 3',
+  			'start-3-end-4': '3 / 4'
+  		},
+  		backgroundImage: {
+  			'button-gradient': 'linear-gradient(135deg, #a26ff4, #512e99)'
+  		},
+  		borderRadius: {
+  			button: '1.125rem',
+  			lg: 'var(--radius)',
+  			md: 'calc(var(--radius) - 2px)',
+  			sm: 'calc(var(--radius) - 4px)'
+  		}
+  	}
   },
-  plugins: [require("@tailwindcss/typography")],
+  plugins: [require("@tailwindcss/typography"), require("tailwindcss-animate")],
 };
 /* eslint-enable */
 

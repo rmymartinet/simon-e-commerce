@@ -34,16 +34,16 @@ const Youtube = () => {
 
   return (
     <div className="mt-[20vh] flex w-full flex-col px-4">
-      <div className="mb-10 flex flex-col md:mb-40">
+      <div className="mb-10 flex flex-col items-center md:mb-40">
         <h1
           ref={titleRef}
-          className="max-w-5xl text-pretty break-words text-3xl md:text-4xl lg:text-7xl"
+          className="max-w-5xl text-pretty break-words text-3xl lg:text-4xl"
         >
           Tous vos exercices en vidéo
         </h1>
         <p
           ref={textRef}
-          className="max-w-5xl font-medium text-muted md:text-xl"
+          className="max-w-5xl text-center font-medium text-muted md:text-xl"
         >
           Accédez à mes vidéos exclusives sur YouTube pour perfectionner vos
           mouvements et exécuter chaque exercice avec précision. Disponible pour

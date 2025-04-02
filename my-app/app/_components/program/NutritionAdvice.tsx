@@ -3,7 +3,6 @@ import gsap from "gsap";
 import { data } from "@/app/data/nutritionAdviceData";
 import { useRef } from "react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import Button from "../Button";
 import { textSplitLinesScrollTrigger } from "@/utils/common/textAnimation";
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
@@ -75,15 +74,13 @@ const NutritionAdvice = () => {
 
   return (
     <div className="mt-[20vh] flex flex-col gap-20 px-4">
-      <div ref={textRef} className="mb-10 flex flex-col gap-20">
-        <p className="max-w-5xl text-pretty break-words text-3xl md:text-4xl lg:text-7xl">
+      <div ref={textRef} className="flex flex-col items-center gap-20">
+        <p className="max-w-5xl text-pretty break-words text-center text-3xl lg:text-4xl">
           Des conseils sur-mesure pour équilibrer vos repas et atteindre vos
           objectifs durablement
         </p>
       </div>
-      <div className="self-center md:mb-40">
-        <Button href="/pricing" />
-      </div>
+      <div className="self-center md:mb-40"></div>
       <div ref={contentRef} className="flex flex-col gap-20">
         <div className="flex flex-col gap-14 self-end lg:w-1/2">
           {data.map((item, index) => (

@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 
 export interface AddToCartButtonProps {
   productData: ProductDataProps;
+  isHighlighted: boolean;
 }
 
 export interface AuthContextType {
@@ -32,8 +33,9 @@ export interface BlogCardProps {
 export interface CardPriceProps {
   productData: ProductDataProps;
   filterName: string;
-
   session: Session | null;
+
+  isHighlighted: boolean;
 }
 
 export interface CartContextProps {
@@ -329,6 +331,27 @@ export interface SubscriptionData {
   status: string;
 }
 
+export type Step1_UserInfoProps = {
+  formState: {
+    genre: string;
+    age: number;
+    height: number;
+    weight: number;
+    activities: number;
+    bodyFatMode: string;
+    trainingDays: number;
+    sessionDuration: number;
+    intensity: number;
+  };
+  updateField: (
+    field: keyof Step1_UserInfoProps["formState"],
+    value: string | number,
+  ) => void;
+  errors: { [key: string]: string };
+  setErrors: (errors: { [key: string]: string }) => void;
+  setFormIsValid: (isValid: boolean) => void;
+};
+
 export type Step2_UserGoalsProps = {
   formState: {
     genre: string;
@@ -370,4 +393,15 @@ export type Step2_UserGoalsProps = {
 
 export type Step3UserDietProps = {
   setGoals: (macros: { carbs: number; proteins: number; fats: number }) => void;
+};
+
+export type Step4_ResultProps = {
+  goalsTraining: { carbs: number; proteins: number; fats: number } | null;
+  goalsRest: { carbs: number; proteins: number; fats: number } | null;
+  totalCaloriesTraining: number;
+  totalCaloriesRest: number;
+  formIsValid: boolean;
+  goals: { carbs: number; proteins: number; fats: number } | null;
+  isTrainingDay: boolean;
+  setIsTrainingDay: (isTrainingDay: boolean) => void;
 };

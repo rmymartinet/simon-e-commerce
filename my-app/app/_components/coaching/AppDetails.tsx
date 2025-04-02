@@ -53,7 +53,7 @@ const AppDetails = () => {
   return (
     <div
       ref={containerRef}
-      className="relative mt-[70vh] flex h-[200vh] w-screen flex-col items-center gap-40 px-2 lg:h-[300vh]"
+      className="relative flex h-[200vh] w-screen flex-col items-center gap-40 px-2 pt-[70vh] lg:h-[300vh]"
     >
       <div className="sticky top-1/2 flex -translate-y-1/2 flex-col">
         <div
@@ -68,11 +68,11 @@ const AppDetails = () => {
               Affinez chaque détail pour mieux performer
             </h1>
 
-            <p className="text-md mt-4 hyphens-auto text-pretty text-justify text-muted md:mt-0 md:text-center lg:text-start">
+            <p className="text-md mt-4 hyphens-auto text-pretty text-justify text-gray-400 md:mt-0 md:text-center lg:text-start">
               Vos programmes ne sont{" "}
-              <span className="font-semibold text-white">pas figés</span> :
+              <span className="font-medium text-white">pas figés</span> :
               ajustez chaque séance selon vos ressentis. En cas de besoin,{" "}
-              <span className="font-semibold text-white">
+              <span className="font-medium text-white">
                 informez-moi directement
               </span>{" "}
               via l’application pour adapter ensemble vos objectifs et optimiser
@@ -91,16 +91,14 @@ const AppDetails = () => {
             <h1 className="mb-4 text-center text-2xl font-bold md:text-start">
               Des démonstrations vidéos pour chaque mouvement
             </h1>
-            <p className="text-md mt-4 hyphens-auto text-pretty text-justify text-muted md:mt-0 md:text-center lg:text-start">
+            <p className="text-md mt-4 hyphens-auto text-pretty text-justify text-gray-400 md:mt-0 md:text-center lg:text-start">
               Ne restez jamais dans l&apos;incertitude : chaque mouvement est
               expliqué en vidéo dans{" "}
-              <span className="font-semibold text-white">l’application</span>,
-              et pour un accès supplémentaire, retrouvez l’ensemble de mes
+              <span className="font-medium text-white">l’application</span>, et
+              pour un accès supplémentaire, retrouvez l’ensemble de mes
               démonstrations sur{" "}
-              <span className="font-semibold text-white">
-                ma chaîne YouTube
-              </span>
-              . Vous n&apos;êtes jamais seul pour progresser !
+              <span className="font-medium text-white">ma chaîne YouTube</span>.
+              Vous n&apos;êtes jamais seul pour progresser !
             </p>
           </div>
         </div>

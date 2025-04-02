@@ -44,12 +44,12 @@ const Filter = ({ filterName, setFilterName }: FilterProps) => {
   return (
     <div
       ref={containerRef}
-      className="relative self-start overflow-hidden rounded-full border border-violet-300"
+      className="relative overflow-hidden rounded-full border border-[--border-color] bg-[--bg-color]"
     >
       <div className="relative grid grid-cols-2 justify-items-center gap-10 px-2 py-1 lg:px-4 lg:py-2">
         <div
           ref={bgFilterRef}
-          className="absolute z-10 h-full w-1/2 rounded-full bg-violet-300"
+          className="absolute z-10 h-full w-1/2 rounded-full bg-violet-600"
         ></div>
         <button
           className={`z-[99] cursor-pointer font-semibold md:text-lg`}

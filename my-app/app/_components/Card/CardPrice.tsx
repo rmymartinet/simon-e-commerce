@@ -6,15 +6,22 @@ import Price from "./Price";
 import AddToCartButton from "../AddToCartButton";
 import useHandleAction from "@/hooks/useHandleAction";
 
-const CardPrice = ({ productData, filterName, session }: CardPriceProps) => {
+const CardPrice = ({
+  productData,
+  filterName,
+  session,
+  isHighlighted,
+}: CardPriceProps) => {
   const { handleAction, loading } = useHandleAction(session);
 
   return (
     <>
-      <div className="relative flex h-full w-full flex-col rounded-2xl border p-10">
+      <div
+        className={`relative flex h-full w-full flex-col rounded-2xl border border-[--border-color] bg-[--card-bg] p-10 ${isHighlighted ? "bg-violet-700 text-white" : "bg-[var(--card-bg)]"}`}
+      >
         {productData.mostPopular && (
-          <div className="absolute -right-10 -top-4 z-50 w-max -translate-x-1/2 rounded-full bg-button-gradient p-2 font-semibold">
-            Plus populaire
+          <div className="absolute -right-16 -top-4 z-50 w-max -translate-x-1/2 rounded-full border border-[--border-color] bg-[--card-bg] p-2 font-semibold shadow-xl">
+            🔥 Plus populaire
           </div>
         )}
         <div className="mb-20 flex justify-between">
@@ -24,11 +31,13 @@ const CardPrice = ({ productData, filterName, session }: CardPriceProps) => {
           price={productData.price}
           mounth={productData.month}
           dayPrice={productData.dayPrice}
+          isHighlighted={isHighlighted}
         />
+        <p className="mb-8 text-sm">{productData.description}</p>
         <div className="grid grid-rows-cardPrice">
-          <div className="mb-10 flex flex-col">
+          <div className="mb-10">
             <button
-              className="padding w-full self-end rounded-xl bg-button-gradient text-center text-lg font-semibold text-white"
+              className={`${isHighlighted ? "bg-secondary text-primary" : "text-secondary bg-violet-600"} h-12 w-full rounded px-6 font-medium`}
               onClick={() =>
                 handleAction({
                   productData,
@@ -40,7 +49,10 @@ const CardPrice = ({ productData, filterName, session }: CardPriceProps) => {
               {filterName === "programmes" ? "Acheter" : "S'abonner"}
             </button>
             {filterName === "programmes" && (
-              <AddToCartButton productData={productData} />
+              <AddToCartButton
+                productData={productData}
+                isHighlighted={isHighlighted}
+              />
             )}
           </div>
           <ul className="mt-8 flex flex-col gap-3">

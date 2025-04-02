@@ -4,9 +4,9 @@ import gsap from "gsap";
 import { coachingNutritionData } from "@/app/data/coachingNutritionData";
 import Accordion from "../Accordion";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import Image from "next/image";
 import useWindowWidth from "@/hooks/useWindowWidth";
-import Button from "../Button";
+import Link from "next/link";
+import { Button } from "../ui/button";
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
@@ -42,9 +42,9 @@ const CoachingNutrition = () => {
   const { width } = useWindowWidth();
 
   return (
-    <div className="mt-[20vh] flex w-full flex-col gap-20 px-4">
-      <div className="mb-10 flex flex-col md:mb-20">
-        <h1 className="text-pretty break-words text-3xl md:text-4xl lg:max-w-6xl lg:text-start lg:text-7xl">
+    <div className="flex w-full flex-col gap-20 bg-foreground px-4 pb-40 pt-[20vh] text-background">
+      <div className="mb-10 flex flex-col items-center text-center md:mb-20">
+        <h1 className="text-pretty break-words text-3xl md:text-4xl lg:max-w-6xl">
           Un suivi nutritionnel personnalisé adapté à vos besoins
         </h1>
         <p className="max-w-5xl font-medium text-muted md:text-xl">
@@ -53,14 +53,14 @@ const CoachingNutrition = () => {
           pour un accompagnement efficace et adapté.
         </p>
         <div className="mt-20 self-center">
-          <Button href="/pricing" />
+          <Button variant={"blackBg"}>
+            <Link href="/pricing">Découvrir</Link>
+          </Button>
         </div>
       </div>
-      <div className="flex flex-col gap-20 lg:grid lg:grid-cols-2">
+      <div className="flex flex-col items-center gap-20 lg:grid lg:grid-cols-2">
         {width > 1024 && (
-          <div className="">
-            <span className="max-w-lg text-light lg:text-[20vw]">01</span>
-          </div>
+          <span className="max-w-lg text-[#E0E0E0] lg:text-[35vw]">01</span>
         )}
         <div className="flex flex-col gap-8">
           <div className="flex justify-between">
@@ -91,7 +91,7 @@ const CoachingNutrition = () => {
       <div className="">
         {width > 1024 ? (
           <div className="grid grid-cols-2 items-center">
-            <span className="max-w-lg text-light lg:text-[20vw]">02</span>
+            <span className="max-w-lg text-light lg:text-[35vw]">02</span>
             <div>
               {" "}
               <h2 className="text-4xl">
@@ -115,17 +115,6 @@ const CoachingNutrition = () => {
             </p>
           </div>
         )}
-        <div className="h-[110vh]">
-          <Image
-            ref={imgRef}
-            src="/images/food_app/iphone_food_app.png"
-            alt="Food app"
-            width={2000}
-            height={2000}
-            quality={100}
-            className="h-full w-full scale-75 object-cover"
-          />
-        </div>
       </div>
     </div>
   );

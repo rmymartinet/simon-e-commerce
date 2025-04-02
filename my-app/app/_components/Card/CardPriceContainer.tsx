@@ -41,24 +41,26 @@ const CardPriceContainer = ({
           ref={cardContainerRef}
           className="relative flex w-full flex-col items-center justify-items-center gap-4 px-4 md:gap-0 lg:grid lg:grid-cols-3 lg:gap-4"
         >
-          {programData.map((data) => (
+          {programData.map((data, index) => (
             <CardPrice
               key={data.titlePlan}
               productData={data}
               filterName={filterName}
               session={session}
+              isHighlighted={index === 1}
             />
           ))}
         </div>
       )}
       {filterName === "coaching" && (
         <div className="relative flex w-full flex-col items-center justify-items-center gap-4 px-4 md:gap-0 lg:grid lg:grid-cols-3 lg:gap-4">
-          {coachingData.map((data) => (
+          {coachingData.map((data, index) => (
             <CardPrice
               key={data.titlePlan}
               productData={data}
               filterName={filterName}
               session={session}
+              isHighlighted={index === 1}
             />
           ))}
         </div>
