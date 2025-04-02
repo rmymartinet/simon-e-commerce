@@ -4,9 +4,9 @@ import gsap from "gsap";
 import { coachingNutritionData } from "@/app/data/coachingNutritionData";
 import Accordion from "../Accordion";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import useWindowWidth from "@/hooks/useWindowWidth";
 import Link from "next/link";
 import { Button } from "../ui/button";
+import Image from "next/image";
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
@@ -39,10 +39,8 @@ const CoachingNutrition = () => {
     });
   }, []);
 
-  const { width } = useWindowWidth();
-
   return (
-    <div className="flex w-full flex-col gap-20 bg-foreground px-4 pb-40 text-background">
+    <div className="flex w-full flex-col gap-20 bg-foreground pb-40 text-background md:px-40">
       <div className="mb-10 flex flex-col items-center text-start md:mb-20 md:text-center">
         <h1 className="text-pretty break-words text-3xl md:text-4xl lg:max-w-6xl">
           Un suivi nutritionnel personnalisé adapté à vos besoins
@@ -58,11 +56,8 @@ const CoachingNutrition = () => {
           </Button>
         </div>
       </div>
-      <div className="flex flex-col items-center gap-20 lg:grid lg:grid-cols-2">
-        {width > 1024 && (
-          <span className="max-w-lg text-[#E0E0E0] lg:text-[35vw]">01</span>
-        )}
-        <div className="flex flex-col gap-8">
+      <div className="flex flex-col items-center gap-20">
+        <div className="z-50 flex flex-col gap-8">
           <div className="flex justify-between">
             <p className="text-sm">Processus</p>
             <p className="text-sm">Mise en place</p>
@@ -88,33 +83,46 @@ const CoachingNutrition = () => {
           </div>
         </div>
       </div>
-      <div className="">
-        {width > 1024 ? (
-          <div className="grid grid-cols-2 items-center">
-            <span className="max-w-lg text-light lg:text-[35vw]">02</span>
-            <div>
-              {" "}
-              <h2 className="text-4xl">
-                Communiquez moi vos repas en temps réel
-              </h2>
-              <p className="max-w-5xl font-medium text-muted md:text-xl">
-                Je vous transmets votre plan alimentaire directement dans
-                l’application Food. Vous pouvez ensuite l’ajuster selon votre
-                rythme de vie, et je m’assure derrière que tout est bien
-                optimisé pour vous. Un suivi flexible et personnalisé, au plus
-                proche de vos besoins
-              </p>
-            </div>
-          </div>
-        ) : (
-          <div className="mb-10">
-            <p className="text-3xl md:text-4xl">Repas en temps réel </p>
-            <p className="font-medium text-muted md:text-3xl lg:text-center">
-              Grâce à l’application Food, recevez vos repas et partagez vos
-              ajustements en toute simplicité.
+      <div className="flex flex-col-reverse items-center gap-10 md:grid md:grid-cols-2 md:gap-20 lg:gap-32">
+        <div className="flex flex-col items-start gap-6 text-left">
+          <h2 className="text-3xl font-bold md:text-4xl">
+            Repas en temps réel
+          </h2>
+          <p className="text-base leading-relaxed text-[--subtext] md:text-lg">
+            Grâce à l’application{" "}
+            <span className="font-semibold text-white">Food</span>, tu reçois
+            ton plan nutritionnel{" "}
+            <span className="font-semibold text-white">
+              directement sur ton téléphone
+            </span>
+            . Tu peux ensuite me partager tes repas, tes ressentis ou tes
+            ajustements en un clic.
+          </p>
+          <p className="text-base leading-relaxed text-[--subtext] md:text-lg">
+            Je vois tout en direct, et je peux adapter ton programme
+            nutritionnel au fil des jours. C’est un{" "}
+            <span className="font-semibold text-white">
+              suivi 100% personnalisé
+            </span>
+            , sans prise de tête.
+          </p>
+        </div>
+
+        <div className="flex items-center justify-center">
+          <div className="relative w-full max-w-sm rounded-2xl border border-[--border-color] bg-white p-4 shadow-xl">
+            <Image
+              src="/images/food_app/iphone_food_app.png"
+              alt="Aperçu repas en direct"
+              width={1000}
+              height={1000}
+              quality={100}
+              className="h-auto w-full rounded-xl object-contain"
+            />
+            <p className="absolute bottom-2 right-4 text-xs italic text-[--subtext]">
+              Mockup de l’application Food
             </p>
           </div>
-        )}
+        </div>
       </div>
     </div>
   );
