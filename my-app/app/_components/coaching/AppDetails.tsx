@@ -68,7 +68,7 @@ const AppDetails = () => {
               Affinez chaque détail pour mieux performer
             </h1>
 
-            <p className="text-md mt-4 hyphens-auto text-pretty text-justify text-gray-400 md:mt-0 md:text-center lg:text-start">
+            <p className="text-md mt-4 hyphens-auto text-pretty text-justify text-[--subtext] md:mt-0 md:text-center lg:text-start">
               Vos programmes ne sont{" "}
               <span className="font-medium text-white">pas figés</span> :
               ajustez chaque séance selon vos ressentis. En cas de besoin,{" "}
@@ -91,7 +91,7 @@ const AppDetails = () => {
             <h1 className="mb-4 text-center text-2xl font-bold md:text-start">
               Des démonstrations vidéos pour chaque mouvement
             </h1>
-            <p className="text-md mt-4 hyphens-auto text-pretty text-justify text-gray-400 md:mt-0 md:text-center lg:text-start">
+            <p className="text-md mt-4 hyphens-auto text-pretty text-justify text-[--subtext] md:mt-0 md:text-center lg:text-start">
               Ne restez jamais dans l&apos;incertitude : chaque mouvement est
               expliqué en vidéo dans{" "}
               <span className="font-medium text-white">l’application</span>, et

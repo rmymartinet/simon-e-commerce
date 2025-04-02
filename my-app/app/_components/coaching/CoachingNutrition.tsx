@@ -42,12 +42,12 @@ const CoachingNutrition = () => {
   const { width } = useWindowWidth();
 
   return (
-    <div className="flex w-full flex-col gap-20 bg-foreground px-4 pb-40 pt-[20vh] text-background">
-      <div className="mb-10 flex flex-col items-center text-center md:mb-20">
+    <div className="flex w-full flex-col gap-20 bg-foreground px-4 pb-40 text-background">
+      <div className="mb-10 flex flex-col items-center text-start md:mb-20 md:text-center">
         <h1 className="text-pretty break-words text-3xl md:text-4xl lg:max-w-6xl">
           Un suivi nutritionnel personnalisé adapté à vos besoins
         </h1>
-        <p className="max-w-5xl font-medium text-muted md:text-xl">
+        <p className="font-medium text-[--subtext] md:max-w-5xl md:text-xl">
           Nous échangeons ensemble pour définir vos besoins, vos objectifs et
           toutes les spécificités de votre mode de vie. Chaque détail compte
           pour un accompagnement efficace et adapté.
