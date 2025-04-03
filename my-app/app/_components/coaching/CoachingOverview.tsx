@@ -35,7 +35,7 @@ const CoachingOverview = () => {
           </p>
           <div className="mt-10">
             <Button variant={"blackBg"}>
-              <Link href="/pricing">Découvrir</Link>
+              <Link href="/pricing">Découvrir nos offres</Link>
             </Button>
           </div>
         </div>

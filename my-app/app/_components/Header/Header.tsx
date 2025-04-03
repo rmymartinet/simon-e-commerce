@@ -5,6 +5,7 @@ import useWindowWidth from "@/hooks/useWindowWidth";
 import { textSplitLines } from "@/utils/common/textAnimation";
 import ProgramOverview from "../program/ProgramOverview";
 import { Button } from "../ui/button";
+import Link from "next/link";
 
 gsap.registerPlugin(useGSAP);
 
@@ -70,8 +71,12 @@ const Header = () => {
               Transforme-toi avec ou sans coach.
             </h1>
             <div className="mt-4 flex gap-10">
-              <Button variant="blackBg">Commencer maintenant</Button>
-              <Button variant="glassmorph">About</Button>
+              <Button variant="blackBg">
+                <Link href="/pricing">Découvrir nos offres</Link>
+              </Button>
+              <Button variant="glassmorph">
+                <Link href="/about">En savoir plus sur moi</Link>{" "}
+              </Button>
             </div>
           </div>
           <ProgramOverview />

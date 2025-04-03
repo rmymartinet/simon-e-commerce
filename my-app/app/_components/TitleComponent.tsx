@@ -37,7 +37,7 @@ const TitleComponent = ({
         </p>
       )}
 
-      <h1 className="text-center text-3xl md:text-6xl">{title}</h1>
+      <h1 className="text-3xl md:text-6xl">{title}</h1>
       <p
         ref={subtitleRef}
         className="mt-2 text-center font-medium text-[--subtext] md:max-w-5xl md:text-xl"

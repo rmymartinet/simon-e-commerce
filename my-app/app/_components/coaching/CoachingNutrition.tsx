@@ -52,7 +52,7 @@ const CoachingNutrition = () => {
         </p>
         <div className="mt-20 self-center">
           <Button variant={"blackBg"}>
-            <Link href="/pricing">Découvrir</Link>
+            <Link href="/pricing">Découvrir nos offres</Link>
           </Button>
         </div>
       </div>

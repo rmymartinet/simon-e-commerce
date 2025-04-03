@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { signUp } from "@/app/_lib/authAction";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { Button } from "../ui/button";
 
 export default function SignUpForm() {
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
@@ -28,34 +29,47 @@ export default function SignUpForm() {
 
   return (
     <form onSubmit={handleSubmit} className="flex w-full flex-col gap-4">
-      <input
-        name="name"
-        type="text"
-        required
-        className="rounded-lg border border-slate-200 p-2 text-black"
-        placeholder="Nom"
-      />
-      <input
-        name="email"
-        type="email"
-        required
-        autoComplete="email"
-        className="rounded-lg border border-slate-200 p-2 text-black"
-        placeholder="Email"
-      />
-      <input
-        name="password"
-        type="password"
-        required
-        autoComplete="current-password"
-        className="rounded-lg border border-slate-200 p-2 text-black"
-        placeholder="Mot de passe"
-      />
+      <div className="flex flex-col gap-2">
+        <label htmlFor="email" className="text-sm">
+          Pseudo
+        </label>
+        <input
+          name="name"
+          type="text"
+          required
+          className="text-secondary rounded-lg border border-[--border-color] bg-[--card-bg] p-2"
+          placeholder="Nom"
+        />
+      </div>
+      <div className="flex flex-col gap-2">
+        <label htmlFor="email" className="text-sm">
+          Email
+        </label>
+        <input
+          name="email"
+          type="email"
+          required
+          autoComplete="email"
+          className="text-secondary rounded-lg border border-[--border-color] bg-[--card-bg] p-2"
+          placeholder="Email"
+        />
+      </div>
+      <div className="mb-4 flex flex-col gap-2">
+        <label htmlFor="password" className="text-sm">
+          Mot de passe
+        </label>
+        <input
+          name="password"
+          type="password"
+          required
+          autoComplete="current-password"
+          className="text-secondary rounded-lg border border-[--border-color] bg-[--card-bg] p-2"
+          placeholder="Mot de passe"
+        />
+      </div>
       {errorMessage && <p className="text-sm text-red-500">{errorMessage}</p>}
-      <button className="mt-6 rounded-lg bg-button-gradient p-2 font-semibold text-white">
-        S&apos;inscrire
-      </button>
-      <button className="text-black">
+      <Button variant="blackBg">S&apos;inscrire</Button>
+      <button className="text-secondary">
         <Link href="/sign-in">Vous avez déjà un compte? Se connecter</Link>
       </button>
     </form>
