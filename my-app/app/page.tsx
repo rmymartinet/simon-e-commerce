@@ -9,6 +9,7 @@ import CoachingOverview from "./_components/coaching/CoachingOverview";
 import AppDetails from "./_components/coaching/AppDetails";
 import CoachingNutrition from "./_components/coaching/CoachingNutrition";
 import NutritionAdvice from "./_components/program/NutritionAdvice";
+import CoachingTransitionSection from "./_components/CoachingTransitionSection";
 
 gsap.registerPlugin(useGSAP);
 
@@ -18,6 +19,7 @@ export default function Home() {
       <Header />
       <NutritionAdvice />
       <Youtube />
+      <CoachingTransitionSection />
       <CoachingOverview />
       <AppDetails />
       <CoachingNutrition />

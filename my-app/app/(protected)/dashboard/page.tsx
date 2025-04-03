@@ -100,7 +100,7 @@ export default async function Dashboard() {
       </div>
     );
   return (
-    <div className="mt-40 flex flex-col gap-20 px-4 lg:px-20">
+    <div className="mt-40 flex min-h-screen flex-col gap-20 px-4 lg:px-20">
       <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
         <div className="flex flex-col gap-2 font-semibold">
           <p className="text-violet-400">Votre dashboard</p>
