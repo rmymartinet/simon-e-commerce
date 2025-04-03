@@ -4,6 +4,7 @@ import PostsContent from "./PostsContent";
 import PostsHeader from "./PostsHeader";
 
 function PostsContainer({ sanityPosts }: { sanityPosts: SanityDocument[] }) {
+  
   return (
     <section>
       <PostsHeader />

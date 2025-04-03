@@ -10,7 +10,7 @@ function PostsCard({ sanityPosts }: { sanityPosts: SanityDocument }) {
   const builder = imageUrlBuilder(client);
 
   return (
-    <div className="border-primaryCardBorder hover:border-secondaryCardBorder group h-full w-full rounded-xl border bg-background p-5 transition-all duration-300 md:p-4">
+    <div className="group h-full w-full rounded-xl border border-[--border-color] bg-[--card-bg] p-5 transition-all duration-300 md:p-4">
       <div className="h-[300px] overflow-hidden rounded-md">
         <Link key={sanityPosts._id} href={`/blog/${sanityPosts.slug.current}`}>
           {sanityPosts && (
@@ -20,14 +20,14 @@ function PostsCard({ sanityPosts }: { sanityPosts: SanityDocument }) {
               width={1000}
               height={1000}
               quality={100}
-              className="h-full w-full object-cover"
+              className="h-full w-full object-cover transition-all duration-500 group-hover:scale-105"
             />
           )}
         </Link>
       </div>
       <div className="flex justify-between">
         <div className="mt-10 flex flex-col gap-10">
-          <div className="w-max rounded-full border border-white p-2 text-sm">
+          <div className="w-max rounded-full border border-[--border-color] bg-[--card-bg] p-2 text-sm transition-all duration-500 group-hover:scale-105">
             {sanityPosts.tags}
           </div>
           <h2 className="md:text-xl">{sanityPosts.title}</h2>

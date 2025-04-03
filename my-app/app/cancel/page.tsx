@@ -1,5 +1,6 @@
+import Link from "next/link";
 import { IoCloseOutline } from "react-icons/io5";
-import Button from "../_components/Button";
+import { Button } from "../_components/ui/button";
 
 export default function Cancel() {
   return (
@@ -18,7 +19,9 @@ export default function Cancel() {
         La bonne nouvelle, c&apos;est que vous pouvez réessayer 😊
       </p>
       <div className="mt-5">
-        <Button title="Réessayer" href="/pricing" />
+        <Button>
+          <Link href="/pricing">Réessayer</Link>
+        </Button>
       </div>
     </main>
   );

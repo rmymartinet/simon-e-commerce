@@ -26,14 +26,14 @@ function FilterPosts({
         <button
           ref={gridButtonRef}
           onClick={() => setFilter("grid")}
-          className={`rounded-full border border-white px-8 py-2 text-sm ${filter === "grid" ? "bg-white text-black" : ""} transition-all duration-150 ease-linear`}
+          className={`rounded-full px-8 py-2 text-sm ${filter === "grid" ? "text-secondary border-none bg-violet-700" : "border border-[--border-color] bg-[--card-bg]"} transition-all duration-150 ease-linear`}
         >
           Grid
         </button>
         <button
           ref={listButtonRef}
           onClick={() => setFilter("list")}
-          className={`rounded-full border border-white px-8 py-2 text-sm ${filter === "list" ? "bg-white text-black" : ""} transition-all duration-150 ease-linear`}
+          className={`rounded-full px-8 py-2 text-sm ${filter === "list" ? "text-secondary border-none bg-violet-700" : "border border-[--border-color] bg-[--card-bg]"} transition-all duration-150 ease-linear`}
         >
           List
         </button>
@@ -41,7 +41,7 @@ function FilterPosts({
       <div className="flex gap-4">
         <button
           onClick={() => setFilterByTag("")}
-          className={`rounded-full border border-white px-4 py-2 text-sm ${filterByTag === "" ? "bg-white text-black" : ""} transition-all duration-150 ease-linear`}
+          className={`rounded-full px-4 py-2 text-sm ${filterByTag === "" ? "text-secondary border-none bg-violet-700" : "border border-[--border-color] bg-[--card-bg]"} transition-all duration-150 ease-linear`}
         >
           Tous
         </button>
@@ -49,7 +49,7 @@ function FilterPosts({
           <button
             key={tag}
             onClick={() => setFilterByTag(tag)}
-            className={`rounded-full border border-white px-4 py-2 text-sm ${filterByTag === tag ? "bg-white text-black" : ""} transition-all duration-150 ease-linear`}
+            className={`rounded-full px-4 py-2 text-sm ${filterByTag === tag ? "text-secondary border-none bg-violet-700" : "border border-[--border-color] bg-[--card-bg]"} transition-all duration-150 ease-linear`}
           >
             {tag}
           </button>

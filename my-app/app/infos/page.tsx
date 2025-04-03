@@ -6,6 +6,7 @@ import gsap from "gsap";
 import { textSplitLinesScrollTrigger } from "@/utils/common/textAnimation";
 import { useRef } from "react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import TitleComponent from "../_components/TitleComponent";
 
 gsap.registerPlugin(useGSAP, ScrollTrigger);
 
@@ -15,7 +16,6 @@ export default function Infos() {
   const thirdParaRef = useRef<HTMLParagraphElement | null>(null);
   const headerRef = useRef<HTMLDivElement | null>(null);
   const imgRef = useRef<HTMLDivElement | null>(null);
-  const infosContainerRef = useRef<HTMLDivElement | null>(null);
 
   useGSAP(() => {
     gsap.set(headerRef.current, {
@@ -40,7 +40,12 @@ export default function Infos() {
   }, []);
 
   return (
-    <div className="relative mt-40 flex min-h-screen flex-col items-center justify-center gap-40 px-4">
+    <div className="relative mt-[20vh] flex min-h-screen flex-col items-center justify-center gap-40 px-4">
+      <TitleComponent
+        title="Infos"
+        titleIndication="infos"
+        subtitle="Toutes les informations essentielles à portée de main."
+      />
       <div
         ref={headerRef}
         className="relative flex flex-col-reverse items-center gap-16 md:min-h-[700px] lg:grid lg:grid-cols-2 lg:gap-24"

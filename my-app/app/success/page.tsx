@@ -1,9 +1,10 @@
 "use server";
 
 import { FaCheck } from "react-icons/fa";
-import Button from "../_components/Button";
 import { auth } from "../_lib/auth";
 import ClearCartComponent from "@/hooks/useClearCart";
+import { Button } from "../_components/ui/button";
+import Link from "next/link";
 
 export default async function SuccessPage() {
   const session = await auth();
@@ -35,9 +36,13 @@ export default async function SuccessPage() {
         </h2>
       </div>
       {session ? (
-        <Button title="Allez sur mon dashboard" href="/dashboard" />
+        <Button>
+          <Link href="/dashboard">Allez sur mon compte</Link>
+        </Button>
       ) : (
-        <Button href="/" />
+        <Button>
+          <Link href="/dashboard">Home</Link>
+        </Button>
       )}
     </main>
   );

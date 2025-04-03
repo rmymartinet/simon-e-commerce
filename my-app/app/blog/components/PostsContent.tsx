@@ -23,6 +23,7 @@ function PostsContent({ sanityPosts }: { sanityPosts: SanityDocument[] }) {
   const gridPostsContainerRef = useRef<HTMLDivElement | null>(null);
   const listImgRefs = useRef<(HTMLDivElement | null)[]>([]);
   const builder = imageUrlBuilder(client);
+  const postsContainerRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     listImgRefs.current = sanityPosts.map(() => null);
@@ -87,8 +88,22 @@ function PostsContent({ sanityPosts }: { sanityPosts: SanityDocument[] }) {
     requestAnimationFrame(() => updateImageVisibility(null));
   };
 
+  useGSAP(() => {
+    gsap.set(postsContainerRef.current, {
+      filter: "blur(70px)",
+      y: 100,
+    });
+
+    gsap.to(postsContainerRef.current, {
+      y: 0,
+      duration: 1,
+      ease: "power2.out",
+      filter: "blur(0px)",
+    });
+  }, []);
+
   return (
-    <>
+    <section ref={postsContainerRef}>
       <FilterPosts
         sanityTags={sanityPosts}
         filter={filter}
@@ -190,7 +205,7 @@ function PostsContent({ sanityPosts }: { sanityPosts: SanityDocument[] }) {
             ))}
         </div>
       )}
-    </>
+    </section>
   );
 }
 

@@ -9,7 +9,7 @@ export default async function Page() {
   });
 
   return (
-    <main className="flex min-h-screen flex-col px-4 pt-[30vh]">
+    <main className="flex min-h-screen flex-col px-4 pt-[20vh]">
       <PostsContainer sanityPosts={sanityPosts} />
     </main>
   );

@@ -7,6 +7,7 @@ import gsap from "gsap";
 import TitleComponent from "../_components/TitleComponent";
 import AnimatedQuestions from "../_components/AnimatedQuestions";
 import { Button } from "../_components/ui/button";
+import Link from "next/link";
 
 export default function Calorie() {
   const { isAnimating } = useAnimation();
@@ -60,7 +61,9 @@ export default function Calorie() {
           apports caloriques personnalisés en fonction de tes dépenses
           énergiques et de ton alimentation."
       />
-      <Button variant="blackBg">Découvrir nos offres</Button>
+      <Button variant="blackBg">
+        <Link href="/pricing">Découvrir nos offres</Link>
+      </Button>
       <FormCalories />
       <div className="flex w-full flex-col items-center px-4">
         <TitleComponent

@@ -11,7 +11,7 @@ export const coachingData = [
     titlePlan: "Essai",
     month: 3,
     dayPrice: "5",
-    price: 177,
+    price: 189,
     description:
       "Testez nos services et observez les premiers changements. Parfait pour initier votre transformation de style de vie.",
     priceId: process.env.NEXT_PUBLIC_STRIPE_COACHING_BEGINNER_PRICE_ID!,
@@ -23,7 +23,7 @@ export const coachingData = [
     titlePlan: "Standard",
     month: 6,
     dayPrice: "4,50",
-    price: 147,
+    price: 165,
     description:
       "Ancrez des habitudes saines et obtenez des résultats durables. Le meilleur équilibre entre durée et efficacité.",
     priceId: process.env.NEXT_PUBLIC_STRIPE_COACHING_INTERMEDIATE_PRICE_ID!,
@@ -36,7 +36,7 @@ export const coachingData = [
     titlePlan: "Intensif",
     month: 9,
     dayPrice: "4",
-    price: 137,
+    price: 159,
     description:
       "Transformez-vous totalement avec un suivi intensif. L'engagement ultime pour un changement profond et pérenne.",
     priceId: process.env.NEXT_PUBLIC_STRIPE_COACHING_ADVANCED_PRICE_ID!,
