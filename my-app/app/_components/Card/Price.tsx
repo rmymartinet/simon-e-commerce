@@ -29,7 +29,7 @@ const Price = ({
     {mounth !== 0 && (
       <div>
         <p
-          className={`mt-6 pl-2 text-base font-semibold ${isHighlighted ? "text-primary" : "text-[#E0AAFF]"}`}
+          className={`mt-6 pl-2 text-base font-semibold ${isHighlighted ? "text-green-300" : "text-[#E0AAFF]"}`}
         >
           À moins de {dayPrice} €/jour
         </p>

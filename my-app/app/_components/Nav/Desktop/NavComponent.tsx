@@ -32,7 +32,7 @@ const NavComponent = ({ session }: { session: Session | null }) => {
     { title: "Tarifs", link: "/pricing" },
     { title: "Infos", link: "/infos" },
     { title: "Blog", link: "/blog" },
-    { title: "Calories", link: "/calories" },
+    { title: "Calculateurs", link: "/calculator" },
   ];
 
   const handleMouseEnter = (index: number) => {
