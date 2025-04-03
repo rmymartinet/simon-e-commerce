@@ -14,19 +14,22 @@ export default function Infos() {
   const secondParaRef = useRef<HTMLParagraphElement | null>(null);
   const thirdParaRef = useRef<HTMLParagraphElement | null>(null);
   const headerRef = useRef<HTMLDivElement | null>(null);
-  const ImgRef = useRef<HTMLDivElement | null>(null);
+  const imgRef = useRef<HTMLDivElement | null>(null);
+  const infosContainerRef = useRef<HTMLDivElement | null>(null);
 
   useGSAP(() => {
     gsap.set(headerRef.current, {
+      filter: "blur(70px)",
       y: 100,
     });
 
     gsap.to(headerRef.current, {
       y: 0,
-      delay: 2,
       duration: 1,
       ease: "power2.out",
+      filter: "blur(0px)",
     });
+
     if (firstParaRef.current && secondParaRef.current && thirdParaRef.current) {
       textSplitLinesScrollTrigger(firstParaRef as React.RefObject<HTMLElement>);
       textSplitLinesScrollTrigger(
@@ -40,10 +43,10 @@ export default function Infos() {
     <div className="relative mt-40 flex min-h-screen flex-col items-center justify-center gap-40 px-4">
       <div
         ref={headerRef}
-        className="relative flex flex-col-reverse items-center gap-16 lg:grid lg:grid-cols-2 lg:gap-24"
+        className="relative flex flex-col-reverse items-center gap-16 md:min-h-[700px] lg:grid lg:grid-cols-2 lg:gap-24"
       >
         {/* Bloc Infos sous forme de timeline animée */}
-        <div className="flex flex-col gap-8">
+        <div className="flex flex-col gap-8 overflow-hidden">
           {[
             {
               id: "01",
@@ -66,7 +69,7 @@ export default function Infos() {
               className="relative overflow-hidden rounded-xl border border-[--border-color] bg-[--card-bg] px-6 py-5 transition-all duration-300 hover:scale-[1.015]"
             >
               <div className="flex items-start gap-4">
-                <div className="text-xl font-semibold text-muted">
+                <div className="text-xl font-semibold text-[--subtext]">
                   {" "}
                   {item.id}{" "}
                 </div>
@@ -100,7 +103,7 @@ export default function Infos() {
             <h1 className="text-4xl lg:text-7xl">Du déclic à la passion</h1>
             <p
               ref={firstParaRef}
-              className="text-justify text-muted lg:text-2xl"
+              className="text-justify text-[--subtext] lg:text-2xl"
             >
               Depuis mon plus jeune âge, je me voyais comme un{" "}
               <span className="font-bold text-white">garçon frêle</span>,
@@ -139,7 +142,7 @@ export default function Infos() {
           </div>
         </div>
         <div
-          ref={ImgRef}
+          ref={imgRef}
           className="flex w-full lg:mb-[20vh] lg:mt-[20vh] lg:px-72"
         >
           <Image
@@ -157,7 +160,7 @@ export default function Infos() {
             <h1 className="text-4xl lg:text-7xl">Du déclic à la passion</h1>
             <p
               ref={secondParaRef}
-              className="text-justify text-muted lg:text-2xl"
+              className="text-justify text-[--subtext] lg:text-2xl"
             >
               La <span className="font-bold text-white">musculation</span>{" "}
               n&apos;est plus seulement une quête{" "}
@@ -201,7 +204,7 @@ export default function Infos() {
             </p>
             <p
               ref={thirdParaRef}
-              className="text-justify text-muted lg:text-2xl"
+              className="text-justify text-[--subtext] lg:text-2xl"
             >
               En tant que{" "}
               <span className="font-bold text-white">coach sportif</span> et{" "}
