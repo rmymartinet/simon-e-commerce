@@ -1,4 +1,4 @@
-import { auth } from "@/app/_lib/auth";
+import { auth } from "@/app/_lib/auths";
 import { redirect } from "next/navigation";
 import SignInWrapper from "@/app/_components/SignInWrapper";
 

@@ -1,5 +1,5 @@
-import { auth } from "@/app/_lib/auth";
-import { signOut } from "@/app/_lib/auth";
+import { auth } from "@/app/_lib/auths";
+import { signOut } from "@/app/_lib/auths";
 import { redirect } from "next/navigation";
 import UserDashboard from "@/app/_components/User/UserDashboard";
 import { prisma } from "@/app/_lib/prisma";

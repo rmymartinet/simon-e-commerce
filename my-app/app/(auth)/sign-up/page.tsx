@@ -1,5 +1,5 @@
 import SignUpWrapper from "@/app/_components/signUpWrapper";
-import { auth } from "@/app/_lib/auth";
+import { auth } from "@/app/_lib/auths";
 import { redirect } from "next/navigation";
 
 export default async function SignUpForm() {

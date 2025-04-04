@@ -1,5 +1,5 @@
 import PrincingComponents from "../_components/PrincingComponents";
-import { auth } from "../_lib/auth";
+import { auth } from "../_lib/auths";
 
 export default async function Pricing() {
   const session = await auth();

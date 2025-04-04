@@ -1,4 +1,4 @@
-import { auth } from "../_lib/auth";
+import { auth } from "../_lib/auths";
 import CheckoutComponent from "./components/CheckoutComponent";
 
 export default async function Checkout() {

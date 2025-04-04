@@ -1,6 +1,6 @@
 import React from "react";
 import MobileNavComponent from "./MobileNavComponent";
-import { auth } from "@/app/_lib/auth";
+import { auth } from "@/app/_lib/auths";
 
 const MobileNav = async () => {
   const session = await auth();

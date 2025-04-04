@@ -1,7 +1,7 @@
 "use server";
 
 import { FaCheck } from "react-icons/fa";
-import { auth } from "../_lib/auth";
+import { auth } from "../_lib/auths";
 import ClearCartComponent from "@/hooks/useClearCart";
 import { Button } from "../_components/ui/button";
 import Link from "next/link";

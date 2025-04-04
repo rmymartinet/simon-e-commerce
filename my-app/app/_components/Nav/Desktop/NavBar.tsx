@@ -1,4 +1,4 @@
-import { auth } from "@/app/_lib/auth";
+import { auth } from "@/app/_lib/auths";
 import NavComponent from "./NavComponent";
 
 const NavBar = async () => {
