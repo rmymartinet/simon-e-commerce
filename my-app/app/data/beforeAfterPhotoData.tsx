@@ -1,12 +1,12 @@
 export const names = [
   "Adrien",
-  "Manon",
+  "Pierre",
   "Alex",
   "Dylan",
-  "Alexia",
-  "Olivia",
+  "Théo",
+  "Maxime",
   "Evan",
-  "Caroline",
+  "Mathéo",
 ];
 
 export const imagesUrls = [
