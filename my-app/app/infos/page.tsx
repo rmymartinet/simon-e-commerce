@@ -162,7 +162,7 @@ export default function Infos() {
         </div>
         <div className="flex flex-col items-center gap-10 lg:items-start">
           <div className="flex flex-col gap-8">
-            <h1 className="text-4xl lg:text-7xl">Du déclic à la passion</h1>
+            <h1 className="text-4xl lg:text-7xl">Une passion en vocation</h1>
             <p
               ref={secondParaRef}
               className="text-justify text-[--subtext] lg:text-2xl"
