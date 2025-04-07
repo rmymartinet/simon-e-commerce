@@ -57,7 +57,7 @@ const UserProfile = ({ userData }: { userData: UserDataProps }) => {
             className="rounded-md border p-1 text-black"
           />
         ) : (
-          <p>{userData.name || userData.firstName || "Aucun"}</p>
+          <p>{userData.name || "Aucun"}</p>
         )}
       </div>
       <div className="flex items-center gap-2">
