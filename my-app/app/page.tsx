@@ -1,15 +1,16 @@
 "use client";
 
+import BeforeAfterPhoto from "@/components/BeforeAfterPhoto";
+import AppDetails from "@/components/coaching/AppDetails";
+import CoachingNutrition from "@/components/coaching/CoachingNutrition";
+import CoachingOverview from "@/components/coaching/CoachingOverview";
+import CoachingTransitionSection from "@/components/CoachingTransitionSection";
+import Header from "@/components/Header/Header";
+import NutritionAdvice from "@/components/program/NutritionAdvice";
+import Youtube from "@/components/program/Youtube";
+
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
-import BeforeAfterPhoto from "./_components/BeforeAfterPhoto";
-import Header from "./_components/Header/Header";
-import Youtube from "./_components/program/Youtube";
-import CoachingOverview from "./_components/coaching/CoachingOverview";
-import AppDetails from "./_components/coaching/AppDetails";
-import CoachingNutrition from "./_components/coaching/CoachingNutrition";
-import NutritionAdvice from "./_components/program/NutritionAdvice";
-import CoachingTransitionSection from "./_components/CoachingTransitionSection";
 
 gsap.registerPlugin(useGSAP);
 

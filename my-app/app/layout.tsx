@@ -3,12 +3,14 @@ import { SessionProvider } from "next-auth/react";
 import { CartProvider } from "./context/CartContext";
 import { CheckoutProvider } from "./context/CheckoutContext";
 import { AnimationProvider } from "./context/AnimationContext";
-import ConditionalNav from "./_components/Nav/ConditionalNav";
-import Footer from "./_components/Footer/Footer";
+
 import "./globals.css";
-import { LayoutTransition } from "./_components/pageTransitions/LayoutTransition";
-import LocomotiveScrollWrapper from "./_components/LocomotiveScrollWrapper";
+
 import Script from "next/script";
+import ConditionalNav from "@/components/Nav/ConditionalNav";
+import { LayoutTransition } from "@/components/pageTransitions/LayoutTransition";
+import Footer from "@/components/Footer/Footer";
+import LocomotiveScrollWrapper from "@/components/LocomotiveScrollWrapper";
 
 export default function RootLayout({
   children,
@@ -35,10 +37,13 @@ export default function RootLayout({
   gtag('config', 'G-NH0VPNGP9L');
   `}
                 </Script>
+                
               </head>
               <body id="main-container" className="antialiased">
                 <ConditionalNav />
-                <LayoutTransition>{children}</LayoutTransition>
+                <LayoutTransition>
+                  <main className="pb-20">{children}</main>
+                </LayoutTransition>
                 <Footer />
                 <LocomotiveScrollWrapper />
               </body>

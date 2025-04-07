@@ -6,7 +6,7 @@ import gsap from "gsap";
 import { textSplitLinesScrollTrigger } from "@/utils/common/textAnimation";
 import { useRef } from "react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import TitleComponent from "../_components/TitleComponent";
+import TitleComponent from "@/components/TitleComponent";
 
 gsap.registerPlugin(useGSAP, ScrollTrigger);
 

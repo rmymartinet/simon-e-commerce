@@ -1,13 +1,16 @@
 "use server";
 
 import { FaCheck } from "react-icons/fa";
-import { auth } from "../_lib/auths";
 import ClearCartComponent from "@/hooks/useClearCart";
-import { Button } from "../_components/ui/button";
 import Link from "next/link";
+import { auth } from "@/lib/auth";
+import { headers } from "next/headers";
+import { Button } from "@/components/ui/button";
 
 export default async function SuccessPage() {
-  const session = await auth();
+  const session = await auth.api.getSession({
+    headers: await headers(),
+  });
 
   return (
     <main className="min-w-screen flex h-screen flex-col items-center justify-center gap-10">
@@ -36,11 +39,11 @@ export default async function SuccessPage() {
         </h2>
       </div>
       {session ? (
-        <Button>
+        <Button variant="blackBg">
           <Link href="/dashboard">Allez sur mon compte</Link>
         </Button>
       ) : (
-        <Button>
+        <Button variant="whiteBg">
           <Link href="/dashboard">Home</Link>
         </Button>
       )}

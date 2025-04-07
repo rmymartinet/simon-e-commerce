@@ -1,6 +1,6 @@
 "use client";
 
-import TitleComponent from "@/app/_components/TitleComponent";
+import TitleComponent from "@/components/TitleComponent";
 import React from "react";
 
 function PostsHeader() {

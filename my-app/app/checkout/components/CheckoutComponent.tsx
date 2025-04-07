@@ -1,8 +1,8 @@
 "use client";
 
-import TitleComponent from "@/app/_components/TitleComponent";
-import { Button } from "@/app/_components/ui/button";
 import { useCart } from "@/app/context/CartContext";
+import TitleComponent from "@/components/TitleComponent";
+import { Button } from "@/components/ui/button";
 import useHandleAction from "@/hooks/useHandleAction";
 import { useRemoveItem } from "@/hooks/useRemoveItem";
 import { CartItemProps } from "@/types/types";

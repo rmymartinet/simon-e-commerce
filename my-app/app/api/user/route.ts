@@ -1,12 +1,10 @@
-import { prisma } from "@/app/_lib/prisma";
 import { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
+import { prisma } from "@/lib/prisma";
 
 export async function POST(req: NextRequest) {
   try {
     const { name, email } = await req.json();
-
-    console.log("req.body", email, name);
 
     if (!req) {
       throw new Error("No request object provided");
@@ -36,7 +34,5 @@ export async function POST(req: NextRequest) {
     }
 
     return NextResponse.json({ message: "An error occurred" }, { status: 500 });
-
-    return;
   }
 }

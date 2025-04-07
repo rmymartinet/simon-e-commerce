@@ -9,8 +9,9 @@
 
 import { NextStudio } from "next-sanity/studio";
 import config from "@/sanity.config";
+// import { redirect } from "next/navigation";
+import { auth } from "@/app/_lib/auths";
 import { redirect } from "next/navigation";
-import { auth } from "@/app/_lib/auth";
 
 export const dynamic = "force-static";
 

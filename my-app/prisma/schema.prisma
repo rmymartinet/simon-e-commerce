@@ -1,140 +1,106 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
-generator client {
-  provider = "prisma-client-js"
-}
-
-enum Role {
-  USER
-  ADMIN
-  GUEST
-}
-
 model User {
-  id                     String          @id @default(cuid())
-  name                   String?
-  firstName              String?
-  lastName               String?
-  username               String?
-  email                  String          @unique
-  emailVerified          DateTime?
-  isTemporary            Boolean         @default(false)
-  lastActive             DateTime?
-  activationToken        String?
-  activationTokenExpires DateTime?
-  password               String?
-  image                  String?
-  accounts               Account[]
-  sessions               Session[]
-  Authenticator          Authenticator[]
-  Purchase               Purchase[]
-  customerId             String?
-  priceId                String?
-  stripeCustomerId       String?
-  subscriptionStartDate  DateTime?
-  subscriptionEndDate    DateTime?
-  isSubscribed           Boolean         @default(false)
-  createdAt              DateTime        @default(now())
-  updatedAt              DateTime        @updatedAt
-  role                   Role            @default(USER)
-  subscriptionId         String?
-  resetPasswordToken     String?
-  resetPasswordExpires   DateTime?
-}
+  id                  String             @id
+  name                String
+  email               String             @unique
+  emailVerified       Boolean
+  image               String?
+  createdAt           DateTime
+  updatedAt           DateTime
+  stripeCustomerId    String?            @map("stripe_customer_id")
+  isSubscribed        Boolean?           @default(false)
+  subscriptionId      String? // ← peut être utile
+  subscriptionEndDate DateTime? // ✅ ← ajoute ceci
+  Purchase            Purchase[]
+  accounts            Account[]
+  sessions            Session[]
+  SubscriptionData    SubscriptionData[]
 
-model Account {
-  userId            String
-  type              String
-  provider          String
-  providerAccountId String
-  refresh_token     String?
-  access_token      String?
-  expires_at        Int?
-  token_type        String?
-  scope             String?
-  id_token          String?
-  session_state     String?
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  @@id([provider, providerAccountId])
+  @@map("user")
 }
 
 model Session {
-  sessionToken String   @unique
-  userId       String
-  expires      DateTime
-  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId    String
+  createdAt DateTime
+  updatedAt DateTime
+  expiresAt DateTime
+  token     String   @unique
+  ipAddress String?
+  userAgent String?
+  id        String   @id
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  @@map("session")
 }
 
-model VerificationToken {
+model Account {
+  id                    String    @id
+  accountId             String
+  providerId            String
+  userId                String
+  accessToken           String?
+  refreshToken          String?
+  idToken               String?
+  accessTokenExpiresAt  DateTime?
+  refreshTokenExpiresAt DateTime?
+  scope                 String?
+  password              String?
+  createdAt             DateTime
+  updatedAt             DateTime
+  user                  User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("account")
+}
+
+model Verification {
+  id         String    @id
   identifier String
-  token      String
-  expires    DateTime
+  value      String
+  expiresAt  DateTime
+  createdAt  DateTime?
+  updatedAt  DateTime?
 
-  @@id([identifier, token])
-}
-
-model Authenticator {
-  credentialID         String  @unique
-  userId               String
-  providerAccountId    String
-  credentialPublicKey  String
-  counter              Int
-  credentialDeviceType String
-  credentialBackedUp   Boolean
-  transports           String?
-
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  @@id([userId, credentialID])
+  @@map("verification")
 }
 
 model Purchase {
   id               String            @id @default(cuid())
   userId           String
-  user             User              @relation(fields: [userId], references: [id], onDelete: Cascade)
   amount           Float
   status           String
   customerId       String
-  subscriptionData SubscriptionData?
-  userPurchaseData ProgramData?
   createdAt        DateTime          @default(now())
   updatedAt        DateTime          @updatedAt
   subscriptionId   String?
+  userPurchaseData ProgramData?
+  user             User              @relation(fields: [userId], references: [id], onDelete: Cascade)
+  subscriptionData SubscriptionData?
 }
 
 model SubscriptionData {
   id         String   @id @default(cuid())
   purchaseId String   @unique
-  purchase   Purchase @relation(fields: [purchaseId], references: [id], onDelete: Cascade)
+  userId     String
   titlePlan  String
   startDate  DateTime
   endDate    DateTime
   status     String
+
+  purchase Purchase @relation(fields: [purchaseId], references: [id], onDelete: Cascade)
+  user     User     @relation(fields: [userId], references: [id])
 }
 
 model ProgramData {
   id         String   @id @default(cuid())
   purchaseId String   @unique
-  purchase   Purchase @relation(fields: [purchaseId], references: [id], onDelete: Cascade)
   titlePlan  String
-}
-
-model PasswordResetToken {
-  id      String   @id @default(cuid())
-  email   String
-  token   String   @unique
-  expires DateTime
-
-  @@unique([email, token])
+  purchase   Purchase @relation(fields: [purchaseId], references: [id], onDelete: Cascade)
 }

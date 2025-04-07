@@ -1,13 +1,4 @@
-export const names = [
-  "Adrien",
-  "Pierre",
-  "Alex",
-  "Dylan",
-  "Théo",
-  "Maxime",
-  "Evan",
-  "Mathéo",
-];
+export const names = ["Adrien", "Max", "Clément", "Théo", "Maxence", "Dylan"];
 
 export const imagesUrls = [
   {
@@ -19,10 +10,10 @@ export const imagesUrls = [
     after: "/images/before_after/client1/2.jpeg",
   },
   {
-    name: "Alexia",
+    name: "Max",
     firstMoutnh: "1mois",
     lastMoutnh: "3mois",
-    result: "+7kg",
+    result: "+5kg",
     before: "/images/before_after/client2/img1.jpeg",
     after: "/images/before_after/client2/img2.jpeg",
   },
@@ -30,32 +21,24 @@ export const imagesUrls = [
     name: "Clément",
     firstMoutnh: "1mois",
     lastMoutnh: "4mois",
-    result: "+5kg",
+    result: "+4.5kg",
     before: "/images/before_after/client3/img1.jpeg",
     after: "/images/before_after/client3/img2.jpeg",
-  },
-  {
-    name: "Fanny",
-    firstMoutnh: "1mois",
-    lastMoutnh: "5mois",
-    result: "-15kg",
-    before: "/images/before_after/client4/img1.jpeg",
-    after: "/images/before_after/client4/img2.jpeg",
   },
   {
     name: "Théo",
     firstMoutnh: "1mois",
     lastMoutnh: "3mois",
-    result: "+3kg",
-    before: "/images/before_after/client5/img1.jpeg",
-    after: "/images/before_after/client5/img2.jpeg",
+    result: "-5kg",
+    before: "/images/before_after/client4/img1.jpeg",
+    after: "/images/before_after/client4/img2.jpeg",
   },
 
   {
     name: "Maxence",
     firstMoutnh: "1mois",
-    lastMoutnh: "3mois",
-    result: "+4kg",
+    lastMoutnh: "4mois",
+    result: "+5kg",
     before: "/images/before_after/client6/img1.jpeg",
     after: "/images/before_after/client6/img2.jpeg",
   },

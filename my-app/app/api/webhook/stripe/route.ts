@@ -1,148 +1,11 @@
-import { prisma } from "@/app/_lib/prisma";
 import Stripe from "stripe";
-import crypto from "crypto";
-import { sendProgramEmail } from "@/app/_lib/mailer";
-
-const stripe = new Stripe(process.env.NEXT_PUBLIC_STRIPE_SECRET_KEY!, {
-  typescript: true,
-});
-
-type SubscriptionData = {
-  startDate: string;
-  endDate: string;
-  titlePlan: string;
-  status: string;
-};
+import { prisma } from "@/lib/prisma";
+import { handleSubscription } from "@/lib/stripe/subscription";
+import { handleProgram } from "@/lib/stripe/programs";
+import { createNewUser } from "@/lib/stripe/createNewUser";
+import { stripe } from "@/lib/stripe/stripe";
 
 const WEBHOOK_SECRET = process.env.NEXT_STRIPE_WEBHOOK_SECRET!;
-
-function generateToken(length = 64): { token: string; expires: Date } {
-  return {
-    token: crypto.randomBytes(length).toString("hex"),
-    expires: new Date(Date.now() + 3600000),
-  };
-}
-
-async function handleSubscription(
-  existingUser: { id: string },
-  session: Stripe.Checkout.Session,
-  subscriptionId: string,
-) {
-  const startDate = new Date(session.created * 1000);
-  const months = parseInt(session.metadata?.month || "0", 10);
-
-  if (isNaN(months) || months <= 0) {
-    console.error("Invalid months metadata:", session.metadata?.month);
-    throw new Error("Invalid months metadata");
-  }
-
-  const endDate = new Date(startDate);
-  endDate.setMonth(endDate.getMonth() + months);
-  const endDateTimestamp = Math.floor(endDate.getTime() / 1000);
-
-  await stripe.subscriptions.update(subscriptionId, {
-    cancel_at: endDateTimestamp,
-  });
-
-  await prisma.user.update({
-    where: { id: existingUser.id },
-    data: {
-      subscriptionId,
-      isSubscribed: true,
-      subscriptionStartDate: startDate,
-      subscriptionEndDate: endDate,
-      stripeCustomerId:
-        typeof session.customer === "string" ? session.customer : null,
-    },
-  });
-
-  const subscriptionData: SubscriptionData = {
-    startDate: startDate.toISOString(),
-    endDate: endDate.toISOString(),
-    titlePlan: session.metadata?.titlePlan || "",
-    status: session.metadata?.status || "",
-  };
-
-  return prisma.purchase.create({
-    data: {
-      subscriptionId,
-      userId: existingUser.id,
-      amount: session.amount_total || 0,
-      status: "completed",
-      customerId: session.customer ? String(session.customer) : "",
-      subscriptionData: {
-        create: subscriptionData,
-      },
-      createdAt: new Date(),
-    },
-  });
-}
-
-async function handleProgram(
-  existingUser: { id: string },
-  session: Stripe.Checkout.Session,
-) {
-  await prisma.user.update({
-    where: { id: existingUser.id },
-    data: {
-      isSubscribed: session.metadata?.subscription ? true : false,
-      stripeCustomerId:
-        typeof session.customer === "string" ? session.customer : null,
-    },
-  });
-
-  const email = session.customer_details?.email || "";
-  const programTitle = session.metadata?.titlePlan as string;
-  await sendProgramEmail(email, programTitle);
-
-  const userPurchaseData = {
-    titlePlan: session.metadata?.titlePlan as string,
-  };
-
-  return prisma.purchase.create({
-    data: {
-      userId: existingUser.id,
-      amount: session.amount_total || 0,
-      status: "completed",
-      customerId: session.customer ? String(session.customer) : "",
-      userPurchaseData: {
-        create: userPurchaseData,
-      },
-      createdAt: new Date(),
-    },
-  });
-}
-
-async function handleNewUser(session: Stripe.Checkout.Session) {
-  const { token: activationToken, expires: activationTokenExpires } =
-    generateToken();
-  const email = session.customer_details?.email || "";
-
-  const newUser = await prisma.user.create({
-    data: {
-      email,
-      password: crypto.randomBytes(16).toString("hex"),
-      isTemporary: true,
-      activationToken,
-      activationTokenExpires,
-      createdAt: new Date(),
-    },
-  });
-
-  await prisma.purchase.create({
-    data: {
-      userId: newUser.id,
-      customerId: session.customer ? String(session.customer) : "", // Vérifier le type de customerId
-      amount: session.amount_total || 0,
-      status: "completed",
-      createdAt: new Date(),
-    },
-  });
-
-  // Envoyer un email d'activation (simulate the process)
-  const activationLink = `http://localhost:3000/activate?token=${activationToken}`;
-  console.log(`Activation email sent to ${email}: ${activationLink}`);
-}
 
 async function getUserAndSubscription(event: Stripe.Event) {
   const subscription = event.data.object as Stripe.Subscription;
@@ -212,7 +75,7 @@ export async function POST(req: Request) {
             await handleProgram(existingUser, session);
           }
         } else {
-          await handleNewUser(session);
+          await createNewUser(session);
         }
 
         return new Response("Webhook processed successfully", { status: 200 });
@@ -277,6 +140,9 @@ export async function POST(req: Request) {
             ).toISOString(),
             status: subscription.status,
             titlePlan: "3mois",
+            user: {
+              connect: { id: user.id }, // ✅ indispensable
+            },
           };
 
           await prisma.purchase.create({

@@ -1,13 +1,13 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import FormCalories from "../_components/Calories/FormCalories";
 import { useAnimation } from "../context/AnimationContext";
 import gsap from "gsap";
-import TitleComponent from "../_components/TitleComponent";
-import AnimatedQuestions from "../_components/AnimatedQuestions";
-import { Button } from "../_components/ui/button";
 import Link from "next/link";
+import TitleComponent from "@/components/TitleComponent";
+import { Button } from "@/components/ui/button";
+import FormCalories from "@/components/Calories/FormCalories";
+import AnimatedQuestions from "@/components/AnimatedQuestions";
 
 export default function Calorie() {
   const { isAnimating } = useAnimation();
