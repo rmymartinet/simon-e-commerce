@@ -14,7 +14,7 @@ import Image from "next/image";
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
 
-export default async function Inter() {
+export default async function Portal() {
   const user = await getUser();
 
   if (!user) {
@@ -30,7 +30,6 @@ export default async function Inter() {
             Manage your account settings and preferences
           </CardDescription>
         </CardHeader>
-
         <CardContent className="grid gap-4">
           <div className="flex items-center gap-4">
             <div className="flex h-16 w-16 items-center justify-center overflow-hidden rounded-full bg-gray-200">
@@ -96,21 +95,7 @@ export default async function Inter() {
             >
               Déconnexion
             </Button>
-            <Button
-              variant="outline"
-              className="w-full"
-              formAction={async () => {
-                "use server";
-
-                await auth.api.signOut({
-                  headers: await headers(),
-                });
-                redirect("/auth/signin");
-              }}
-            >
-              Change Password
-            </Button>
-            <Link href="/auth/reset-password" className="w-full">
+            <Link href="/auth/forget-password" className="w-full">
               <Button className="w-full">Reset Password</Button>
             </Link>
           </form>

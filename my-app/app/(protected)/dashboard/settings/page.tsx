@@ -6,7 +6,6 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 
-// ✅ Server action uniquement pour name et email
 async function updateUser(formData: FormData) {
   "use server";
 
@@ -20,7 +19,7 @@ async function updateUser(formData: FormData) {
   const name = formData.get("name")?.toString();
   const email = formData.get("email")?.toString();
 
-  const dataToUpdate: any = {};
+  const dataToUpdate: Partial<{ name: string; email: string }> = {};
   if (name) dataToUpdate.name = name;
   if (email) dataToUpdate.email = email;
 
@@ -47,7 +46,7 @@ export default async function SettingsPage() {
   });
 
   return (
-    <div className="mt-40 flex w-full justify-center px-4">
+    <div className="flex w-full justify-center px-4 md:mt-40">
       <div className="w-full max-w-2xl space-y-12">
         <div className="rounded-xl bg-gray-900 p-6 shadow-lg">
           <h2 className="mb-2 text-3xl font-semibold text-white">

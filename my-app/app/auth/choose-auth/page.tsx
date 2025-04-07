@@ -4,7 +4,6 @@ import React from "react";
 import Link from "next/link";
 import useWindowWidth from "@/hooks/useWindowWidth";
 import Image from "next/image";
-import SignInWrapper from "@/components/SignInWrapper";
 import Guest from "@/components/Guest";
 
 export default function Page() {
@@ -13,7 +12,6 @@ export default function Page() {
     <div className="mt-6 flex h-screen flex-col items-center justify-center justify-items-center px-4 lg:mt-0 lg:grid lg:grid-cols-3">
       {width > 1024 && (
         <>
-          <SignInWrapper />
           <div className="mb-6 mt-10 h-[1px] w-full bg-slate-400 lg:mt-0 lg:h-[40vh] lg:w-[1px]"></div>
           <Guest />
         </>

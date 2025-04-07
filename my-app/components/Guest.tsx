@@ -1,10 +1,10 @@
 "use client";
 
 import { usePayment } from "@/hooks/usePayment";
-import { useCheckout } from "../context/CheckoutContext";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { ProductDataProps } from "@/types/types";
+import { useCheckout } from "@/app/context/CheckoutContext";
 
 const Guest = () => {
   const { handleCheckout } = usePayment();

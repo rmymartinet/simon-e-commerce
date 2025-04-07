@@ -1,12 +1,11 @@
 import { useRouter } from "next/navigation";
 import { useCheckout } from "@/app/context/CheckoutContext";
-import { CartItemProps, UserDataProps } from "@/types/types";
+import { BetterAuthSession, CartItemProps, UserDataProps } from "@/types/types";
 import { useEffect, useState } from "react";
 import { usePayment } from "./usePayment";
 import Swal from "sweetalert2";
-import { Session } from "next-auth";
 
-export default function useHandleAction(session: Session | null) {
+export default function useHandleAction(session: BetterAuthSession | null) {
   const [userData, setUserData] = useState<UserDataProps | null>(null);
   const [loading, setLoading] = useState(true);
   const router = useRouter();

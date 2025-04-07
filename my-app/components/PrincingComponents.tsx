@@ -1,16 +1,28 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
-import { Session } from "next-auth";
 import TitleComponent from "./TitleComponent";
 import Filter from "./Filter";
 import CardPriceContainer from "./Card/CardPriceContainer";
 import FeedBackContainer from "./FeedBack/FeedBackContainer";
 import Faq from "./Faq";
+import { BetterAuthSession } from "@/types/types";
+import { useSearchParams } from "next/navigation";
 
-function PrincingComponents({ session }: { session: Session | null }) {
-  const [filterName, setFilterName] = useState("programmes");
+function PrincingComponents({
+  session,
+}: {
+  session: BetterAuthSession | null;
+}) {
+  const searchParams = useSearchParams();
+  const defaultFilter = searchParams.get("filter") || "programmes";
+  const [filterName, setFilterName] = useState(defaultFilter);
+
+  useEffect(() => {
+    const param = searchParams.get("filter");
+    if (param) setFilterName(param);
+  }, [searchParams]);
 
   return (
     <>

@@ -1,4 +1,3 @@
-import { Session } from "next-auth";
 import { motion } from "framer-motion";
 
 export interface AddToCartButtonProps {
@@ -33,8 +32,7 @@ export interface BlogCardProps {
 export interface CardPriceProps {
   productData: ProductDataProps;
   filterName: string;
-  session: Session | null;
-
+  session: BetterAuthSession | null;
   isHighlighted: boolean;
 }
 
@@ -285,28 +283,43 @@ export interface ProgramDataPros {
   titlePlan: string;
 }
 
+// export interface UserDataProps {
+//   Purchase: PurchaseItemProps[];
+//   activationToken: string | null;
+//   activationTokenExpires: Date | null;
+//   createdAt: Date;
+//   customerId: string | null;
+//   email: string;
+//   emailVerified: Date | null;
+//   id: string;
+//   image: string | null;
+//   isSubscribed: boolean;
+//   isTemporary: boolean;
+//   lastActive: Date | null;
+//   name: string | null;
+//   firstName: string | null;
+//   password: string | null;
+//   priceId: string | null;
+//   stripeCustomerId: string | null;
+//   subscriptionEndDate: Date | null;
+//   subscriptionStartDate: Date | null;
+//   subscriptionId: string | null;
+//   updatedAt: Date;
+// }
+
 export interface UserDataProps {
-  Purchase: PurchaseItemProps[];
-  activationToken: string | null;
-  activationTokenExpires: Date | null;
-  createdAt: Date;
-  customerId: string | null;
-  email: string;
-  emailVerified: Date | null;
   id: string;
-  image: string | null;
-  isSubscribed: boolean;
-  isTemporary: boolean;
-  lastActive: Date | null;
   name: string | null;
-  firstName: string | null;
-  password: string | null;
-  priceId: string | null;
-  stripeCustomerId: string | null;
-  subscriptionEndDate: Date | null;
-  subscriptionStartDate: Date | null;
-  subscriptionId: string | null;
+  email: string;
+  emailVerified: boolean;
+  image: string | null;
+  createdAt: Date;
   updatedAt: Date;
+  stripeCustomerId: string | null;
+  isSubscribed: boolean;
+  subscriptionId: string | null;
+  subscriptionEndDate: Date | null;
+  Purchase: PurchaseItemProps[];
 }
 
 export interface SubscriptionInfosProps {
@@ -322,13 +335,6 @@ export interface LayoutTransitionProps {
   children: React.ReactNode;
   className?: React.ComponentProps<typeof motion.div>["className"];
   style?: React.ComponentProps<typeof motion.div>["style"];
-}
-
-export interface SubscriptionData {
-  startDate: string;
-  endDate: string;
-  titlePlan: string;
-  status: string;
 }
 
 export type Step1_UserInfoProps = {
@@ -405,3 +411,33 @@ export type Step4_ResultProps = {
   isTrainingDay: boolean;
   setIsTrainingDay: (isTrainingDay: boolean) => void;
 };
+
+export interface BetterAuthSession {
+  session: {
+    id: string;
+    createdAt: Date;
+    updatedAt: Date;
+    userId: string;
+    expiresAt: Date;
+    token: string;
+    ipAddress?: string | null;
+    userAgent?: string | null;
+  };
+  user: {
+    id: string;
+    name: string;
+    email: string;
+    emailVerified: boolean;
+    image?: string | null; // ✅ ← ici on autorise undefined et null
+    createdAt: Date;
+    updatedAt: Date;
+  };
+}
+
+export interface Invoice {
+  id: string;
+  number: string;
+  created: number;
+  amount_paid: number;
+  invoice_pdf: string;
+}

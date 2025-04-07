@@ -3,7 +3,6 @@ import { IoCheckmarkOutline } from "react-icons/io5";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import { AvailableOffersProps } from "@/types/types";
-import Stars from "./Stars";
 import useNavigation from "@/hooks/useNavigation";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -31,13 +30,6 @@ const AvailableOffers = ({
 
   return (
     <div className="card-box-shadow relative flex flex-col gap-10 overflow-hidden rounded-3xl border-card p-10">
-      <Stars
-        yposition="top-0"
-        xposition="left-0"
-        height="h-full"
-        weight="w-full"
-        isTop={true}
-      />
       <div
         ref={bgPurpleRef}
         className="fixed-bg-purple absolute bottom-0 right-0 -z-10 h-[20%] w-[20%] scale-0"

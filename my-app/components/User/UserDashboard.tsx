@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import Image from "next/image";
 import UserProfile from "./UserProfile";
 import UserFilter from "./UserFIlter";
 import UserPurchaseHistory from "./UserPurchaseHistory";

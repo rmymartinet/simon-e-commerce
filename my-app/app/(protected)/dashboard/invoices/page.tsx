@@ -3,16 +3,9 @@
 import { useEffect, useState } from "react";
 import { Card, CardTitle } from "@/components/ui/card";
 import { FileDown } from "lucide-react";
+import { Invoice } from "@/types/types";
 
 export default function InvoicesPage() {
-  interface Invoice {
-    id: string;
-    number: string;
-    created: number;
-    amount_paid: number;
-    invoice_pdf: string;
-  }
-
   const [invoices, setInvoices] = useState<Invoice[]>([]);
 
   useEffect(() => {
@@ -26,7 +19,7 @@ export default function InvoicesPage() {
   }, []);
 
   return (
-    <div className="mt-40 flex w-full flex-col items-center gap-10 px-4">
+    <div className="flex w-full flex-col items-center gap-10 px-4 md:mt-40">
       <h1 className="text-center text-4xl font-bold text-white">
         Mes factures
       </h1>

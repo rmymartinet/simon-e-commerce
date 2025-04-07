@@ -5,9 +5,18 @@ import { Button } from "@/components/ui/button";
 import UserDashboard from "@/components/User/UserDashboard";
 import { getUserDashboardData } from "@/lib/getUserDashboard";
 import { calculateNextPayment, formattedDate } from "@/utils/dateUtils";
+import Image from "next/image";
 
 export default async function Dashboard() {
   const { userData } = await getUserDashboardData();
+
+  const session = await auth.api.getSession({
+    headers: await headers(),
+  });
+
+  if (!session) {
+    redirect("/auth/signin");
+  }
 
   const allPurchases = userData.Purchase || [];
   const subscriptionPurchase = allPurchases.find((p) => p.subscriptionData);
@@ -37,31 +46,51 @@ export default async function Dashboard() {
       };
 
   return (
-    <div className="mt-40 flex min-h-screen flex-col gap-20 px-4 pb-40 lg:px-20">
+    <div className="flex min-h-screen w-full flex-col gap-20 px-4 pb-40 md:mt-40 lg:px-20">
       <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
-        <div className="flex flex-col gap-2 font-semibold">
+        <div className="flex w-full flex-col gap-4 font-semibold">
           <p className="text-violet-400">Votre dashboard</p>
-          <h1 className="text-4xl font-black uppercase lg:text-6xl">
-            Bonjour, {userData.name || "Utilisateur"}
-          </h1>
-          <form
-            action={async () => {
-              "use server";
-              await auth.api.signOut({
-                headers: await headers(),
-              });
-              redirect("/auth/signin");
-            }}
-          >
-            <Button variant="blackBg" className="w-max">
-              Déconnexion
-            </Button>
-          </form>
+          <div className="flex items-center gap-3">
+            <div className="flex h-12 w-12 items-center justify-center overflow-hidden rounded-full bg-gray-200">
+              {session.user.image ? (
+                <Image
+                  src={session.user.image}
+                  alt={session.user.name || "User"}
+                  width={64}
+                  height={64}
+                  className="h-full w-full object-cover"
+                />
+              ) : (
+                <span className="text-2xl font-bold">
+                  {session.user.name?.charAt(0) ||
+                    session.user.email?.charAt(0)}
+                </span>
+              )}
+            </div>
+            <h1 className="text-4xl font-black uppercase lg:text-6xl">
+              Bonjour, {userData.name || "Utilisateur"}
+            </h1>
+          </div>
+          <div className="mt-10 flex flex-col-reverse items-start justify-between gap-6 md:flex-row md:items-center">
+            <form
+              action={async () => {
+                "use server";
+                await auth.api.signOut({
+                  headers: await headers(),
+                });
+                redirect("/auth/signin");
+              }}
+            >
+              <Button variant="blackBg" className="w-max">
+                Déconnexion
+              </Button>
+            </form>
+            <p className="text-pretty lg:w-[30vw]">
+              Bienvenue sur votre dashboard! Ici vous pourrez voir vos achats,
+              abonnements en cours, et gérer votre profil.
+            </p>
+          </div>
         </div>
-        <p className="text-pretty lg:w-[30vw]">
-          Bienvenue sur votre dashboard! Ici vous pourrez voir vos achats,
-          abonnements en cours, et gérer votre profil.
-        </p>
       </div>
 
       <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-3">

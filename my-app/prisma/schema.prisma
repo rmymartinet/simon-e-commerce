@@ -8,21 +8,22 @@ datasource db {
 }
 
 model User {
-  id                  String             @id
-  name                String
-  email               String             @unique
-  emailVerified       Boolean
-  image               String?
-  createdAt           DateTime
-  updatedAt           DateTime
-  stripeCustomerId    String?            @map("stripe_customer_id")
-  isSubscribed        Boolean?           @default(false)
-  subscriptionId      String? // ← peut être utile
-  subscriptionEndDate DateTime? // ✅ ← ajoute ceci
-  Purchase            Purchase[]
-  accounts            Account[]
-  sessions            Session[]
-  SubscriptionData    SubscriptionData[]
+  id                    String             @id
+  name                  String
+  email                 String             @unique
+  emailVerified         Boolean
+  image                 String?
+  createdAt             DateTime
+  updatedAt             DateTime
+  stripeCustomerId      String?            @map("stripe_customer_id")
+  isSubscribed          Boolean            @default(false)
+  subscriptionId        String? // ← peut être utile
+  subscriptionStartDate DateTime? // ✅ à ajouter
+  subscriptionEndDate   DateTime? // ✅ ← ajoute ceci
+  Purchase              Purchase[]
+  accounts              Account[]
+  sessions              Session[]
+  SubscriptionData      SubscriptionData[]
 
   @@map("user")
 }
@@ -73,7 +74,8 @@ model Verification {
 
 model Purchase {
   id               String            @id @default(cuid())
-  userId           String
+  userId           String? // ← mettre en optionnel
+  email            String
   amount           Float
   status           String
   customerId       String
@@ -81,8 +83,9 @@ model Purchase {
   updatedAt        DateTime          @updatedAt
   subscriptionId   String?
   userPurchaseData ProgramData?
-  user             User              @relation(fields: [userId], references: [id], onDelete: Cascade)
   subscriptionData SubscriptionData?
+
+  user User? @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model SubscriptionData {

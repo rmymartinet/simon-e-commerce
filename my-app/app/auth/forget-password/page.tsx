@@ -43,9 +43,13 @@ export default function ForgetPassword() {
               );
 
               toast.success("Check your email to reset your password.");
-            } catch (error: any) {
+            } catch (error: unknown) {
               toast.error("Failed to send reset link.");
-              console.error(error);
+              if (error instanceof Error) {
+                console.error(error.message);
+              } else {
+                console.error("An unknown error occurred.");
+              }
             }
           }}
           className="flex flex-col gap-4"
@@ -94,9 +98,13 @@ export default function ForgetPassword() {
             );
 
             toast.success("Check your email to reset your password.");
-          } catch (error: any) {
+          } catch (error: unknown) {
             toast.error("Failed to send reset link.");
-            console.error(error);
+            if (error instanceof Error) {
+              console.error(error.message);
+            } else {
+              console.error("An unknown error occurred.");
+            }
           }
         }}
         className="flex flex-col gap-4"

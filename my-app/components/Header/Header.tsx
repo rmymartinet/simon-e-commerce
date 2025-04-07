@@ -70,15 +70,15 @@ const Header = () => {
             <h1
               className={`text-center text-2xl font-bold uppercase tracking-tighter text-white md:text-5xl`}
             >
-              Un plan <span className="text-violet-500">pro</span>. Un coach{" "}
-              certifié
+              Un plan <span className="text-violet-500">pro.</span> Un coach{" "}
+              certifié.
             </h1>
             <div className="mt-4 flex gap-10 md:flex-row">
               <Button variant="blackBg">
                 <Link href="/pricing">Suivre un plan</Link>
               </Button>
               <Button variant="glassmorph">
-                <Link href="/about">Être coaché</Link>
+                <Link href="/pricing?filter=coaching">Être coaché</Link>
               </Button>
             </div>
           </div>

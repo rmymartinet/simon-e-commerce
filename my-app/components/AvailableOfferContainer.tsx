@@ -1,4 +1,4 @@
-import { coachingIncludes9Month, programIncludes } from "../data/cardPriceData";
+import { coachingIncludes9Month, programIncludes } from "@/app/data/cardPriceData";
 import AvailableOffers from "./AvailableOffers";
 
 const AvailableOfferContainer = () => {

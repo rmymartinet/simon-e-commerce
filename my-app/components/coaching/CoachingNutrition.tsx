@@ -41,16 +41,16 @@ const CoachingNutrition = () => {
   }, []);
 
   return (
-    <div className="flex w-full flex-col gap-20 bg-foreground px-4 pb-40 text-background md:px-40">
+    <div className="flex w-full flex-col gap-20 bg-foreground px-4 pb-40 text-background md:px-20">
       <TitleComponent
         title="Un suivi nutritionnel personnalisé adapté à vos besoins"
         titleIndication="coaching nutrition"
         subtitle="Nous échangeons ensemble pour définir vos besoins, vos objectifs et toutes les spécificités de votre mode de vie. Chaque détail compte pour un accompagnement efficace et adapté."
         isTextSplitLines={false}
       />
-      <div className="mt-20 self-center">
+      <div className="self-center">
         <Button variant={"blackBg"}>
-          <Link href="/pricing">Découvrir nos offres</Link>
+          <Link href="/pricing?filter=coaching">Découvrir nos offres</Link>
         </Button>
       </div>
       <div className="flex flex-col items-center gap-20">

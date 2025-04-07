@@ -11,7 +11,7 @@ const Faq = ({ filterName }: { filterName: string }) => {
         subtitle="Les questions les plus fréquemment posées."
       />
 
-      <div className="mt-20 flex flex-col gap-4 overflow-hidden md:px-40">
+      <div className="mt-20 flex flex-col gap-4 overflow-hidden md:px-20">
         {filterName === "programmes"
           ? faqProgramData.map(
               (item: { question: string; answer: string }, index: number) => (

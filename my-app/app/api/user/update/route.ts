@@ -17,7 +17,11 @@ export async function POST(req: Request) {
   const body = await req.json();
   const { name, email, password } = body;
 
-  const dataToUpdate: Record<string, any> = {};
+  const dataToUpdate: Partial<{
+    name: string;
+    email: string;
+    password: string;
+  }> = {};
   if (name) dataToUpdate.name = name;
   if (email) dataToUpdate.email = email;
   if (password) {

@@ -2,30 +2,10 @@ import Stripe from "stripe";
 import { prisma } from "@/lib/prisma";
 import { handleSubscription } from "@/lib/stripe/subscription";
 import { handleProgram } from "@/lib/stripe/programs";
-import { createNewUser } from "@/lib/stripe/createNewUser";
 import { stripe } from "@/lib/stripe/stripe";
+import { getUserAndSubscription } from "@/lib/stripe/getUserAndSubscription";
 
 const WEBHOOK_SECRET = process.env.NEXT_STRIPE_WEBHOOK_SECRET!;
-
-async function getUserAndSubscription(event: Stripe.Event) {
-  const subscription = event.data.object as Stripe.Subscription;
-  const customerId = subscription.customer as string;
-
-  const user = await prisma.user.findFirst({
-    where: {
-      stripeCustomerId: customerId,
-    },
-  });
-
-  if (!user) {
-    if (process.env.NODE_ENV === "development") {
-      console.error("User not found for subscription:", subscription.id);
-    }
-    return null;
-  }
-
-  return { user, subscription };
-}
 
 export async function POST(req: Request) {
   const body = await req.text();
@@ -34,6 +14,7 @@ export async function POST(req: Request) {
     console.error("Empty body received");
     return new Response("Empty body", { status: 400 });
   }
+  
   const sig = req.headers.get("stripe-signature");
 
   if (!sig) {
@@ -75,7 +56,24 @@ export async function POST(req: Request) {
             await handleProgram(existingUser, session);
           }
         } else {
-          await createNewUser(session);
+          if (session.customer_details?.email) {
+            await prisma.purchase.create({
+              data: {
+                email: session.customer_details?.email,
+                amount: session.amount_total ? session.amount_total / 100 : 0,
+                status: session.payment_status || "unpaid",
+                customerId: session.customer as string,
+                createdAt: new Date(),
+                userPurchaseData: session.metadata?.programTitle
+                  ? {
+                      create: {
+                        titlePlan: session.metadata.programTitle,
+                      },
+                    }
+                  : undefined,
+              },
+            });
+          }
         }
 
         return new Response("Webhook processed successfully", { status: 200 });
@@ -95,7 +93,6 @@ export async function POST(req: Request) {
           });
         }
 
-        //le point d'escalamtion a la fin permet
         const { user, subscription } = userAndSubscription!;
 
         if (!user) {
@@ -120,48 +117,49 @@ export async function POST(req: Request) {
               subscriptionId: null,
             },
           });
-        } else if (event.type === "customer.subscription.created") {
-          await prisma.user.update({
-            where: { id: user.id },
-            data: {
-              isSubscribed: true,
-              subscriptionEndDate: new Date(
-                subscription.current_period_end * 1000,
-              ),
-              subscriptionId: subscription.id,
-            },
-          });
-          const subscriptionData = {
-            startDate: new Date(
-              subscription.current_period_start * 1000,
-            ).toISOString(),
-            endDate: new Date(
-              subscription.current_period_end * 1000,
-            ).toISOString(),
-            status: subscription.status,
-            titlePlan: "3mois",
-            user: {
-              connect: { id: user.id }, // ✅ indispensable
-            },
-          };
+          // } else if (event.type === "customer.subscription.created") {
+          //   await prisma.user.update({
+          //     where: { id: user.id },
+          //     data: {
+          //       isSubscribed: true,
+          //       subscriptionEndDate: new Date(
+          //         subscription.current_period_end * 1000,
+          //       ),
+          //       subscriptionId: subscription.id,
+          //     },
+          //   });
+          //   const subscriptionData = {
+          //     startDate: new Date(
+          //       subscription.current_period_start * 1000,
+          //     ).toISOString(),
+          //     endDate: new Date(
+          //       subscription.current_period_end * 1000,
+          //     ).toISOString(),
+          //     status: subscription.status,
+          //     titlePlan: "3mois",
+          //     user: {
+          //       connect: { id: user.id },
+          //     },
+          //   };
 
-          await prisma.purchase.create({
-            data: {
-              userId: user.id,
-              subscriptionId: subscription.id,
-              amount: 3333.0,
-              status: subscription.status,
-              customerId: subscription.customer as string,
-              createdAt: new Date(),
-              subscriptionData: {
-                create: subscriptionData,
-              },
-            },
+          //   await prisma.purchase.create({
+          //     data: {
+          //       userId: user.id,
+          //       subscriptionId: subscription.id,
+          //       amount: 3333.0,
+          //       status: subscription.status,
+          //       customerId: subscription.customer as string,
+          //       createdAt: new Date(),
+          //       subscriptionData: {
+          //         create: subscriptionData,
+          //       },
+          //     },
+          //   });
+          // }
+          return new Response("Webhook processed successfully", {
+            status: 200,
           });
         }
-
-        return new Response("Webhook processed successfully", { status: 200 });
-
       default:
         if (process.env.NODE_ENV === "development") {
           console.log(`Unhandled event type: ${event.type}`);

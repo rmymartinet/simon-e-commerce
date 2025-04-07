@@ -33,7 +33,7 @@ const CoachingOverview = () => {
           pas à pas.
         </p>
         <Button variant="blackBg" className="mt-4">
-          <Link href="/pricing">Découvrir les offres</Link>
+          <Link href="/pricing?filter=coaching">Découvrir les offres</Link>
         </Button>
       </div>
 

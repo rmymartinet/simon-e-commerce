@@ -1,9 +1,9 @@
 import { coachingData, programData } from "@/app/data/cardPriceContainerData";
 import CardPrice from "./CardPrice";
-import { Session } from "next-auth";
 import { useRef } from "react";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
+import { BetterAuthSession } from "@/types/types";
 
 gsap.registerPlugin(useGSAP);
 
@@ -12,7 +12,7 @@ const CardPriceContainer = ({
   session,
 }: {
   filterName: string;
-  session: Session | null;
+  session: BetterAuthSession | null;
 }) => {
   const cardContainerRef = useRef<HTMLDivElement>(null);
 

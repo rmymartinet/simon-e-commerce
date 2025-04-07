@@ -27,7 +27,7 @@ export async function GET() {
     // Récupérez les factures depuis Stripe
     const invoices = await stripe.invoices.list({
       customer: dbUser.stripeCustomerId,
-      limit: 10, // Limitez le nombre de factures retournées
+      limit: 10,
     });
 
     // Retournez les factures

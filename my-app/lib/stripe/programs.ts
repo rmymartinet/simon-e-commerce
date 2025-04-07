@@ -3,7 +3,7 @@ import { prisma } from "../prisma";
 import { sendProgramEmail } from "../mailer";
 
 export async function handleProgram(
-  existingUser: { id: string },
+  existingUser: { id: string; email: string },
   session: Stripe.Checkout.Session,
 ) {
   await prisma.user.update({
@@ -15,18 +15,20 @@ export async function handleProgram(
     },
   });
 
-  const email = session.customer_details?.email || "";
+  const email = session.customer_details?.email || existingUser.email || "";
   const programTitle = session.metadata?.titlePlan as string;
+
   await sendProgramEmail(email, programTitle);
 
   const userPurchaseData = {
-    titlePlan: session.metadata?.titlePlan as string,
+    titlePlan: programTitle,
   };
 
   return prisma.purchase.create({
     data: {
+      email, // ✅ obligatoire si le champ est non nullable dans Prisma
       userId: existingUser.id,
-      amount: session.amount_total || 0,
+      amount: session.amount_total ? session.amount_total / 100 : 0,
       status: "completed",
       customerId: session.customer ? String(session.customer) : "",
       userPurchaseData: {

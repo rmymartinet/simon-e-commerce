@@ -5,12 +5,11 @@ import TitleComponent from "@/components/TitleComponent";
 import { Button } from "@/components/ui/button";
 import useHandleAction from "@/hooks/useHandleAction";
 import { useRemoveItem } from "@/hooks/useRemoveItem";
-import { CartItemProps } from "@/types/types";
-import { Session } from "next-auth";
+import { BetterAuthSession, CartItemProps } from "@/types/types";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 
-function CheckoutComponent({ session }: { session: Session | null }) {
+function CheckoutComponent({ session }: { session: BetterAuthSession | null }) {
   const { cart } = useCart();
   const [totalAmount, setTotalAmount] = useState<number>(0);
   const { handleAction } = useHandleAction(session);
