@@ -1,6 +1,6 @@
+import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { IoCloseOutline } from "react-icons/io5";
-import { Button } from "../_components/ui/button";
 
 export default function Cancel() {
   return (

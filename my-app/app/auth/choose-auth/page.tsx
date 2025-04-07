@@ -1,11 +1,11 @@
 "use client";
 
 import React from "react";
-import Guest from "@/app/_components/Guest";
 import Link from "next/link";
 import useWindowWidth from "@/hooks/useWindowWidth";
 import Image from "next/image";
-import SignInWrapper from "@/app/_components/SignInWrapper";
+import SignInWrapper from "@/components/SignInWrapper";
+import Guest from "@/components/Guest";
 
 export default function Page() {
   const { width } = useWindowWidth();

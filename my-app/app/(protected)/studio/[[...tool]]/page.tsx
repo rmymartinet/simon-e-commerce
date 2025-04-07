@@ -10,15 +10,19 @@
 import { NextStudio } from "next-sanity/studio";
 import config from "@/sanity.config";
 // import { redirect } from "next/navigation";
-import { auth } from "@/app/_lib/auths";
 import { redirect } from "next/navigation";
+import { auth } from "@/lib/auth";
+import { headers } from "next/headers";
 
 export const dynamic = "force-static";
 
 export { metadata, viewport } from "next-sanity/studio";
 
 export default async function StudioPage() {
-  const session: { user?: { email?: string | null } } | null = await auth();
+  const session = await auth.api.getSession({
+    headers: await headers(),
+  });
+
   if (!session || session?.user?.email !== "simonmrt@hotmail.fr") {
     redirect("/sign-in");
   }
