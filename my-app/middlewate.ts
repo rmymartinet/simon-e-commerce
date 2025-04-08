@@ -1,9 +1,27 @@
-export { auth as middleware } from "@/app/_lib/auths";
+import { NextRequest, NextResponse } from "next/server";
+import { getSessionCookie } from "better-auth/cookies";
 
+export async function middleware(request: NextRequest) {
+  const sessionCookie = getSessionCookie(request, {
+    cookieName: "session_token",
+    cookiePrefix: "better-auth",
+  });
+
+  if (!sessionCookie) {
+    return NextResponse.redirect(new URL("/", request.url));
+  }
+
+  return NextResponse.next();
+}
+
+const protectedRoutes = [
+  "/dashboard",
+  "/dashboard/settings",
+  "/dashboard/invoices",
+  "/dashboard/faq",
+  "/dashboard/support",
+  "/studio/:path*",
+];
 export const config = {
-  matcher: [
-    "/studio/:path*",
-    "/((?!_next|[^?]*\\.(?:html?|css|js(?!on)|jpe?g|webp|png|gif|svg|ttf|woff2?|ico|csv|docx?|xlsx?|zip|webmanifest)).*)",
-    "/(api|trpc)(.*)",
-  ],
+  matcher: protectedRoutes,
 };
