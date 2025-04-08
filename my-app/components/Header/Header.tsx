@@ -75,10 +75,10 @@ const Header = () => {
             </h1>
             <div className="mt-4 flex gap-10 md:flex-row">
               <Button variant="blackBg">
-                <Link href="/pricing">Suivre un plan</Link>
+                <Link href="/pricing">Être coaché</Link>
               </Button>
               <Button variant="glassmorph">
-                <Link href="/pricing?filter=coaching">Être coaché</Link>
+                <Link href="/pricing?filter=coaching">Mes programmes</Link>
               </Button>
             </div>
           </div>
