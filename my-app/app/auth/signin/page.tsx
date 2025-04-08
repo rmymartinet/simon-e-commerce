@@ -18,13 +18,14 @@ import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
-import { authClient } from "@/lib/auth-client"; // import the auth client
+import { authClient } from "@/lib/auth-client";
 
 export default function SignIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [rememberMe, setRememberMe] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
   const router = useRouter();
 
   const { data: session } = authClient.useSession();
@@ -55,11 +56,15 @@ export default function SignIn() {
               }}
               value={email}
             />
+            {errorMessage && (
+              <p className="text-sm text-red-500">{errorMessage}</p>
+            )}
           </div>
 
           <div className="grid gap-2">
             <div className="flex items-center">
               <Label htmlFor="password">Password</Label>
+
               <Link
                 href="/auth/forget-password"
                 className="ml-auto inline-block text-sm underline"
@@ -103,9 +108,9 @@ export default function SignIn() {
                     setLoading(true);
                   },
                   onResponse: () => {
+                    console.log("response");
                     setLoading(false);
                   },
-
                   onError: (ctx) => {
                     toast.error(ctx.error.message);
                   },
@@ -116,7 +121,11 @@ export default function SignIn() {
               );
 
               if (error) {
+                setErrorMessage(
+                  error.message || "Mot de passe ou email incorrect",
+                );
                 toast.error(error.message);
+                return;
               }
             }}
           >

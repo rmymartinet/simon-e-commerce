@@ -23,10 +23,14 @@ export default function SignUp() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [passwordConfirmation, setPasswordConfirmation] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
   const [image, setImage] = useState<File | null>(null);
   const [imagePreview, setImagePreview] = useState<string | null>(null);
-  const router = useRouter();
   const [loading, setLoading] = useState(false);
+
+  console.log("errorMessage", errorMessage);
+
+  const router = useRouter();
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -88,6 +92,9 @@ export default function SignUp() {
               }}
               value={email}
             />
+            {errorMessage && (
+              <p className="text-sm text-red-500">{errorMessage}</p>
+            )}
           </div>
           <div className="grid gap-2">
             <Label htmlFor="password">Password</Label>
@@ -151,16 +158,17 @@ export default function SignUp() {
             onClick={async () => {
               setLoading(true); // ⬅️ Ici AVANT le signUp
               try {
-                await signUp.email({
+                const { error } = await signUp.email({
                   email,
                   password,
                   name: `${firstName} ${lastName}`,
                   image: image ? await convertImageToBase64(image) : "",
-                  callbackURL: "/inter",
+                  callbackURL: "/dashboard",
                   fetchOptions: {
                     onResponse: () => setLoading(false),
                     onError: (ctx) => {
-                      setLoading(false); // ✅ aussi ici en cas d'erreur
+                      setErrorMessage(ctx.error.message);
+                      setLoading(false);
                       toast.error(ctx.error.message);
                     },
                     onSuccess: async () => {
@@ -168,6 +176,13 @@ export default function SignUp() {
                     },
                   },
                 });
+
+                if (error) {
+                  setErrorMessage(error.message || "Ce compte existe déjà");
+                  toast.error(error.message);
+                  setLoading(false);
+                  return;
+                }
               } catch (err) {
                 console.error(err);
                 setLoading(false);
