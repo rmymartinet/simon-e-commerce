@@ -87,6 +87,7 @@ const Header = () => {
       </div>
       <div className="absolute top-0 h-screen w-full overflow-hidden">
         <video
+          playsInline
           autoPlay
           loop
           muted

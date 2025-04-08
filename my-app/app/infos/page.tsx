@@ -99,6 +99,7 @@ export default function Infos() {
             muted
             autoPlay
             controls
+            playsInline
           />
         </div>
       </div>
