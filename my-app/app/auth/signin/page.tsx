@@ -30,7 +30,7 @@ export default function SignIn() {
   const { data: session } = authClient.useSession();
 
   if (session) {
-    router.push("/portal");
+    router.push("/auth/portal");
   }
 
   return (
@@ -110,7 +110,7 @@ export default function SignIn() {
                     toast.error(ctx.error.message);
                   },
                   onSuccess: () => {
-                    router.push("/portal");
+                    router.push("/auth/portal");
                   },
                 },
               );
@@ -141,7 +141,7 @@ export default function SignIn() {
                 await signIn.social(
                   {
                     provider: "google",
-                    callbackURL: "/dashboard",
+                    callbackURL: "/auth/portal",
                   },
                   {
                     onRequest: () => {

@@ -98,7 +98,7 @@ const NavComponent = ({ session }: NavComponentProps) => {
               }}
             >
               <LiaArrowAltCircleRight />
-              <Link href={session ? `/dashboard` : "/sign-in"}>
+              <Link href={session ? `/auth/dashboard` : "/auth/signin"}>
                 {session ? "Mon compte" : "Connexion"}
               </Link>
             </div>

@@ -15,20 +15,20 @@ export default function DashboardRootLayout({
   const links = [
     {
       title: "Home",
-      href: "/dashboard",
+      href: "/auth/dashboard",
     },
 
     {
       title: "Factures",
-      href: "/dashboard/invoices",
+      href: "/auth/dashboard/invoices",
     },
     {
       title: "Calendar",
-      href: "/dashboard/calendar",
+      href: "/auth/dashboard/calendar",
     },
     {
       title: "Settings",
-      href: "/dashboard/settings",
+      href: "/auth/dashboard/settings",
     },
     // {
     //   title: "Support",
