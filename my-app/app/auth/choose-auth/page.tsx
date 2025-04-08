@@ -30,7 +30,7 @@ export default function Page() {
         </h1>
 
         <div className="flex w-full flex-col gap-4">
-          <Link href="/auth/sign-in">
+          <Link href="/auth/signin">
             <Button className="w-full py-6 text-lg" variant="blackBg">
               Se connecter
             </Button>
