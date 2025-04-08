@@ -114,7 +114,7 @@ export default function useHandleAction(session: BetterAuthSession | null) {
         break;
       case !session && filterName === "programmes":
         setCheckoutData({ productData: products, filterName });
-        router.push("/choose-auth");
+        router.push("/auth/choose-auth");
         break;
 
       default:

@@ -13,7 +13,7 @@ const Guest = () => {
   const router = useRouter();
 
   if (session) {
-    router.push("/dashboard");
+    router.push("/auth/dashboard");
   }
 
   let allPriceIds: string[] = [];
