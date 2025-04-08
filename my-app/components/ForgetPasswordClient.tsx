@@ -25,10 +25,10 @@ const ForgetPasswordClient = () => {
             const email = formData.get("email") as string;
 
             try {
-              await authClient.forgetPassword(
+              const { error } = await authClient.forgetPassword(
                 {
                   email,
-                  redirectTo: "/auth/forget-password", // ✅ URL vers laquelle rediriger
+                  redirectTo: "/auth/forget-password",
                 },
                 {
                   onError: (ctx) => {
@@ -36,11 +36,18 @@ const ForgetPasswordClient = () => {
                     console.error(ctx.error.message);
                   },
                   onSuccess: () => {
+                    console.log("Password reset link sent successfully.");
                     toast.success("Check your email to reset your password.");
                     router.push("/auth/signin");
                   },
                 },
               );
+
+              if (error) {
+                toast.error("Failed to send reset link.");
+                console.error(error.message);
+                return;
+              }
 
               toast.success("Check your email to reset your password.");
             } catch (error: unknown) {
