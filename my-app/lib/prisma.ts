@@ -12,8 +12,12 @@ if (process.env.NODE_ENV !== "production") {
 prisma
   .$connect()
   .then(() => {
-    console.log("✅ Prisma connecté");
+    if (process.env.NODE_ENV === "development") {
+      console.log("✅ Prisma connecté");
+    }
   })
   .catch((err) => {
-    console.error("❌ Erreur de connexion à Prisma :", err);
+    if (process.env.NODE_ENV === "development") {
+      console.error("❌ Erreur de connexion à Prisma :", err);
+    }
   });
