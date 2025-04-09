@@ -135,7 +135,7 @@ const MobileNavComponent = ({ session }: NavComponentProps) => {
     <>
       {isDisplayNavBar && width <= 1024 && (
         <>
-          <div className="opacity-1 fixed top-10 z-50 flex w-full items-center justify-between gap-2 px-4">
+          <div className="opacity-1 fixed top-10 z-[99999999] flex w-full items-center justify-between gap-2 px-4">
             <Link href="/checkout">
               <div
                 ref={shoppingIconRef}
