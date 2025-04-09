@@ -11,6 +11,7 @@ import ConditionalNav from "@/components/Nav/ConditionalNav";
 import { LayoutTransition } from "@/components/pageTransitions/LayoutTransition";
 import Footer from "@/components/Footer/Footer";
 import LocomotiveScrollWrapper from "@/components/LocomotiveScrollWrapper";
+import { Analytics } from "@vercel/analytics/react";
 
 export default function RootLayout({
   children,
@@ -37,9 +38,9 @@ export default function RootLayout({
   gtag('config', 'G-NH0VPNGP9L');
   `}
                 </Script>
-                
               </head>
               <body id="main-container" className="antialiased">
+                <Analytics />
                 <ConditionalNav />
                 <LayoutTransition>
                   <main className="pb-20">{children}</main>

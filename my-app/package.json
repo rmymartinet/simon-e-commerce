@@ -32,6 +32,7 @@
     "@stripe/stripe-js": "^5.2.0",
     "@supabase/supabase-js": "^2.47.5",
     "@tailwindcss/typography": "^0.5.15",
+    "@vercel/analytics": "^1.5.0",
     "bcrypt": "^5.1.1",
     "better-auth": "^1.2.5",
     "charts.css": "^1.1.0",
