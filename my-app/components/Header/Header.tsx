@@ -63,7 +63,7 @@ const Header = () => {
           ref={textLeftRef}
           className="absolute left-1/2 top-5 -translate-x-1/2 overflow-hidden"
         >
-          <h1 className="uppercase">Sm coaching</h1>
+          <h1 className="uppercase">SMartinet coaching</h1>
         </div>
         <div className="mt-[30vh] flex flex-col items-center gap-20">
           <div className="mb-20 flex flex-col items-center gap-6">
