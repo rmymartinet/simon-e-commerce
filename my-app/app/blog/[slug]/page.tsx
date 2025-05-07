@@ -1,35 +1,30 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+// app/blog/[slug]/page.tsx
 import { SanityDocument } from "@sanity/client";
-import { postPathsQuery, postQuery } from "@/sanity/lib/queries";
+import { postQuery } from "@/sanity/lib/queries";
 import { sanityFetch } from "@/sanity/lib/fetch";
-import { client } from "@/sanity/lib/client";
-import React from "react";
 import Post from "../components/Post";
 
-export async function generateStaticParams() {
-  const posts = await client.fetch(postPathsQuery);
+export const dynamic = "force-static"; // ← important
 
-  return posts
-    .filter((post: any) => post.slug?.current)
-    .map((post: any) => ({
-      slug: post.slug.current,
-    }));
+export default async function PostPage({
+  params,
+}: {
+  params: Promise<{ slug: string }>; // tu gardes ta structure
+}) {
+  const { slug } = await params; // mais tu l'await en-dehors du rendu
+  return <PostPageContent slug={slug} />;
 }
 
-const PostPage = async ({ params }: { params: { slug: string } }) => {
-  if (!params) return null;
-
-  const { slug } = await params;
-
+async function PostPageContent({ slug }: { slug: string }) {
   const post = await sanityFetch<SanityDocument>({
     query: postQuery,
     params: { slug },
   });
 
-  return <Post post={post} />;
-};
+  if (!post) return <div>❌ Article non trouvé</div>;
 
-export default PostPage;
+  return <Post post={post} />;
+}
 
 // import { sanityFetch } from "@/sanity/lib/fetch";
 // import { postQuery } from "@/sanity/lib/queries";
