@@ -1,5 +1,3 @@
-"use client";
-
 import { PortableText, PortableTextReactComponents } from "@portabletext/react";
 import { client } from "@/sanity/lib/client";
 import imageUrlBuilder from "@sanity/image-url";
