@@ -18,7 +18,7 @@ export async function generateStaticParams() {
     }));
 }
 
-const PostPage = async ({ params }: { params: { slug: string } }) => {
+const PostPage = async ({ params }: { params: Promise<{ slug: string }> }) => {
   if (!params) return null;
 
   const { slug } = await params;
