@@ -9,6 +9,8 @@ import Post from "../components/Post";
 export async function generateStaticParams() {
   const posts = await client.fetch(postPathsQuery);
 
+  console.log("posts", posts);
+
   return posts
     .filter((post: any) => post.slug?.current)
     .map((post: any) => ({
@@ -16,7 +18,7 @@ export async function generateStaticParams() {
     }));
 }
 
-const PostPage = async ({ params }: { params: Promise<{ slug: string }> }) => {
+const PostPage = async ({ params }: { params: { slug: string } }) => {
   if (!params) return null;
 
   const { slug } = await params;
