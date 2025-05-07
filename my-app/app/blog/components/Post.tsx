@@ -5,22 +5,16 @@ import { client } from "@/sanity/lib/client";
 import imageUrlBuilder from "@sanity/image-url";
 import Image from "next/image";
 import { SanityDocument } from "@sanity/client";
-import PostsCard from "./PostsCard";
 
 const builder = imageUrlBuilder(client);
 
-const Post = ({
-  sanityPosts,
-  post,
-}: {
-  sanityPosts: SanityDocument[];
-  post: SanityDocument;
-}) => {
+const Post = ({ post }: { post: SanityDocument }) => {
   const formattedDate = new Date(post.publishedAt).toLocaleDateString("fr-FR", {
     year: "numeric",
     month: "long",
     day: "numeric",
   });
+
   const myPortableTextComponents: Partial<PortableTextReactComponents> = {
     marks: {
       textColor: ({ children, value }) => (
@@ -57,9 +51,6 @@ const Post = ({
       ),
     },
   };
-  const filteredPosts = sanityPosts.filter((p) => p.title !== post.title);
-  const shuffledPosts = filteredPosts.sort(() => 0.5 - Math.random());
-  const randomPosts = shuffledPosts.slice(0, 2);
 
   return (
     <main className="container mx-auto mt-40 flex flex-col items-center px-4 py-16">
@@ -69,8 +60,9 @@ const Post = ({
         </h1>
         <span>{formattedDate}</span>
       </div>
-      <div className="">
-        {post?.mainImage ? (
+
+      <div>
+        {post?.mainImage && (
           <Image
             src={builder.image(post.mainImage).url()}
             alt={post.title}
@@ -79,27 +71,19 @@ const Post = ({
             quality={100}
             className="h-full w-full object-cover"
           />
-        ) : null}
+        )}
       </div>
+
       <section className="prose-custom prose prose-xl">
-        {post?.body ? (
+        {post?.body && (
           <div className="text-white">
             <PortableText
               value={post.body}
               components={myPortableTextComponents}
             />
           </div>
-        ) : null}
+        )}
       </section>
-      <div className="mb-20 mt-20 h-[1px] w-full bg-white" />
-      <div className="flex flex-col gap-8">
-        <h1 className="text-7xl">Prochains articles</h1>
-        <div className="flex flex-col gap-10 lg:grid lg:grid-cols-2">
-          {randomPosts.map((post, index) => (
-            <PostsCard key={index} sanityPosts={post} />
-          ))}
-        </div>
-      </div>
     </main>
   );
 };
