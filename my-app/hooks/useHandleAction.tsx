@@ -110,7 +110,7 @@ export default function useHandleAction(session: BetterAuthSession | null) {
         break;
 
       case !session && filterName === "coaching":
-        router.push("/sign-in");
+        router.push("/auth/signin");
         break;
       case !session && filterName === "programmes":
         setCheckoutData({ productData: products, filterName });
