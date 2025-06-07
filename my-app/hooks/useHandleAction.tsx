@@ -12,6 +12,7 @@ export default function useHandleAction(session: BetterAuthSession | null) {
   const { handleCheckout } = usePayment({
     userData: userData || ({} as UserDataProps),
   });
+
   const { setCheckoutData } = useCheckout();
 
   useEffect(() => {
@@ -45,6 +46,8 @@ export default function useHandleAction(session: BetterAuthSession | null) {
     filterName: string;
   }) => {
     const products = Array.isArray(productData) ? productData : [productData];
+
+    console.log("products", products[0].priceId);
 
     if (!productData) {
       console.error("Aucun produit dans le panier.");

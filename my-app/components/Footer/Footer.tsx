@@ -30,44 +30,6 @@ const Footer = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
-  // useEffect(() => {
-  //   if (!footerContainerRef.current || !footerContentRef.current) return;
-  //   // Supprimer les anciens triggers liés à ce footer
-  //   ScrollTrigger.getAll().forEach((trigger) => {
-  //     if (trigger.trigger === footerContainerRef.current) {
-  //       trigger.kill();
-  //     }
-  //   });
-
-  //   // Position initiale
-  //   gsap.set(footerContentRef.current, { y: -400 });
-
-  //   // Nouvelle animation + scroll plus fluide et déclenché plus tôt
-  //   gsap.fromTo(
-  //     footerContentRef.current,
-  //     { y: -400 },
-  //     {
-  //       y: 0,
-  //       ease: "power4.out", // plus doux
-  //       duration: 2,
-  //       scrollTrigger: {
-  //         trigger: footerContainerRef.current,
-  //         start: "top+=200 bottom", // démarre plus tôt
-  //         end: "top top",
-  //         scrub: 1.5, // plus smooth
-  //         anticipatePin: 1, // aide à lisser les débuts de scroll
-  //       },
-  //     },
-  //   );
-
-  //   return () => {
-  //     // Nettoyage de l'animation
-  //     gsap.killTweensOf(footerContentRef.current);
-  //     gsap.killTweensOf(footerContainerRef.current);
-  //     ScrollTrigger.refresh(); // rafraîchit les triggers
-  //   };
-  // }, []);
-
   return (
     <>
       {isDisplayNavBar && (

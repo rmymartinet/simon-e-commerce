@@ -8,7 +8,7 @@ const BackgroundYoutubeImg = ({
   iphoneRef,
 }: BackgroundYoutubeImgProps) => {
   return (
-    <div className="relative flex h-[80vh] flex-col items-center">
+    <div className="relative flex h-[80vh] w-screen max-w-[90vw] flex-col items-center overflow-hidden rounded-3xl px-4 py-20">
       <div className="absolute flex h-full w-full justify-center gap-4 overflow-hidden">
         {images.map((img, index) => (
           <div

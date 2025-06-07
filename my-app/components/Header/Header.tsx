@@ -1,9 +1,7 @@
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { useEffect, useRef } from "react";
-import useWindowWidth from "@/hooks/useWindowWidth";
 import { textSplitLines } from "@/utils/common/textAnimation";
-import ProgramOverview from "../program/ProgramOverview";
 import { Button } from "../ui/button";
 import Link from "next/link";
 
@@ -15,8 +13,6 @@ const Header = () => {
   const textRightRef = useRef<HTMLParagraphElement>(null);
   const titleRef = useRef<HTMLHeadingElement>(null);
   const buttonsContainerRef = useRef<HTMLDivElement>(null);
-
-  const { width } = useWindowWidth();
 
   useGSAP(() => {
     if (textLeftRef.current && textRightRef.current && titleRef.current) {
@@ -58,42 +54,38 @@ const Header = () => {
       ref={containerRef}
       className="relative flex w-screen flex-col justify-end overflow-hidden"
     >
-      <div className="z-50 mb-4 flex w-full flex-col items-center justify-center">
+      <div className="z-50 mb-4 flex h-screen w-full flex-col items-center justify-center">
         <div
           ref={textLeftRef}
           className="absolute left-1/2 top-5 -translate-x-1/2 overflow-hidden"
         >
           <h1 className="uppercase">SMartinet coaching</h1>
         </div>
-        <div className="mt-[30vh] flex flex-col items-center gap-20">
+        <div className="flex flex-col items-center gap-20">
           <div className="mb-20 flex flex-col items-center gap-6">
             <h1
-              className={`text-center text-2xl font-bold uppercase tracking-tighter text-white md:text-5xl`}
+              className={`text-center text-6xl font-bold uppercase tracking-tighter text-white md:text-9xl`}
             >
-              Un plan <span className="text-violet-500">pro.</span> Un coach{" "}
-              certifié.
+              Coaché <br /> par un pro
             </h1>
+            <h4 className="text-center font-medium uppercase text-white md:text-2xl">
+              Coaching * Programmes * Nutrition
+            </h4>
             <div className="mt-4 flex gap-10 md:flex-row">
               <Button variant="blackBg">
-                <Link href="/pricing">Être coaché</Link>
-              </Button>
-              <Button variant="glassmorph">
-                <Link href="/pricing?filter=coaching">Mes programmes</Link>
+                <Link href="/pricing">Commencer</Link>
               </Button>
             </div>
           </div>
-          <ProgramOverview />
         </div>
       </div>
-      <div className="absolute top-0 h-screen w-full overflow-hidden">
+      <div className="absolute top-0 h-screen w-full overflow-hidden md:p-20">
         <video
           playsInline
           autoPlay
           loop
           muted
-          src={
-            width <= 498 ? "/videos/mobile_header.mp4" : "/videos/header.mp4"
-          }
+          src="/videos/header.mp4"
           className="h-full w-full object-cover brightness-[0.9] filter"
           preload="true"
         />

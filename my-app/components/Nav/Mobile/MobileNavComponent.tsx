@@ -2,11 +2,7 @@
 
 import Link from "next/link";
 import { useRef, useState } from "react";
-import {
-  PiInstagramLogoFill,
-  PiLinkedinLogoFill,
-  PiYoutubeLogoFill,
-} from "react-icons/pi";
+import { PiInstagramLogoFill, PiLinkedinLogoFill } from "react-icons/pi";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { AiFillTikTok } from "react-icons/ai";
@@ -47,18 +43,14 @@ const MobileNavComponent = ({ session }: NavComponentProps) => {
 
   const navLinks = [
     { title: "Home", link: "/" },
-    { title: "Tarifs", link: "/pricing" },
-    { title: "Infos", link: "/infos" },
+    { title: "Programmes", link: "/programs" },
+    { title: "Coachings", link: "/coachings" },
+    { title: "Votre coach", link: "/coach" },
     { title: "Blog", link: "/blog" },
     { title: "Calculateurs", link: "/calculator" },
   ];
 
   const socialIcons = [
-    {
-      icon: <PiYoutubeLogoFill size={24} />,
-      label: "YouTube",
-      link: "https://www.youtube.com/channel/UC9ZJ3JY2JQzr3v7e7vJ1J8A",
-    },
     {
       icon: <PiInstagramLogoFill size={24} />,
       label: "Instagram",

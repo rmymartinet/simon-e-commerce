@@ -10,7 +10,7 @@ export const coachingData = [
     type: "Coaching",
     titlePlan: "Essai",
     month: 3,
-    dayPrice: "5",
+    dayPrice: 5,
     price: 189,
     description:
       "Testez nos services et observez les premiers changements. Parfait pour initier votre transformation de style de vie.",
@@ -22,7 +22,7 @@ export const coachingData = [
     type: "Coaching",
     titlePlan: "Standard",
     month: 6,
-    dayPrice: "4,50",
+    dayPrice: 4.5,
     price: 165,
     description:
       "Ancrez des habitudes saines et obtenez des résultats durables. Le meilleur équilibre entre durée et efficacité.",
@@ -35,7 +35,7 @@ export const coachingData = [
     type: "Coaching",
     titlePlan: "Intensif",
     month: 9,
-    dayPrice: "4",
+    dayPrice: 4,
     price: 159,
     description:
       "Transformez-vous totalement avec un suivi intensif. L'engagement ultime pour un changement profond et pérenne.",

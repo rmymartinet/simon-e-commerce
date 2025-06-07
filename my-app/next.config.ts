@@ -5,6 +5,13 @@ const nextConfig: NextConfig = {
   swcMinify: true,
   images: {
     domains: ["cdn.sanity.io"],
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "images.unsplash.com",
+        pathname: "/**",
+      },
+    ],
   },
 };
 

@@ -3,6 +3,19 @@ import { prismaAdapter } from "better-auth/adapters/prisma";
 import { prisma } from "./prisma";
 import { resend } from "./resend";
 import { nextCookies } from "better-auth/next-js";
+import { Session } from "next-auth";
+
+export interface BetterAuthSession extends Session {
+  user: {
+    id: string;
+    name: string;
+    email: string;
+    emailVerified: boolean;
+    image?: string | null;
+    createdAt: Date;
+    updatedAt: Date;
+  };
+}
 
 export const auth = betterAuth({
   secret: process.env.BETTER_AUTH_SECRET!,

@@ -16,8 +16,8 @@
 }
 
 body {
-  font-family: "Helvetica Neue LT Pro", "Helvetica Neue", Helvetica, Arial,
-    sans-serif;
+  font-family:
+    "Helvetica Neue LT Pro", "Helvetica Neue", Helvetica, Arial, sans-serif;
   overflow-x: hidden;
   background: var(--background);
   color: var(--foreground);
@@ -173,8 +173,8 @@ body {
 
 .glassmorph {
   background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(3.5px);
-  -webkit-backdrop-filter: blur(3.5px);
+  backdrop-filter: blur(2.5px);
+  -webkit-backdrop-filter: blur(2.5px);
 }
 
 .laoding {
@@ -233,7 +233,8 @@ body {
     0 0 40px 20px hsla(0, 0%, 100%, 0.06),
     inset 0 0.5px 0 0 hsla(0, 0%, 100%, 0.3);
 
-  background: radial-gradient(
+  background:
+    radial-gradient(
       85.77% 49.97% at 51% 5.12%,
       hsla(270, 100%, 89%, 0.11) 0,
       rgba(222, 226, 255, 0.17) 45.83%,

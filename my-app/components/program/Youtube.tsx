@@ -34,10 +34,10 @@ const Youtube = () => {
   }, []);
 
   return (
-    <div className="mt-[20vh] w-full px-4">
+    <div className="mt-[20vh] flex w-full flex-col items-center px-4">
       <div className="relative mb-10 flex flex-col items-center gap-6 text-center md:mb-40">
         <span className="rounded-full border-2 border-violet-600 bg-[--card-bg] px-4 py-1 text-sm uppercase tracking-widest text-white opacity-70">
-          Accès inclus
+          Accès inclus pour tous les membres
         </span>
         <h1
           ref={titleRef}

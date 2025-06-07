@@ -18,10 +18,6 @@ const FooterLinks = () => {
 
   const socialLinks = [
     {
-      title: "YouTube",
-      link: "https://www.youtube.com/channel/UC9ZJ3JY2JQzr3v7e7vJ1J8A",
-    },
-    {
       title: "Instagram",
       link: "https://www.instagram.com/simonmrtz/",
     },

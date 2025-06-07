@@ -32,8 +32,9 @@ const NavComponent = ({ session }: NavComponentProps) => {
 
   const navLinks = [
     { title: "Home", link: "/" },
-    { title: "Tarifs", link: "/pricing" },
-    { title: "Infos", link: "/infos" },
+    { title: "Programmes", link: "/programs" },
+    { title: "Coachings", link: "/coachings" },
+    { title: "Votre coach", link: "/coach" },
     { title: "Blog", link: "/blog" },
     { title: "Calculateurs", link: "/calculator" },
   ];
@@ -111,7 +112,8 @@ const NavComponent = ({ session }: NavComponentProps) => {
               }}
             >
               <Link href="/checkout">
-                Cart ({numberOfProducts > 0 ? ` ${numberOfProducts} ` : " 0 "})
+                Panier ({numberOfProducts > 0 ? ` ${numberOfProducts} ` : " 0 "}
+                )
               </Link>
             </div>
           </div>
