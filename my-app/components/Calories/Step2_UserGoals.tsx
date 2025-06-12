@@ -278,4 +278,6 @@ const Step2_UserGoals = ({
   );
 };
 
+GoalCard.displayName = 'GoalCard';
+
 export default Step2_UserGoals;

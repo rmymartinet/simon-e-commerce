@@ -34,6 +34,8 @@ const NumberInput = React.memo(({
   </div>
 ));
 
+NumberInput.displayName = 'NumberInput';
+
 const Step1_UserInfo = ({
   formState,
   updateField,

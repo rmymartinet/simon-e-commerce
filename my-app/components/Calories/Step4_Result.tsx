@@ -161,4 +161,6 @@ const Step4_Result = ({
   );
 };
 
+MacroTable.displayName = 'MacroTable';
+
 export default Step4_Result;

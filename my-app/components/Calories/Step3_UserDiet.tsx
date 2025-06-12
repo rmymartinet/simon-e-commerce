@@ -145,4 +145,6 @@ const Step3_UserDiet = ({ setGoals }: Step3UserDietProps) => {
   );
 };
 
+MacroInput.displayName = 'MacroInput';
+
 export default Step3_UserDiet;
