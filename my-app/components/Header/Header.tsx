@@ -2,8 +2,7 @@ import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { useEffect, useRef } from "react";
 import { textSplitLines } from "@/utils/common/textAnimation";
-import { Button } from "../ui/button";
-import Link from "next/link";
+import CoachingsProgramsButtons from "../CoachingsProgramsButtons";
 
 gsap.registerPlugin(useGSAP);
 
@@ -72,9 +71,9 @@ const Header = () => {
               Coaching * Programmes * Nutrition
             </h4>
             <div className="mt-4 flex gap-10 md:flex-row">
-              <Button variant="blackBg">
-                <Link href="/pricing">Commencer</Link>
-              </Button>
+            <div className="flex gap-4">
+<CoachingsProgramsButtons />
+</div>
             </div>
           </div>
         </div>

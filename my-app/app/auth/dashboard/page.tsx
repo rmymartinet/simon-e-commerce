@@ -1,11 +1,11 @@
 import { auth } from "@/lib/auth";
 import { redirect } from "next/navigation";
 import { headers } from "next/headers";
-import { Button } from "@/components/ui/button";
 import UserDashboard from "@/components/User/UserDashboard";
 import { getUserDashboardData } from "@/lib/getUserDashboard";
 import { calculateNextPayment, formattedDate } from "@/utils/dateUtils";
 import Image from "next/image";
+import SignOutButton from "@/components/User/SignOutButton";
 
 export default async function Dashboard() {
   const { userData } = await getUserDashboardData();
@@ -72,19 +72,7 @@ export default async function Dashboard() {
             </h1>
           </div>
           <div className="mt-10 flex flex-col-reverse items-start justify-between gap-6 md:flex-row md:items-center">
-            <form
-              action={async () => {
-                "use server";
-                await auth.api.signOut({
-                  headers: await headers(),
-                });
-                redirect("/auth/signin");
-              }}
-            >
-              <Button variant="blackBg" className="w-max">
-                Déconnexion
-              </Button>
-            </form>
+            <SignOutButton />
             <p className="text-pretty lg:w-[30vw]">
               Bienvenue sur votre dashboard! Ici vous pourrez voir vos achats,
               abonnements en cours, et gérer votre profil.

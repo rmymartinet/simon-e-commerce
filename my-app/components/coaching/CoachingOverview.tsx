@@ -77,7 +77,7 @@ const CoachingOverview = () => {
         titleIndication="coaching"
         subtitle="Un coach à tes côtés, à chaque étape. Bénéficie d’un suivi personnalisé, d’un accompagnement quotidien et d’ajustements en temps réel. Ensemble, on va plus loin : je suis là pour te guider, te booster et t’aider à rester sur la bonne voie."
       />
-      <Button variant="blackBg" className="mt-4">
+      <Button variant="blackBg">
         <Link href="/pricing?filter=coaching">Découvrir les offres</Link>
       </Button>
 

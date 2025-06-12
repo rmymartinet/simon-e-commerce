@@ -61,9 +61,18 @@ export default function Calorie() {
           apports caloriques personnalisés en fonction de tes dépenses
           énergiques et de ton alimentation."
       />
-      <Button variant="blackBg">
-        <Link href="/pricing">Découvrir nos offres</Link>
-      </Button>
+     <div className="flex gap-4">
+  <Button asChild className="bg-violet-400 text-white">
+    <Link href="/coachings">
+      Coachings
+    </Link>
+  </Button>
+  <Button asChild className="bg-violet-400 text-white">
+    <Link href="/programs">
+      Programmes
+    </Link>
+  </Button>
+</div>
       <FormCalories />
       <div className="flex w-full flex-col items-center px-4">
         <TitleComponent
@@ -71,9 +80,18 @@ export default function Calorie() {
           subtitle=" Vous vous êtes sûrement posé ces questions"
           isTextSplitLines={false}
         />
-        <div className="mt-10">
-          <Button variant="blackBg">Découvrir nos offres</Button>
-        </div>
+        <div className="flex gap-4">
+  <Button asChild className="bg-violet-400 text-white">
+    <Link href="/coachings">
+      Coachings
+    </Link>
+  </Button>
+  <Button asChild className="bg-violet-400 text-white">
+    <Link href="/programs">
+      Programmes
+    </Link>
+  </Button>
+</div>
         <AnimatedQuestions questions={questions} />
       </div>
     </div>

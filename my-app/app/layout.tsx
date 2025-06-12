@@ -1,17 +1,15 @@
 // app/layout.tsx
-import { SessionProvider } from "next-auth/react";
 import { CartProvider } from "./context/CartContext";
 import { CheckoutProvider } from "./context/CheckoutContext";
 import { AnimationProvider } from "./context/AnimationContext";
-
 import "./globals.css";
-
 import Script from "next/script";
 import ConditionalNav from "@/components/Nav/ConditionalNav";
 import { LayoutTransition } from "@/components/pageTransitions/LayoutTransition";
 import Footer from "@/components/Footer/Footer";
 import LocomotiveScrollWrapper from "@/components/LocomotiveScrollWrapper";
 import { Analytics } from "@vercel/analytics/react";
+import { AuthProvider } from "./context/AuthContext";
 
 export default function RootLayout({
   children,
@@ -19,7 +17,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <SessionProvider>
+    <AuthProvider> 
       <CartProvider>
         <CheckoutProvider>
           <AnimationProvider>
@@ -52,6 +50,6 @@ export default function RootLayout({
           </AnimationProvider>
         </CheckoutProvider>
       </CartProvider>
-    </SessionProvider>
+    </AuthProvider>
   );
 }

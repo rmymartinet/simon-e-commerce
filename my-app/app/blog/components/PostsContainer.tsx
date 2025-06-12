@@ -3,14 +3,17 @@ import { SanityDocument } from "next-sanity";
 import PostsContent from "./PostsContent";
 import PostsHeader from "./PostsHeader";
 
-function PostsContainer({ sanityPosts }: { sanityPosts: SanityDocument[] }) {
-  
+interface PostsContainerProps {
+  sanityPosts: SanityDocument[];
+}
+
+const PostsContainer: React.FC<PostsContainerProps> = ({ sanityPosts }) => {
   return (
-    <section>
+    <section className="w-full max-w-7xl mx-auto">
       <PostsHeader />
       <PostsContent sanityPosts={sanityPosts} />
     </section>
   );
-}
+};
 
 export default PostsContainer;

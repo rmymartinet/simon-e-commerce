@@ -1,10 +1,95 @@
 import { Step2_UserGoalsProps } from "@/types/types";
 import { calculateAll } from "@/utils/calories/calculateAll";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback, useMemo } from "react";
 
 /**
  * !TODO REVOIR BODYFAT PERCENTAGE
  */
+
+// Types pour les objectifs
+type GoalType = "perte" | "gain" | "maintien" | "custom";
+type PerteType = "lente" | "moderee" | "rapide";
+type GainType = "prudente" | "moderee" | "extreme";
+
+// Constantes pour les options
+const PERTE_OPTIONS: { value: string; label: string }[] = [
+  { value: "lente", label: "Lente (−15%)" },
+  { value: "moderee", label: "Modérée (−20%)" },
+  { value: "rapide", label: "Rapide (−25%)" },
+];
+
+const GAIN_OPTIONS: { value: string; label: string }[] = [
+  { value: "prudente", label: "Prudente (+5%)" },
+  { value: "moderee", label: "Modérée (+10%)" },
+  { value: "extreme", label: "Extrême (+20%)" },
+];
+
+// Composant pour les cartes d'objectif
+const GoalCard = React.memo(({ 
+  title, 
+  selected, 
+  onSelect, 
+  value, 
+  options, 
+  disabled = false,
+  customInput = false,
+  onCustomChange,
+  onOptionChange
+}: { 
+  title: string;
+  selected: boolean;
+  onSelect: () => void;
+  value: number | string;
+  options?: { value: string; label: string }[];
+  disabled?: boolean;
+  customInput?: boolean;
+  onCustomChange?: (value: number) => void;
+  onOptionChange?: (value: string) => void;
+}) => (
+  <div className="rounded-xl border border-gray-300 bg-white p-6 shadow-md">
+    <label className="mb-2 flex items-center gap-2">
+      <input
+        type="radio"
+        name="goal"
+        checked={selected}
+        onChange={onSelect}
+      />
+      <h3 className="text-xl font-bold text-blue-700">{title}</h3>
+    </label>
+    <p className={`${!disabled ? "text-black" : "text-[--subtext]"} text-3xl font-semibold`}>
+      {disabled ? "-" : Math.round(Number(value))} kcal
+    </p>
+    <p className="mb-4 text-sm text-gray-500">kcal par jour</p>
+    {options && options.map((option) => (
+      <label
+        key={option.value}
+        className={`flex items-center gap-2 ${!disabled ? "text-black" : "text-[--subtext]"}`}
+      >
+        <input
+          type="radio"
+          name={`${title.toLowerCase()}-option`}
+          value={option.value}
+          checked={option.value === value}
+          onChange={() => {
+            onSelect();
+            onOptionChange?.(option.value as string);
+          }}
+          disabled={!selected}
+        />
+        {option.label}
+      </label>
+    ))}
+    {customInput && selected && (
+      <input
+        type="number"
+        className="mt-2 w-full rounded border border-gray-300 p-2"
+        placeholder="Ex: 2500"
+        value={value || ""}
+        onChange={(e) => onCustomChange?.(Number(e.target.value))}
+      />
+    )}
+  </div>
+));
 
 const Step2_UserGoals = ({
   formState,
@@ -17,52 +102,24 @@ const Step2_UserGoals = ({
   goals,
   isTrainingDay,
 }: Step2_UserGoalsProps) => {
-  const [selectedGoal, setSelectedGoal] = useState<
-    "perte" | "gain" | "maintien" | "custom"
-  >("perte");
-  const [perteChoice, setPerteChoice] = useState<
-    "lente" | "moderee" | "rapide"
-  >("lente");
-  const [gainChoice, setGainChoice] = useState<
-    "prudente" | "moderee" | "extreme"
-  >("prudente");
+  const [selectedGoal, setSelectedGoal] = useState<GoalType>("perte");
+  const [perteChoice, setPerteChoice] = useState<PerteType>("lente");
+  const [gainChoice, setGainChoice] = useState<GainType>("prudente");
   const [customCalories, setCustomCalories] = useState<number | null>(null);
 
-  const weightChange =
-    selectedGoal === "perte"
-      ? perteChoice === "lente"
-        ? 0.25
-        : perteChoice === "moderee"
-          ? 0.5
-          : 0.75
-      : selectedGoal === "gain"
-        ? gainChoice === "prudente"
-          ? 0.25
-          : gainChoice === "moderee"
-            ? 0.5
-            : 1
-        : 0;
+  // Calcul du changement de poids basé sur les choix
+  const weightChange = useMemo(() => {
+    if (selectedGoal === "perte") {
+      return perteChoice === "lente" ? 0.25 : perteChoice === "moderee" ? 0.5 : 0.75;
+    }
+    if (selectedGoal === "gain") {
+      return gainChoice === "prudente" ? 0.25 : gainChoice === "moderee" ? 0.5 : 1;
+    }
+    return 0;
+  }, [selectedGoal, perteChoice, gainChoice]);
 
-  const {
-    totalGain,
-    totalGainTraining,
-    totalMaintien,
-    totalMaintienTraining,
-    totalPerte,
-    totalPerteTraining,
-  } = calculateAll({
-    ...formState,
-    bodyFatPercentage: 15,
-    weightChange,
-    isTrainingDay,
-  });
-
-  const perteData = isTrainingDay ? totalPerteTraining : totalPerte;
-  const gainData = isTrainingDay ? totalGainTraining : totalGain;
-  const maintienData = isTrainingDay ? totalMaintienTraining : totalMaintien;
-
-  // 🔁 Recalcule les calories et macros dès qu’un paramètre change
-  useEffect(() => {
+  // Calcul des calories et macros
+  const calculateValues = useCallback(() => {
     if (!formIsValid || !goals) return;
 
     const {
@@ -78,26 +135,22 @@ const Step2_UserGoals = ({
       isTrainingDay,
     });
 
-    const perteData = totalPerte;
-    const gainData = totalGain;
-    const maintienData = totalMaintien;
-
     let total = 0;
     let training = 0;
     let rest = 0;
 
     if (selectedGoal === "perte") {
-      total = perteData[perteChoice];
+      total = totalPerte[perteChoice];
       training = totalPerteTraining[perteChoice];
       rest = totalPerte[perteChoice];
     } else if (selectedGoal === "gain") {
-      total = gainData[gainChoice];
+      total = totalGain[gainChoice];
       training = totalGainTraining[gainChoice];
       rest = totalGain[gainChoice];
     } else if (selectedGoal === "maintien") {
-      total = maintienData;
-      training = maintienData;
-      rest = maintienData;
+      total = totalMaintien;
+      training = totalMaintien;
+      rest = totalMaintien;
     } else if (selectedGoal === "custom" && customCalories) {
       total = customCalories;
       training = customCalories;
@@ -108,17 +161,14 @@ const Step2_UserGoals = ({
     setTotalCaloriesTraining(Math.round(training));
     setTotalCaloriesRest(Math.round(rest));
 
-    const calculateMacros = (
-      calories: number,
-      g: { carbs: number; proteins: number; fats: number },
-    ) => ({
-      carbs: (calories * (g.carbs / 100)) / 4,
-      proteins: (calories * (g.proteins / 100)) / 4,
-      fats: (calories * (g.fats / 100)) / 9,
+    const calculateMacros = (calories: number) => ({
+      carbs: (calories * (goals.carbs / 100)) / 4,
+      proteins: (calories * (goals.proteins / 100)) / 4,
+      fats: (calories * (goals.fats / 100)) / 9,
     });
 
-    setTrainingMacros(calculateMacros(training, goals));
-    setRestMacros(calculateMacros(rest, goals));
+    setTrainingMacros(calculateMacros(training));
+    setRestMacros(calculateMacros(rest));
   }, [
     formIsValid,
     formState,
@@ -129,7 +179,44 @@ const Step2_UserGoals = ({
     gainChoice,
     customCalories,
     goals,
+    setTotalCalories,
+    setTotalCaloriesTraining,
+    setTotalCaloriesRest,
+    setTrainingMacros,
+    setRestMacros,
   ]);
+
+  useEffect(() => {
+    calculateValues();
+  }, [calculateValues]);
+
+  // Calcul des valeurs pour chaque objectif
+  const calculatedValues = useMemo(() => {
+    if (!formIsValid) return {
+      perte: 0,
+      gain: 0,
+      maintien: 0,
+      custom: customCalories || 0
+    };
+
+    const {
+      totalGain,
+      totalMaintien,
+      totalPerte,
+    } = calculateAll({
+      ...formState,
+      bodyFatPercentage: 15,
+      weightChange,
+      isTrainingDay,
+    });
+
+    return {
+      perte: totalPerte[perteChoice],
+      gain: totalGain[gainChoice],
+      maintien: totalMaintien,
+      custom: customCalories || 0
+    };
+  }, [formIsValid, formState, weightChange, isTrainingDay, perteChoice, gainChoice, customCalories]);
 
   return (
     <div className="relative flex w-screen flex-col gap-4 rounded-xl border border-[--border-color] bg-[--card-bg] p-8 lg:w-full">
@@ -143,136 +230,49 @@ const Step2_UserGoals = ({
           Choisis ton objectif : perdre de la graisse, prendre de la masse, ou
           simplement maintenir ton poids. Tu peux aussi entrer un total
           personnalisé si tu sais déjà ce que tu veux viser. Ensuite, ajuste le
-          niveau d’intensité de ton objectif pour un déficit ou un surplus
+          niveau d&apos;intensité de ton objectif pour un déficit ou un surplus
           progressif ou plus rapide
         </p>
       </div>
-      {/* Toggle Entraînement */}
+
       <div className="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-2">
-        {/* Perte de graisse */}
-        <div className="rounded-xl border border-gray-300 bg-white p-6 shadow-md">
-          <label className="mb-2 flex items-center gap-2">
-            <input
-              type="radio"
-              name="goal"
-              value="perte"
-              checked={selectedGoal === "perte"}
-              onChange={() => setSelectedGoal("perte")}
-            />
-            <h3 className="text-xl font-bold text-blue-700">
-              Perte de graisse
-            </h3>
-          </label>
-          <p
-            className={`${formIsValid ? "text-black" : "text-[--subtext]"} text-3xl font-semibold`}
-          >
-            {!formIsValid ? "-" : Math.round(perteData[perteChoice])} kcal
-          </p>
-          <p className="mb-4 text-sm text-gray-500">kcal par jour</p>
-          {["lente", "moderee", "rapide"].map((option) => (
-            <label
-              key={option}
-              className={`flex items-center gap-2 ${formIsValid ? "text-black" : "text-[--subtext]"}`}
-            >
-              <input
-                type="radio"
-                name="perte-option"
-                value={option}
-                checked={perteChoice === option}
-                onChange={() => setPerteChoice(option as typeof perteChoice)}
-                disabled={selectedGoal !== "perte"}
-              />
-              {option === "lente"
-                ? "Lente (−15%)"
-                : option === "moderee"
-                  ? "Modérée (−20%)"
-                  : "Rapide (−25%)"}
-            </label>
-          ))}
-        </div>
+        <GoalCard
+          title="Perte de graisse"
+          selected={selectedGoal === "perte"}
+          onSelect={() => setSelectedGoal("perte")}
+          value={calculatedValues.perte}
+          options={PERTE_OPTIONS}
+          disabled={!formIsValid}
+          onOptionChange={(value) => setPerteChoice(value as PerteType)}
+        />
 
-        {/* Prise de masse */}
-        <div className="rounded-xl border border-gray-300 bg-white p-6 shadow-md">
-          <label className="mb-2 flex items-center gap-2">
-            <input
-              type="radio"
-              name="goal"
-              value="gain"
-              checked={selectedGoal === "gain"}
-              onChange={() => setSelectedGoal("gain")}
-            />
-            <h3 className="text-xl font-bold text-blue-700">Prise de masse</h3>
-          </label>
-          <p
-            className={`${formIsValid ? "text-black" : "text-[--subtext]"} text-3xl font-semibold`}
-          >
-            {" "}
-            {!formIsValid ? "-" : Math.round(gainData[gainChoice])} kcal
-          </p>
-          <p className="mb-4 text-sm text-gray-500">kcal par jour</p>
-          {["prudente", "moderee", "extreme"].map((option) => (
-            <label
-              key={option}
-              className={`flex items-center gap-2 ${formIsValid ? "text-black" : "text-[--subtext]"}`}
-            >
-              <input
-                type="radio"
-                name="gain-option"
-                value={option}
-                checked={gainChoice === option}
-                onChange={() => setGainChoice(option as typeof gainChoice)}
-                disabled={selectedGoal !== "gain"}
-              />
-              {option === "prudente"
-                ? "Prudente (+5%)"
-                : option === "moderee"
-                  ? "Modérée (+10%)"
-                  : "Extrême (+20%)"}
-            </label>
-          ))}
-        </div>
+        <GoalCard
+          title="Prise de masse"
+          selected={selectedGoal === "gain"}
+          onSelect={() => setSelectedGoal("gain")}
+          value={calculatedValues.gain}
+          options={GAIN_OPTIONS}
+          disabled={!formIsValid}
+          onOptionChange={(value) => setGainChoice(value as GainType)}
+        />
 
-        {/* Maintien */}
-        <div className="col-span-1 rounded-xl border border-gray-300 bg-white p-6 shadow-md">
-          <label className="mb-2 flex items-center gap-2">
-            <input
-              type="radio"
-              name="goal"
-              value="maintien"
-              checked={selectedGoal === "maintien"}
-              onChange={() => setSelectedGoal("maintien")}
-            />
-            <h3 className="text-xl font-bold text-blue-700">Maintien</h3>
-          </label>
-          <p
-            className={`${formIsValid ? "text-black" : "text-[--subtext]"} text-3xl font-semibold`}
-          >
-            {!formIsValid ? "-" : Math.round(maintienData)} kcal
-          </p>
-          <p className="text-sm text-gray-500">kcal par jour</p>
-        </div>
+        <GoalCard
+          title="Maintien"
+          selected={selectedGoal === "maintien"}
+          onSelect={() => setSelectedGoal("maintien")}
+          value={calculatedValues.maintien}
+          disabled={!formIsValid}
+        />
 
-        {/* Personnalisé */}
-        <div className="col-span-1 rounded-xl bg-white p-6 shadow-md">
-          <label className="mb-2 flex items-center gap-2">
-            <input
-              type="radio"
-              name="goal"
-              value="custom"
-              checked={selectedGoal === "custom"}
-              onChange={() => setSelectedGoal("custom")}
-            />
-            <h3 className="text-xl font-bold text-blue-700">Personnalisé</h3>
-          </label>
-          <input
-            type="number"
-            className="mt-2 w-full rounded border border-gray-300 p-2"
-            placeholder="Ex: 2500"
-            value={customCalories ?? ""}
-            onChange={(e) => setCustomCalories(Number(e.target.value))}
-            disabled={selectedGoal !== "custom"}
-          />
-        </div>
+        <GoalCard
+          title="Personnalisé"
+          selected={selectedGoal === "custom"}
+          onSelect={() => setSelectedGoal("custom")}
+          value={calculatedValues.custom}
+          customInput={true}
+          onCustomChange={setCustomCalories}
+          disabled={!formIsValid}
+        />
       </div>
     </div>
   );

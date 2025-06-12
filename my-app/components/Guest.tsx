@@ -1,20 +1,25 @@
 "use client";
 
 import { usePayment } from "@/hooks/usePayment";
-import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { ProductDataProps } from "@/types/types";
+import { authClient } from "@/lib/auth-client";
 import { useCheckout } from "@/app/context/CheckoutContext";
+import { useEffect } from "react";
+import { Button } from "./ui/button";
+const { useSession } = authClient;
 
 const Guest = () => {
   const { handleCheckout } = usePayment();
   const { checkoutData } = useCheckout();
-  const { data: session } = useSession();
   const router = useRouter();
+  const { data: session } = useSession();
 
-  if (session) {
-    router.push("/auth/dashboard");
-  }
+  useEffect(() => {
+    if (session) {
+      router.push("/auth/dashboard");
+    }
+  }, [session, router]);
 
   let allPriceIds: string[] = [];
   let allTitles: string[] = [];
@@ -43,8 +48,9 @@ const Guest = () => {
   return (
     <section className="flex w-full flex-col items-center justify-center md:gap-10">
       <div className="flex w-full flex-col items-center gap-2 text-center lg:mt-0">
-        <button
-          className="mt-4 w-full rounded-full border px-2 py-1 font-semibold lg:px-4 lg:py-2"
+        <Button 
+          variant="default"
+          className="w-full"
           onClick={() => {
             if (allPriceIds) {
               handleCheckout(
@@ -60,7 +66,7 @@ const Guest = () => {
           }}
         >
           Continuer en tant qu&apos;invité
-        </button>
+        </Button>
       </div>
     </section>
   );

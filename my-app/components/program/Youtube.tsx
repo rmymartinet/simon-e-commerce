@@ -5,7 +5,6 @@ import { useGSAP } from "@gsap/react";
 import BackgroundYoutubeImg from "./BackgroundYoutubeImg";
 import { textSplitLinesScrollTrigger } from "@/utils/common/textAnimation";
 
-// Enregistrement des plugins GSAP
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
 const Youtube = () => {

@@ -1,5 +1,44 @@
 import { Step4_ResultProps } from "@/types/types";
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
+
+// Types
+type MacroValues = {
+  carbs: number;
+  proteins: number;
+  fats: number;
+  calories: number;
+};
+
+// Composant pour le tableau de macros
+const MacroTable = React.memo(({
+  title,
+  data,
+  headers
+}: {
+  title: string;
+  data: MacroValues;
+  headers: string[];
+}) => (
+  <table className="w-full table-auto border-collapse text-center">
+    <thead>
+      <tr className={title === "Total" ? "bg-yellow-400" : "bg-gray-500"}>
+        {headers.map((header) => (
+          <th key={header} className="p-3 text-white">
+            {header}
+          </th>
+        ))}
+      </tr>
+    </thead>
+    <tbody>
+      <tr className="bg-gray-50 font-semibold text-black">
+        <td className="p-3">{data.carbs.toFixed(2)}</td>
+        <td className="p-3">{data.proteins.toFixed(2)}</td>
+        <td className="p-3">{data.fats.toFixed(2)}</td>
+        <td className="p-3">{data.calories.toFixed(2)}</td>
+      </tr>
+    </tbody>
+  </table>
+));
 
 const Step4_Result = ({
   goalsTraining,
@@ -12,11 +51,35 @@ const Step4_Result = ({
 }: Step4_ResultProps) => {
   const [mealsPerDay, setMealsPerDay] = useState(3);
 
-  // ✅ Utilise isTrainingDay local, pas includeTraining
-  const macros = isTrainingDay ? goalsTraining : goalsRest;
-  const totalCalories = isTrainingDay
-    ? totalCaloriesTraining
-    : totalCaloriesRest;
+  // Calcul des macros et calories en fonction du type de jour
+  const { macros, totalCalories } = useMemo(() => ({
+    macros: isTrainingDay ? goalsTraining : goalsRest,
+    totalCalories: isTrainingDay ? totalCaloriesTraining : totalCaloriesRest
+  }), [isTrainingDay, goalsTraining, goalsRest, totalCaloriesTraining, totalCaloriesRest]);
+
+  // Calcul des macros totales
+  const totalMacros = useMemo(() => {
+    if (!goals || !totalCalories) return { carbs: 0, proteins: 0, fats: 0, calories: 0 };
+
+    const carbs = (totalCalories * goals.carbs) / 100 / 4;
+    const proteins = (totalCalories * goals.proteins) / 100 / 4;
+    const fats = (totalCalories * goals.fats) / 100 / 9;
+
+    return {
+      carbs,
+      proteins,
+      fats,
+      calories: totalCalories
+    };
+  }, [goals, totalCalories]);
+
+  // Calcul des macros par repas
+  const perMealMacros = useMemo(() => ({
+    carbs: Number((totalMacros.carbs / mealsPerDay).toFixed(1)),
+    proteins: Number((totalMacros.proteins / mealsPerDay).toFixed(1)),
+    fats: Number((totalMacros.fats / mealsPerDay).toFixed(1)),
+    calories: Number((totalCalories / mealsPerDay).toFixed(0))
+  }), [totalMacros, mealsPerDay, totalCalories]);
 
   if (!macros || totalCalories === 0) {
     return (
@@ -25,37 +88,6 @@ const Step4_Result = ({
       </div>
     );
   }
-
-  const perMeal = {
-    carbs: (macros.carbs / mealsPerDay).toFixed(1),
-    proteins: (macros.proteins / mealsPerDay).toFixed(1),
-    fats: (macros.fats / mealsPerDay).toFixed(1),
-    calories: (totalCalories / mealsPerDay).toFixed(0),
-  };
-
-  const totalCarbs = isTrainingDay
-    ? goals && goals.carbs !== undefined
-      ? (totalCaloriesTraining * goals.carbs) / 100 / 4
-      : 0
-    : goals && goals.carbs !== undefined
-      ? (totalCaloriesRest * goals.carbs) / 100 / 4
-      : 0;
-
-  const totalProteins = isTrainingDay
-    ? goals && goals.proteins !== undefined
-      ? (totalCaloriesTraining * goals.proteins) / 100 / 4
-      : 0
-    : goals && goals.proteins !== undefined
-      ? (totalCaloriesRest * goals.proteins) / 100 / 4
-      : 0;
-
-  const totalFats = isTrainingDay
-    ? goals && goals.fats !== undefined
-      ? (totalCaloriesTraining * goals.fats) / 100 / 9
-      : 0
-    : goals && goals.fats !== undefined
-      ? (totalCaloriesRest * goals.fats) / 100 / 9
-      : 0;
 
   return (
     <div className="relative flex w-screen flex-col gap-4 rounded-xl border border-[--border-color] bg-[--card-bg] p-8 lg:w-full">
@@ -66,11 +98,12 @@ const Step4_Result = ({
         </h2>
         <p className="lg:max-w-[40vw]">
           Voici tes besoins caloriques et ta répartition en macronutriments,
-          adaptés aux jours d’entraînement et de repos. Tu peux aussi ajuster le
+          adaptés aux jours d&apos;entraînement et de repos. Tu peux aussi ajuster le
           nombre de repas pour obtenir une répartition pratique à suivre au
           quotidien.
         </p>
       </div>
+
       {/* Toggle entraînement ou repos */}
       <div className="mb-6 flex items-center gap-6">
         <label className="flex items-center gap-2 font-semibold">
@@ -94,24 +127,13 @@ const Step4_Result = ({
       </div>
 
       {/* Tableau macros totales */}
-      <table className="mb-8 w-full table-auto border-collapse text-center">
-        <thead>
-          <tr className="bg-yellow-400 text-white">
-            <th className="p-3">Glucides (g)</th>
-            <th className="p-3">Protéines (g)</th>
-            <th className="p-3">Lipides (g)</th>
-            <th className="p-3">Total (kcal)</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr className="bg-gray-50 font-semibold">
-            <td className="p-3">{totalCarbs.toFixed(2)}</td>
-            <td className="p-3">{totalProteins.toFixed(2)}</td>
-            <td className="p-3">{totalFats.toFixed(2)}</td>
-            <td className="p-3">{totalCalories.toFixed(2)}</td>
-          </tr>
-        </tbody>
-      </table>
+      <div className="mb-8">
+        <MacroTable
+          title="Total"
+          data={totalMacros}
+          headers={["Glucides (g)", "Protéines (g)", "Lipides (g)", "Total (kcal)"]}
+        />
+      </div>
 
       {/* Sélection des repas */}
       <div className="mb-6 text-center">
@@ -119,7 +141,7 @@ const Step4_Result = ({
         <select
           value={mealsPerDay}
           onChange={(e) => setMealsPerDay(Number(e.target.value))}
-          className="rounded border p-2"
+          className="rounded border p-2 text-black"
         >
           {[1, 2, 3, 4, 5, 6].map((num) => (
             <option key={num} value={num}>
@@ -130,25 +152,13 @@ const Step4_Result = ({
       </div>
 
       {/* Tableau macros par repas */}
-      <table className="w-full table-auto border-collapse text-center">
-        <thead>
-          <tr className="bg-gray-200">
-            <th className="p-3">Glucides / repas</th>
-            <th className="p-3">Protéines / repas</th>
-            <th className="p-3">Lipides / repas</th>
-            <th className="p-3">Calories / repas</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr className="bg-gray-50">
-            <td className="p-3">{perMeal.carbs}</td>
-            <td className="p-3">{perMeal.proteins}</td>
-            <td className="p-3">{perMeal.fats}</td>
-            <td className="p-3">{perMeal.calories}</td>
-          </tr>
-        </tbody>
-      </table>
+      <MacroTable
+        title="Par repas"
+        data={perMealMacros}
+        headers={["Glucides / repas", "Protéines / repas", "Lipides / repas", "Calories / repas"]}
+      />
     </div>
   );
 };
+
 export default Step4_Result;

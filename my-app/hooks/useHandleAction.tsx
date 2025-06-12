@@ -1,6 +1,7 @@
 import { useRouter } from "next/navigation";
 import { useCheckout } from "@/app/context/CheckoutContext";
-import { BetterAuthSession, CartItemProps, UserDataProps } from "@/types/types";
+import { CartItemProps, UserDataProps } from "@/types/types";
+import { BetterAuthSession } from "@/types/session";
 import { useEffect, useState } from "react";
 import { usePayment } from "./usePayment";
 import Swal from "sweetalert2";
@@ -47,15 +48,16 @@ export default function useHandleAction(session: BetterAuthSession | null) {
   }) => {
     const products = Array.isArray(productData) ? productData : [productData];
 
-    console.log("products", products[0].priceId);
+    console.log("products", products);  
 
-    if (!productData) {
+
+    if (!productData ) {
       console.error("Aucun produit dans le panier.");
       return;
     }
 
     switch (true) {
-      case session && filterName === "coaching" && userData?.isSubscribed:
+      case session && filterName === "coachings" && userData?.isSubscribed:
         Swal.fire({
           icon: "error",
           title: "Vous êtes déjà abonné",
@@ -67,20 +69,22 @@ export default function useHandleAction(session: BetterAuthSession | null) {
         }
         break;
 
-      case session && filterName === "coaching":
-        if (products[0].priceId) {
-          handleCheckout(
-            products[0].priceId,
-            products[0].titlePlan,
-            products[0].month,
-            true,
-            false,
-          );
-        } else if (process.env.NODE_ENV === "development") {
-          console.error(
-            `Le produit "${products[0].titlePlan}" n'a pas de priceId.`,
-          );
+      case session && filterName  === "coachings":
+        if (!products[0].priceId) {
+          Swal.fire({
+            icon: "error",
+            title: "Erreur",
+            text: "Ce produit n'est pas disponible pour le moment",
+          });
+          return;
         }
+        handleCheckout(
+          products[0].priceId,
+          products[0].titlePlan,
+          products[0].month,
+          true,
+          false,
+        );
         break;
 
       case session && filterName === "programmes":
@@ -112,8 +116,8 @@ export default function useHandleAction(session: BetterAuthSession | null) {
         }
         break;
 
-      case !session && filterName === "coaching":
-        router.push("/auth/signin");
+      case !session && filterName === "coachings":
+        router.push("/auth/signup");
         break;
       case !session && filterName === "programmes":
         setCheckoutData({ productData: products, filterName });

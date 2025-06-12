@@ -9,21 +9,25 @@
 
 import { NextStudio } from "next-sanity/studio";
 import config from "@/sanity.config";
-// import { redirect } from "next/navigation";
-// import { auth } from "@/lib/auth";
-// import { headers } from "next/headers";
-
-export const dynamic = "force-static";
+import { headers } from "next/headers";
+import { redirect } from "next/navigation";
+import { auth } from "@/lib/auth";
 
 export { metadata, viewport } from "next-sanity/studio";
 
 export default async function StudioPage() {
-  // const session = await auth.api.getSession({
-  //   headers: await headers(),
-  // });
+  const session = await auth.api.getSession({
+    headers: await headers(),
+  });
 
-  // if (!session || session?.user?.email !== "simonmrt@hotmail.fr") {
-  //   redirect("/auth/signin");
-  // }
+
+  const isAdmin = session?.user?.email === process.env.ADMIN_EMAIL_2;
+
+
+  if (!isAdmin) {
+    console.log("Pas de session, redirection vers /auth/signin");
+    redirect("/auth/signin");
+  }
+
   return <NextStudio config={config} />;
 }

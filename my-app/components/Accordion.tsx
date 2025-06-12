@@ -45,12 +45,12 @@ const Accordion = ({
       >
         <div className="flex w-full items-center justify-between gap-10 lg:grid lg:grid-cols-coachingNutrition">
           {width > 1024 && <span className="lg:text-xl">0{index + 1}</span>}
-          <h1 className="lg:text-2xl">{title}</h1>
+          <h1 className="lg:text-xl">{title}</h1>
           <div
             ref={iconRef}
             className="rounded-full border border-[--border-color] bg-[--card-bg] lg:p-2"
           >
-            <IoAdd className="text-2xl text-muted" />
+            <IoAdd className="text-xl text-muted" />
           </div>
         </div>
         <p

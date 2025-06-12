@@ -3,9 +3,8 @@ import { prismaAdapter } from "better-auth/adapters/prisma";
 import { prisma } from "./prisma";
 import { resend } from "./resend";
 import { nextCookies } from "better-auth/next-js";
-import { Session } from "next-auth";
 
-export interface BetterAuthSession extends Session {
+export interface BetterAuthSession {
   user: {
     id: string;
     name: string;

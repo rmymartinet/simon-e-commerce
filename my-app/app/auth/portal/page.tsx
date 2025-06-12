@@ -11,8 +11,7 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 import { getUser } from "@/lib/auth-sesssion";
 import Image from "next/image";
-import { auth } from "@/lib/auth";
-import { headers } from "next/headers";
+import SignOutButton from "@/components/User/SignOutButton";
 
 export default async function Portal() {
   const user = await getUser();
@@ -81,20 +80,7 @@ export default async function Portal() {
             >
               Mon compte
             </Button>
-            <Button
-              variant="outline"
-              className="w-full"
-              formAction={async () => {
-                "use server";
-
-                await auth.api.signOut({
-                  headers: await headers(),
-                });
-                redirect("/auth/signin");
-              }}
-            >
-              Déconnexion
-            </Button>
+            <SignOutButton />
             <Link href="/auth/forget-password" className="w-full">
               <Button className="w-full">Reset Password</Button>
             </Link>

@@ -12,6 +12,7 @@ import { usePathname } from "next/navigation";
 import useWindowWidth from "@/hooks/useWindowWidth";
 import { FaCartShopping } from "react-icons/fa6";
 import { useCart } from "@/app/context/CartContext";
+import { FaEdit } from "react-icons/fa";
 
 gsap.registerPlugin(useGSAP);
 
@@ -35,7 +36,6 @@ const MobileNavComponent = ({ session }: NavComponentProps) => {
   const lineRefs = useRef<(HTMLDivElement | null)[]>([]);
 
   const isDisplayNavBar =
-    !/^\/studio/.test(pathname) &&
     pathname !== "/success" &&
     pathname !== "/cancel";
 
@@ -45,7 +45,7 @@ const MobileNavComponent = ({ session }: NavComponentProps) => {
     { title: "Home", link: "/" },
     { title: "Programmes", link: "/programs" },
     { title: "Coachings", link: "/coachings" },
-    { title: "Votre coach", link: "/coach" },
+    { title: "Votre coach", link: "/votre-coach" },
     { title: "Blog", link: "/blog" },
     { title: "Calculateurs", link: "/calculator" },
   ];
@@ -220,6 +220,30 @@ const MobileNavComponent = ({ session }: NavComponentProps) => {
                     ></div>
                   </li>
                 ))}
+                {session && (
+                  <li
+                    className="cursor-pointer overflow-hidden px-4 uppercase text-white"
+                    onClick={() => setIsClicked(false)}
+                  >
+                    <Link className="overflow-hidden" href="/studio">
+                      <div
+                        ref={(el) => {
+                          navLinksRef.current[navLinks.length] = el;
+                        }}
+                        className="flex items-end justify-between"
+                      >
+                        <p className="text-2xl">Gérer le blog</p>
+                        <FaEdit className="text-xl" />
+                      </div>
+                    </Link>
+                    <div
+                      ref={(el) => {
+                        lineRefs.current[navLinks.length] = el;
+                      }}
+                      className="mt-2 h-[1px] w-0 bg-muted"
+                    ></div>
+                  </li>
+                )}
               </ul>
               <div className="program-button-container flex w-full items-center justify-between gap-6 rounded-lg border border-[#3a3a3a]">
                 <div className="padding flex w-full justify-between gap-6 overflow-hidden">

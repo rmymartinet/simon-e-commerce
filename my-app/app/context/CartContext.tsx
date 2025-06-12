@@ -44,11 +44,14 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
   // Charger le panier spécifique à l'utilisateur ou session
   const getInitialCart = () => {
     if (typeof window !== "undefined" && userId) {
-      // Utiliser sessionStorage si l'utilisateur n'est pas connecté
-      const storage =
-        localStorage.getItem(`cart_${userId}`) ||
-        sessionStorage.getItem(`cart_${userId}`);
-      return storage ? JSON.parse(storage) : [];
+      // Vérifier d'abord le localStorage si l'utilisateur est connecté
+      if (localStorage.getItem("userId")) {
+        const localCart = localStorage.getItem(`cart_${userId}`);
+        if (localCart) return JSON.parse(localCart);
+      }
+      // Sinon vérifier le sessionStorage
+      const sessionCart = sessionStorage.getItem(`cart_${userId}`);
+      return sessionCart ? JSON.parse(sessionCart) : [];
     }
     return [];
   };
@@ -57,13 +60,17 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
 
   const clearCart = () => {
     setCart([]);
+    if (typeof window !== "undefined" && userId) {
+      localStorage.removeItem(`cart_${userId}`);
+      sessionStorage.removeItem(`cart_${userId}`);
+    }
   };
 
   const updateCartQuantity = (itemId: string, newQuantity: number) => {
     setCart((prevCart) =>
       prevCart.map((item) =>
         item.priceId === itemId
-          ? { ...item, tempQuantity: Math.max(1, newQuantity) } // Empêche la quantité d'être inférieure à 1
+          ? { ...item, quantity: Math.max(1, newQuantity) }
           : item,
       ),
     );
@@ -72,12 +79,16 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
   // Sauvegarder le panier dans le bon storage selon l'utilisateur
   useEffect(() => {
     if (typeof window !== "undefined" && userId) {
-      if (cart.length > 0) {
-        // Sauvegarder dans sessionStorage si non connecté, sinon localStorage
-        const storageType = localStorage.getItem("userId")
-          ? localStorage
-          : sessionStorage;
-        storageType.setItem(`cart_${userId}`, JSON.stringify(cart));
+      const storageType = localStorage.getItem("userId")
+        ? localStorage
+        : sessionStorage;
+      
+      // Toujours sauvegarder l'état actuel du panier
+      storageType.setItem(`cart_${userId}`, JSON.stringify(cart));
+      
+      // Si on utilise localStorage, supprimer du sessionStorage
+      if (storageType === localStorage) {
+        sessionStorage.removeItem(`cart_${userId}`);
       }
     }
   }, [cart, userId]);

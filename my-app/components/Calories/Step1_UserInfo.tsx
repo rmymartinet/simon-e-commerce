@@ -1,7 +1,38 @@
 import { Step1_UserInfoProps } from "@/types/types";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
-import React from "react";
+import React, { useCallback } from "react";
+
+// Composant pour les champs de saisie numériques
+const NumberInput = React.memo(({ 
+  id, 
+  label, 
+  value, 
+  onChange, 
+  error, 
+  unit = "" 
+}: { 
+  id: string; 
+  label: string; 
+  value: number; 
+  onChange: (value: number) => void; 
+  error?: string;
+  unit?: string;
+}) => (
+  <div className="flex flex-col">
+    <label htmlFor={id} className="mb-2 text-lg font-semibold">
+      {label}{unit && ` (${unit})`}
+    </label>
+    <input
+      type="number"
+      id={id}
+      value={value === 0 ? "" : value}
+      onChange={(e) => onChange(Number(e.target.value))}
+      className={`rounded-lg bg-slate-100 p-2 text-black ${error ? "border border-red-400" : ""}`}
+    />
+    {error && <span className="text-red-400">{error}</span>}
+  </div>
+));
 
 const Step1_UserInfo = ({
   formState,
@@ -23,7 +54,7 @@ const Step1_UserInfo = ({
 
   const formRef = React.useRef<HTMLFormElement>(null);
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = useCallback((e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     const newErrors: { [key: string]: string } = {};
@@ -47,11 +78,8 @@ const Step1_UserInfo = ({
     }
 
     setErrors({});
-
-    if (Object.keys(newErrors).length === 0) {
-      setFormIsValid(true);
-    }
-  };
+    setFormIsValid(true);
+  }, [formState, setErrors, setFormIsValid]);
 
   useGSAP(() => {
     gsap.from(formRef.current, {
@@ -67,26 +95,23 @@ const Step1_UserInfo = ({
     <form
       ref={formRef}
       className="relative flex w-screen flex-col gap-4 rounded-xl border border-[--border-color] bg-[--card-bg] p-8 lg:w-full"
-      onSubmit={(e) => {
-        e.preventDefault();
-        handleSubmit(e);
-      }}
+      onSubmit={handleSubmit}
     >
+      <div className="mb-10 flex flex-col items-center gap-4 text-center">
+        <h2 className="text-2xl">
+          <span className="font-bold text-violet-400">Étape 1</span> :
+          informations générales
+        </h2>
+        <p className="lg:max-w-[40vw]">
+          Commence par renseigner tes données de base : âge, sexe, taille,
+          poids, niveau d&apos;activité et fréquence d&apos;entraînement. Ces infos nous
+          permettent de calculer précisément ton métabolisme de base (BMR) et
+          tes besoins énergétiques
+        </p>
+      </div>
+
       {/* Genre */}
       <div className="flex flex-col">
-        <div className="mb-10 flex flex-col items-center gap-4 text-center">
-          <h2 className="text-2xl">
-            <span className="font-bold text-violet-400">Étape 1</span> :
-            informations générales
-          </h2>
-          <p className="lg:max-w-[40vw]">
-            Commence par renseigner tes données de base : âge, sexe, taille,
-            poids, niveau d’activité et fréquence d’entraînement. Ces infos nous
-            permettent de calculer précisément ton métabolisme de base (BMR) et
-            tes besoins énergétiques
-          </p>
-        </div>
-
         <label className="mb-2 text-lg font-semibold">Genre</label>
         <div className="flex gap-4">
           {["male", "female"].map((value) => (
@@ -106,50 +131,31 @@ const Step1_UserInfo = ({
         {errors.genre && <span className="text-red-400">{errors.genre}</span>}
       </div>
 
-      {/* Âge */}
-      <div className="flex flex-col">
-        <label htmlFor="age" className="mb-2 text-lg font-semibold">
-          Âge
-        </label>
-        <input
-          type="number"
-          id="age"
-          value={formState.age === 0 ? "" : formState.age} // Affiche une chaîne vide si l'âge est 0
-          onChange={(e) => updateField("age", Number(e.target.value))}
-          className={`rounded-lg bg-slate-100 p-2 text-black ${errors.age ? "border border-red-400" : ""}`}
-        />
-        {errors.age && <span className="text-red-400">{errors.age}</span>}
-      </div>
+      <NumberInput
+        id="age"
+        label="Âge"
+        value={formState.age}
+        onChange={(value) => updateField("age", value)}
+        error={errors.age}
+      />
 
-      {/* Taille */}
-      <div className="flex flex-col">
-        <label htmlFor="height" className="mb-2 text-lg font-semibold">
-          Taille (cm)
-        </label>
-        <input
-          type="number"
-          id="height"
-          value={formState.height === 0 ? "" : formState.height} // Affiche une chaîne vide si la taille est 0
-          onChange={(e) => updateField("height", Number(e.target.value))}
-          className={`rounded-lg bg-slate-100 p-2 text-black ${errors.height ? "border border-red-400" : ""}`}
-        />
-        {errors.height && <span className="text-red-400">{errors.height}</span>}
-      </div>
+      <NumberInput
+        id="height"
+        label="Taille"
+        value={formState.height}
+        onChange={(value) => updateField("height", value)}
+        error={errors.height}
+        unit="cm"
+      />
 
-      {/* Poids */}
-      <div className="flex flex-col">
-        <label htmlFor="weight" className="mb-2 text-lg font-semibold">
-          Poids (kg)
-        </label>
-        <input
-          type="number"
-          id="weight"
-          value={formState.weight === 0 ? "" : formState.weight} // Affiche une chaîne vide si le poids est 0
-          onChange={(e) => updateField("weight", Number(e.target.value))}
-          className={`rounded-lg bg-slate-100 p-2 text-black ${errors.weight ? "border border-red-400" : ""}`}
-        />
-        {errors.weight && <span className="text-red-400">{errors.weight}</span>}
-      </div>
+      <NumberInput
+        id="weight"
+        label="Poids"
+        value={formState.weight}
+        onChange={(value) => updateField("weight", value)}
+        error={errors.weight}
+        unit="kg"
+      />
 
       {/* Masse grasse */}
       <div className="flex flex-col">
@@ -172,8 +178,7 @@ const Step1_UserInfo = ({
           <span className="text-red-400">{errors.bodyFatMode}</span>
         )}
       </div>
-
-      {/* Activité quotidienne */}
+      
       {/* Activité quotidienne */}
       <div className="flex flex-col">
         <label className="mb-2 text-lg font-semibold">
@@ -205,52 +210,26 @@ const Step1_UserInfo = ({
         )}
       </div>
 
-      {/* Jours d'entraînement */}
-      <div className="flex flex-col">
-        <label htmlFor="trainingDays" className="mb-2 text-lg font-semibold">
-          Jours d&apos;entraînement/semaine
-        </label>
-        <input
-          type="number"
-          id="trainingDays"
-          value={formState.trainingDays === 0 ? "" : formState.trainingDays} // Affiche une chaîne vide si le nombre de jours est 0
-          min={0}
-          max={7}
-          onChange={(e) => {
-            const value = Number(e.target.value);
-            if (value >= 0 && value <= 7) {
-              updateField("trainingDays", value); // Met à jour uniquement si la valeur est valide
-            }
-          }}
-          className={`rounded-lg bg-slate-100 p-2 text-black ${
-            errors.trainingDays ? "border border-red-400" : ""
-          }`}
-        />
-        {errors.trainingDays && (
-          <span className="text-red-400">{errors.trainingDays}</span>
-        )}
-      </div>
-
-      {/* Durée des séances */}
-      <div className="flex flex-col">
-        <label htmlFor="sessionDuration" className="mb-2 text-lg font-semibold">
-          Durée moyenne (minutes)
-        </label>
-        <input
-          type="number"
-          id="sessionDuration"
-          value={
-            formState.sessionDuration === 0 ? "" : formState.sessionDuration
-          } // Affiche une chaîne vide si la durée est 0
-          onChange={(e) =>
-            updateField("sessionDuration", Number(e.target.value))
+      <NumberInput
+        id="trainingDays"
+        label="Jours d'entraînement/semaine"
+        value={formState.trainingDays}
+        onChange={(value) => {
+          if (value >= 0 && value <= 7) {
+            updateField("trainingDays", value);
           }
-          className={`rounded-lg bg-slate-100 p-2 text-black ${errors.sessionDuration ? "border border-red-400" : ""}`}
-        />
-        {errors.sessionDuration && (
-          <span className="text-red-400">{errors.sessionDuration}</span>
-        )}
-      </div>
+        }}
+        error={errors.trainingDays}
+      />
+
+      <NumberInput
+        id="sessionDuration"
+        label="Durée moyenne"
+        value={formState.sessionDuration}
+        onChange={(value) => updateField("sessionDuration", value)}
+        error={errors.sessionDuration}
+        unit="minutes"
+      />
 
       {/* Intensité */}
       <div className="flex flex-col">
@@ -280,14 +259,6 @@ const Step1_UserInfo = ({
           <span className="text-red-400">{errors.intensity}</span>
         )}
       </div>
-
-      {/* Bouton */}
-      <button
-        type="submit"
-        className="padding mt-10 w-max self-center rounded bg-button-gradient px-6 py-2 font-bold text-white"
-      >
-        Continuer
-      </button>
     </form>
   );
 };

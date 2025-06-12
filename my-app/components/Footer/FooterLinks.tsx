@@ -3,16 +3,28 @@ import FooterLinkSection from "./FooterLinkSection";
 const FooterLinks = () => {
   const pageLinks = [
     {
-      title: "Tarifs",
-      link: "/pricing",
+      title: "Accueil",
+      link: "/",
     },
     {
-      title: "Infos",
-      link: "/infos",
+      title: "Programmes",
+      link: "/programmes",
+    },
+    {
+      title: "Coachings",
+      link: "/coachings",
+    },
+    {
+      title: "Votre coach",
+      link: "/votre-coach",
     },
     {
       title: "Blog",
       link: "/blog",
+    },
+    {
+      title: "Calculateur de calories",
+      link: "/calculator",
     },
   ];
 

@@ -8,25 +8,23 @@ import gsap from "gsap";
 import { usePathname } from "next/navigation";
 import useWindowWidth from "@/hooks/useWindowWidth";
 import { useCart } from "@/app/context/CartContext";
+import { FaEdit } from "react-icons/fa";
+import { useAuth } from "@/app/context/AuthContext";
 
 gsap.registerPlugin(useGSAP);
 
-interface NavComponentProps {
-  session: { user: { name: string; email: string } } | null;
-}
-
-const NavComponent = ({ session }: NavComponentProps) => {
+const NavComponent = () => {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const navRef = useRef<HTMLDivElement | null>(null);
   const navItemsRef = useRef<(HTMLDivElement | HTMLLIElement | null)[]>([]);
   const pathname = usePathname();
   const { width } = useWindowWidth();
   const cart = useCart();
+  const { session } = useAuth();
 
   const numberOfProducts = cart.cart.length;
 
   const isDisplayNavBar =
-    !/^\/studio/.test(pathname) &&
     pathname !== "/success" &&
     pathname !== "/cancel";
 
@@ -34,7 +32,7 @@ const NavComponent = ({ session }: NavComponentProps) => {
     { title: "Home", link: "/" },
     { title: "Programmes", link: "/programs" },
     { title: "Coachings", link: "/coachings" },
-    { title: "Votre coach", link: "/coach" },
+    { title: "Votre coach", link: "/votre-coach" },
     { title: "Blog", link: "/blog" },
     { title: "Calculateurs", link: "/calculator" },
   ];
@@ -72,7 +70,7 @@ const NavComponent = ({ session }: NavComponentProps) => {
         <nav onMouseLeave={handleMouseLeaveNav}>
           <div
             ref={navRef}
-            className="fixed left-4 top-5 z-[9999] flex items-center overflow-hidden text-xl text-white mix-blend-difference"
+            className="fixed left-5 top-5 z-[9999] flex items-center overflow-hidden text-xl text-white mix-blend-difference"
           >
             <ul className="flex rounded-full">
               {navLinks.map((link, index) => (
@@ -90,12 +88,24 @@ const NavComponent = ({ session }: NavComponentProps) => {
             </ul>
           </div>
 
-          <div className="padding fixed right-5 top-5 z-[9999] flex items-center gap-6 text-xl text-white mix-blend-difference">
+          <div className="fixed right-5 top-5 z-[9999] flex items-center gap-6 text-xl text-white mix-blend-difference">
+            {session && (
+              <div
+                className="flex cursor-pointer items-center gap-2"
+                onMouseEnter={() => handleMouseEnter(navLinks.length)}
+                ref={(el) => {
+                  navItemsRef.current[navLinks.length] = el;
+                }}
+              >
+                <FaEdit />
+                <Link href="/studio">Gérer le blog</Link>
+              </div>
+            )}
             <div
               className="flex cursor-pointer items-center gap-2"
-              onMouseEnter={() => handleMouseEnter(navLinks.length)} // index juste après les liens de gauche
+              onMouseEnter={() => handleMouseEnter(navLinks.length + 1)}
               ref={(el) => {
-                navItemsRef.current[navLinks.length] = el;
+                navItemsRef.current[navLinks.length + 1] = el;
               }}
             >
               <LiaArrowAltCircleRight />
@@ -106,9 +116,9 @@ const NavComponent = ({ session }: NavComponentProps) => {
 
             <div
               className="cursor-pointer"
-              onMouseEnter={() => handleMouseEnter(navLinks.length + 1)}
+              onMouseEnter={() => handleMouseEnter(navLinks.length + 2)}
               ref={(el) => {
-                navItemsRef.current[navLinks.length + 1] = el;
+                navItemsRef.current[navLinks.length + 2] = el;
               }}
             >
               <Link href="/checkout">

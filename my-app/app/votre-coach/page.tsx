@@ -7,15 +7,20 @@ import { textSplitLinesScrollTrigger } from "@/utils/common/textAnimation";
 import { useRef } from "react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import TitleComponent from "@/components/TitleComponent";
+import Overlay from "@/components/Overlay";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 gsap.registerPlugin(useGSAP, ScrollTrigger);
 
 export default function Infos() {
+  const firstParaTitle = useRef<HTMLHeadingElement | null>(null);
   const firstParaRef = useRef<HTMLParagraphElement | null>(null);
   const secondParaRef = useRef<HTMLParagraphElement | null>(null);
+  const secondParaTitle = useRef<HTMLHeadingElement | null>(null);
   const thirdParaRef = useRef<HTMLParagraphElement | null>(null);
+  const fourthParaRef = useRef<HTMLParagraphElement | null>(null);
   const headerRef = useRef<HTMLDivElement | null>(null);
-  const imgRef = useRef<HTMLDivElement | null>(null);
 
   useGSAP(() => {
     gsap.set(headerRef.current, {
@@ -31,16 +36,20 @@ export default function Infos() {
     });
 
     if (firstParaRef.current && secondParaRef.current && thirdParaRef.current) {
+      textSplitLinesScrollTrigger(firstParaTitle as React.RefObject<HTMLElement>)
+      textSplitLinesScrollTrigger(secondParaTitle as React.RefObject<HTMLElement>)
       textSplitLinesScrollTrigger(firstParaRef as React.RefObject<HTMLElement>);
       textSplitLinesScrollTrigger(
         secondParaRef as React.RefObject<HTMLElement>,
       );
       textSplitLinesScrollTrigger(thirdParaRef as React.RefObject<HTMLElement>);
+      textSplitLinesScrollTrigger(fourthParaRef as React.RefObject<HTMLElement>);
+
     }
   }, []);
 
   return (
-    <div className="relative mt-[20vh] flex min-h-screen flex-col items-center justify-center gap-40 px-4">
+    <main className="relative mt-[20vh] flex min-h-screen flex-col items-center justify-center gap-40 px-4">
       <TitleComponent
         title="Infos"
         titleIndication="infos"
@@ -104,12 +113,31 @@ export default function Infos() {
         </div>
       </div>
       <div className="mt-20 flex w-full flex-col items-center gap-8">
-        <div className="flex flex-col items-center gap-10 lg:items-start">
-          <div className="flex flex-col gap-8">
-            <h1 className="text-4xl lg:text-7xl">Du déclic à la passion</h1>
-            <p
-              ref={firstParaRef}
-              className="text-justify text-[--subtext] lg:text-2xl"
+      <div className="relative w-full flex md:items-center justify-center h-[70vh] md:h-screen md:px-20">  
+        <Image src="/images/about/calum.jpg" alt="calum-von-moger" width={1000}  height={1000} quality={100} className="absolute inset-0 -z-10" />
+       <Overlay/>
+        <div className="flex flex-col md:grid md:grid-cols-2 gap-10">
+          <div className="flex flex-col gap-4">
+          <h1 ref={firstParaTitle} className="text-4xl lg:text-7xl font-bold uppercase">Du déclic <br /> à la passion</h1>
+
+<div className="flex gap-4">
+  <Button asChild className="bg-violet-400 text-white">
+    <Link href="/coachings">
+      Coachings
+    </Link>
+  </Button>
+  <Button asChild className="bg-violet-400 text-white">
+    <Link href="/programs">
+      Programmes
+    </Link>
+  </Button>
+</div>
+          </div>
+            <div className="flex flex-col gap-2"
+            >
+              <p
+               ref={firstParaRef}
+              className="text-justify text-[--subtext] lg:text-xl "
             >
               Depuis mon plus jeune âge, je me voyais comme un{" "}
               <span className="font-bold text-white">garçon frêle</span>,
@@ -126,7 +154,11 @@ export default function Infos() {
                 &quot;De quoi suis-je réellement capable ?&quot;
               </span>{" "}
               À 17 ans, j&apos;ai décidé de ne plus rester dans
-              l&apos;incertitude. En découvrant la{" "}
+              l&apos;incertitude. 
+            </p>
+            <p  ref={secondParaRef}             
+            className="text-justify text-[--subtext] lg:text-xl"
+            > En découvrant la{" "}
               <span className="font-bold text-white">musculation</span>,
               j&apos;ai trouvé bien plus qu&apos;un moyen de me transformer{" "}
               <span className="font-bold text-white">physiquement</span> :
@@ -144,10 +176,12 @@ export default function Infos() {
               <span className="font-bold text-white">esprit</span> sont
               indissociables dans cette{" "}
               <span className="font-bold text-white">transformation</span>.
-            </p>
+              </p>
+              <div className="bg-violet-400 w-full h-[1px] mt-4"></div>
+            </div>
           </div>
-        </div>
-        <div
+          </div>
+        {/* <div
           ref={imgRef}
           className="flex w-full lg:mb-[20vh] lg:mt-[20vh] lg:px-72"
         >
@@ -160,13 +194,13 @@ export default function Infos() {
             layout="responsive"
             quality={100}
           />
-        </div>
-        <div className="flex flex-col items-center gap-10 lg:items-start">
+        </div> */}
+        <div className="flex flex-col items-center gap-10 lg:items-start md:px-20">
           <div className="flex flex-col gap-8">
-            <h1 className="text-4xl lg:text-7xl">Une passion en vocation</h1>
+            <h1 ref={secondParaTitle} className="text-4xl lg:text-7xl text-center uppercase font-bold">Une passion en vocation</h1>
             <p
-              ref={secondParaRef}
-              className="text-justify text-[--subtext] lg:text-2xl"
+              ref={thirdParaRef}
+              className="text-justify text-[--subtext] lg:text-xl"
             >
               La <span className="font-bold text-white">musculation</span>{" "}
               n&apos;est plus seulement une quête{" "}
@@ -209,7 +243,7 @@ export default function Infos() {
               .
             </p>
             <p
-              ref={thirdParaRef}
+              ref={fourthParaRef}
               className="text-justify text-[--subtext] lg:text-2xl"
             >
               En tant que{" "}
@@ -235,6 +269,6 @@ export default function Infos() {
           </div>{" "}
         </div>
       </div>
-    </div>
+    </main>
   );
 }

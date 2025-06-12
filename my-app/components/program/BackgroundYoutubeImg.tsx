@@ -1,14 +1,17 @@
 import Image from "next/image";
 import Iphone from "../Iphone";
 import { images } from "@/app/data/youtubeData";
-import { BackgroundYoutubeImgProps } from "@/types/types";
+import { RefObject } from "react";
 
 const BackgroundYoutubeImg = ({
   imagesRefs,
   iphoneRef,
-}: BackgroundYoutubeImgProps) => {
+}: {
+  imagesRefs: { current: (HTMLDivElement | null)[] };
+  iphoneRef: RefObject<HTMLDivElement | null>;
+}) => {
   return (
-    <div className="relative flex h-[80vh] w-screen max-w-[90vw] flex-col items-center overflow-hidden rounded-3xl px-4 py-20">
+    <div className="relative flex h-[80vh] w-screen max-w-[90vw] flex-col items-center overflow-hidden rounded-3xl px-4">
       <div className="absolute flex h-full w-full justify-center gap-4 overflow-hidden">
         {images.map((img, index) => (
           <div

@@ -7,7 +7,6 @@ import TitleComponent from "../TitleComponent";
 import { Button } from "../ui/button";
 import BackgroundRadialColor from "../BackgroundRadialColor";
 
-// ✅ Enregistrement du plugin GSAP
 gsap.registerPlugin(useGSAP);
 
 const ProgramOverview = () => {

@@ -1,14 +1,12 @@
+"use client";
+
 import React from "react";
 import MobileNavComponent from "./MobileNavComponent";
-import { auth } from "@/lib/auth";
-import { headers } from "next/headers";
+import { useAuth } from "@/app/context/AuthContext";
 
-const MobileNav = async () => {
-  const session = await auth.api.getSession({
-    headers: await headers(),
-  });
+const MobileNav = () => {
+  const { session } = useAuth();
 
-  console.log("MobileNav session", session);
   return (
     <>
       <MobileNavComponent session={session} />

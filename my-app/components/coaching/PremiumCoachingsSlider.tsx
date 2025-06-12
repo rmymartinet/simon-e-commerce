@@ -50,19 +50,19 @@ export default function PremiumCoachingsSlider() {
   };
 
   return (
-    <section className="flex flex-col gap-20 bg-black py-12 pl-20 text-white">
+    <section className="flex flex-col gap-10 md:gap-20 bg-black py-8 md:py-12 px-4 md:pl-20 text-white">
       {/* ── Bandeau supérieur (Titre + Description + Boutons) ── */}
-      <div className="mx-auto grid grid-cols-2">
+      <div className="mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
         {/* Titre à gauche */}
-        <div className="mb-8">
-          <h2 className="text-6xl font-bold uppercase md:text-6xl">
+        <div className="mb-4 md:mb-8">
+          <h2 className="text-4xl md:text-6xl font-bold uppercase">
             Suivi <br /> <span className="font-bold">Premium</span>
           </h2>
         </div>
 
         {/* Texte descriptif + boutons à droite */}
-        <div className="pr-20">
-          <p className="text-base leading-relaxed md:text-lg">
+        <div className="md:pr-20">
+          <p className="text-sm md:text-base leading-relaxed md:text-lg">
             Un accompagnement complet et personnalisé pour atteindre tes
             objectifs. Du plan d&apos;entraînement sur-mesure à
             l&apos;évaluation régulière, je t&apos;accompagne pas à pas avec des
@@ -70,11 +70,11 @@ export default function PremiumCoachingsSlider() {
             des résultats durables.
           </p>
 
-          <div className="mt-6 flex space-x-4">
-            <button className="rounded-md border border-[#ceff65] px-4 py-1 text-[#ceff65] transition hover:bg-[#ceff65] hover:text-black">
+          <div className="mt-4 md:mt-6 flex flex-wrap gap-2 md:space-x-4">
+            <button className="rounded-md border border-[#ceff65] px-3 md:px-4 py-1 text-sm md:text-base text-[#ceff65] transition hover:bg-[#ceff65] hover:text-black">
               Disponibilité 7j/7
             </button>
-            <button className="rounded-md border border-[#ceff65] px-4 py-1 text-[#ceff65] transition hover:bg-[#ceff65] hover:text-black">
+            <button className="rounded-md border border-[#ceff65] px-3 md:px-4 py-1 text-sm md:text-base text-[#ceff65] transition hover:bg-[#ceff65] hover:text-black">
               Outils pro inclus
             </button>
           </div>
@@ -82,17 +82,17 @@ export default function PremiumCoachingsSlider() {
       </div>
 
       {/* ── Slider horizontal ── */}
-      <div className="relative mt-12 pb-20">
+      <div className="relative mt-8 md:mt-12 pb-16 md:pb-20">
         {/* Conteneur scrollable */}
         <div
           ref={sliderRef}
-          className="-ms-overflow-style:none scrollbar-width:none flex space-x-8 overflow-x-auto scroll-smooth [&::-webkit-scrollbar]:hidden"
+          className="-ms-overflow-style:none scrollbar-width:none flex space-x-4 md:space-x-8 overflow-x-auto scroll-smooth [&::-webkit-scrollbar]:hidden"
         >
           {slidesData.map((slide, idx) => (
             <div
               key={idx}
               ref={idx === 0 ? firstSlideRef : null}
-              className="relative aspect-[4/5] h-[30rem] w-64 flex-shrink-0 snap-center overflow-hidden rounded-xl bg-gray-800 sm:w-72 md:w-[22rem]"
+              className="relative aspect-[4/5] h-[20rem] md:h-[30rem] w-56 md:w-64 flex-shrink-0 snap-center overflow-hidden rounded-xl bg-gray-800 sm:w-72 md:w-[22rem]"
             >
               {/* Image de fond */}
               <Image
@@ -105,22 +105,22 @@ export default function PremiumCoachingsSlider() {
               />
               {/* Overlay texte en bas à gauche */}
               <div className="absolute bottom-4 left-4">
-                <span className="text-lg font-semibold text-white drop-shadow-md sm:text-xl">
+                <span className="text-base md:text-lg font-semibold text-white drop-shadow-md sm:text-xl">
                   {slide.title}
                 </span>
               </div>
             </div>
           ))}
         </div>
-        <div className="absolute -bottom-10 right-20 flex gap-4">
+        <div className="absolute -bottom-10 right-4 md:right-20 flex gap-2 md:gap-4">
           {/* Flèche « Précédent » */}
           <button
             onClick={handlePrev}
-            className="rounded-full border border-[#ceff65] p-2 text-[#ceff65] transition hover:bg-[#ceff65] hover:text-black"
+            className="rounded-full border border-[#ceff65] p-1.5 md:p-2 text-[#ceff65] transition hover:bg-[#ceff65] hover:text-black"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              className="h-6 w-6"
+              className="h-5 w-5 md:h-6 md:w-6"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -136,11 +136,11 @@ export default function PremiumCoachingsSlider() {
           {/* Flèche « Suivant » */}
           <button
             onClick={handleNext}
-            className="rounded-full border border-[#ceff65] p-2 text-[#ceff65] transition hover:bg-[#ceff65] hover:text-black"
+            className="rounded-full border border-[#ceff65] p-1.5 md:p-2 text-[#ceff65] transition hover:bg-[#ceff65] hover:text-black"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              className="h-6 w-6"
+              className="h-5 w-5 md:h-6 md:w-6"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"

@@ -3,80 +3,82 @@ import Stripe from "stripe";
 
 const stripe = new Stripe(process.env.NEXT_PUBLIC_STRIPE_SECRET_KEY!);
 
+const VALID_SUBSCRIPTION_DURATIONS = [3, 6, 9];
+
+function validateInput(data: { priceId: string; subscription: boolean; month: number; titlePlan: string | string[] }) {
+  if (!data.priceId) {
+    throw new Error("Price ID is required");
+  }
+  if (data.subscription && !VALID_SUBSCRIPTION_DURATIONS.includes(data.month)) {
+    throw new Error("Invalid subscription duration");
+  }
+}
+
+function createLineItems(priceId: string | string[]) {
+  return Array.isArray(priceId)
+    ? priceId.map((id) => ({
+        price: id,
+        quantity: 1,
+      }))
+    : [{ price: priceId, quantity: 1 }];
+}
+
+function formatTitlePlan(titlePlan: string | string[]) {
+  return Array.isArray(titlePlan)
+    ? titlePlan.filter(Boolean).join(", ") || "N/A"
+    : titlePlan || "N/A";
+}
+
 export async function POST(req: NextRequest) {
-  const { userId, priceId, subscription, email, guest, month, titlePlan } =
-    await req.json();
+  try {
+    const data = await req.json();
+    validateInput(data);
 
-  if (subscription) {
-    if (![3, 6, 9].includes(month)) {
-      return NextResponse.json({ error: "Invalid subscription duration" });
-    }
+    const { userId, priceId, subscription, email, guest, month, titlePlan } = data;
+    const lineItems = createLineItems(priceId);
+    const titlePlanString = formatTitlePlan(titlePlan);
 
-    try {
-      const lineItems = Array.isArray(priceId)
-        ? priceId.map((id) => ({
-            price: id,
-            quantity: 1,
-          }))
-        : [{ price: priceId, quantity: 1 }];
+    const baseSessionConfig = {
+      line_items: lineItems,
+      metadata: {
+        userId,
+        month,
+        guest,
+        titlePlan: titlePlanString,
+      },
+      success_url: `${process.env.FRONTEND_URL}/success?session_id={CHECKOUT_SESSION_ID}`,
+      cancel_url: `${process.env.FRONTEND_URL}/cancel`,
+      customer_email: email || undefined,
+    };
 
-      const titlePlanString = Array.isArray(titlePlan)
-        ? titlePlan.filter((item) => item).join(", ") || "N/A"
-        : titlePlan || "N/A";
+    const session = await stripe.checkout.sessions.create(
+      subscription
+        ? {
+            ...baseSessionConfig,
+            payment_method_types: ["sepa_debit"],
+            mode: "subscription",
+            allow_promotion_codes: true,
+            phone_number_collection: {
+              enabled: true,
+            },
+            metadata: {
+              ...baseSessionConfig.metadata,
+              subscription: "true",
+            },
+          }
+        : {
+            ...baseSessionConfig,
+            payment_method_types: ["card"],
+            mode: "payment",
+          }
+    );
 
-      const session = await stripe.checkout.sessions.create({
-        payment_method_types: ["sepa_debit"],
-        line_items: lineItems,
-        metadata: {
-          userId,
-          subscription,
-          month,
-          guest,
-          titlePlan: titlePlanString,
-        },
-        mode: "subscription",
-        success_url: `${process.env.FRONTEND_URL}/success?session_id={CHECKOUT_SESSION_ID}`,
-        cancel_url: `${process.env.FRONTEND_URL}/cancel`,
-        allow_promotion_codes: true,
-        customer_email: email,
-        phone_number_collection: {
-          enabled: true,
-        },
-      });
-
-      return NextResponse.json({ sessionId: session.id });
-    } catch (error) {
-      console.error("Error creating subscription checkout session:", error);
-      return NextResponse.json({ error: "Failed to create checkout session" });
-    }
-  } else {
-    try {
-      // Si priceId est un tableau, on le mappe pour créer les line_items
-      const lineItems = Array.isArray(priceId)
-        ? priceId.map((id) => ({
-            price: id, // Assurez-vous que `id` est une chaîne
-            quantity: 1,
-          }))
-        : [{ price: priceId, quantity: 1 }]; // Cas d'un seul prix
-
-      const titlePlanString = Array.isArray(titlePlan)
-        ? titlePlan.filter((item) => item).join(", ") || "N/A"
-        : titlePlan || "N/A";
-
-      const session = await stripe.checkout.sessions.create({
-        payment_method_types: ["card"],
-        line_items: lineItems,
-        metadata: { userId, month, guest, titlePlan: titlePlanString },
-        mode: "payment",
-        success_url: `${process.env.FRONTEND_URL}/success?session_id={CHECKOUT_SESSION_ID}`,
-        cancel_url: `${process.env.FRONTEND_URL}/cancel`,
-        customer_email: email || undefined,
-      });
-
-      return NextResponse.json({ sessionId: session.id });
-    } catch (error) {
-      console.error("Error creating one-time payment checkout session:", error);
-      return NextResponse.json({ error: "Failed to create checkout session" });
-    }
+    return NextResponse.json({ sessionId: session.id });
+  } catch (error) {
+    console.error("Error creating checkout session:", error);
+    return NextResponse.json(
+      { error: error instanceof Error ? error.message : "Failed to create checkout session" },
+      { status: 400 }
+    );
   }
 }
