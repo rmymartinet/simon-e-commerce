@@ -4,7 +4,7 @@ import UserDashboard from "@/components/User/UserDashboard";
 import Image from "next/image";
 import SignOutButton from "./SignOutButton";
 import { Session } from "better-auth/types";
-import { UserDataProps } from "@/types/types";
+import { PurchaseItemProps, UserDataProps } from "@/types/types";
 
 interface CustomSession extends Session {
   user: {
@@ -25,7 +25,7 @@ interface DashboardClientProps {
     nextPaymentDate: string;
     isSubscribed: boolean;
   };
-  allPurchases: any[];
+  allPurchases: PurchaseItemProps[];
 }
 
 export default function DashboardClient({ userData, session, subscriptionInfos, allPurchases }: DashboardClientProps) {
@@ -91,3 +91,4 @@ export default function DashboardClient({ userData, session, subscriptionInfos, 
     </div>
   );
 } 
+
