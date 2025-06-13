@@ -10,15 +10,15 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 
 function CheckoutComponent({ session }: { session: BetterAuthSession | null }) {
+  const [userData, setUserData] = useState<UserDataProps | null>(null);
   const { cart } = useCart();
   const [totalAmount, setTotalAmount] = useState<number>(0);
   const removeItem = useRemoveItem();
-  const { handlePayment } = usePayment();
+  const { handlePayment } = usePayment({ userData: userData || undefined });
 
 
   const isGuest = !session?.user?.email;
 
-const [userData, setUserData] = useState<UserDataProps | null>(null);
 
   useEffect(()=>{
     const fetchUser = async () => {
