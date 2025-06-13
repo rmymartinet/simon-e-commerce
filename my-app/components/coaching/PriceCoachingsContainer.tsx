@@ -11,8 +11,21 @@ import { useGSAP } from "@gsap/react";
 import { animateBlockReveal } from "@/utils/Animation";
 import { RefObject } from "react";
 import { BetterAuthSession } from "@/types/types";
+import Image from "next/image";
+import Overlay from "../Overlay";
 
-
+const getImageForMonth = (month: number) => {
+  switch (month) {
+    case 3:
+      return "/images/coachings/beginner.jpeg";
+    case 6:
+      return "/images/coachings/intermediate.jpeg";
+    case 9:
+      return "/images/coachings/advanced.jpeg";
+    default:
+      return "/images/coachings/beginner.jpeg";
+  }
+};
 
 const PriceCoachingsContainer = () => {
     const { data: session } = authClient.useSession();
@@ -34,10 +47,21 @@ const PriceCoachingsContainer = () => {
 
     if (!selectedCard) return null;
 
+  
+
     return (
         <section ref={priceCoachingsRef} className="relative mb-10 grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-40 overflow-hidden rounded-3xl p-4 md:p-8">
         <BackgroundRadialColor />
-        <div className="flex w-full md:w-max flex-col items-center gap-6 md:gap-10 justify-self-center rounded-2xl bg-white p-6 md:p-8 text-black">
+        <Overlay/>
+        <div className="flex w-full md:w-max flex-col items-center gap-6 md:gap-10 justify-self-center rounded-2xl relative p-6 md:p-8 text-black overflow-hidden text-white">
+          <Image
+            src={getImageForMonth(selectedCard.month)}
+            alt="coaching"
+            width={1500}
+            height={1500}
+            quality={100}
+            className="absolute inset-0 -z-10 h-full w-full object-cover opacity-50"
+          />
           <h1 className="text-4xl md:text-5xl font-bold">
             {selectedCard.month} mois
           </h1>
@@ -50,7 +74,9 @@ const PriceCoachingsContainer = () => {
                 key={index}
                 className="flex items-center gap-2 font-semibold sm:gap-3"
               >
-                <IoCheckmarkOutline className="text-base text-violet-500 sm:text-lg" />
+                <div className="flex items-center justify-center w-6 h-6 rounded-full bg-violet-500">
+                  <IoCheckmarkOutline className="text-base text-white sm:text-lg" />
+                </div>
                 <p className="text-sm sm:text-base">{feature}</p>
               </div>
             ))}

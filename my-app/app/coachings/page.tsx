@@ -5,6 +5,7 @@ import PremiumCoachingsSlider from "@/components/coaching/PremiumCoachingsSlider
 import Faq from "@/components/Faq";
 import TitleComponent from "@/components/TitleComponent";
 import PriceCoachingsContainer from "@/components/coaching/PriceCoachingsContainer";
+import CoachingsApps from "@/components/coaching/CoachingsApps";
 
 export default function CoachingsPage() {
 
@@ -19,6 +20,7 @@ export default function CoachingsPage() {
       />
    <PriceCoachingsContainer />
       <PremiumCoachingsSlider />
+      <CoachingsApps/>
       <BeforeAfterPhoto />
       <Faq />
     </main>
