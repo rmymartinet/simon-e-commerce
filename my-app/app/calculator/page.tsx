@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { RefObject, useEffect, useRef } from "react";
 import { useAnimation } from "../context/AnimationContext";
 import gsap from "gsap";
 import Link from "next/link";
@@ -8,11 +8,12 @@ import TitleComponent from "@/components/TitleComponent";
 import { Button } from "@/components/ui/button";
 import FormCalories from "@/components/Calories/FormCalories";
 import AnimatedQuestions from "@/components/AnimatedQuestions";
+import { useGSAP } from "@gsap/react";
+import { animateBlockReveal } from "@/utils/Animation";
 
 export default function Calorie() {
-  const { isAnimating } = useAnimation();
   const containerRef = useRef(null);
-
+  const calculatorContentRef = useRef(null);
   const questions = [
     "Comment perdre du poids ?",
     "Comment perdre du gras ?",
@@ -32,22 +33,12 @@ export default function Calorie() {
     "Comment retrouver la motivation ?",
   ];
 
-  useEffect(() => {
-    if (!isAnimating) {
-      gsap.fromTo(
-        containerRef.current,
-        {
-          y: 100,
-        },
-        {
-          y: 0,
-          opacity: 1,
-          duration: 1,
-          ease: "power2.out",
-        },
-      );
+  useGSAP(() => {
+    if (calculatorContentRef.current) {
+      animateBlockReveal(calculatorContentRef as unknown as RefObject<HTMLDivElement>, 0.5);
     }
-  }, [isAnimating]);
+  }, []);
+
 
   return (
     <div
@@ -61,7 +52,8 @@ export default function Calorie() {
           apports caloriques personnalisés en fonction de tes dépenses
           énergiques et de ton alimentation."
       />
-     <div className="flex gap-4">
+   <div ref={calculatorContentRef} className="flex flex-col gap-4 items-center">
+   <div className="flex gap-4">
   <Button asChild className="bg-violet-400 text-white">
     <Link href="/coachings">
       Coachings
@@ -72,7 +64,7 @@ export default function Calorie() {
       Programmes
     </Link>
   </Button>
-</div>
+     </div>
       <FormCalories />
       <div className="flex w-full flex-col items-center px-4">
         <TitleComponent
@@ -94,6 +86,7 @@ export default function Calorie() {
 </div>
         <AnimatedQuestions questions={questions} />
       </div>
+   </div>
     </div>
   );
 }

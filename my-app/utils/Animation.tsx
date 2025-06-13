@@ -66,3 +66,15 @@ export const animatePageOut = (
     });
   }
 };
+
+export const animateBlockReveal = (ref: React.RefObject<HTMLDivElement>, delay: number) => {
+  gsap.from(ref.current, {
+    filter: "blur(70px)",
+    duration: 1,
+    y: 100,
+    opacity: 0,
+    delay: delay,
+    stagger: 0.1,
+    ease: "power2.out",
+  });
+};

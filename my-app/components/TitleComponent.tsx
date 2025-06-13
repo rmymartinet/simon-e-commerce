@@ -8,6 +8,7 @@ import {
 import { useGSAP } from "@gsap/react";
 import React from "react";
 
+
 const TitleComponent = ({
   titleIndication,
   title,

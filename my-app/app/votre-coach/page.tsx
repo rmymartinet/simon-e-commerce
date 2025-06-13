@@ -4,12 +4,13 @@ import { useGSAP } from "@gsap/react";
 import Image from "next/image";
 import gsap from "gsap";
 import { textSplitLinesScrollTrigger } from "@/utils/common/textAnimation";
-import { useRef } from "react";
+import { RefObject, useRef } from "react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import TitleComponent from "@/components/TitleComponent";
 import Overlay from "@/components/Overlay";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import { animateBlockReveal } from "@/utils/Animation";
 
 gsap.registerPlugin(useGSAP, ScrollTrigger);
 
@@ -23,18 +24,8 @@ export default function Infos() {
   const headerRef = useRef<HTMLDivElement | null>(null);
 
   useGSAP(() => {
-    gsap.set(headerRef.current, {
-      filter: "blur(70px)",
-      y: 100,
-    });
-
-    gsap.to(headerRef.current, {
-      y: 0,
-      duration: 1,
-      ease: "power2.out",
-      filter: "blur(0px)",
-    });
-
+ 
+ animateBlockReveal(headerRef as RefObject<HTMLDivElement>, 0.5);
     if (firstParaRef.current && secondParaRef.current && thirdParaRef.current) {
       textSplitLinesScrollTrigger(firstParaTitle as React.RefObject<HTMLElement>)
       textSplitLinesScrollTrigger(secondParaTitle as React.RefObject<HTMLElement>)
