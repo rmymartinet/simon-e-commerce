@@ -83,7 +83,7 @@ export default function Faq() {
         </div>
         <div className="flex flex-col md:flex-row gap-8">
           {/* Menu catégories - visible uniquement en desktop */}
-          <nav className="hidden md:flex mr-[15vw] md:flex-col gap-2 md:gap-8 md:min-w-[160px] md:sticky md:top-28 self-start z-10 p-10 rounded-2xl">
+          <nav className="hidden md:flex mr-[10vw] md:flex-col gap-2 md:gap-8 md:min-w-[160px] md:sticky md:top-28 self-start z-10 p-10 rounded-2xl">
             {faqCategories.map((cat) => (
               <a
                 key={cat.id}
