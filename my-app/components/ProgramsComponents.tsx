@@ -1,12 +1,11 @@
 "use client";
 
 import { programData } from "@/app/data/cardPriceContainerData";
-import { BetterAuthSession } from "@/types/session";
 import Image from "next/image";
 import { Button } from "./ui/button";
 import useHandleAction from "@/hooks/useHandleAction";
 import { useAddToCart } from "@/hooks/useAddToCart";
-import { CartItemProps } from "@/types/types";
+import { BetterAuthSession, CartItemProps } from "@/types/types";
 import { animateBlockReveal } from "@/utils/Animation";
 import { useGSAP } from "@gsap/react";
 import {  useRef } from "react";

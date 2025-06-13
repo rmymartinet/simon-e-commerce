@@ -2,7 +2,6 @@
 
 import BeforeAfterPhoto from "@/components/BeforeAfterPhoto";
 import PremiumCoachingsSlider from "@/components/coaching/PremiumCoachingsSlider";
-import { authClient } from "@/lib/auth-client";
 import Faq from "@/components/Faq";
 import TitleComponent from "@/components/TitleComponent";
 import PriceCoachingsContainer from "@/components/coaching/PriceCoachingsContainer";

@@ -1,10 +1,10 @@
 import ProgramsComponents from "@/components/ProgramsComponents";
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
-import { BetterAuthSession } from "@/types/session";
 import ProgramsOverview from "@/components/ProgramsOverview";
 import Faq from "@/components/Faq";
 import TitleComponent from "@/components/TitleComponent";
+import { BetterAuthSession } from "@/types/types";
 
 export default async function Programs() {
  
@@ -13,6 +13,14 @@ export default async function Programs() {
   });
 
   const betterSession: BetterAuthSession | null = session ? {
+    session: {
+      id: session.session.id,
+      createdAt: session.session.createdAt,
+      updatedAt: session.session.updatedAt,
+      userId: session.session.userId,
+      expiresAt: session.session.expiresAt,
+      token: session.session.token
+    },
     user: {
       id: session.user.id,
       name: session.user.name,

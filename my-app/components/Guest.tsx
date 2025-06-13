@@ -12,7 +12,7 @@ import Swal from "sweetalert2";
 const { useSession } = authClient;
 
 const Guest = () => {
-  const { handleCheckout } = usePayment();
+  const { handlePayment } = usePayment();
   const { checkoutData } = useCheckout();
   const router = useRouter();
   const { data: session } = useSession();
@@ -58,7 +58,7 @@ const Guest = () => {
       return;
     }
     if (allPriceIds) {
-      handleCheckout(
+      handlePayment(
         allPriceIds,
         allTitles,
         allMonths[0],

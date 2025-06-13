@@ -5,12 +5,12 @@ import { Loader2 } from "lucide-react";
 import { useMemo, useRef, useState } from "react";
 import { coachingData } from "@/app/data/cardPriceContainerData";
 import { authClient } from "@/lib/auth-client";
-import { BetterAuthSession } from "@/lib/auth";
 import useHandleAction from "@/hooks/useHandleAction";
 import { Button } from "../ui/button";
 import { useGSAP } from "@gsap/react";
 import { animateBlockReveal } from "@/utils/Animation";
 import { RefObject } from "react";
+import { BetterAuthSession } from "@/types/types";
 
 
 
@@ -18,25 +18,22 @@ const PriceCoachingsContainer = () => {
     const { data: session } = authClient.useSession();
     const dataSession = session as BetterAuthSession | null;
     const { handleAction, loading } = useHandleAction(dataSession);
-
     const [selectedDuration, setSelectedDuration] = useState(3);
+    const priceCoachingsRef = useRef<HTMLDivElement>(null);
 
     const selectedCard = useMemo(() => 
         coachingData.find((card) => card.month === selectedDuration),
         [selectedDuration]
-      );
+    );
 
-      if (!selectedCard) return null;
-
-      const priceCoachingsRef = useRef<HTMLDivElement>(null);
-
-      useGSAP(() => {
+    useGSAP(() => {
         if (priceCoachingsRef.current) {
-          animateBlockReveal(priceCoachingsRef as RefObject<HTMLDivElement>, 0.5);
+            animateBlockReveal(priceCoachingsRef as RefObject<HTMLDivElement>, 0.5);
         } 
-      }, []);
+    }, []);
 
-    
+    if (!selectedCard) return null;
+
     return (
         <section ref={priceCoachingsRef} className="relative mb-10 grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-40 overflow-hidden rounded-3xl p-4 md:p-8">
         <BackgroundRadialColor />

@@ -1,8 +1,6 @@
 "use client";
 
-import { RefObject, useEffect, useRef } from "react";
-import { useAnimation } from "../context/AnimationContext";
-import gsap from "gsap";
+import { RefObject, useRef } from "react";
 import Link from "next/link";
 import TitleComponent from "@/components/TitleComponent";
 import { Button } from "@/components/ui/button";

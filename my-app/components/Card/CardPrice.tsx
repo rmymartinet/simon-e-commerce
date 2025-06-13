@@ -1,6 +1,6 @@
 "use client";
 
-import { CardPriceProps, CartItemProps } from "@/types/types";
+import { CardPriceProps } from "@/types/types";
 import { IoCheckmarkOutline } from "react-icons/io5";
 import Price from "./Price";
 import AddToCartButton from "../AddToCartButton";
@@ -13,8 +13,6 @@ const CardPrice = ({
   isHighlighted,
 }: CardPriceProps) => {
   const { handleAction, loading } = useHandleAction(session);
-
-
   return (
     <>
       <div
