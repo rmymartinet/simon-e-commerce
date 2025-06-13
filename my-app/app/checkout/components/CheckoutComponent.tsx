@@ -17,7 +17,7 @@ function CheckoutComponent({ session }: { session: BetterAuthSession | null }) {
   const { handlePayment } = usePayment({ userData: userData || undefined });
 
 
-  const isGuest = !session?.user?.email;
+  // const isGuest = !session?.user?.email;
 
 
   useEffect(()=>{
