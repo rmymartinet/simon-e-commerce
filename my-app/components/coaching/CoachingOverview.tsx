@@ -173,7 +173,7 @@ const CoachingOverview = () => {
               "Support prioritaire 24/7",
               "Séances de coaching en visio mensuelles",
             ]}
-            urlLink={`/pricing?filter=coaching&month=3`}
+            urlLink={`/coachings`}
             buttonText="Découvrir"
           />
           <OfferCard
@@ -188,7 +188,7 @@ const CoachingOverview = () => {
               "Séances de coaching en visio mensuelles",
               "Accès à des ressources exclusives",
             ]}
-            urlLink={`/pricing?filter=coaching&month=6`}
+            urlLink={`/coachings`}
             buttonText="Découvrir"
           />
           <OfferCard
@@ -205,7 +205,7 @@ const CoachingOverview = () => {
               "Support prioritaire 24/7",
               "Plan de maintien personnalisé en fin de programme",
             ]}
-            urlLink={`/pricing?filter=coaching&month=9`}
+            urlLink={`/coachings`}
             buttonText="Découvrir"
           />
         </div>
