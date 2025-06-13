@@ -59,6 +59,9 @@ export async function middleware(request: NextRequest) {
     Object.entries(securityHeaders).forEach(([key, value]) => {
       response.headers.set(key, value);
     });
+    response.headers.set("Access-Control-Allow-Origin", "https://simon-e-commerce-mwum5g9lb-rmymartinets-projects.vercel.app");
+    response.headers.set("Access-Control-Allow-Methods", "GET,POST,OPTIONS");
+    response.headers.set("Access-Control-Allow-Headers", "Content-Type, Authorization");
     return response;
   }
 
@@ -105,6 +108,10 @@ export async function middleware(request: NextRequest) {
     Object.entries(securityHeaders).forEach(([key, value]) => {
       nextResponse.headers.set(key, value);
     });
+
+    nextResponse.headers.set("Access-Control-Allow-Origin", "https://simon-e-commerce-mwum5g9lb-rmymartinets-projects.vercel.app");
+    nextResponse.headers.set("Access-Control-Allow-Methods", "GET,POST,OPTIONS");
+    nextResponse.headers.set("Access-Control-Allow-Headers", "Content-Type, Authorization");
 
     return nextResponse;
   } catch (error) {
