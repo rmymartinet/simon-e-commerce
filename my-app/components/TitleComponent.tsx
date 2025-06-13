@@ -36,7 +36,7 @@ const TitleComponent = ({
   return (
     <div
       ref={titleRef}
-      className="flex flex-col items-center justify-center text-center mb-20"
+      className="flex flex-col items-center justify-center text-center mb-0 md:mb-20"
     >
       {titleIndication && (
         <p className="mb-4 text-sm uppercase text-[--subtext] rounded-full border-2 border-violet-500 px-4 py-2">

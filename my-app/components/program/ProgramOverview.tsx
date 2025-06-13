@@ -57,7 +57,7 @@ const ProgramOverview = () => {
         ].map(({ level, src, alt }) => (
           <div
             key={level}
-            className="relative flex h-[700px] w-[400px] flex-col items-center justify-between gap-4 py-6"
+            className="relative flex h-[500px] md:h-[700px] w-[400px]  flex-col items-center justify-between gap-4 py-6"
           >
             <h3 className="text-center text-4xl font-semibold uppercase text-white">
               {level}

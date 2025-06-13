@@ -187,7 +187,7 @@ export default function Infos() {
           />
         </div> */}
         <div className="flex flex-col items-center gap-10 lg:items-start md:px-20">
-          <div className="flex flex-col gap-8">
+          <div className="flex flex-col gap-8 mt-20 md:mt-0">
             <h1 ref={secondParaTitle} className="text-4xl lg:text-7xl text-center uppercase font-bold">Une passion en vocation</h1>
             <p
               ref={thirdParaRef}
