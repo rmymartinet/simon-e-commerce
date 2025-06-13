@@ -36,10 +36,11 @@ function formatTitlePlan(titlePlan: string | string[]) {
 export async function POST(req: NextRequest) {
   try {
     const data = await req.json();
-    console.log("data", data);  
+    console.log("Données reçues:", data);
     
     // Validation des entrées
     const validatedData = checkoutSchema.parse(data);
+    console.log("Données validées:", validatedData);
 
     const { priceId, subscription, email, month, titlePlan, guest } = validatedData;
     const isGuest = guest === true;
@@ -47,8 +48,6 @@ export async function POST(req: NextRequest) {
     // Vérification de l'authentification
     let userId = 'guest';
     let userEmail = email;
-
-
 
     // Si ce n'est pas un invité, on vérifie l'authentification
     if (!isGuest) {
@@ -82,8 +81,6 @@ export async function POST(req: NextRequest) {
 
     const lineItems = createLineItems(priceId);
     const titlePlanString = formatTitlePlan(titlePlan);
-
-
 
     const baseSessionConfig = {
       line_items: lineItems,
@@ -123,6 +120,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ sessionId: session.id });
   } catch (error) {
     if (error instanceof z.ZodError) {
+      console.error("Erreur de validation:", error.errors);
       return NextResponse.json(
         { error: 'Données invalides', details: error.errors },
         { status: 400 }
