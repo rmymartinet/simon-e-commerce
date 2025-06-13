@@ -1,22 +1,22 @@
-import { auth } from "@/lib/auth";
-import { headers } from "next/headers";
+import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
-import { NextResponse } from "next/server";
 import { stripe } from "@/lib/stripe/stripe";
+import { verifyAuth } from "@/lib/auth-utils";
 
-export async function GET() {
+export async function GET(req: NextRequest) {
   try {
-    // Vérifiez si l'utilisateur est authentifié
-    const session = await auth.api.getSession({ headers: await headers() });
-    const user = session?.user;
-
-    if (!user) {
-      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    // Vérification de l'authentification
+    const auth = await verifyAuth(req);
+    if (!auth.success) {
+      return NextResponse.json(
+        { error: auth.error },
+        { status: auth.status }
+      );
     }
 
     // Récupérez le stripeCustomerId depuis la base de données
     const dbUser = await prisma.user.findUnique({
-      where: { id: user.id },
+      where: { id: auth.user?.id },
       select: { stripeCustomerId: true },
     });
 

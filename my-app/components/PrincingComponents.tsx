@@ -4,7 +4,6 @@ import React, { useEffect, useState } from "react";
 
 import TitleComponent from "./TitleComponent";
 import Filter from "./Filter";
-import CardPriceContainer from "./Card/CardPriceContainer";
 import FeedBackContainer from "./FeedBack/FeedBackContainer";
 import Faq from "./Faq";
 import { BetterAuthSession } from "@/types/types";

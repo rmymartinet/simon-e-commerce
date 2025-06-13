@@ -5,8 +5,10 @@ import { useRouter } from "next/navigation";
 import { ProductDataProps } from "@/types/types";
 import { authClient } from "@/lib/auth-client";
 import { useCheckout } from "@/app/context/CheckoutContext";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "./ui/button";
+import { Input } from "./ui/input";
+import Swal from "sweetalert2";
 const { useSession } = authClient;
 
 const Guest = () => {
@@ -14,6 +16,7 @@ const Guest = () => {
   const { checkoutData } = useCheckout();
   const router = useRouter();
   const { data: session } = useSession();
+  const [email, setEmail] = useState("");
 
   useEffect(() => {
     if (session) {
@@ -45,25 +48,43 @@ const Guest = () => {
     }
   }
 
+  const handleGuestCheckout = () => {
+    if (!email) {
+      Swal.fire({
+        icon: "error",
+        title: "Erreur",
+        text: "Veuillez entrer votre email",
+      });
+      return;
+    }
+    if (allPriceIds) {
+      handleCheckout(
+        allPriceIds,
+        allTitles,
+        allMonths[0],
+        false,
+        true,
+        email
+      );
+    } else {
+      console.error("priceId is undefined");
+    }
+  };
+
   return (
     <section className="flex w-full flex-col items-center justify-center md:gap-10">
-      <div className="flex w-full flex-col items-center gap-2 text-center lg:mt-0">
+      <div className="flex w-full flex-col items-center gap-4 text-center lg:mt-0">
+        <Input
+          type="email"
+          placeholder="Votre email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          className="w-full"
+        />
         <Button 
           variant="default"
           className="w-full"
-          onClick={() => {
-            if (allPriceIds) {
-              handleCheckout(
-                allPriceIds,
-                allTitles,
-                allMonths[0],
-                false,
-                false,
-              );
-            } else {
-              console.error("priceId is undefined");
-            }
-          }}
+          onClick={handleGuestCheckout}
         >
           Continuer en tant qu&apos;invité
         </Button>

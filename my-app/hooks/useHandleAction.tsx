@@ -1,43 +1,17 @@
 import { useRouter } from "next/navigation";
 import { useCheckout } from "@/app/context/CheckoutContext";
-import { CartItemProps, UserDataProps } from "@/types/types";
+import { CartItemProps } from "@/types/types";
 import { BetterAuthSession } from "@/types/session";
-import { useEffect, useState } from "react";
-import { usePayment } from "./usePayment";
+import { useAddToCart } from "@/hooks/useAddToCart";
+import { useCart } from "@/app/context/CartContext";
 import Swal from "sweetalert2";
 
 export default function useHandleAction(session: BetterAuthSession | null) {
-  const [userData, setUserData] = useState<UserDataProps | null>(null);
-  const [loading, setLoading] = useState(true);
   const router = useRouter();
-  const { handleCheckout } = usePayment({
-    userData: userData || ({} as UserDataProps),
-  });
-
+  const { cart } = useCart();
+  const addToCart = useAddToCart();
   const { setCheckoutData } = useCheckout();
 
-  useEffect(() => {
-    const fetchUserData = async () => {
-      if (session?.user?.email) {
-        console.log("session?.user?.email", session?.user?.email);
-        try {
-          const res = await fetch(`/api/auth/userData`);
-          const data = await res.json();
-          setUserData(data);
-        } catch (error) {
-          console.error("Failed to fetch user data:", error);
-        } finally {
-          setLoading(false);
-        }
-      }
-    };
-
-    if (session?.user?.email) {
-      fetchUserData();
-    } else {
-      setLoading(false);
-    }
-  }, [session]);
 
   const handleAction = ({
     productData,
@@ -48,90 +22,55 @@ export default function useHandleAction(session: BetterAuthSession | null) {
   }) => {
     const products = Array.isArray(productData) ? productData : [productData];
 
-    console.log("products", products);  
-
-
-    if (!productData ) {
+    if (!productData) {
       console.error("Aucun produit dans le panier.");
       return;
     }
 
-    switch (true) {
-      case session && filterName === "coachings" && userData?.isSubscribed:
-        Swal.fire({
-          icon: "error",
-          title: "Vous êtes déjà abonné",
-          text: "Vous ne pouvez pas acheter un autre abonnement",
-        });
-
-        if (process.env.NODE_ENV === "development") {
-          console.error("Vous êtes déjà abonné");
-        }
-        break;
-
-      case session && filterName  === "coachings":
-        if (!products[0].priceId) {
+    if (session) {
+      // Vérification pour les coachings
+      if (filterName === "coachings") {
+        const alreadyHasCoaching = cart.some(
+          item => item.type && item.type.toLowerCase().includes("coach")
+        );
+        if (alreadyHasCoaching) {
           Swal.fire({
             icon: "error",
-            title: "Erreur",
-            text: "Ce produit n'est pas disponible pour le moment",
+            title: "Vous avez déjà une formule de coaching dans votre panier.",
+            text: "Vous ne pouvez pas acheter deux coachings.",
           });
           return;
         }
-        handleCheckout(
-          products[0].priceId,
-          products[0].titlePlan,
-          products[0].month,
-          true,
-          false,
-        );
-        break;
+      }
+      // Ajout au panier
+      products.forEach((product) => addToCart(product));
+      setCheckoutData({
+        productData: products,
+        filterName,
+        total: products.reduce((acc, item) => acc + Number(item.price), 0),
+      });
+      router.push("/checkout");
+      return;
+    }
 
-      case session && filterName === "programmes":
-        if (products.length > 1) {
-          const allPriceIds = products
-            .map((product) => product.priceId)
-            .filter((id): id is string => id !== undefined);
-          const allTitles = products
-            .map((product) => product.titlePlan)
-            .filter((title): title is string => title !== undefined);
+    // Cas utilisateur non connecté
+    setCheckoutData({
+      productData: products,
+      filterName,
+      total: products.reduce((acc, item) => acc + Number(item.price), 0),
+    });
 
-          handleCheckout(allPriceIds, allTitles, 0, false, false);
-        } else if (products.length === 1) {
-          const product = products[0];
+    const params = new URLSearchParams({
+      from: filterName,
+      product: encodeURIComponent(JSON.stringify(products[0])),
+    });
 
-          if (product.priceId) {
-            handleCheckout(
-              product.priceId,
-              product.titlePlan,
-              product.month,
-              false,
-              false,
-            );
-          } else if (process.env.NODE_ENV === "development") {
-            console.error(`Le produit n'a pas de priceId.`);
-          }
-        } else if (process.env.NODE_ENV === "development") {
-          console.error("Aucun produit valide trouvé.");
-        }
-        break;
-
-      case !session && filterName === "coachings":
-        router.push("/auth/signup");
-        break;
-      case !session && filterName === "programmes":
-        setCheckoutData({ productData: products, filterName });
-        router.push("/auth/choose-auth");
-        break;
-
-      default:
-        if (process.env.NODE_ENV === "development") {
-          console.error(
-            `Le produit "${Array.isArray(productData) ? productData[0].titlePlan : productData.titlePlan}" n'a pas de priceId.`,
-          );
-        }
+    if (filterName === "coachings") {
+      router.push(`/auth/signup?${params.toString()}`);
+    } else if (filterName === "programmes") {
+      router.push(`/auth/choose-auth?${params.toString()}`);
     }
   };
 
-  return { handleAction, loading };
+  return { handleAction };
 }

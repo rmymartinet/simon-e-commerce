@@ -63,8 +63,9 @@ export interface CartContextProps {
 }
 
 export interface CheckoutData {
-    items: CartItemProps[];
-    total: number;
+  productData: CartItemProps[];
+  filterName: string;
+  total: number;
 }
 
 export interface CheckoutContextValue {
@@ -121,11 +122,6 @@ export interface CartContextProps {
 export interface CheckoutContextValue {
   checkoutData: CheckoutData | null;
   setCheckoutData: (data: CheckoutData | null) => void;
-}
-
-export interface CheckoutData {
-  productData: ProductDataProps[];
-  filterName: string;
 }
 
 export interface CircleChartProps {

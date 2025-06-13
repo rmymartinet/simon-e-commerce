@@ -4,11 +4,16 @@ import Link from "next/link";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import Guest from "@/components/Guest";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { IoArrowBack } from "react-icons/io5";
 
-export default function Page() {
+export default function ChooseAuthPage() {
+
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const params = searchParams.toString();
+
+
 
   return (
     <div className="flex min-h-screen flex-col items-center justify-center px-4 py-10 md:py-20">
@@ -43,11 +48,11 @@ export default function Page() {
           </p>
 
           <div className="flex w-full flex-col gap-4">
-            <Link href="/auth/signin">
-              <Button className="w-full py-6 text-lg" variant="blackBg">
-                Se connecter
-              </Button>
-            </Link>
+          <Link href={`/auth/signin?${params}`}>
+  <Button className="w-full py-6 text-lg" variant="blackBg">
+    Se connecter
+  </Button>
+</Link>
 
             <div className="relative text-center text-gray-500 before:absolute before:left-0 before:top-1/2 before:h-px before:w-full before:bg-gray-300 before:content-['']">
               <span className="relative z-10 bg-white px-4 text-sm">ou</span>

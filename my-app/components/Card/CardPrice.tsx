@@ -1,6 +1,6 @@
 "use client";
 
-import { CardPriceProps } from "@/types/types";
+import { CardPriceProps, CartItemProps } from "@/types/types";
 import { IoCheckmarkOutline } from "react-icons/io5";
 import Price from "./Price";
 import AddToCartButton from "../AddToCartButton";
@@ -14,16 +14,12 @@ const CardPrice = ({
 }: CardPriceProps) => {
   const { handleAction, loading } = useHandleAction(session);
 
+
   return (
     <>
       <div
         className={`relative flex h-full w-full flex-col rounded-2xl border border-[--border-color] bg-[--card-bg] p-10 ${isHighlighted ? "bg-violet-700 text-white" : "bg-[var(--card-bg)]"}`}
       >
-        {productData.mostPopular && (
-          <div className="absolute -right-16 -top-4 z-50 w-max -translate-x-1/2 rounded-full border border-[--border-color] bg-[--card-bg] p-2 font-semibold shadow-xl">
-            🔥 Plus populaire
-          </div>
-        )}
         <div className="mb-20 flex justify-between">
           <h1 className="text-4xl font-semibold">{productData.titlePlan}</h1>
         </div>
@@ -38,12 +34,12 @@ const CardPrice = ({
           <div className="mb-10">
             <button
               className={`${isHighlighted ? "bg-secondary text-primary" : "text-secondary bg-violet-600"} h-12 w-full rounded px-6 font-medium`}
-              onClick={() =>
-                handleAction({
-                  productData,
-                  filterName,
-                })
-              }
+              onClick={() => {
+                  handleAction({
+                    productData,
+                    filterName,
+                  });            
+              }}
               disabled={loading}
             >
               {filterName === "programmes" ? "Acheter" : "S'abonner"}

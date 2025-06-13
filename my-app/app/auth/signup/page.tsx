@@ -17,7 +17,7 @@ import { signUp } from "@/lib/auth-client";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { toast } from "sonner";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { signIn } from "@/lib/auth-client";
 
 export default function SignUp() {
@@ -31,8 +31,8 @@ export default function SignUp() {
   const [imagePreview, setImagePreview] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
 
-  console.log("errorMessage", errorMessage);
-
+  const searchParams = useSearchParams();
+  const params = searchParams.toString();
   const router = useRouter();
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -260,8 +260,8 @@ export default function SignUp() {
             </Button>
             <p className="text-sm text-center mt-4">
               Déjà un compte ?{" "}
-              <Link href="/auth/signin" className="text-violet-500 hover:underline">
-                Se connecter
+              <Link href={`/auth/signin?${params}`} className="text-violet-500 hover:underline">
+              Se connecter
               </Link>
             </p>
           </div>

@@ -3,21 +3,32 @@
 import { useCart } from "@/app/context/CartContext";
 import TitleComponent from "@/components/TitleComponent";
 import { Button } from "@/components/ui/button";
-import useHandleAction from "@/hooks/useHandleAction";
+import { usePayment } from "@/hooks/usePayment";
 import { useRemoveItem } from "@/hooks/useRemoveItem";
-import { BetterAuthSession, CartItemProps } from "@/types/types";
+import { BetterAuthSession, UserDataProps } from "@/types/types";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 
 function CheckoutComponent({ session }: { session: BetterAuthSession | null }) {
   const { cart } = useCart();
   const [totalAmount, setTotalAmount] = useState<number>(0);
-  const { handleAction } = useHandleAction(session);
   const removeItem = useRemoveItem();
+  const { handlePayment } = usePayment();
 
-  const allProducts = cart.map((item: CartItemProps) => {
-    return item;
-  });
+
+  const isGuest = !session?.user?.email;
+
+const [userData, setUserData] = useState<UserDataProps | null>(null);
+
+  useEffect(()=>{
+    const fetchUser = async () => {
+      const res = await fetch("/api/user");
+      const data = await res.json();
+      setUserData(data);
+    };
+
+    fetchUser();
+  },[])
 
   useEffect(() => {
     const total = cart
@@ -91,17 +102,22 @@ function CheckoutComponent({ session }: { session: BetterAuthSession | null }) {
           </div>
 
           <Button
-            variant="blackBg"
-            onClick={() => {
-              handleAction({
-                productData: allProducts,
-                filterName: "programmes",
-              });
-            }}
-            disabled={cart.length === 0}
-          >
-            Payer
-          </Button>
+      variant="blackBg"
+      onClick={() => {
+        if (!userData) return;
+        handlePayment(
+          cart.map((item) => item.priceId).filter((id): id is string => !!id),
+          cart.map((item) => item.titlePlan).filter((title): title is string => !!title),
+          cart[0]?.month,
+          userData.isSubscribed,
+          isGuest,         
+          session?.user?.email,
+        );
+      }}
+      disabled={cart.length === 0 || !userData}
+    >
+      Procéder au paiement
+    </Button>
         </div>
       </div>
     </section>

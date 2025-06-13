@@ -11,14 +11,16 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Loader2 } from "lucide-react";
 import { signIn } from "@/lib/auth-client";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { toast } from "sonner";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useAuth } from "@/app/context/AuthContext";
+import { useAddToCart } from "@/hooks/useAddToCart";
+import { useCart } from "@/app/context/CartContext";
 
 export default function SignIn() {
   const [email, setEmail] = useState("");
@@ -27,12 +29,18 @@ export default function SignIn() {
   const [rememberMe, setRememberMe] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const router = useRouter();
+  const { cart } = useCart();
+
+  const searchParams = useSearchParams()
+  const addToCart = useAddToCart()
+  const from = searchParams.get("from");
+  const productRaw = searchParams.get("product");
   const { refreshSession } = useAuth();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setLoading(true);
     setErrorMessage("");
+    setLoading(true);
 
     try {
       const { error } = await signIn.email(
@@ -55,7 +63,17 @@ export default function SignIn() {
             try {
               await refreshSession();
               router.refresh();
-              router.push("/auth/portal");
+              
+              if (from && productRaw) {
+                const product = JSON.parse(decodeURIComponent(productRaw));
+                // Vérifier si déjà dans le panier avant d'ajouter
+                if (!cart.some(item => item.priceId === product.priceId)) {
+                  addToCart(product);
+                }
+                router.push("/checkout");
+              } else {
+                router.push("/auth/portal"); // ou la page par défaut
+              }
             } catch (error) {
               console.error("Erreur lors de la redirection:", error);
               toast.error("Erreur lors de la redirection");

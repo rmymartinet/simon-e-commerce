@@ -10,12 +10,13 @@ export const usePayment = ({ userData }: { userData?: UserDataProps } = {}) => {
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
 
-  const handleCheckout = async (
+  const handlePayment = async (
     priceId: string | string[],
     titlePlan: string | string[],
     month: number | number[],
     subscription: boolean,
     guest: boolean,
+    email?: string,
   ) => {
     setError(null);
     setLoading(true);
@@ -25,26 +26,35 @@ export const usePayment = ({ userData }: { userData?: UserDataProps } = {}) => {
         throw new Error("Configuration Stripe manquante");
       }
 
+      const requestBody = {
+        userId: userData?.id,
+        priceId: Array.isArray(priceId) ? priceId : [priceId],
+        titlePlan: Array.isArray(titlePlan) ? titlePlan : [titlePlan],
+        month,
+        subscription,
+        guest,
+        email: email || userData?.email,
+      };
+
+
       const response = await fetch(`/api/payments/create-checkout-session`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          "Accept": "application/json",
         },
-        body: JSON.stringify({
-          userId: userData?.id || undefined,
-          priceId: Array.isArray(priceId) ? priceId : [priceId],
-          subscription,
-          guest,
-          month,
-          titlePlan: Array.isArray(titlePlan) ? titlePlan : [titlePlan],
-          email: userData?.email || undefined,
-        }),
+        credentials: "include",
+        body: JSON.stringify(requestBody),
       });
 
       const data = await response.json();
 
+       console.log("MOOOOO", data);   
+
+
       if (!response.ok) {
-        throw new Error(data.message || "Erreur lors de la création de la session");
+        console.error("Erreur de réponse:", data);
+        throw new Error(data.error || "Erreur lors de la création de la session");
       }
 
       if (data.sessionId) {
@@ -60,6 +70,7 @@ export const usePayment = ({ userData }: { userData?: UserDataProps } = {}) => {
       }
     } catch (error) {
       const message = error instanceof Error ? error.message : "Une erreur est survenue";
+      console.error("Erreur de paiement:", error);
       setError(message);
       Swal.fire({
         icon: "error",
@@ -71,5 +82,5 @@ export const usePayment = ({ userData }: { userData?: UserDataProps } = {}) => {
     }
   };
 
-  return { handleCheckout, error, loading };
+  return { handlePayment, error, loading };
 };
