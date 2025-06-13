@@ -19,7 +19,7 @@ const CoachingsApps = () => {
           </h2>
           <p className="text-[--subtext]">
             <span className="text-white font-semibold">VirtualGym</span> est votre <span className="text-white font-semibold">coach sportif digital</span> : suivez des <span className="text-white font-semibold">séances personnalisées</span>, suivez vos <span className="text-white font-semibold">progrès</span> et restez <span className="text-white font-semibold">motivé</span> grâce à une interface intuitive.
-            Accédez à des <span className="text-white font-semibold">programmes variés</span>, des <span className="text-white font-semibold">vidéos d’exercices</span> et des <span className="text-white font-semibold">conseils adaptés</span> à votre niveau, où que vous soyez.
+            Accédez à des <span className="text-white font-semibold">programmes variés</span>, des <span className="text-white font-semibold">vidéos d'exercices</span> et des <span className="text-white font-semibold">conseils adaptés</span> à votre niveau, où que vous soyez.
           </p>
         </div>
       </div>
@@ -39,7 +39,7 @@ const CoachingsApps = () => {
           </h2>
           <p className="text-[--subtext]">
   <span className="text-white font-semibold">VirtualGym</span> est votre <span className="text-white font-semibold">coach sportif digital</span> : recevez vos <span className="text-white font-semibold">plans d'entraînement personnalisés</span>, ajustés en fonction de votre <span className="text-white font-semibold">progression</span> et de vos <span className="text-white font-semibold">objectifs</span>.  
-  Suivez vos cycles, accédez à des <span className="text-white font-semibold">programmes ciblés</span>, des <span className="text-white font-semibold">vidéos d’exercices détaillées</span> et des <span className="text-white font-semibold">conseils adaptés</span> pour progresser efficacement, où que vous soyez.
+  Suivez vos cycles, accédez à des <span className="text-white font-semibold">programmes ciblés</span>, des <span className="text-white font-semibold">vidéos d'exercices détaillées</span> et des <span className="text-white font-semibold">conseils adaptés</span> pour progresser efficacement, où que vous soyez.
 </p>
         </div>
       </div>
