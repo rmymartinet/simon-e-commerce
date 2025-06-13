@@ -110,7 +110,7 @@ function CheckoutComponent({ session }: { session: BetterAuthSession | null }) {
           cart.map((item) => item.titlePlan).filter((title): title is string => !!title),
           cart[0]?.month,
           userData?.isSubscribed || false,
-          isGuest,         
+          true,         
           session?.user?.email,
         );
       }}

@@ -2,7 +2,10 @@ import { NextRequest } from 'next/server';
 import { prisma } from './prisma';
 
 export async function verifyAuth(req: NextRequest) {
-  const sessionToken = req.cookies.get('better-auth.session_token')?.value;
+  const cookieName = process.env.NODE_ENV === "production"
+    ? "__Secure-better-auth.session_token"
+    : "better-auth.session_token";
+  const sessionToken = req.cookies.get(cookieName)?.value;
   
   
   if (!sessionToken) {

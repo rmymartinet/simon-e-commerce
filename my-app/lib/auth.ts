@@ -140,14 +140,16 @@ export const auth = betterAuth({
 
   cookies: {
     sessionToken: {
-      name: 'session-token',
+      name: process.env.NODE_ENV === "production"
+        ? "__Secure-better-auth.session_token"
+        : "better-auth.session_token",
       options: {
         httpOnly: true,
-        sameSite: 'lax',
-        path: '/',
-        secure: process.env.NODE_ENV === 'production',
-        domain: process.env.NODE_ENV === 'production' ? '.smartinet-coaching.com' : undefined
-      }
-    }
+        sameSite: "lax",
+        path: "/",
+        secure: process.env.NODE_ENV === "production",
+        domain: process.env.NODE_ENV === "production" ? ".smartinet-coaching.com" : undefined,
+      },
+    },
   }
 });

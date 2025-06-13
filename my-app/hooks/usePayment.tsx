@@ -21,6 +21,8 @@ export const usePayment = ({ userData }: { userData?: UserDataProps } = {}) => {
     setError(null);
     setLoading(true);
 
+    console.log("userData", userData); 
+
     try {
       if (!process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY) {
         throw new Error("Configuration Stripe manquante");
