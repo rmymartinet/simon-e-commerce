@@ -60,6 +60,7 @@ export async function middleware(request: NextRequest) {
       response.headers.set(key, value);
     });
     response.headers.set("Access-Control-Allow-Origin", "https://simon-e-commerce-mwum5g9lb-rmymartinets-projects.vercel.app");
+    response.headers.set("Access-Control-Allow-Origin", "https://www.smartinet-coaching.com");
     response.headers.set("Access-Control-Allow-Methods", "GET,POST,OPTIONS");
     response.headers.set("Access-Control-Allow-Headers", "Content-Type, Authorization");
     return response;
