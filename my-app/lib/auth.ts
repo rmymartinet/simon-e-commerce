@@ -137,4 +137,17 @@ export const auth = betterAuth({
     requireEmailVerification: true,
     emailVerificationExpiresIn: 24 * 60 * 60, // 24 heures
   },
+
+  cookies: {
+    sessionToken: {
+      name: 'session-token',
+      options: {
+        httpOnly: true,
+        sameSite: 'lax',
+        path: '/',
+        secure: process.env.NODE_ENV === 'production',
+        domain: process.env.NODE_ENV === 'production' ? '.smartinet-coaching.com' : undefined
+      }
+    }
+  }
 });
