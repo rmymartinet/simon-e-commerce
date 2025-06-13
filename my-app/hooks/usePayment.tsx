@@ -49,8 +49,6 @@ export const usePayment = ({ userData }: { userData?: UserDataProps } = {}) => {
 
       const data = await response.json();
 
-       console.log("MOOOOO", data);   
-
 
       if (!response.ok) {
         console.error("Erreur de réponse:", data);
