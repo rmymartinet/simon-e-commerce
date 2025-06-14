@@ -21,6 +21,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { useAuth } from "@/app/context/AuthContext";
 import { useAddToCart } from "@/hooks/useAddToCart";
 import { useCart } from "@/app/context/CartContext";
+import { FcGoogle } from "react-icons/fc";
 
 export default function SignIn() {
   const [email, setEmail] = useState("");
@@ -167,30 +168,29 @@ export default function SignIn() {
               <Button
                 type="button"
                 variant="outline"
-                className={cn("w-full gap-2")}
+                className="w-full flex flex-row items-center justify-center gap-x-2"
                 disabled={loading}
                 onClick={async () => {
                   try {
                     setLoading(true);
-                    await signIn.social(
-                      {
-                        provider: "google",
-                        callbackURL: "/auth/portal",
-                      }
-                    );
+                    await signIn.social({
+                      provider: "google",
+                      callbackURL: "/auth/portal",
+                    });
                   } catch (error) {
-                    console.error("Erreur lors de la connexion avec Google:", error);
                     toast.error("Erreur lors de la connexion avec Google");
                   } finally {
                     setLoading(false);
                   }
                 }}
               >
-                <svg
+          <div className="flex flex-row items-center justify-center gap-x-2">
+          <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  width="0.98em"
-                  height="1em"
+                  width="24"
+                  height="24"
                   viewBox="0 0 256 262"
+                  className="flex-shrink-0"
                 >
                   <path
                     fill="#4285F4"
@@ -209,7 +209,8 @@ export default function SignIn() {
                     d="M130.55 50.479c24.514 0 41.05 10.589 50.479 19.438l36.844-35.974C195.245 12.91 165.798 0 130.55 0C79.49 0 35.393 29.301 13.925 71.947l42.211 32.783c10.59-31.477 39.891-54.251 74.414-54.251"
                   ></path>
                 </svg>
-                Se connecter avec Google
+                <span className="font-medium">Se connecter avec Google</span>
+          </div>
               </Button>
               <p className="text-sm text-center mt-4">
                 Pas encore de compte ?{" "}
