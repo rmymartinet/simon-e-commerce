@@ -155,7 +155,7 @@ const MobileNavComponent = ({ session }: NavComponentProps) => {
           </div>
           <nav
             ref={navRef}
-            className="fixed inset-0 z-[999999] flex h-[100dvh] w-screen -translate-y-[150%] flex-col bg-black px-10 text-white"
+            className="fixed inset-0 z-[999999] flex h-dvh w-screen -translate-y-[150%] flex-col bg-black px-10 text-white overflow-y-auto"
           >
             <button
               ref={navActionRef}
