@@ -23,6 +23,7 @@ export default function RootLayout({
           <AnimationProvider>
             <html lang="en">
               <head>
+                <title>Smartinet Coaching</title>
                 <Script
                   async
                   src="https://www.googletagmanager.com/gtag/js?id=G-NH0VPNGP9L"
