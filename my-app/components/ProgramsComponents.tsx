@@ -38,7 +38,7 @@ const ProgramsComponents = ({ session }: ProgramsComponentsProps) => {
                         ref={(el) => {
                             programRefs.current[index] = el;
                         }}
-                        className="flex flex-col gap-3 md:gap-4 rounded-xl border border-white/10 bg-[--card-bg] p-4 md:p-6"
+                        className="flex flex-col justify-between gap-3 md:gap-4 rounded-xl border border-white/10 bg-[--card-bg] p-4 md:p-6"
                     >
                         <div className="relative h-[200px] md:h-[500px] w-full overflow-hidden rounded-lg">
                             <Image 
@@ -51,42 +51,40 @@ const ProgramsComponents = ({ session }: ProgramsComponentsProps) => {
                                 priority={index === 0}
                             />
                         </div>
-                        <div className="flex flex-col gap-3 md:gap-4">
-                            <div>
-                                <h3 className="text-xl md:text-2xl font-bold">{program.titlePlan}</h3>
-                                <p className="text-sm md:text-base text-gray-400">{program.description}</p>
-                            </div>
-                            <div className="flex flex-col gap-2">
-                                <Button
-                                    onClick={() => handleAction({
-                                        productData: program,
-                                        filterName: "programmes"
-                                    })}
-                                    disabled={loading}
-                                    variant="whiteBg"
-                                    className="w-full"
-                                >
-                                    Acheter {program.price}€
-                                </Button>
-                                <Button
-                                    variant="outline"
-                                    className="w-full"
-                                    onClick={() => {
-                                        const cartItem: CartItemProps = {
-                                            type: program.type,
-                                            titlePlan: program.titlePlan,
-                                            price: program.price,
-                                            priceId: program.priceId,
-                                            imageUrl: program.imageUrl,
-                                            month: program.month,
-                                            quantity: 1
-                                        };
-                                        addToCart(cartItem);
-                                    }}
-                                >
-                                    Ajouter au panier
-                                </Button>
-                            </div>
+                        <div className="min-h-[90px] md:min-h-[70px] flex flex-col justify-start">
+                            <h3 className="text-xl md:text-2xl font-bold">{program.titlePlan}</h3>
+                            <p className="text-sm md:text-base text-gray-400">{program.description}</p>
+                        </div>
+                        <div className="flex flex-col gap-2">
+                            <Button
+                                onClick={() => handleAction({
+                                    productData: program,
+                                    filterName: "programmes"
+                                })}
+                                disabled={loading}
+                                variant="whiteBg"
+                                className="w-full"
+                            >
+                                Acheter {program.price}€
+                            </Button>
+                            <Button
+                                variant="outline"
+                                className="w-full"
+                                onClick={() => {
+                                    const cartItem: CartItemProps = {
+                                        type: program.type,
+                                        titlePlan: program.titlePlan,
+                                        price: program.price,
+                                        priceId: program.priceId,
+                                        imageUrl: program.imageUrl,
+                                        month: program.month,
+                                        quantity: 1
+                                    };
+                                    addToCart(cartItem);
+                                }}
+                            >
+                                Ajouter au panier
+                            </Button>
                         </div>
                     </div>
                 ))}
