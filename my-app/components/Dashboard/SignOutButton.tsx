@@ -6,7 +6,9 @@ import { useAuth } from "@/app/context/AuthContext";
 import { useState } from "react";
 import { Loader2 } from "lucide-react";
 
-export default function SignOutButton({variant = "whiteBg"}: {variant: "purpleBg" | "whiteBg"}) {
+type Variant = "purpleBg" | "whiteBg";
+
+export default function SignOutButton({ variant = "whiteBg" }: { variant?: Variant }) {
   const router = useRouter();
   const { refreshSession } = useAuth();
   const [loading, setLoading] = useState(false);
@@ -60,4 +62,4 @@ export default function SignOutButton({variant = "whiteBg"}: {variant: "purpleBg
       )}
     </>
   );
-} 
+}   
