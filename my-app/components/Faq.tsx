@@ -77,7 +77,7 @@ export default function Faq() {
       <div className="max-w-7xl px-4">
         <div className="mb-16 flex flex-col items-center gap-4">
           <h1 className="text-5xl font-bold text-center">Questions fréquentes</h1>
-          <p className="text-gray-400 text-center">
+          <p className="text-[--subtext] text-center">
             Voici les questions les plus fréquemment posées. Si vous avez d&apos;autres questions, n&apos;hésitez pas à nous contacter.
           </p>
         </div>
@@ -92,7 +92,7 @@ export default function Faq() {
                 className={`font-bold text-lg md:text-2xl transition-all duration-200
                   ${activeCat === cat.id
                     ? "text-white bg-black rounded-full shadow-md"
-                    : "text-gray-400 hover:text-gray-600"
+                    : "text-[] hover:text-gray-600"
                   }
                 `}
                 style={{

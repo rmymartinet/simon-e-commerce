@@ -53,7 +53,7 @@ const ProgramsComponents = ({ session }: ProgramsComponentsProps) => {
                         </div>
                         <div className="min-h-[90px] md:min-h-[70px] flex flex-col justify-start">
                             <h3 className="text-xl md:text-2xl font-bold">{program.titlePlan}</h3>
-                            <p className="text-sm md:text-base text-gray-400">{program.description}</p>
+                            <p className="text-sm md:text-base text-[--subtext]">{program.description}</p>
                         </div>
                         <div className="flex flex-col gap-2">
                             <Button
