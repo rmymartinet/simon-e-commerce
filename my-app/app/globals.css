@@ -13,6 +13,7 @@
   --background: #000;
   --foreground: #fefefe;
   --subtext: #afaeae;
+  --purple-color: #6F41D2;
 }
 
 body {
@@ -447,6 +448,7 @@ body {
   clip-path: inset(0 0 84% 0); /* shows only the top 40% of the text */
   opacity: 0.5;
 }
+
 
 @layer base {
   :root {
