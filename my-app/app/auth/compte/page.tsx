@@ -46,10 +46,10 @@ export default async function Dashboard() {
       };
 
   return (
-    <div className="flex min-h-screen w-full flex-col gap-20 px-4 pb-40 md:mt-40 lg:px-20">
+    <main className="flex min-h-screen w-full flex-col gap-20 px-4 pb-40 md:mt-40 lg:px-20">
       <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
         <div className="flex w-full flex-col gap-4 font-semibold">
-          <p className="text-violet-400">Votre dashboard</p>
+          <p className="text-violet-400">Votre compte</p>
           <div className="flex items-center gap-3">
             <div className="flex h-12 w-12 items-center justify-center overflow-hidden rounded-full bg-gray-200">
               {session.user.image ? (
@@ -74,7 +74,7 @@ export default async function Dashboard() {
           <div className="mt-10 flex flex-col-reverse items-start justify-between gap-6 md:flex-row md:items-center">
             <SignOutButton />
             <p className="text-pretty lg:w-[30vw]">
-              Bienvenue sur votre dashboard! Ici vous pourrez voir vos achats,
+              Bienvenue sur votre compte! Ici vous pourrez voir vos achats,
               abonnements en cours, et gérer votre profil.
             </p>
           </div>
@@ -107,6 +107,6 @@ export default async function Dashboard() {
         allPurchases={allPurchases}
         subscriptionInfos={subscriptionInfos}
       />
-    </div>
+    </main>
   );
 }

@@ -1,4 +1,6 @@
 import { Calendar, Home, Inbox, Settings } from "lucide-react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 import {
   Sidebar,
@@ -14,7 +16,7 @@ import {
 // Menu items.
 const items = [
   {
-    title: "Home",
+    title: "Accueil",
     url: "/auth/dashboard",
     icon: Home,
   },
@@ -24,41 +26,48 @@ const items = [
     icon: Inbox,
   },
   {
-    title: "Calendar",
+    title: "Calendrier",
     url: "/auth/dashboard/calendar",
     icon: Calendar,
   },
   {
-    title: "Settings",
+    title: "Paramètres",
     url: "/auth/dashboard/settings",
     icon: Settings,
   },
 ];
 
 export function AppSidebar() {
+  const pathname = usePathname();
+
   return (
-    <Sidebar className="fixed left-0 top-40 z-[999999] hidden h-screen w-64 border-none bg-gray-900 md:block">
-      <SidebarContent className="border-none bg-gray-900 text-white">
-        <SidebarGroup>
-          <SidebarGroupLabel className="text-white">
-            Application
-          </SidebarGroupLabel>
-          <SidebarGroupContent>
-            <SidebarMenu>
-              {items.map((item) => (
-                <SidebarMenuItem key={item.title}>
-                  <SidebarMenuButton asChild>
-                    <a href={item.url}>
-                      <item.icon />
-                      <span>{item.title}</span>
-                    </a>
-                  </SidebarMenuButton>
-                </SidebarMenuItem>
-              ))}
-            </SidebarMenu>
-          </SidebarGroupContent>
-        </SidebarGroup>
-      </SidebarContent>
-    </Sidebar>
+    <nav aria-label="Menu principal">
+      <Sidebar className="fixed left-0 top-0 hidden h-screen w-64 border-none bg-gray-900 md:block pt-40">
+        <SidebarContent className="border-none bg-gray-900 text-white">
+          <SidebarGroup>
+            <SidebarGroupLabel className="text-white">
+              Application
+            </SidebarGroupLabel>
+            <SidebarGroupContent>
+              <SidebarMenu>
+                {items.map((item) => (
+                  <SidebarMenuItem
+                    key={item.title}
+                    className={pathname === item.url ? "bg-gray-800" : ""}
+                  >
+                    <SidebarMenuButton asChild>
+                      <Link href={item.url}>
+                        <item.icon />
+                        <span>{item.title}</span>
+                      </Link>
+                    </SidebarMenuButton>
+                  </SidebarMenuItem>
+                ))}
+              </SidebarMenu>
+            </SidebarGroupContent>
+          </SidebarGroup>
+        </SidebarContent>
+      </Sidebar>
+    </nav>
   );
 }

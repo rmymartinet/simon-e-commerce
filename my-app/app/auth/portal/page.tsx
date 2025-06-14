@@ -75,7 +75,7 @@ export default async function Portal() {
               formAction={async () => {
                 "use server";
 
-                redirect("/auth/dashboard");
+                redirect("/auth/compte");
               }}
             >
               Mon compte

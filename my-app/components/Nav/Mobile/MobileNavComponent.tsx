@@ -174,7 +174,7 @@ const MobileNavComponent = ({ session }: NavComponentProps) => {
                 className="mb-8 mt-24 flex w-full items-center justify-between gap-6 text-xl"
               >
                 <Link
-                  href={session ? "/auth/dashboard" : "/auth/signin"}
+                  href={session ? "/auth/compte" : "/auth/signin"}
                   className="relative flex items-center gap-8"
                 >
                   <button onClick={() => setIsClicked(false)}>

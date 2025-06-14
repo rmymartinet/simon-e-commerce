@@ -21,7 +21,8 @@ const Footer = () => {
     pathname !== "/auth/signup" &&
     pathname !== "/auth/reset-password" &&
     pathname !== "/auth/forgot-password" &&
-    !pathname.startsWith("/dashboard");
+    pathname !== "/auth/compte" &&
+    !pathname.startsWith("/compte");
 
   const footerContainerRef = useRef<HTMLDivElement>(null);
   const footerContentRef = useRef<HTMLDivElement>(null);

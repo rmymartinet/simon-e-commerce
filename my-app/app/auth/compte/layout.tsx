@@ -5,7 +5,7 @@ import { SidebarProvider } from "@/components/ui/sidebar";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-export default function DashboardRootLayout({
+export default function CompteRootLayout({
   children,
 }: {
   children: React.ReactNode;
@@ -15,20 +15,19 @@ export default function DashboardRootLayout({
   const links = [
     {
       title: "Home",
-      href: "/auth/dashboard",
+      href: "/auth/compte",
     },
-
     {
       title: "Factures",
-      href: "/auth/dashboard/invoices",
+      href: "/auth/compte/factures",
     },
     {
-      title: "Calendar",
-      href: "/auth/dashboard/calendar",
+      title: "Calendrier",
+      href: "/auth/compte/calendrier",
     },
     {
-      title: "Settings",
-      href: "/auth/dashboard/settings",
+      title: "Paramètres",
+      href: "/auth/compte/parametres",
     },
     // {
     //   title: "Support",
