@@ -35,7 +35,7 @@ const Header = () => {
               Coacher <br /> par un pro
             </h1>
             <h4 className="text-center font-medium uppercase text-white md:text-2xl">
-              Coaching * Programmes * Nutrition
+              Coachings * Programmes * Nutrition
             </h4>
             <div className="mt-4 flex gap-10 md:flex-row">
             <div className="flex gap-4">
