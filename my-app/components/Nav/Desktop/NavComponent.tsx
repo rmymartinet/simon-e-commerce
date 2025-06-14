@@ -5,7 +5,7 @@ import { useRef, useState } from "react";
 import { LiaArrowAltCircleRight } from "react-icons/lia";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import useWindowWidth from "@/hooks/useWindowWidth";
 import { useCart } from "@/app/context/CartContext";
 import { FaEdit } from "react-icons/fa";
@@ -18,6 +18,7 @@ const NavComponent = () => {
   const navRef = useRef<HTMLDivElement | null>(null);
   const navItemsRef = useRef<(HTMLDivElement | HTMLLIElement | null)[]>([]);
   const pathname = usePathname();
+  const router = useRouter();
   const { width } = useWindowWidth();
   const cart = useCart();
   const { session } = useAuth();
@@ -27,6 +28,8 @@ const NavComponent = () => {
   const isDisplayNavBar =
     pathname !== "/success" &&
     pathname !== "/cancel";
+
+  const isStudio = pathname.startsWith("/studio");
 
   const navLinks = [
     { title: "Home", link: "/" },
@@ -63,6 +66,19 @@ const NavComponent = () => {
       });
     }
   }, [hoveredIndex]);
+
+  if (isStudio && width > 1024) {
+    return (
+      <nav className="fixed left-5 top-5 z-[9999]">
+        <button
+          onClick={() => router.back()}
+          className="flex items-center gap-2 rounded bg-violet-600 px-4 py-2 text-white font-semibold hover:bg-violet-700 transition"
+        >
+          ← Retour
+        </button>
+      </nav>
+    );
+  }
 
   return (
     <>
