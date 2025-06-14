@@ -51,7 +51,9 @@ const Footer = () => {
                   on t&apos;aide à transformer ton corps et ta discipline, grâce
                   à une méthode claire, humaine et adaptée à ton rythme.
                 </span>
-                <p className="underline">contact@smartinet-coaching.com</p>
+                <a href="mailto:contact@smartinet-coaching.com" className="underline">
+                  contact@smartinet-coaching.com
+                </a>
               </div>
               <div className="m-auto flex gap-40">
                 <FooterLinks />
