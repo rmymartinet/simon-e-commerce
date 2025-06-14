@@ -1,6 +1,6 @@
 "use client";
 
-const ProgramsOverview = () => {
+const ProgramsDetails = () => {
   return (
     <section className="w-full px-4 py-12 ">
       <div className=" mx-auto flex flex-col md:flex-row items-center gap-14">
@@ -51,4 +51,4 @@ const ProgramsOverview = () => {
   );
 };
 
-export default ProgramsOverview;
+export default ProgramsDetails;

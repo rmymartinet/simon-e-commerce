@@ -3,7 +3,7 @@
 import { RefObject, useRef } from "react";
 import TitleComponent from "@/components/TitleComponent";
 import FormCalories from "@/components/Calories/FormCalories";
-import AnimatedQuestions from "@/components/AnimatedQuestions";
+import AnimatedQuestions from "@/components/Faq/AnimatedQuestions";
 import { useGSAP } from "@gsap/react";
 import { animateBlockReveal } from "@/utils/Animation";
 import CoachingsProgramsButtons from "@/components/CoachingsProgramsButtons";

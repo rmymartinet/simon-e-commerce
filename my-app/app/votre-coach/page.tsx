@@ -9,7 +9,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import TitleComponent from "@/components/TitleComponent";
 import Overlay from "@/components/Overlay";
 import { animateBlockReveal } from "@/utils/Animation";
-import Faq from "@/components/Faq";
+import Faq from "@/components/Faq/Faq";
 import CoachingsProgramsButtons from "@/components/CoachingsProgramsButtons";
 
 gsap.registerPlugin(useGSAP, ScrollTrigger);

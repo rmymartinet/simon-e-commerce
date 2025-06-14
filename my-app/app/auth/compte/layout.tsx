@@ -1,5 +1,5 @@
 "use client";
-import { AppSidebar } from "@/components/AppSidebar";
+import { DashboardSideBar } from "@/components/Dashboard/DashboardSideBar";
 import { Button } from "@/components/ui/button";
 import { SidebarProvider } from "@/components/ui/sidebar";
 import Link from "next/link";
@@ -36,7 +36,7 @@ export default function CompteRootLayout({
   ];
   return (
     <SidebarProvider>
-      <AppSidebar />
+      <DashboardSideBar/>
       <main className="flex w-full flex-col md:flex-row">
         <div className="mb-10 mt-40 flex justify-between px-4 md:hidden">
           {links.map((link) => {

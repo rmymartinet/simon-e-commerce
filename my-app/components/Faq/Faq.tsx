@@ -2,8 +2,9 @@
 
 import { faqCoachingData, faqProgramData } from "@/app/data/faqData";
 import { useRef, useEffect, useState, useCallback } from "react";
-import Accordion from "./Accordion";
-import TitleComponent from "./TitleComponent";
+import TitleComponent from "../TitleComponent";
+import Accordion from "../Accordion";
+
 
 
 

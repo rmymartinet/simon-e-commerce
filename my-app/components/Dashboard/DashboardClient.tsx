@@ -1,6 +1,6 @@
 "use client";
 
-import UserDashboard from "@/components/User/UserDashboard";
+import UserDashboard from "@/components/Dashboard/UserDashboard";
 import Image from "next/image";
 import SignOutButton from "./SignOutButton";
 import { Session } from "better-auth/types";

@@ -1,10 +1,10 @@
-import ProgramsComponents from "@/components/ProgramsComponents";
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
-import ProgramsOverview from "@/components/ProgramsOverview";
-import Faq from "@/components/Faq";
+import ProgramsOverview from "@/components/Programs/ProgramsDetails";
 import TitleComponent from "@/components/TitleComponent";
 import { BetterAuthSession } from "@/types/types";
+import ProgramsComponents from "@/components/Programs/ProgramsComponents";
+import Faq from "@/components/Faq/Faq";
 
 export default async function Programs() {
  

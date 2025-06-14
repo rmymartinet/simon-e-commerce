@@ -1,11 +1,11 @@
 import { auth } from "@/lib/auth";
 import { redirect } from "next/navigation";
 import { headers } from "next/headers";
-import UserDashboard from "@/components/User/UserDashboard";
+import UserDashboard from "@/components/Dashboard/UserDashboard";
 import { getUserDashboardData } from "@/lib/getUserDashboard";
 import { calculateNextPayment, formattedDate } from "@/utils/dateUtils";
 import Image from "next/image";
-import SignOutButton from "@/components/User/SignOutButton";
+import SignOutButton from "@/components/Dashboard/SignOutButton";
 
 export default async function Dashboard() {
   const { userData } = await getUserDashboardData();

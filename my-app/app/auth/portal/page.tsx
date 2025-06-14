@@ -11,7 +11,7 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 import { getUser } from "@/lib/auth-sesssion";
 import Image from "next/image";
-import SignOutButton from "@/components/User/SignOutButton";
+import SignOutButton from "@/components/Dashboard/SignOutButton";
 
 export default async function Portal() {
   const user = await getUser();

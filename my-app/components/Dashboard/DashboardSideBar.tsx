@@ -37,7 +37,7 @@ const items = [
   },
 ];
 
-export function AppSidebar() {
+export function DashboardSideBar() {
   const pathname = usePathname();
 
   return (

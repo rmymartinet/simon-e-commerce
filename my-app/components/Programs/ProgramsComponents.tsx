@@ -2,7 +2,7 @@
 
 import { programData } from "@/app/data/cardPriceContainerData";
 import Image from "next/image";
-import { Button } from "./ui/button";
+import { Button } from "@/components/ui/button";
 import useHandleAction from "@/hooks/useHandleAction";
 import { useAddToCart } from "@/hooks/useAddToCart";
 import { BetterAuthSession, CartItemProps } from "@/types/types";

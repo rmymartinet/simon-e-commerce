@@ -6,8 +6,8 @@ import { ProductDataProps } from "@/types/types";
 import { authClient } from "@/lib/auth-client";
 import { useCheckout } from "@/app/context/CheckoutContext";
 import { useEffect, useState } from "react";
-import { Button } from "./ui/button";
-import { Input } from "./ui/input";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import Swal from "sweetalert2";
 const { useSession } = authClient;
 

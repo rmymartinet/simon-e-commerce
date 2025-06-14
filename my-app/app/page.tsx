@@ -3,8 +3,8 @@
 import BeforeAfterPhoto from "@/components/BeforeAfterPhoto";
 import CoachingOverview from "@/components/coaching/CoachingOverview";
 import Header from "@/components/Header/Header";
-import ProgramOverview from "@/components/program/ProgramOverview";
-import Youtube from "@/components/program/Youtube";
+import ProgramOverview from "@/components/Programs/ProgramOverview";
+import Youtube from "@/components/Programs/Youtube";
 
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";

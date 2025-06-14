@@ -1,16 +1,17 @@
 "use client";
 
 import { useState } from "react";
-import UserProfile from "./UserProfile";
-import UserFilter from "./UserFIlter";
-import UserPurchaseHistory from "./UserPurchaseHistory";
-import UserProgramPanel from "./UserProgramPanel";
-import UserCoachingPanel from "./UserCoachingPanel";
+
 import {
   PurchaseItemProps,
   SubscriptionInfosProps,
   UserDataProps,
 } from "@/types/types";
+import UserProfile from "./UserProfile";
+import UserFilter from "./UserFIlter";
+import UserPurchaseHistory from "./UserPurchaseHistory";
+import UserProgramPanel from "./UserProgramPanel";
+import UserCoachingPanel from "./UserCoachingPanel";
 
 const UserDashboard = ({
   userData,

@@ -3,10 +3,10 @@
 import Link from "next/link";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
-import Guest from "@/components/Guest";
 import { useRouter, useSearchParams } from "next/navigation";
 import { IoArrowBack } from "react-icons/io5";
 import { Suspense } from "react";
+import Guest from "@/components/Auth/Guest";
 
 const ChooseAuthContent = () => {
   const router = useRouter();
@@ -55,7 +55,6 @@ const ChooseAuthContent = () => {
             <div className="relative text-center text-gray-500 before:absolute before:left-0 before:top-1/2 before:h-px before:w-full before:bg-gray-300 before:content-['']">
               <span className="relative z-10 bg-white px-4 text-sm">ou</span>
             </div>
-
             <Guest />
           </div>
         </div>

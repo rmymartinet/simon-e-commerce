@@ -2,12 +2,12 @@
 
 import BeforeAfterPhoto from "@/components/BeforeAfterPhoto";
 import PremiumCoachingsSlider from "@/components/coaching/PremiumCoachingsSlider";
-import Faq from "@/components/Faq";
 import TitleComponent from "@/components/TitleComponent";
 import PriceCoachingsContainer from "@/components/coaching/PriceCoachingsContainer";
 import CoachingsApps from "@/components/coaching/CoachingsApps";
 import AfterPurchaseSteps from "@/components/AfterPurchaseSteps";
 import { coachingsSteps } from "../data/afterPurchaseSteps";
+import Faq from "@/components/Faq/Faq";
 
 
 export default function CoachingsPage() {
