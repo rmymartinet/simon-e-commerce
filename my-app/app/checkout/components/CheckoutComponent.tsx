@@ -16,9 +16,7 @@ function CheckoutComponent({ session }: { session: BetterAuthSession | null }) {
   const removeItem = useRemoveItem();
   const { handlePayment } = usePayment({ userData: userData || undefined });
 
-
   // const isGuest = !session?.user?.email;
-
 
   useEffect(()=>{
     const fetchUser = async () => {
@@ -36,6 +34,8 @@ function CheckoutComponent({ session }: { session: BetterAuthSession | null }) {
       .reduce((acc, item) => acc + Number(item.price), 0);
     setTotalAmount(Number(total.toFixed(2)));
   }, [cart]);
+
+  console.log(cart) 
 
   return (
     <section className="mt-[20vh]">

@@ -6,6 +6,9 @@ import Faq from "@/components/Faq";
 import TitleComponent from "@/components/TitleComponent";
 import PriceCoachingsContainer from "@/components/coaching/PriceCoachingsContainer";
 import CoachingsApps from "@/components/coaching/CoachingsApps";
+import AfterPurchaseSteps from "@/components/AfterPurchaseSteps";
+import { coachingsSteps } from "../data/afterPurchaseSteps";
+
 
 export default function CoachingsPage() {
 
@@ -22,6 +25,7 @@ export default function CoachingsPage() {
       <PremiumCoachingsSlider />
       <CoachingsApps/>
       <BeforeAfterPhoto />
+      <AfterPurchaseSteps data={coachingsSteps} />
       <Faq />
     </main>
   );

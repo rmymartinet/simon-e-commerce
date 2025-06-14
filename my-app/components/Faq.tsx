@@ -3,6 +3,7 @@
 import { faqCoachingData, faqProgramData } from "@/app/data/faqData";
 import { useRef, useEffect, useState, useCallback } from "react";
 import Accordion from "./Accordion";
+import TitleComponent from "./TitleComponent";
 
 
 
@@ -75,12 +76,11 @@ export default function Faq() {
   return (
     <section className="relative mx-auto pt-12 mt-[20vh]">
       <div className="max-w-7xl px-4">
-        <div className="mb-16 flex flex-col items-center gap-4">
-          <h1 className="text-5xl font-bold text-center">Questions fréquentes</h1>
-          <p className="text-[--subtext] text-center">
-            Voici les questions les plus fréquemment posées. Si vous avez d&apos;autres questions, n&apos;hésitez pas à nous contacter.
-          </p>
-        </div>
+        <TitleComponent
+          title="Questions fréquentes"
+          subtitle="Voici les questions les plus fréquemment posées. Si vous avez d'autres questions, n'hésitez pas à nous contacter."
+          titleIndication="Questions fréquentes"
+        />
         <div className="flex flex-col md:flex-row gap-8">
           {/* Menu catégories - visible uniquement en desktop */}
           <nav className="hidden md:flex mr-[10vw] md:flex-col gap-2 md:gap-8 md:min-w-[160px] md:sticky md:top-28 self-start z-10 p-10 rounded-2xl">
