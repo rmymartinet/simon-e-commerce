@@ -57,7 +57,7 @@ const ProgramCards = () => {
             quality={100}
             priority
           />
-          <Button variant="whiteBg" className="w-max">Voir le programme</Button>
+          <Button variant="whiteBg" className="w-max">Découvrir</Button>
         </div>
       ))}
     </div>
