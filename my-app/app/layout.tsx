@@ -25,8 +25,8 @@ export default function RootLayout({
               <head>
                 <title>Smartinet Coaching</title>
                 <Script
-                  async
-                  src="https://www.googletagmanager.com/gtag/js?id=G-NH0VPNGP9L"
+                  src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXX"
+                  strategy="afterInteractive"
                 ></Script>
                 <Script id="google-analytic">
                   {` 
