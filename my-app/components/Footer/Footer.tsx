@@ -62,7 +62,7 @@ const Footer = () => {
                     onClick={() => handleBackToTop()}
                     className="uppercase"
                   >
-                    back on top
+                    Retour en haut
                   </button>
                   <FaArrowUp size={12} />
                 </div>
