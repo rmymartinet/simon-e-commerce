@@ -40,12 +40,13 @@ const ProgramsComponents = ({ session }: ProgramsComponentsProps) => {
                         }}
                         className="flex flex-col gap-3 md:gap-4 rounded-xl border border-white/10 bg-[--card-bg] p-4 md:p-6"
                     >
-                        <div className="relative h-[200px] md:h-full w-full overflow-hidden rounded-lg">
+                        <div className="relative h-[200px] md:h-[500px] w-full overflow-hidden rounded-lg">
                             <Image 
                                 src={program.imageUrl} 
                                 alt={program.titlePlan} 
-                                width={700}
-                                height={700}
+                                width={1000}
+                                height={1000}
+                                quality={100}
                                 className="object-cover w-full h-full"
                                 priority={index === 0}
                             />
