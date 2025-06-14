@@ -11,8 +11,8 @@ const BackgroundYoutubeImg = ({
   iphoneRef: RefObject<HTMLDivElement | null>;
 }) => {
   return (
-    <div className="relative flex h-[80vh] w-screen max-w-[90vw] flex-col items-center overflow-hidden rounded-3xl px-4">
-      <div className="absolute flex h-full w-full justify-center gap-4 overflow-hidden">
+    <div className="relative flex h-[60vh] sm:h-[70vh] md:h-[80vh] min-h-[300px] w-full max-w-[98vw] md:max-w-[90vw] flex-col items-center overflow-hidden rounded-3xl px-2 sm:px-4">
+      <div className="absolute flex h-full w-full justify-center gap-2 sm:gap-4 overflow-x-auto overflow-y-hidden">
         {images.map((img, index) => (
           <div
             ref={(el) => {
@@ -87,7 +87,7 @@ const BackgroundYoutubeImg = ({
       </div>
       <div
         ref={iphoneRef}
-        className="absolute left-1/2 top-1/2 z-50 -translate-x-1/2 -translate-y-1/2 opacity-100"
+        className="absolute left-1/2 top-1/2 z-50 w-[120px] sm:w-[180px] md:w-[220px] -translate-x-1/2 -translate-y-1/2 opacity-100"
       >
         <div className="relative h-full w-full">
           <Iphone video="/videos/exercices/video1.mp4" />
