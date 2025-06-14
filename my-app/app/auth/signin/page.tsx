@@ -178,6 +178,7 @@ export default function SignIn() {
                     });
                   } catch (error) {
                     toast.error("Erreur lors de la connexion avec Google");
+                    console.error(error);
                   } finally {
                     setLoading(false);
                   }
