@@ -13,9 +13,9 @@ const ForgetPasswordClient = () => {
 
   if (!token) {
     return (
-      <div className="mx-auto w-full max-w-md p-4">
+      <div className="mx-auto w-full max-w-md p-4 h-screen flex flex-col items-center justify-center">
         <h1 className="mb-4 text-2xl font-bold">Reset Password</h1>
-        <p className="mb-4 text-sm text-muted-foreground">
+        <p className="mb-4 text-sm text-[--subtext] text-center">
           Enter your email address and we’ll send you a link to reset your
           password.
         </p>
@@ -69,7 +69,7 @@ const ForgetPasswordClient = () => {
             required
             placeholder="name@example.com"
           />
-          <Button type="submit">Send Reset Link</Button>
+          <Button type="submit" variant="whiteBg" className="w-full">Send Reset Link</Button>
         </form>
       </div>
     );

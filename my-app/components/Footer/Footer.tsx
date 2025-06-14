@@ -20,7 +20,7 @@ const Footer = () => {
     pathname !== "/auth/signin" &&
     pathname !== "/auth/signup" &&
     pathname !== "/auth/reset-password" &&
-    pathname !== "/auth/forgot-password" &&
+    pathname !== "/auth/forget-password" &&
     pathname !== "/auth/compte" &&
     !pathname.startsWith("/compte");
 
