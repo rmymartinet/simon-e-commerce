@@ -21,7 +21,6 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { useAuth } from "@/app/context/AuthContext";
 import { useAddToCart } from "@/hooks/useAddToCart";
 import { useCart } from "@/app/context/CartContext";
-import { FcGoogle } from "react-icons/fc";
 
 export default function SignIn() {
   const [email, setEmail] = useState("");
