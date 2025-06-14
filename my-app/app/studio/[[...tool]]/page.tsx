@@ -25,7 +25,6 @@ export default async function StudioPage() {
 
 
   if (!isAdmin) {
-    console.log("Pas de session, redirection vers /auth/signin");
     redirect("/auth/signin");
   }
 
