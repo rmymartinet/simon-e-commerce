@@ -28,6 +28,8 @@ const Counter = ({
       trigger: containerRef.current,
       start: "top 80%",
       end: "bottom 20%",
+      scrub: 1,
+      once: true,
       onEnter: () => {
         const timeline = gsap.timeline();
         timeline.to(

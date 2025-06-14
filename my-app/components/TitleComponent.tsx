@@ -22,14 +22,19 @@ const TitleComponent = ({
 }) => {
   const titleRef = React.useRef<HTMLDivElement>(null);
   const subtitleRef = React.useRef<HTMLParagraphElement>(null);
+  const titleIndicationRef = React.useRef<HTMLParagraphElement>(null);
+
 
   useGSAP(() => {
     if (titleRef.current && subtitleRef.current && isTextSplitLines) {
       textSplitLines(titleRef as React.RefObject<HTMLElement>);
       textSplitLines(subtitleRef as React.RefObject<HTMLElement>);
-    } else if (titleRef.current && subtitleRef.current && !isTextSplitLines) {
+      textSplitLines(titleIndicationRef as React.RefObject<HTMLElement>);
+    } else if (titleRef.current && subtitleRef.current && titleIndicationRef.current && !isTextSplitLines) {
       textSplitLinesScrollTrigger(titleRef as React.RefObject<HTMLElement>);
       textSplitLinesScrollTrigger(subtitleRef as React.RefObject<HTMLElement>);
+      textSplitLinesScrollTrigger(titleIndicationRef as React.RefObject<HTMLElement>);
+
     }
   }, []);
 
@@ -38,11 +43,13 @@ const TitleComponent = ({
       ref={titleRef}
       className="flex flex-col items-center justify-center text-center mb-0 md:mb-20"
     >
-      {titleIndication && (
-        <p className="mb-4 text-sm uppercase text-[--subtext] rounded-full border-2 border-violet-500 px-4 py-2">
+   <div ref={titleIndicationRef}>
+   {titleIndication && (
+        <p  className="mb-4 text-sm uppercase text-[--subtext] rounded-full border-2 border-violet-500 px-4 py-2">
           {titleIndication}
         </p>
       )}
+   </div>
 
       <h1 className="text-3xl font-bold md:text-6xl">{title}</h1>
       <p

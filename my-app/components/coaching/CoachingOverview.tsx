@@ -18,11 +18,14 @@ const CoachingOverview = () => {
   const titleRef = useRef<HTMLHeadingElement>(null);
   const textRef = useRef<HTMLParagraphElement>(null);
   const countContainerRef = useRef<HTMLDivElement>(null);
-
+  const bgRef = useRef<HTMLDivElement>(null);
   const [programsCount, setProgramsCount] = useState(0);
   const [successRate, setSuccessRate] = useState(0);
   const [coachingCount, setCoachingCount] = useState(0);
   const [isCounting, setIsCounting] = useState(false);
+  const coachingRef = useRef<HTMLDivElement>(null);
+
+
 
   useGSAP(() => {
     ScrollTrigger.create({
@@ -33,6 +36,21 @@ const CoachingOverview = () => {
         setIsCounting(true);
       },
     });
+  }, []);
+
+  useGSAP(() => {
+    if (bgRef.current) {
+      gsap.from(bgRef.current, {
+        scale: 0.1,
+        duration: 1.5,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: coachingRef.current,
+          start: "top bottom",
+          once: true,
+        },
+      })
+    }
   }, []);
 
   useEffect(() => {
@@ -69,15 +87,20 @@ const CoachingOverview = () => {
   }, []);
   return (
     <section
+      ref={coachingRef}
       id="coaching"
-      className="mx-auto mt-20 flex w-screen max-w-[90vw] flex-col items-center overflow-hidden rounded-3xl bg-gradient-to-br from-gray-50 to-gray-100 px-4 py-20 text-black md:mt-[20vh] md:gap-10"
+      className="mx-auto mt-20 flex w-screen max-w-[90vw] flex-col items-center overflow-hidden rounded-3xl px-4 py-20 text-black md:mt-[20vh] md:gap-10 relative"
+
     >
+      <div ref={bgRef} className="absolute top-0 -z-10 h-full w-full bg-white"/>
+    
       <TitleComponent
         title="Un coaching sur-mesure"
         titleIndication="coaching"
         subtitle="Un coach à tes côtés, à chaque étape. Bénéficie d’un suivi personnalisé, d’un accompagnement quotidien et d’ajustements en temps réel. Ensemble, on va plus loin : je suis là pour te guider, te booster et t’aider à rester sur la bonne voie."
+        isTextSplitLines={false}
       />
-      <Button variant="blackBg">
+      <Button variant="purpleBg" className="-mt-10">
         <Link href="/pricing?filter=coaching">Découvrir les offres</Link>
       </Button>
 

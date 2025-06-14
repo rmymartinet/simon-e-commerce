@@ -57,18 +57,19 @@ const ProgramsComponents = ({ session }: ProgramsComponentsProps) => {
                             </div>
                             <div className="flex flex-col gap-2">
                                 <Button
-                                    className="w-full bg-violet-600 text-white hover:bg-violet-700 text-sm md:text-base"
                                     onClick={() => handleAction({
                                         productData: program,
                                         filterName: "programmes"
                                     })}
                                     disabled={loading}
+                                    variant="whiteBg"
+                                    className="w-full"
                                 >
                                     Acheter {program.price}€
                                 </Button>
                                 <Button
                                     variant="outline"
-                                    className="w-full text-sm md:text-base"
+                                    className="w-full"
                                     onClick={() => {
                                         const cartItem: CartItemProps = {
                                             type: program.type,

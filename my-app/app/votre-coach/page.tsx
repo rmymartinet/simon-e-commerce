@@ -11,6 +11,8 @@ import Overlay from "@/components/Overlay";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { animateBlockReveal } from "@/utils/Animation";
+import Faq from "@/components/Faq";
+import CoachingsProgramsButtons from "@/components/CoachingsProgramsButtons";
 
 gsap.registerPlugin(useGSAP, ScrollTrigger);
 
@@ -111,18 +113,7 @@ export default function Infos() {
           <div className="flex flex-col gap-4">
           <h1 ref={firstParaTitle} className="text-4xl lg:text-7xl font-bold uppercase">Du déclic <br /> à la passion</h1>
 
-<div className="flex gap-4">
-  <Button asChild className="bg-violet-400 text-white">
-    <Link href="/coachings">
-      Coachings
-    </Link>
-  </Button>
-  <Button asChild className="bg-violet-400 text-white">
-    <Link href="/programs">
-      Programmes
-    </Link>
-  </Button>
-</div>
+<CoachingsProgramsButtons/>
           </div>
             <div className="flex flex-col gap-2"
             >
@@ -260,6 +251,7 @@ export default function Infos() {
           </div>{" "}
         </div>
       </div>
+      <Faq/>
     </main>
   );
 }

@@ -8,6 +8,7 @@ import FormCalories from "@/components/Calories/FormCalories";
 import AnimatedQuestions from "@/components/AnimatedQuestions";
 import { useGSAP } from "@gsap/react";
 import { animateBlockReveal } from "@/utils/Animation";
+import CoachingsProgramsButtons from "@/components/CoachingsProgramsButtons";
 
 export default function Calorie() {
   const containerRef = useRef(null);
@@ -52,16 +53,7 @@ export default function Calorie() {
       />
    <div ref={calculatorContentRef} className="flex flex-col gap-4 items-center">
    <div className="flex gap-4">
-  <Button asChild className="bg-violet-400 text-white">
-    <Link href="/coachings">
-      Coachings
-    </Link>
-  </Button>
-  <Button asChild className="bg-violet-400 text-white">
-    <Link href="/programs">
-      Programmes
-    </Link>
-  </Button>
+ <CoachingsProgramsButtons variant="whiteBg"/>
      </div>
       <FormCalories />
       <div className="flex w-full flex-col items-center px-4">
@@ -71,16 +63,7 @@ export default function Calorie() {
           isTextSplitLines={false}
         />
         <div className="flex gap-4">
-  <Button asChild className="bg-violet-400 text-white">
-    <Link href="/coachings">
-      Coachings
-    </Link>
-  </Button>
-  <Button asChild className="bg-violet-400 text-white">
-    <Link href="/programs">
-      Programmes
-    </Link>
-  </Button>
+  <CoachingsProgramsButtons variant="whiteBg"/>
 </div>
         <AnimatedQuestions questions={questions} />
       </div>

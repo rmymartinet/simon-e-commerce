@@ -52,8 +52,8 @@ const OfferCard = ({
         </div>
       </div>
       <Button
-        className="w-full rounded-lg bg-black py-2 text-white transition-colors hover:bg-gray-800 sm:py-3"
-        variant="blackBg"
+        className="w-full"
+        variant="purpleBg"
       >
         <Link href={urlLink}>{buttonText}</Link>
       </Button>
