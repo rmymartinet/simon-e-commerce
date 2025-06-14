@@ -38,7 +38,7 @@ export default function CompteRootLayout({
     <SidebarProvider>
       <DashboardSideBar/>
       <main className="flex w-full flex-col md:flex-row">
-        <div className="mb-10 mt-40 flex justify-between px-4 md:hidden">
+        <div className="mb-10 mt-40 flex justify-between px-4 md:hidden gap-2">
           {links.map((link) => {
             const isActive = pathname === link.href; // Vérifie si la route est active
 

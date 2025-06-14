@@ -49,34 +49,28 @@ export default function SignIn() {
           password,
         },
         {
-          onRequest: () => {
-            setLoading(true);
-          },
-          onResponse: () => {
-            setLoading(false);
-          },
+          onRequest: () => setLoading(true),
+          onResponse: () => {},
           onError: (ctx) => {
             toast.error(ctx.error.message);
             setErrorMessage(ctx.error.message);
+            setLoading(false);
           },
           onSuccess: async () => {
             try {
               await refreshSession();
               router.refresh();
-              
               if (from && productRaw) {
                 const product = JSON.parse(decodeURIComponent(productRaw));
-                // Vérifier si déjà dans le panier avant d'ajouter
                 if (!cart.some(item => item.priceId === product.priceId)) {
                   addToCart(product);
                 }
-                router.push("/checkout");
+                await router.push("/checkout");
               } else {
-                router.push("/auth/portal"); // ou la page par défaut
+                await router.push("/auth/portal");
               }
-            } catch (error) {
-              console.error("Erreur lors de la redirection:", error);
-              toast.error("Erreur lors de la redirection");
+            } finally {
+              setLoading(false);
             }
           },
         }
@@ -85,12 +79,12 @@ export default function SignIn() {
       if (error) {
         setErrorMessage(error.message || "Mot de passe ou email incorrect");
         toast.error(error.message);
+        setLoading(false);
       }
     } catch (error) {
       console.error("Erreur lors de la connexion:", error);
       setErrorMessage("Une erreur est survenue");
       toast.error("Une erreur est survenue");
-    } finally {
       setLoading(false);
     }
   };
@@ -105,63 +99,68 @@ export default function SignIn() {
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <form onSubmit={handleSubmit} className="grid gap-4">
-            <div className="grid gap-2">
-              <Label htmlFor="email">Email</Label>
-              <Input
-                id="email"
-                type="email"
-                placeholder="exemple@email.com"
-                required
-                onChange={(e) => setEmail(e.target.value)}
-                value={email}
-              />
-              {errorMessage && (
-                <p className="text-sm text-red-500">{errorMessage}</p>
-              )}
-            </div>
-
-            <div className="grid gap-2">
-              <div className="flex items-center">
-                <Label htmlFor="password">Mot de passe</Label>
-                <Link
-                  href="/auth/forget-password"
-                  className="ml-auto inline-block text-sm underline"
-                >
-                  Mot de passe oublié ?
-                </Link>
+          <form onSubmit={handleSubmit} className="grid gap-4" aria-busy={loading}>
+            <fieldset disabled={loading} className="contents">
+              <div className="grid gap-2">
+                <Label htmlFor="email">Email</Label>
+                <Input
+                  id="email"
+                  type="email"
+                  placeholder="exemple@email.com"
+                  required
+                  onChange={(e) => setEmail(e.target.value)}
+                  value={email}
+                />
+                {errorMessage && (
+                  <p className="text-sm text-red-500">{errorMessage}</p>
+                )}
               </div>
 
-              <Input
-                id="password"
-                type="password"
-                placeholder="mot de passe"
-                autoComplete="current-password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
-            </div>
+              <div className="grid gap-2">
+                <div className="flex items-center">
+                  <Label htmlFor="password">Mot de passe</Label>
+                  <Link
+                    href="/auth/forget-password"
+                    className="ml-auto inline-block text-sm underline"
+                  >
+                    Mot de passe oublié ?
+                  </Link>
+                </div>
 
-            <div className="flex items-center gap-2">
-              <Checkbox
-                id="remember"
-                checked={rememberMe}
-                onCheckedChange={(checked) => setRememberMe(checked as boolean)}
-              />
-              <Label htmlFor="remember">Se souvenir de moi</Label>
-            </div>
+                <Input
+                  id="password"
+                  type="password"
+                  placeholder="mot de passe"
+                  autoComplete="current-password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+              </div>
 
-            <Button
-              type="submit"
-              className="w-full"
-              disabled={loading}
-            >
-              {loading ? (
-                <Loader2 size={16} className="animate-spin" />
-              ) : (
-                "Se connecter"
-              )}
-            </Button>
+              <div className="flex items-center gap-2">
+                <Checkbox
+                  id="remember"
+                  checked={rememberMe}
+                  onCheckedChange={(checked) => setRememberMe(checked as boolean)}
+                />
+                <Label htmlFor="remember">Se souvenir de moi</Label>
+              </div>
+
+              <Button
+                type="submit"
+                className="w-full"
+                disabled={loading}
+              >
+                {loading ? (
+                  <div className="flex flex-row items-center justify-center gap-x-2">
+                    <Loader2 size={16} className="animate-spin mr-2" />
+                    Connexion en cours...
+                  </div>
+                ) : (
+                  "Se connecter"
+                )}
+              </Button>
+            </fieldset>
 
             <div className={cn("flex w-full items-center gap-2", "flex-col justify-between")}>
               <Button
@@ -222,6 +221,17 @@ export default function SignIn() {
           </form>
         </CardContent>
       </Card>
+      {loading && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50"
+        style={{ cursor: "wait" }}
+>
+          
+          <div className="flex flex-col items-center gap-2">
+            <Loader2 size={32} className="animate-spin text-white" />
+            <span className="text-white font-semibold">Connexion en cours...</span>
+          </div>
+        </div>
+      )}
     </main>
   );
 }

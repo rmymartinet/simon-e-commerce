@@ -54,14 +54,16 @@ export default async function Portal() {
 
           <div className="mt-4 grid gap-2">
             <h4 className="text-sm font-medium">Account Details</h4>
-            <div className="grid grid-cols-2 gap-2 text-sm">
-              <span className="text-muted-foreground">Email:</span>
-              <span>{user.email}</span>
+            <div className="flex flex-col gap-2 text-sm">
+           <div className="flex flex-row gap-2">
+           <span className="text-muted-foreground">Email:</span>
+           <span>{user.email}</span>
+           </div> 
               {user.name && (
-                <>
+                <div className="flex flex-row gap-2">
                   <span className="text-muted-foreground">Name:</span>
                   <span>{user.name}</span>
-                </>
+                </div>
               )}
             </div>
           </div>
@@ -80,7 +82,7 @@ export default async function Portal() {
             >
               Mon compte
             </Button>
-            <SignOutButton />
+            <SignOutButton variant="purpleBg" />
             <Link href="/auth/forget-password" className="w-full">
               <Button className="w-full">Reset Password</Button>
             </Link>
