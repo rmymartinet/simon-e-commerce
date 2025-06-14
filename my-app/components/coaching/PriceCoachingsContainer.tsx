@@ -95,7 +95,7 @@ const PriceCoachingsContainer = () => {
           />
 
           <Button
-            variant="purpleBg"
+            variant="whiteBg"
             className="w-full"
             onClick={() => {
               handleAction({
