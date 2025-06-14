@@ -102,7 +102,8 @@ function CheckoutComponent({ session }: { session: BetterAuthSession | null }) {
           </div>
 
           <Button
-      variant="blackBg"
+      variant="whiteBg"
+      className="w-full"
       onClick={() => {
         if (!userData) return;
         handlePayment(

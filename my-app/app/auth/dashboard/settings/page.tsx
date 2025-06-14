@@ -82,7 +82,7 @@ export default async function SettingsPage() {
               </div>
             </div>
 
-            <Button variant="blackBg" className="w-full sm:w-auto">
+            <Button variant="whiteBg" className="w-full">
               Sauvegarder les modifications
             </Button>
           </form>

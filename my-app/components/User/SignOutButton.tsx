@@ -26,7 +26,7 @@ export default function SignOutButton() {
   };
 
   return (
-    <Button variant="blackBg" className="w-full" onClick={handleSignOut}>
+    <Button variant="whiteBg" className="w-full" onClick={handleSignOut}>
       Déconnexion
     </Button>
   );

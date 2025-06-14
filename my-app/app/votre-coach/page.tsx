@@ -8,8 +8,6 @@ import { RefObject, useRef } from "react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import TitleComponent from "@/components/TitleComponent";
 import Overlay from "@/components/Overlay";
-import { Button } from "@/components/ui/button";
-import Link from "next/link";
 import { animateBlockReveal } from "@/utils/Animation";
 import Faq from "@/components/Faq";
 import CoachingsProgramsButtons from "@/components/CoachingsProgramsButtons";

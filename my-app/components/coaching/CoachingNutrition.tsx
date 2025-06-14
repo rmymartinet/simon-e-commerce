@@ -49,7 +49,7 @@ const CoachingNutrition = () => {
         isTextSplitLines={false}
       />
       <div className="self-center">
-        <Button variant={"blackBg"}>
+        <Button variant="whiteBg" className="w-full">
           <Link href="/pricing?filter=coaching">Découvrir nos offres</Link>
         </Button>
       </div>

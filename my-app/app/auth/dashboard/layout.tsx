@@ -45,8 +45,9 @@ export default function DashboardRootLayout({
 
             return (
               <Button
-                variant={isActive ? "blackBg" : "default"}
+                variant={isActive ? "whiteBg" : "default"}
                 key={link.title}
+                className="w-full"
               >
                 <Link href={link.href}>{link.title}</Link>
               </Button>

@@ -39,7 +39,7 @@ export default async function SuccessPage() {
         </h2>
       </div>
       {session ? (
-        <Button variant="blackBg">
+        <Button variant="whiteBg">
           <Link href="/auth/dashboard">Allez sur mon compte</Link>
         </Button>
       ) : (

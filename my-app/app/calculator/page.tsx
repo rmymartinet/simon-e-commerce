@@ -1,9 +1,7 @@
 "use client";
 
 import { RefObject, useRef } from "react";
-import Link from "next/link";
 import TitleComponent from "@/components/TitleComponent";
-import { Button } from "@/components/ui/button";
 import FormCalories from "@/components/Calories/FormCalories";
 import AnimatedQuestions from "@/components/AnimatedQuestions";
 import { useGSAP } from "@gsap/react";

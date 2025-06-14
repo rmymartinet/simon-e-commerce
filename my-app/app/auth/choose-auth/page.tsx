@@ -47,7 +47,7 @@ const ChooseAuthContent = () => {
 
           <div className="flex w-full flex-col gap-4">
             <Link href={`/auth/signin?${params}`}>
-              <Button className="w-full py-6 text-lg" variant="blackBg">
+              <Button className="w-full" variant="whiteBg">
                 Se connecter
               </Button>
             </Link>
