@@ -8,9 +8,6 @@ gsap.registerPlugin(useGSAP);
 
 const ProgramOverview = () => {
 
-
-
-
   return (
     <section
       className="flex w-screen max-w-[90vw] flex-col items-center overflow-hidden rounded-3xl px-4 py-20 relative"

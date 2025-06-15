@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { useRef } from "react";
 import { useGSAP } from "@gsap/react";
 import {  animateBlockRevealOnScroll } from "@/utils/Animation";
+import Link from "next/link";
 
 const PROGRAMS = [
   {
@@ -57,7 +58,9 @@ const ProgramCards = () => {
             quality={100}
             priority
           />
-          <Button variant="whiteBg" className="w-max">Découvrir</Button>
+          <Button variant="whiteBg" className="w-max">
+            <Link href="/programs">Découvrir</Link>
+          </Button>
         </div>
       ))}
     </div>

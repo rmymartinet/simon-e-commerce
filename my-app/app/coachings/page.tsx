@@ -9,7 +9,6 @@ import AfterPurchaseSteps from "@/components/AfterPurchaseSteps";
 import { coachingsSteps } from "../data/afterPurchaseSteps";
 import Faq from "@/components/Faq/Faq";
 
-
 export default function CoachingsPage() {
 
 
@@ -21,7 +20,8 @@ export default function CoachingsPage() {
         titleIndication="coachings"
         subtitle="Découvrez nos coachings pour atteindre vos objectifs."
       />
-   <PriceCoachingsContainer />
+      
+      <PriceCoachingsContainer />
       <PremiumCoachingsSlider />
       <CoachingsApps/>
       <BeforeAfterPhoto />
