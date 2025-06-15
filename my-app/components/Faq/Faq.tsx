@@ -75,7 +75,7 @@ export default function Faq() {
   }, []);
 
   return (
-    <section className="relative mx-auto pt-12 mt-[20vh]">
+    <section className="relative mx-auto pt-12">
       <div className="max-w-7xl px-4">
         <TitleComponent
           title="Questions fréquentes"
