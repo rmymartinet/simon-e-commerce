@@ -24,7 +24,9 @@ const buttonVariants = cva(
         purpleBg:
           "h-12 rounded-xl bg-[var(--purple-color)] px-[1rem] py-[2rem] font-bold text-secondary transition-transform duration-900 hover:scale-[1.02]",
         whiteBg:"h-12 rounded-xl bg-[var(--purple-color)] px-[1rem] py-[2rem] font-bold text-secondary transition-transform duration-900 hover:scale-[1.02]",
-        
+        whitetopurple:
+          "h-12 rounded-xl bg-white px-[1rem] py-[2rem] font-bold text-black transition-transform duration-900 hover:scale-[1.02]",
+
         glassmorph:
           "glassmorph h-12 rounded bg-primary px-6 font-medium text-secondary transition-transform duration-500 hover:scale-[0.97]",
       },
@@ -57,7 +59,9 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       if (variant !== "purpleBg" && variant !== "whiteBg") return;
 
       if (overlayRef.current) {
-        gsap.to(overlayRef.current, { height: "100%", duration: 0.4, ease: "power2.out" });
+
+          gsap.to(overlayRef.current, { height: "100%", duration: 0.4, ease: "power2.out" });
+        
       }
       if (textRef.current) {
         const tl = gsap.timeline();
@@ -74,7 +78,9 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       if (variant !== "purpleBg" && variant !== "whiteBg") return;
 
       if (overlayRef.current) {
-        gsap.to(overlayRef.current, { height: "0%", duration: 0.4, ease: "power2.in" });
+       
+          gsap.to(overlayRef.current, { height: "0%", duration: 0.4, ease: "power2.in" });
+        
       }
       if (textRef.current) {
         const tl = gsap.timeline();
@@ -101,7 +107,9 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         {(variant === "purpleBg" || variant === "whiteBg") && (
           <div
             ref={overlayRef}
-            className={`absolute left-0 bottom-0 w-full h-0 z-0 transition-colors duration-300 ${
+            className={`absolute left-0 bottom-0 w-full ${
+              variant === "purpleBg" ? "h-full" : "h-0"
+            } z-0 transition-colors duration-300 ${
               variant === "purpleBg" ? "bg-black" : "bg-white"
             }`}
           />

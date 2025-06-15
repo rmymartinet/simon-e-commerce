@@ -94,6 +94,15 @@ const config: Config = {
   			sm: 'calc(var(--radius) - 4px)'
   		},
   		keyframes: {
+			ring: {
+				'0%, 100%': { transform: 'rotate(0deg)' },
+				'25%': { transform: 'rotate(-15deg)' },
+				'75%': { transform: 'rotate(15deg)' },
+			  },
+			  bounce: {
+				'0%, 100%': { transform: 'translateY(0)' },
+				'50%': { transform: 'translateY(5px)' },
+			  },
   			'accordion-down': {
   				from: {
   					height: '0'

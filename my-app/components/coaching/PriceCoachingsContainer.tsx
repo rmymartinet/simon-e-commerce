@@ -9,7 +9,6 @@ import { useGSAP } from "@gsap/react";
 import { animateBlockReveal } from "@/utils/Animation";
 import { RefObject } from "react";
 import { BetterAuthSession } from "@/types/types"
-import CoachingCard from "./CoachingCard";
 
 
 const PriceCoachingsContainer = () => {
@@ -35,49 +34,44 @@ const PriceCoachingsContainer = () => {
   
 
     return (
-        <section ref={priceCoachingsRef} className="relative mb-10 grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-40 overflow-hidden rounded-3xl p-4 md:p-8 bg-gradient-to-br from-black via-zinc-900 to-zinc-800">
-        <div className="flex w-full md:w-[600px] flex-col items-center gap-6 md:gap-10 justify-self-center rounded-2xl relative p-6 md:p-8 text-black overflow-hidden text-white">
+        <section ref={priceCoachingsRef} className="relative mb-10 gap-8 md:gap-40 overflow-hidden rounded-3xl p-4 md:p-8">
+            <div className="flex flex-col gap-6 md:gap-10">
+                <div className="flex flex-col gap-2">
+                    <h2 className="text-xl md:text-2xl font-bold">Choisissez votre durée</h2>
+                    <p className="text-sm md:text-lg text-[--subtext]">
+                        Vous savez déja se que vous voulez ? <br /> Sélectionnez la durée qui correspond le mieux à vos objectifs
+                    </p>
+                </div>
+                <DurationSelector
+                    onChange={setSelectedDuration}
+                    selectedDuration={selectedDuration}
+                />
 
-          <CoachingCard months={selectedCard.month as 3 | 6 | 9} />
-         
-        </div>
-        <div className="flex flex-col gap-6 md:gap-10">
-          <div className="flex flex-col gap-2">
-            <h2 className="text-xl md:text-2xl font-bold">Choisissez votre durée</h2>
-            <p className="text-sm md:text-base text-gray-600">
-              Sélectionnez la durée qui correspond le mieux à vos objectifs
-            </p>
-          </div>
-          <DurationSelector
-            onChange={setSelectedDuration}
-            selectedDuration={selectedDuration}
-          />
-
-          <Button
-            variant="whiteBg"
-            className="w-full"
-            onClick={() => {
-              handleAction({
-                productData: {
-                  ...selectedCard,
-                  dayPrice: selectedCard.dayPrice.toString()
-                },
-                filterName: "coachings",
-              });
-            }}
-            disabled={loading}
-          >
-            {loading ? (
-              <div className="flex items-center gap-2">
-                <Loader2 className="h-4 w-4 animate-spin" />
-                <span>Chargement...</span>
-              </div>
-            ) : (
-              "Acheter"
-            )}
-          </Button>
-        </div>
-      </section>
+                <Button
+                    variant="whiteBg"
+                    className="w-full"
+                    onClick={() => {
+                        handleAction({
+                            productData: {
+                                ...selectedCard,
+                                dayPrice: selectedCard.dayPrice.toString()
+                            },
+                            filterName: "coachings",
+                        });
+                    }}
+                    disabled={loading}
+                >
+                    {loading ? (
+                        <div className="flex items-center gap-2">
+                            <Loader2 className="h-4 w-4 animate-spin" />
+                            <span>Chargement...</span>
+                        </div>
+                    ) : (
+                        "Acheter"
+                    )}
+                </Button>
+            </div>
+        </section>
     )
 }
 

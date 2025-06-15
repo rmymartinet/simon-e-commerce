@@ -3,12 +3,12 @@ import gsap from "gsap";
 import {  RefObject, useRef } from "react";
 import CoachingsProgramsButtons from "../CoachingsProgramsButtons";
 import { animateBlockReveal } from "@/utils/Animation";
+import CalendlyCallButton from "../Calendly/CalendlyCallButton";
 
 gsap.registerPlugin(useGSAP);
 
-const Header = () => {
+const Header = ({setIsOpen}: {setIsOpen: (isOpen: boolean) => void}) => {
   const containerRef = useRef(null);
-
   useGSAP(() => {
     if (containerRef.current) {
       animateBlockReveal(containerRef as unknown as RefObject<HTMLDivElement>, 0.5);
@@ -21,12 +21,6 @@ const Header = () => {
       className="relative flex w-screen flex-col justify-end overflow-hidden"
     >
       <div className="z-50 mb-4 flex h-screen w-full flex-col items-center justify-center">
-        <div
-      
-          className="absolute left-1/2 top-5 -translate-x-1/2 overflow-hidden"
-        >
-          <h1 className="uppercase">SMartinet coaching</h1>
-        </div>
         <div className="flex flex-col items-center gap-20">
           <div className="mb-20 flex flex-col items-center gap-6">
             <h1
@@ -40,6 +34,8 @@ const Header = () => {
             <div className="mt-4 flex gap-10 md:flex-row">
             <div className="flex gap-4">
 <CoachingsProgramsButtons />
+<CalendlyCallButton setIsOpen={setIsOpen} />
+
 </div>
             </div>
           </div>

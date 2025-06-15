@@ -8,6 +8,7 @@ import CoachingsApps from "@/components/coaching/CoachingsApps";
 import AfterPurchaseSteps from "@/components/AfterPurchaseSteps";
 import { coachingsSteps } from "../data/afterPurchaseSteps";
 import Faq from "@/components/Faq/Faq";
+import CalendlyContainer from "@/components/Calendly/CalendlyContainer";
 
 export default function CoachingsPage() {
 
@@ -20,8 +21,10 @@ export default function CoachingsPage() {
         titleIndication="coachings"
         subtitle="Découvrez nos coachings pour atteindre vos objectifs."
       />
-      
-      <PriceCoachingsContainer />
+  <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+  <CalendlyContainer />
+  <PriceCoachingsContainer />
+  </div>
       <PremiumCoachingsSlider />
       <CoachingsApps/>
       <BeforeAfterPhoto />
