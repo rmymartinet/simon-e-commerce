@@ -21,7 +21,8 @@ export default async function StudioPage() {
   });
 
 
-  const isAdmin = session?.user?.email === process.env.ADMIN_EMAIL_2  || session?.user?.email === process.env.ADMIN_EMAIL_1;
+  const isAdmin = session?.user?.email === process.env.ADMIN_EMAIL_1 || session?.user?.email === process.env.ADMIN_EMAIL_2;
+
 
 
   if (!isAdmin) {

@@ -14,7 +14,7 @@ export default async function StudioLayout({
   });
 
 
-  const isAdmin = session?.user?.email === process.env.ADMIN_EMAIL_2;
+  const isAdmin = session?.user?.email === process.env.ADMIN_EMAIL_1 || session?.user?.email === process.env.ADMIN_EMAIL_2;
 
   if (!isAdmin) {
     redirect("/auth/signin");
