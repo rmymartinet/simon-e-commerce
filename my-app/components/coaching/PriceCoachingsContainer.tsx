@@ -17,13 +17,13 @@ import Overlay from "../Overlay";
 const getImageForMonth = (month: number) => {
   switch (month) {
     case 3:
-      return "/images/coachings/beginner.jpeg";
+      return "/images/coachings/beginner.png";
     case 6:
-      return "/images/coachings/intermediate.jpeg";
+      return "/images/coachings/intermediate.png";
     case 9:
-      return "/images/coachings/advanced.jpeg";
+      return "/images/coachings/advanced.png";
     default:
-      return "/images/coachings/beginner.jpeg";
+      return "/images/coachings/beginner.png";
   }
 };
 
@@ -60,27 +60,9 @@ const PriceCoachingsContainer = () => {
             width={1500}
             height={1500}
             quality={100}
-            className="absolute inset-0 -z-10 h-full w-full object-cover opacity-50"
+            className="w-[700px] h-full object-cover rounded-2xl"
           />
-          <h1 className="text-4xl md:text-5xl font-bold">
-            {selectedCard.month} mois
-          </h1>
-          <span className="text-lg md:text-xl font-bold text-violet-500">
-            Soit {selectedCard.dayPrice}€/jour
-          </span>
-          <ul className="flex flex-col gap-2 w-full">
-            {selectedCard.includes.map((feature, index) => (
-              <div
-                key={index}
-                className="flex items-center gap-2 font-semibold sm:gap-3"
-              >
-                <div className="flex items-center justify-center w-6 h-6 rounded-full bg-violet-500">
-                  <IoCheckmarkOutline className="text-base text-white sm:text-lg" />
-                </div>
-                <p className="text-sm sm:text-base">{feature}</p>
-              </div>
-            ))}
-          </ul>
+         
         </div>
         <div className="flex flex-col gap-6 md:gap-10">
           <div className="flex flex-col gap-2">

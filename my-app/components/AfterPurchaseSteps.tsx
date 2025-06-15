@@ -48,7 +48,7 @@ const AfterPurchaseSteps = ({ data }: { data: { title: string; description: stri
   }, [data.length]);
 
   return (
-    <section className="relative flex flex-col items-center py-20 mt-20">
+    <section className="relative flex flex-col items-center py-20 mt-20 mb-[20vh]">
       <h2 className="mb-12 text-3xl md:text-5xl font-bold text-center">
         Que se passe-t-il après votre achat ?
       </h2>
