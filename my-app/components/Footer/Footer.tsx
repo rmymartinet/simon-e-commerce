@@ -73,12 +73,6 @@ const Footer = () => {
               </div>
             </div>
             <div className="relative mt-20 text-center text-[13vw] leading-none md:mt-0 md:text-[14vw]">
-              <h1 className="slice slice-top font-extrabold uppercase leading-none text-primary">
-                smcoaching
-              </h1>
-              <h1 className="slice slice-mid font-extrabold uppercase leading-none text-primary">
-                smcoaching
-              </h1>
               <h1 className="font-extrabold uppercase leading-none text-primary">
                 smcoaching
               </h1>
