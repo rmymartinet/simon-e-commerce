@@ -9,9 +9,8 @@ import { Button } from "../ui/button";
 import { useGSAP } from "@gsap/react";
 import { animateBlockReveal } from "@/utils/Animation";
 import { RefObject } from "react";
-import { BetterAuthSession } from "@/types/types";
-import Image from "next/image";
-import Overlay from "../Overlay";
+import { BetterAuthSession } from "@/types/types"
+import CoachingCard from "./CoachingCard";
 
 function useIsMobile() {
   const [isMobile, setIsMobile] = useState(false);
@@ -62,18 +61,10 @@ const PriceCoachingsContainer = () => {
   
 
     return (
-        <section ref={priceCoachingsRef} className="relative mb-10 grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-40 overflow-hidden rounded-3xl p-4 md:p-8">
-        <BackgroundRadialColor />
-        <Overlay/>
+        <section ref={priceCoachingsRef} className="relative mb-10 grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-40 overflow-hidden rounded-3xl p-4 md:p-8 bg-gradient-to-br from-black via-zinc-900 to-zinc-800">
         <div className="flex w-full md:w-[600px] flex-col items-center gap-6 md:gap-10 justify-self-center rounded-2xl relative p-6 md:p-8 text-black overflow-hidden text-white">
-          <Image
-            src={getImageForMonth(selectedCard.month)}
-            alt="coaching"
-            width={isMobile ? 400 : 700}
-            height={isMobile ? 400 : 700}
-            quality={100}
-            className="w-full h-full object-cover rounded-2xl"
-          />
+
+          <CoachingCard months={selectedCard.month as 3 | 6 | 9} />
          
         </div>
         <div className="flex flex-col gap-6 md:gap-10">

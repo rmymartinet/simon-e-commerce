@@ -14,13 +14,13 @@ const Iphone = ({
       {title && (
         <h1 className="card padding rounded-xl text-xl font-bold">{title}</h1>
       )}
-      <div className="relative z-50 h-full overflow-hidden">
+      <div className="relative z-50 h-full ">
         <div className="relative w-full h-full flex items-center justify-center">
           <Image
             src="/images/iphonee.png"
             alt=""
-            width={420}
-            height={900}
+            width={2000}
+            height={2000}
             className="w-full h-full object-cover z-20"
             quality={100}
           />

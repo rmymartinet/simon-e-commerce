@@ -3,12 +3,12 @@ import Iphone from "../Iphone";
 
 const CoachingsApps = () => {
   return (
-    <section className="flex flex-col gap-16 py-12 relative rounded-xl">
+    <section className="flex flex-col gap-16 py-12 relative rounded-xl overflow-hidden">
       {/* VirtualGym */}
-      <div className="flex flex-col md:flex-row items-center gap-8 ">
+      <div className="flex flex-col md:flex-row items-center gap-8">
         <BackgroundRadialColor/>
         {/* Vidéo/Image à gauche */}
-        <div className="w-full md:w-1/2 flex justify-center min-h-0 overflow-hidden">
+        <div className="w-full md:w-1/2 flex justify-center min-h-0 overflow-hidden h-[80vh]">
           {/* Remplace src par ta vidéo ou image */}
           <Iphone video="/videos/exercices/exercice_change.mp4"/>
         </div>
