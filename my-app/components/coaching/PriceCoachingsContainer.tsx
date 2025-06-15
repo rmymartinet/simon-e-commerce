@@ -1,7 +1,6 @@
-import BackgroundRadialColor from "../BackgroundRadialColor";
 import DurationSelector from "./DurationSelector";
 import { Loader2 } from "lucide-react";
-import { useMemo, useRef, useState, useEffect } from "react";
+import { useMemo, useRef, useState } from "react";
 import { coachingData } from "@/app/data/cardPriceContainerData";
 import { authClient } from "@/lib/auth-client";
 import useHandleAction from "@/hooks/useHandleAction";
@@ -12,30 +11,6 @@ import { RefObject } from "react";
 import { BetterAuthSession } from "@/types/types"
 import CoachingCard from "./CoachingCard";
 
-function useIsMobile() {
-  const [isMobile, setIsMobile] = useState(false);
-  useEffect(() => {
-    const check = () => setIsMobile(window.innerWidth < 758);
-    check();
-    window.addEventListener("resize", check);
-    return () => window.removeEventListener("resize", check);
-  }, []);
-  return isMobile;
-}
-
-const getImageForMonth = (month: number) => {
-
-    switch (month) {
-      case 3:
-        return "/images/coachings/mobile_beginner.png";
-      case 6:
-        return "/images/coachings/mobile_intermediate.png";
-      case 9:
-        return "/images/coachings/mobile_advanced.png";
-      default:
-        return "/images/coachings/mobile_beginner.png";
-    }
-};
 
 const PriceCoachingsContainer = () => {
     const { data: session } = authClient.useSession();
@@ -43,7 +18,6 @@ const PriceCoachingsContainer = () => {
     const { handleAction, loading } = useHandleAction(dataSession);
     const [selectedDuration, setSelectedDuration] = useState(3);
     const priceCoachingsRef = useRef<HTMLDivElement>(null);
-    const isMobile = useIsMobile();
 
     const selectedCard = useMemo(() => 
         coachingData.find((card) => card.month === selectedDuration),

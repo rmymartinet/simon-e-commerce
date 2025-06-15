@@ -38,6 +38,7 @@ export interface CartItemProps {
   bgColor?: boolean;
   dayPrice?: string;
   quantity?: number;
+  subscription?: boolean;
 }
 
 export interface UserDataProps {

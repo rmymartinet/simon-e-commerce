@@ -16,6 +16,7 @@ export const coachingData = [
       "Testez nos services et observez les premiers changements. Parfait pour initier votre transformation de style de vie.",
     priceId: process.env.NEXT_PUBLIC_STRIPE_COACHING_BEGINNER_PRICE_ID!,
     includes: coachingIncludes3Month,
+    subscription: true,
     imageUrl: "/images/coachings/beginner.jpeg",
   },
   {
@@ -28,8 +29,10 @@ export const coachingData = [
       "Ancrez des habitudes saines et obtenez des résultats durables. Le meilleur équilibre entre durée et efficacité.",
     priceId: process.env.NEXT_PUBLIC_STRIPE_COACHING_INTERMEDIATE_PRICE_ID!,
     mostPopular: true,
+    subscription: true,
     includes: coachingIncludes6Month,
     imageUrl: "/images/coachings/intermediate.jpeg",
+
   },
   {
     type: "Coaching",
@@ -41,7 +44,8 @@ export const coachingData = [
       "Transformez-vous totalement avec un suivi intensif. L'engagement ultime pour un changement profond et pérenne.",
     priceId: process.env.NEXT_PUBLIC_STRIPE_COACHING_ADVANCED_PRICE_ID!,
     includes: coachingIncludes9Month,
-    imageUrl: "/images/coachings/advanced.jpeg",
+    subscription: true,
+    imageUrl: "/images/coaching/advanced.jpeg",
   },
 ];
 

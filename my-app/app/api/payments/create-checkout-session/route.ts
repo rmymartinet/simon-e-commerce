@@ -43,14 +43,15 @@ export async function POST(req: NextRequest) {
     console.log("Données validées:", validatedData);
 
     const { priceId, subscription, email, month, titlePlan, guest } = validatedData;
-    const isGuest = guest === true;
+
+
 
     // Vérification de l'authentification
     let userId = 'guest';
     let userEmail = email;
 
     // Si ce n'est pas un invité, on vérifie l'authentification
-    if (!isGuest) {
+    if (!guest) {
       try {
         const auth = await verifyAuth(req);
         if (auth.success && auth.user) {
@@ -71,7 +72,6 @@ export async function POST(req: NextRequest) {
         );
       }
     }
-
     if (!userEmail) {
       return NextResponse.json(
         { error: "L'email est requis pour le paiement" },
@@ -88,7 +88,7 @@ export async function POST(req: NextRequest) {
         userId,
         month: month.toString(),
         titlePlan: titlePlanString,
-        guest: isGuest ? "true" : "false"
+        guest: guest ? "true" : "false"
       },
       success_url: `${process.env.NEXT_PUBLIC_BASE_URL}/success?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${process.env.NEXT_PUBLIC_BASE_URL}/cancel`,

@@ -21,7 +21,6 @@ export const usePayment = ({ userData }: { userData?: UserDataProps } = {}) => {
     setError(null);
     setLoading(true);
 
-    console.log("userData", userData); 
 
     try {
       if (!process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY) {
@@ -34,10 +33,12 @@ export const usePayment = ({ userData }: { userData?: UserDataProps } = {}) => {
         titlePlan: Array.isArray(titlePlan) ? titlePlan : [titlePlan],
         month,
         subscription,
+        isSubscribed: userData?.isSubscribed,
         guest,
         email: email || userData?.email,
       };
 
+      console.log("requestBody", requestBody);
 
       const response = await fetch(`/api/payments/create-checkout-session`, {
         method: "POST",
