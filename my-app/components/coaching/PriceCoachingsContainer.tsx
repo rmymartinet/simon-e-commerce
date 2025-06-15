@@ -77,7 +77,7 @@ const PriceCoachingsContainer = () => {
         <section ref={priceCoachingsRef} className="relative mb-10 grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-40 overflow-hidden rounded-3xl p-4 md:p-8">
         <BackgroundRadialColor />
         <Overlay/>
-        <div className="flex w-full md:w-max flex-col items-center gap-6 md:gap-10 justify-self-center rounded-2xl relative p-6 md:p-8 text-black overflow-hidden text-white">
+        <div className="flex w-full md:w-[600px] flex-col items-center gap-6 md:gap-10 justify-self-center rounded-2xl relative p-6 md:p-8 text-black overflow-hidden text-white">
           <Image
             src={getImageForMonth(selectedCard.month, isMobile)}
             alt="coaching"
