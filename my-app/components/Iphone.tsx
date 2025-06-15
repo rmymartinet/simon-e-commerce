@@ -10,27 +10,27 @@ const Iphone = ({
   imgUrl?: string;
 }) => {
   return (
-    <div className="flex flex-col  md:h-[70vh] items-center gap-10">
+    <div className="flex flex-col w-full h-full items-center gap-10">
       {title && (
         <h1 className="card padding rounded-xl text-xl font-bold">{title}</h1>
       )}
-      <div className="relative z-50 h-full overflow-hidden lg:scale-150 xl:scale-100">
-        <div className="relative h-full w-full overflow-hidden">
+      <div className="relative z-50 h-full overflow-hidden">
+        <div className="relative w-full h-full flex items-center justify-center">
           <Image
             src="/images/iphonee.png"
             alt=""
-            width={1000}
-            height={1000}
-            className="scale z-20 h-full w-full object-cover"
+            width={420}
+            height={900}
+            className="w-full h-full object-cover z-20"
             quality={100}
           />
-          {imgUrl && (
+          {imgUrl && (  
             <Image
               src={imgUrl}
               alt=""
-              width={1000}
-              height={1000}
-              className="absolute inset-0 left-1/2 top-1/2 -z-10 flex h-[90%] w-[87%] -translate-x-1/2 -translate-y-1/2 items-center justify-center object-cover lg:h-[95%] lg:w-[90%]"
+              width={370}
+              height={740}
+              className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 h-[90%] w-[87%] object-cover z-10"
               quality={100}
             />
           )}

@@ -24,8 +24,8 @@ function useIsMobile() {
   return isMobile;
 }
 
-const getImageForMonth = (month: number, isMobile: boolean) => {
-  if (isMobile) {
+const getImageForMonth = (month: number) => {
+
     switch (month) {
       case 3:
         return "/images/coachings/mobile_beginner.png";
@@ -36,18 +36,6 @@ const getImageForMonth = (month: number, isMobile: boolean) => {
       default:
         return "/images/coachings/mobile_beginner.png";
     }
-  } else {
-    switch (month) {
-      case 3:
-        return "/images/coachings/beginner.png";
-      case 6:
-        return "/images/coachings/intermediate.png";
-      case 9:
-        return "/images/coachings/advanced.png";
-      default:
-        return "/images/coachings/beginner.png";
-    }
-  }
 };
 
 const PriceCoachingsContainer = () => {
@@ -79,7 +67,7 @@ const PriceCoachingsContainer = () => {
         <Overlay/>
         <div className="flex w-full md:w-[600px] flex-col items-center gap-6 md:gap-10 justify-self-center rounded-2xl relative p-6 md:p-8 text-black overflow-hidden text-white">
           <Image
-            src={getImageForMonth(selectedCard.month, isMobile)}
+            src={getImageForMonth(selectedCard.month)}
             alt="coaching"
             width={isMobile ? 400 : 700}
             height={isMobile ? 400 : 700}
