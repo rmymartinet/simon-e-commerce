@@ -23,7 +23,7 @@ const CoachingsApps = () => {
           </p>
         </div>
       </div>
-
+      
       {/* Food */}
       <div className="flex flex-col md:flex-row-reverse items-center gap-8">
         {/* Vidéo/Image à droite */}

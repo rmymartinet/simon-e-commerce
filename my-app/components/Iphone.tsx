@@ -14,28 +14,28 @@ const Iphone = ({
       {title && (
         <h1 className="card padding rounded-xl text-xl font-bold">{title}</h1>
       )}
-      <div className="relative z-50 h-full ">
+      <div className="relative z-50 h-full w-full max-w-[300px] mx-auto">
         <div className="relative w-full h-full flex items-center justify-center">
           <Image
             src="/images/iphonee.png"
             alt=""
-            width={2000}
-            height={2000}
-            className="w-full h-full object-cover z-20"
+            width={300}
+            height={600}
+            className="w-full h-full object-contain z-20"
             quality={100}
           />
           {imgUrl && (  
             <Image
               src={imgUrl}
               alt=""
-              width={370}
-              height={740}
-              className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 h-[90%] w-[87%] object-cover z-10"
+              width={260}
+              height={520}
+              className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 h-[90%] w-[87%] object-contain z-10"
               quality={100}
             />
           )}
           {video && (
-            <div className="absolute inset-0 left-1/2 top-1/2 -z-10 flex h-[95%] w-[90%] -translate-x-1/2 -translate-y-1/2 items-center justify-center overflow-hidden lg:h-[95%] lg:w-[88%]">
+            <div className="absolute inset-0 left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex h-[90%] w-[87%] items-center justify-center overflow-hidden">
               <video
                 autoPlay
                 playsInline
@@ -43,7 +43,7 @@ const Iphone = ({
                 muted
                 preload="auto"
                 src={video}
-                className="h-full w-full object-cover"
+                className="h-full w-full object-contain"
               ></video>
             </div>
           )}

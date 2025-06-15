@@ -13,7 +13,6 @@ export default async function StudioLayout({
     headers: headersList,
   });
 
-
   const isAdmin = session?.user?.email === process.env.ADMIN_EMAIL_1 || session?.user?.email === process.env.ADMIN_EMAIL_2;
 
   if (!isAdmin) {
