@@ -2,7 +2,7 @@ import { IoCheckmarkOutline } from "react-icons/io5";
 import BackgroundRadialColor from "../BackgroundRadialColor";
 import DurationSelector from "./DurationSelector";
 import { Loader2 } from "lucide-react";
-import { useMemo, useRef, useState } from "react";
+import { useMemo, useRef, useState, useEffect } from "react";
 import { coachingData } from "@/app/data/cardPriceContainerData";
 import { authClient } from "@/lib/auth-client";
 import useHandleAction from "@/hooks/useHandleAction";
@@ -14,16 +14,40 @@ import { BetterAuthSession } from "@/types/types";
 import Image from "next/image";
 import Overlay from "../Overlay";
 
-const getImageForMonth = (month: number) => {
-  switch (month) {
-    case 3:
-      return "/images/coachings/beginner.png";
-    case 6:
-      return "/images/coachings/intermediate.png";
-    case 9:
-      return "/images/coachings/advanced.png";
-    default:
-      return "/images/coachings/beginner.png";
+function useIsMobile() {
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < 758);
+    check();
+    window.addEventListener("resize", check);
+    return () => window.removeEventListener("resize", check);
+  }, []);
+  return isMobile;
+}
+
+const getImageForMonth = (month: number, isMobile: boolean) => {
+  if (isMobile) {
+    switch (month) {
+      case 3:
+        return "/images/coachings/mobile_beginner.png";
+      case 6:
+        return "/images/coachings/mobile_intermediate.png";
+      case 9:
+        return "/images/coachings/mobile_advanced.png";
+      default:
+        return "/images/coachings/mobile_beginner.png";
+    }
+  } else {
+    switch (month) {
+      case 3:
+        return "/images/coachings/beginner.png";
+      case 6:
+        return "/images/coachings/intermediate.png";
+      case 9:
+        return "/images/coachings/advanced.png";
+      default:
+        return "/images/coachings/beginner.png";
+    }
   }
 };
 
@@ -33,6 +57,7 @@ const PriceCoachingsContainer = () => {
     const { handleAction, loading } = useHandleAction(dataSession);
     const [selectedDuration, setSelectedDuration] = useState(3);
     const priceCoachingsRef = useRef<HTMLDivElement>(null);
+    const isMobile = useIsMobile();
 
     const selectedCard = useMemo(() => 
         coachingData.find((card) => card.month === selectedDuration),
@@ -55,12 +80,12 @@ const PriceCoachingsContainer = () => {
         <Overlay/>
         <div className="flex w-full md:w-max flex-col items-center gap-6 md:gap-10 justify-self-center rounded-2xl relative p-6 md:p-8 text-black overflow-hidden text-white">
           <Image
-            src={getImageForMonth(selectedCard.month)}
+            src={getImageForMonth(selectedCard.month, isMobile)}
             alt="coaching"
-            width={1500}
-            height={1500}
+            width={isMobile ? 400 : 700}
+            height={isMobile ? 400 : 700}
             quality={100}
-            className="w-[700px] h-full object-cover rounded-2xl"
+            className="w-full h-full object-cover rounded-2xl"
           />
          
         </div>

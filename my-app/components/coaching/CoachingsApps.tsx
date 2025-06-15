@@ -14,7 +14,7 @@ const CoachingsApps = () => {
         </div>
         {/* Texte à droite */}
         <div className="w-full md:w-1/3">
-          <h2 className="text-4xl font-bold mb-4">
+          <h2 className="text-4xl md:text-center text-left  font-bold mb-4">
             <span className="text-white">VirtuaGym</span>
           </h2>
           <p className="text-[--subtext]">
@@ -34,7 +34,7 @@ const CoachingsApps = () => {
         </div>
         {/* Texte à gauche */}
         <div className="w-full md:w-1/3">
-          <h2 className="text-4xl font-bold mb-4">
+          <h2 className="text-4xl md:text-center text-left font-bold mb-4">
             <span className="text-white">Food</span>
           </h2>
           <p className="text-[--subtext]">
