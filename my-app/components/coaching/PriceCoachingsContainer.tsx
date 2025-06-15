@@ -1,4 +1,3 @@
-import { IoCheckmarkOutline } from "react-icons/io5";
 import BackgroundRadialColor from "../BackgroundRadialColor";
 import DurationSelector from "./DurationSelector";
 import { Loader2 } from "lucide-react";
