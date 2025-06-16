@@ -88,6 +88,8 @@ export async function POST(req: NextRequest) {
         const customer = await stripe.customers.retrieve(stripeCustomerId);
         console.log("Client Stripe trouvé:", customer.id);
       } catch (error) {
+        console.log("Erreur lors de la vérification du client Stripe:", error);
+
         console.log("Client Stripe non trouvé, création d'un nouveau client");
         stripeCustomerId = null;
         // Réinitialiser le stripeCustomerId dans la base de données
