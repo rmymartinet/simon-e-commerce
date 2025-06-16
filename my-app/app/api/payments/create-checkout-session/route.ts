@@ -79,6 +79,10 @@ export async function POST(req: NextRequest) {
     }
 
     let stripeCustomerId = user?.stripeCustomerId;
+
+    console.log("stripeCustomerId", stripeCustomerId);
+
+
     if (!stripeCustomerId) {
       const customer = await stripe.customers.create({
         email: userEmail,
@@ -87,6 +91,10 @@ export async function POST(req: NextRequest) {
       stripeCustomerId = customer.id;
       // Mets à jour l'utilisateur dans la base
       if (user) {
+
+        console.log("user", user);
+        console.log("stripeCustomerId", stripeCustomerId);
+
         await prisma.user.update({
           where: { id: user.id },
           data: { stripeCustomerId },

@@ -38,6 +38,8 @@ export const usePayment = ({ userData }: { userData?: UserDataProps } = {}) => {
         email: email || userData?.email,
       };
 
+      console.log("requestBody", requestBody);
+
 
       const response = await fetch(`/api/payments/create-checkout-session`, {
         method: "POST",
