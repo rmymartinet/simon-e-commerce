@@ -39,7 +39,7 @@ const MobileNavComponent = ({ session }: NavComponentProps) => {
     pathname !== "/success" &&
     pathname !== "/cancel";
 
-  const numberOfProducts = cart.cart.length;
+  const numberOfProducts = cart.cart.reduce((total, item) => total + (item.quantity || 1), 0);
 
   const navLinks = [
     { title: "Home", link: "/" },

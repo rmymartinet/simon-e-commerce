@@ -6,32 +6,29 @@ import { prisma } from "@/lib/prisma";
 
 const stripe = new Stripe(process.env.NEXT_PUBLIC_STRIPE_SECRET_KEY!);
 
-const VALID_SUBSCRIPTION_DURATIONS = [3, 6, 9];
-
 const checkoutSchema = z.object({
-  priceId: z.union([z.string(), z.array(z.string())]),
+  lineItems: z.array(z.object({
+    priceId: z.string(),
+    quantity: z.number().min(1),
+    titlePlan: z.string(),
+    month: z.number(),
+  })),
   subscription: z.boolean(),
-  month: z.number().refine(val => !val || VALID_SUBSCRIPTION_DURATIONS.includes(val), {
-    message: "Durée de souscription invalide"
-  }),
-  titlePlan: z.union([z.string(), z.array(z.string())]),
   email: z.string().email().optional(),
   guest: z.boolean().optional()
 });
 
-function createLineItems(priceId: string | string[]) {
-  return Array.isArray(priceId)
-    ? priceId.map((id) => ({
-        price: id,
-        quantity: 1,
-      }))
-    : [{ price: priceId, quantity: 1 }];
+function createLineItems(lineItems: { priceId: string; quantity: number }[]) {
+  return lineItems.map(({ priceId, quantity }) => ({
+    price: priceId,
+    quantity,
+  }));
 }
 
-function formatTitlePlan(titlePlan: string | string[]) {
-  return Array.isArray(titlePlan)
-    ? titlePlan.filter(Boolean).join(", ") || "N/A"
-    : titlePlan || "N/A";
+function formatTitlePlan(lineItems: { titlePlan: string; quantity: number }[]) {
+  return lineItems
+    .map(item => `${item.titlePlan}${item.quantity > 1 ? ` (x${item.quantity})` : ''}`)
+    .join(", ");
 }
 
 export async function POST(req: NextRequest) {
@@ -41,7 +38,7 @@ export async function POST(req: NextRequest) {
     // Validation des entrées
     const validatedData = checkoutSchema.parse(data);
 
-    const { priceId, subscription, email, month, titlePlan, guest } = validatedData;
+    const { lineItems, subscription, email, guest } = validatedData;
 
     // Vérification de l'authentification
     let userId = 'guest';
@@ -122,14 +119,14 @@ export async function POST(req: NextRequest) {
       }
     }
 
-    const lineItems = createLineItems(priceId);
-    const titlePlanString = formatTitlePlan(titlePlan);
+    const stripeLineItems = createLineItems(lineItems);
+    const titlePlanString = formatTitlePlan(lineItems);
 
     const sessionParams: Stripe.Checkout.SessionCreateParams = {
-      line_items: lineItems,
+      line_items: stripeLineItems,
       metadata: {
         userId,
-        month: month.toString(),
+        month: lineItems[0]?.month.toString() || "0",
         titlePlan: titlePlanString,
         guest: guest ? "true" : "false"
       },

@@ -4,16 +4,15 @@ import { useCart } from "@/app/context/CartContext";
 import TitleComponent from "@/components/TitleComponent";
 import { Button } from "@/components/ui/button";
 import { usePayment } from "@/hooks/usePayment";
-import { useRemoveItem } from "@/hooks/useRemoveItem";
 import { BetterAuthSession, UserDataProps } from "@/types/types";
 import Image from "next/image";
 import { useEffect, useState } from "react";
+import { IoAdd, IoRemove, IoTrash } from "react-icons/io5";
 
 function CheckoutComponent({ session }: { session: BetterAuthSession | null }) {
   const [userData, setUserData] = useState<UserDataProps | null>(null);
-  const { cart } = useCart();
+  const { cart, removeItem, updateCartQuantity } = useCart();
   const [totalAmount, setTotalAmount] = useState<number>(0);
-  const removeItem = useRemoveItem();
   const { handlePayment } = usePayment({ userData: userData || undefined });
 
   const isGuest = !session?.user?.email;
@@ -29,12 +28,21 @@ function CheckoutComponent({ session }: { session: BetterAuthSession | null }) {
   },[])
 
   useEffect(() => {
-    const total = cart
-      .flat()
-      .reduce((acc, item) => acc + Number(item.price), 0);
+    const total = cart.reduce((acc, item) => 
+      acc + (Number(item.price) * (item.quantity || 1)), 0
+    );
     setTotalAmount(Number(total.toFixed(2)));
   }, [cart]);
 
+  const handleQuantityChange = (priceId: string, change: number) => {
+    const item = cart.find(item => item.priceId === priceId);
+    if (item) {
+      const newQuantity = (item.quantity || 1) + change;
+      if (newQuantity > 0) {
+        updateCartQuantity(priceId, newQuantity);
+      }
+    }
+  };
 
   return (
     <section className="mt-[20vh]">
@@ -47,9 +55,9 @@ function CheckoutComponent({ session }: { session: BetterAuthSession | null }) {
         <div className="flex w-full flex-col gap-10 overflow-y-auto whitespace-nowrap">
           {cart.length > 0 ? (
             <>
-              {cart.flat().map((item) => (
+              {cart.map((item) => (
                 <div
-                  key={item.titlePlan}
+                  key={item.priceId}
                   className="flex h-[20vh] w-full items-start gap-6 rounded-xl border border-white/10 bg-[--card-bg] p-4 shadow-md"
                 >
                   <div className="h-full w-[150px] overflow-hidden rounded-lg bg-[#fafafa]">
@@ -67,16 +75,32 @@ function CheckoutComponent({ session }: { session: BetterAuthSession | null }) {
                         {item.titlePlan}
                       </h3>
                       <p className="text-base font-medium text-gray-300">
-                        {item.price} €
+                        {(item.price * (item.quantity || 1)).toFixed(2)} €
                       </p>
                     </div>
                     <div className="mt-4 flex items-center justify-between text-sm text-gray-400">
-                      <p>Quantité : 1</p>
+                      <div className="flex items-center gap-3">
+                        <button
+                          onClick={() => handleQuantityChange(item.priceId!, -1)}
+                          className="rounded-full p-1 hover:bg-white/10"
+                          disabled={!item.quantity || item.quantity <= 1}
+                        >
+                          <IoRemove className="h-4 w-4" />
+                        </button>
+                        <span className="w-8 text-center">{item.quantity || 1}</span>
+                        <button
+                          onClick={() => handleQuantityChange(item.priceId!, 1)}
+                          className="rounded-full p-1 hover:bg-white/10"
+                        >
+                          <IoAdd className="h-4 w-4" />
+                        </button>
+                      </div>
                       <button
-                        onClick={() => removeItem(item.titlePlan)}
-                        className="text-red-400 underline hover:text-red-600"
+                        onClick={() => removeItem(item.priceId!)}
+                        className="flex items-center gap-1 text-red-400 hover:text-red-600"
                       >
-                        Supprimer
+                        <IoTrash className="h-4 w-4" />
+                        <span>Supprimer</span>
                       </button>
                     </div>
                   </div>
@@ -101,23 +125,20 @@ function CheckoutComponent({ session }: { session: BetterAuthSession | null }) {
           </div>
 
           <Button
-      variant="whiteBg"
-      className="w-full"
-      onClick={() => {
-        if (!userData) return;
-        handlePayment(
-          cart.map((item) => item.priceId).filter((id): id is string => !!id),
-          cart.map((item) => item.titlePlan).filter((title): title is string => !!title),
-          cart[0]?.month,
-          cart[0]?.subscription || false,
-          isGuest,         
-          session?.user?.email,
-        );
-      }}
-      disabled={cart.length === 0 || !userData}
-    >
-      Procéder au paiement
-    </Button>
+            variant="whiteBg"
+            className="w-full"
+            onClick={() => {
+              if (!userData) return;
+              handlePayment(
+                cart,
+                isGuest,
+                session?.user?.email,
+              );
+            }}
+            disabled={cart.length === 0 || !userData}
+          >
+            Procéder au paiement
+          </Button>
         </div>
       </div>
     </section>

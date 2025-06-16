@@ -61,6 +61,8 @@ export interface CartContextProps {
   setCart: React.Dispatch<React.SetStateAction<CartItemProps[]>>;
   updateCartQuantity: (itemId: string, newQuantity: number) => void;
   clearCart: () => void;
+  addToCart: (item: CartItemProps) => void;
+  removeItem: (priceId: string) => void;
 }
 
 export interface CheckoutData {

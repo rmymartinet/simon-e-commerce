@@ -3,9 +3,9 @@ import { CartItemProps } from "@/types/types";
 import Swal from "sweetalert2";
 
 export const useAddToCart = () => {
-  const { cart, setCart } = useCart();
+  const { cart, addToCart } = useCart();
 
-  const addToCart = (item: CartItemProps) => {
+  const handleAddToCart = (item: CartItemProps) => {
     const isSubscription = item.type && item.type.toLowerCase().includes("coach"); // ou autre logique pour détecter l'abonnement
     const cartHasSubscription = cart.some(
       (p) => p.type && p.type.toLowerCase().includes("coach")
@@ -34,10 +34,9 @@ export const useAddToCart = () => {
       return;
     }
 
-    // ... logique d'ajout normale ...
-    cart.push(item);
-    setCart([...cart]);
+    // Utiliser la nouvelle fonction addToCart du contexte
+    addToCart(item);
   };
 
-  return addToCart;
+  return handleAddToCart;
 };

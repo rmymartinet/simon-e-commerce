@@ -58,6 +58,52 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
 
   const [cart, setCart] = useState<CartItemProps[]>(getInitialCart);
 
+  const addToCart = (newItem: CartItemProps) => {
+    setCart((prevCart) => {
+      const existingItemIndex = prevCart.findIndex(
+        (item) => item.priceId === newItem.priceId
+      );
+
+      if (existingItemIndex !== -1) {
+        // Si l'item existe déjà, on met à jour sa quantité
+        const updatedCart = [...prevCart];
+        updatedCart[existingItemIndex] = {
+          ...updatedCart[existingItemIndex],
+          quantity: (updatedCart[existingItemIndex].quantity || 1) + 1
+        };
+        return updatedCart;
+      }
+
+      // Si c'est un nouvel item, on l'ajoute avec une quantité de 1
+      return [...prevCart, { ...newItem, quantity: 1 }];
+    });
+  };
+
+  const removeItem = (priceId: string) => {
+    setCart((prevCart) => {
+      const existingItemIndex = prevCart.findIndex(
+        (item) => item.priceId === priceId
+      );
+
+      if (existingItemIndex !== -1) {
+        const item = prevCart[existingItemIndex];
+        if (item.quantity && item.quantity > 1) {
+          // Si quantité > 1, on diminue la quantité
+          const updatedCart = [...prevCart];
+          updatedCart[existingItemIndex] = {
+            ...item,
+            quantity: item.quantity - 1
+          };
+          return updatedCart;
+        } else {
+          // Si quantité = 1, on supprime l'item
+          return prevCart.filter((_, index) => index !== existingItemIndex);
+        }
+      }
+      return prevCart;
+    });
+  };
+
   const clearCart = () => {
     setCart([]);
     if (typeof window !== "undefined" && userId) {
@@ -98,6 +144,8 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
       value={{
         cart,
         setCart,
+        addToCart,
+        removeItem,
         updateCartQuantity,
         clearCart,
       }}

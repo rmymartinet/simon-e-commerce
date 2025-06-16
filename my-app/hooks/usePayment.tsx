@@ -1,4 +1,4 @@
-import { UserDataProps } from "@/types/types";
+import { UserDataProps, CartItemProps } from "@/types/types";
 import { loadStripe } from "@stripe/stripe-js";
 import { useState } from "react";
 import Swal from "sweetalert2";
@@ -11,35 +11,36 @@ export const usePayment = ({ userData }: { userData?: UserDataProps } = {}) => {
   const [loading, setLoading] = useState(false);
 
   const handlePayment = async (
-    priceId: string | string[],
-    titlePlan: string | string[],
-    month: number | number[],
-    subscription: boolean,
+    cartItems: CartItemProps[],
     guest: boolean,
     email?: string,
   ) => {
     setError(null);
     setLoading(true);
 
-
     try {
       if (!process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY) {
         throw new Error("Configuration Stripe manquante");
       }
 
+      // Préparer les données pour Stripe en tenant compte des quantités
+      const lineItems = cartItems.map(item => ({
+        priceId: item.priceId!,
+        quantity: item.quantity || 1,
+        titlePlan: item.titlePlan,
+        month: item.month,
+      }));
+
       const requestBody = {
         userId: userData?.id,
-        priceId: Array.isArray(priceId) ? priceId : [priceId],
-        titlePlan: Array.isArray(titlePlan) ? titlePlan : [titlePlan],
-        month,
-        subscription,
+        lineItems,
+        subscription: cartItems[0]?.subscription || false,
         isSubscribed: userData?.isSubscribed,
         guest,
         email: email || userData?.email,
       };
 
       console.log("requestBody", requestBody);
-
 
       const response = await fetch(`/api/payments/create-checkout-session`, {
         method: "POST",
@@ -52,7 +53,6 @@ export const usePayment = ({ userData }: { userData?: UserDataProps } = {}) => {
       });
 
       const data = await response.json();
-
 
       if (!response.ok) {
         console.error("Erreur de réponse:", data);

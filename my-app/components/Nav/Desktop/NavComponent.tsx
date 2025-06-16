@@ -23,7 +23,7 @@ const NavComponent = () => {
   const cart = useCart();
   const { session } = useAuth();
 
-  const numberOfProducts = cart.cart.length;
+  const numberOfProducts = cart.cart.reduce((total, item) => total + (item.quantity || 1), 0);
 
   const isDisplayNavBar =
     pathname !== "/success" &&
