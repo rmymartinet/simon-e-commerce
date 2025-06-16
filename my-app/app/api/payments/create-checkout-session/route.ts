@@ -80,25 +80,43 @@ export async function POST(req: NextRequest) {
 
     let stripeCustomerId = user?.stripeCustomerId;
 
-    console.log("stripeCustomerId", stripeCustomerId);
+    console.log("Vérification du stripeCustomerId:", stripeCustomerId);
 
+    // Vérifier si le stripeCustomerId existe dans Stripe
+    if (stripeCustomerId) {
+      try {
+        const customer = await stripe.customers.retrieve(stripeCustomerId);
+        console.log("Client Stripe trouvé:", customer.id);
+      } catch (error) {
+        console.log("Client Stripe non trouvé, création d'un nouveau client");
+        stripeCustomerId = null;
+        // Réinitialiser le stripeCustomerId dans la base de données
+        if (user) {
+          await prisma.user.update({
+            where: { id: user.id },
+            data: { stripeCustomerId: null },
+          });
+        }
+      }
+    }
 
+    // Créer un nouveau client si nécessaire
     if (!stripeCustomerId) {
+      console.log("Création d'un nouveau client Stripe pour:", userEmail);
       const customer = await stripe.customers.create({
         email: userEmail,
         name: user?.name || "",
       });
       stripeCustomerId = customer.id;
-      // Mets à jour l'utilisateur dans la base
+      console.log("Nouveau client Stripe créé:", stripeCustomerId);
+      
+      // Mettre à jour l'utilisateur dans la base
       if (user) {
-
-        console.log("user", user);
-        console.log("stripeCustomerId", stripeCustomerId);
-
         await prisma.user.update({
           where: { id: user.id },
           data: { stripeCustomerId },
         });
+        console.log("Base de données mise à jour avec le nouveau stripeCustomerId");
       }
     }
 
