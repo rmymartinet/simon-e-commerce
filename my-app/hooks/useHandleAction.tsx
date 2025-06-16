@@ -44,7 +44,7 @@ export default function useHandleAction(session: BetterAuthSession | null) {
         console.error("Aucun produit dans le panier.");
         return;
       }
-
+      
       // Cas non connecté
       if (!session && filterName === "coachings") {
         setCheckoutData({
