@@ -9,8 +9,6 @@ import { useGSAP } from "@gsap/react";
 import { animateBlockReveal } from "@/utils/Animation";
 import { RefObject } from "react";
 import { BetterAuthSession } from "@/types/types"
-import { prisma } from "@/lib/prisma";
-
 
 const PriceCoachingsContainer = () => {
     const { data: session } = authClient.useSession();
@@ -39,7 +37,7 @@ const PriceCoachingsContainer = () => {
                 <div className="flex flex-col gap-2">
                     <h2 className="text-xl md:text-2xl font-bold">Choisissez votre durée</h2>
                     <p className="text-sm md:text-lg text-[--subtext]">
-                        Vous savez déja se que vous voulez ? <br /> Sélectionnez la durée qui correspond le mieux à vos objectifs
+                    Vous savez déja se que vous voulez ? <br /> Sélectionnez la durée qui correspond le mieux à vos objectifs
                     </p>
                 </div>
                 <DurationSelector
