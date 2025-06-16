@@ -31,12 +31,12 @@ const PROTECTED_ROUTES = [
 const securityHeaders = {
   'Content-Security-Policy': 
     "default-src 'self'; " +
-    "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://js.stripe.com https://*.sanity.io https://*.sanity-cdn.com; " +
+    "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://js.stripe.com https://*.sanity.io https://*.sanity-cdn.com https://assets.calendly.com; " +
     "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; " +
     "img-src 'self' data: https:; " +
     "font-src 'self' https://fonts.gstatic.com; " +
     "connect-src 'self' https://api.stripe.com https://*.stripe.com https://*.sanity.io https://*.sanity-cdn.com; " +
-    "frame-src 'self' https://js.stripe.com https://*.sanity.io;",
+    "frame-src 'self' https://js.stripe.com https://*.sanity.io https://calendly.com;",
   'X-Content-Type-Options': 'nosniff',
   'X-Frame-Options': 'DENY',
   'X-XSS-Protection': '1; mode=block',

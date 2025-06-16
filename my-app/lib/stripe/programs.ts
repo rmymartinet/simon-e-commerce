@@ -1,22 +1,24 @@
 import Stripe from "stripe";
 import { prisma } from "../prisma";
-import { sendProgramEmail } from "../mailer";
+  import { sendProgramEmail } from "../mailer";
 
 export async function handleProgram(
   existingUser: { id: string; email: string },
   session: Stripe.Checkout.Session,
 ) {
+
   await prisma.user.update({
     where: { id: existingUser.id },
     data: {
-      isSubscribed: session.metadata?.subscription ? true : false,
       stripeCustomerId:
         typeof session.customer === "string" ? session.customer : null,
     },
   });
 
-  const email = session.customer_details?.email || existingUser.email || "";
+  const email = existingUser.email
   const programTitle = session.metadata?.titlePlan as string;
+
+
 
   await sendProgramEmail(email, programTitle);
 
@@ -26,7 +28,7 @@ export async function handleProgram(
 
   return prisma.purchase.create({
     data: {
-      email, // ✅ obligatoire si le champ est non nullable dans Prisma
+      email: existingUser.email, // ✅ obligatoire si le champ est non nullable dans Prisma
       userId: existingUser.id,
       amount: session.amount_total ? session.amount_total / 100 : 0,
       status: "completed",

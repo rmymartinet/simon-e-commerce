@@ -11,21 +11,23 @@ dotenv.config();
 
 const resend = new Resend(process.env.NEXT_RESEND_API_KEY);
 
+
 export async function sendProgramEmail(
   email: string,
   programTitles: string[] | string,
 ) {
+
   const isProgramTitlesArray = Array.isArray(programTitles)
     ? programTitles
     : programTitles.split(",").map((title) => title.trim());
 
   const pdfLinks: { [key: string]: string } = {
     Débutant:
-      "https://asset.cloudinary.com/dnkhbxpji/d3e19a9781fa2dcbeace055a38040c74",
+      "https://res.cloudinary.com/dnkhbxpji/image/upload/v1738186631/Programmes_de_musculation_pour_les_de%CC%81butants._oh73ea.pdf",
     Intermédiaire:
-      "https://asset.cloudinary.com/dnkhbxpji/fa1add14f226724bf445fdcb490c8386",
+      "https://res.cloudinary.com/dnkhbxpji/image/upload/v1738186609/Programmes_de_musculation_pour_les_interme%CC%81diaires._qc1rnz.pdf",
     Avancé:
-      "https://asset.cloudinary.com/dnkhbxpji/ce505e576514b559f3f62ee1ef1c9dcc",
+      "https://res.cloudinary.com/dnkhbxpji/image/upload/v1738184043/Programmes_de_musculation_pour_les_avance%CC%81_e_s._1_tqz2uw.pdf",
   };
 
   const programs = isProgramTitlesArray.map((title) => {

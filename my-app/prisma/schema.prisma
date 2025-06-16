@@ -15,7 +15,7 @@ model User {
   image                 String?
   createdAt             DateTime
   updatedAt             DateTime
-  stripeCustomerId      String?            @map("stripe_customer_id")
+  stripeCustomerId      String?            @map("stripe_customer_id") @unique
   isSubscribed          Boolean            @default(false)
   subscriptionId        String? // ← peut être utile
   subscriptionStartDate DateTime? // ✅ à ajouter

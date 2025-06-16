@@ -59,7 +59,6 @@ async function handleCheckoutSession(session: Stripe.Checkout.Session) {
 
 async function handleSubscriptionDeletion(user: User, subscription: Stripe.Subscription) {
   try {
-    console.log(`Starting subscription deletion for user ${user.id} and subscription ${subscription.id}`);
     
     const result = await prisma.$transaction(async (tx) => {
       // Supprimer les achats liés
@@ -69,7 +68,6 @@ async function handleSubscriptionDeletion(user: User, subscription: Stripe.Subsc
           subscriptionId: subscription.id,
         },
       });
-      console.log(`Deleted ${deletedPurchases.count} purchases`);
 
       // Mettre à jour l'utilisateur
       const updatedUser = await tx.user.update({
@@ -80,12 +78,10 @@ async function handleSubscriptionDeletion(user: User, subscription: Stripe.Subsc
           subscriptionId: null,
         },
       });
-      console.log(`Updated user ${user.id} subscription status`);
 
       return { deletedPurchases, updatedUser };
     });
 
-    console.log('Transaction completed successfully:', result);
     return result;
   } catch (error) {
     console.error('Error in subscription deletion transaction:', error);
@@ -94,6 +90,7 @@ async function handleSubscriptionDeletion(user: User, subscription: Stripe.Subsc
 }
 
 export async function POST(req: Request) {
+  console.log("Début du webhook Stripe");
   const body = await req.text();
   const headersList = await headers();
   const sig = headersList.get("stripe-signature");
@@ -148,18 +145,49 @@ export async function POST(req: Request) {
 
       case "payment_intent.succeeded": {
         const paymentIntent = event.data.object as Stripe.PaymentIntent;
-        // Mettre à jour le statut du paiement dans la base de données
+        console.log("paymentIntent reçu :", paymentIntent);
+
+        if (!paymentIntent.customer) {
+          console.warn("paymentIntent.customer est null ou undefined !");
+          break;
+        }
+
+        // On retrouve l'utilisateur à partir du stripeCustomerId
+        const user = await prisma.user.findFirst({
+          where: { stripeCustomerId: paymentIntent.customer as string }
+        });
+
+        if (!user) {
+          const email = paymentIntent.receipt_email || 'inconnu';
+          console.warn("Aucun utilisateur trouvé pour ce customer Stripe :", paymentIntent.customer, "Email associé :", email);
+          break;
+        }
+
+        // On met à jour les achats de cet utilisateur
         await prisma.purchase.updateMany({
-          where: { customerId: paymentIntent.customer as string },
+          where: { userId: user.id, customerId: paymentIntent.customer as string },
           data: { status: "paid" },
         });
+
         break;
       }
 
       case "payment_intent.payment_failed": {
         const paymentIntent = event.data.object as Stripe.PaymentIntent;
+        if (!paymentIntent.customer) {
+          console.warn("paymentIntent.customer est null ou undefined !");
+          break;
+        }
+        const user = await prisma.user.findFirst({
+          where: { stripeCustomerId: paymentIntent.customer as string }
+        });
+        if (!user) {
+          const email = paymentIntent.receipt_email || 'inconnu';
+          console.warn("Aucun utilisateur trouvé pour ce customer Stripe :", paymentIntent.customer, "Email associé :", email);
+          break;
+        }
         await prisma.purchase.updateMany({
-          where: { customerId: paymentIntent.customer as string },
+          where: { userId: user.id, customerId: paymentIntent.customer as string },
           data: { status: "failed" },
         });
         break;
@@ -171,7 +199,7 @@ export async function POST(req: Request) {
       { status: 200 }
     );
   } catch (error) {
-    console.error("Error processing webhook:", error);
+    console.error("Erreur dans le webhook Stripe :", error);
     return new Response(
       JSON.stringify({ 
         error: "Internal server error",

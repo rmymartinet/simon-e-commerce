@@ -44,7 +44,7 @@ export default async function SuccessPage() {
         </Button>
       ) : (
         <Button variant="whiteBg">
-          <Link href="/auth/compte">Home</Link>
+          <Link href="/">Home</Link>
         </Button>
       )}
     </main>

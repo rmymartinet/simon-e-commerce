@@ -14,10 +14,9 @@ const ForgetPasswordClient = () => {
   if (!token) {
     return (
       <div className="mx-auto w-full max-w-md p-4 h-screen flex flex-col items-center justify-center">
-        <h1 className="mb-4 text-2xl font-bold">Reset Password</h1>
+        <h1 className="mb-4 text-2xl font-bold">Réinitialiser votre mot de passe</h1>
         <p className="mb-4 text-sm text-[--subtext] text-center">
-          Enter your email address and we’ll send you a link to reset your
-          password.
+          Entrez votre email et nous vous enverrons un lien pour réinitialiser votre mot de passe.
         </p>
 
         <form
@@ -69,7 +68,7 @@ const ForgetPasswordClient = () => {
             required
             placeholder="name@example.com"
           />
-          <Button type="submit" variant="whiteBg" className="w-full">Send Reset Link</Button>
+          <Button type="submit" variant="whiteBg" className="w-full">Envoyer le lien de réinitialisation</Button>
         </form>
       </div>
     );
@@ -77,10 +76,9 @@ const ForgetPasswordClient = () => {
 
   return (
     <div className="mx-auto w-full max-w-md p-4">
-      <h1 className="mb-4 text-2xl font-bold">Reset Password</h1>
+      <h1 className="mb-4 text-2xl font-bold">Réinitialiser votre mot de passe</h1>
       <p className="mb-4 text-sm text-muted-foreground">
-        Enter your email address and we’ll send you a link to reset your
-        password.
+        Entrez votre email et nous vous enverrons un lien pour réinitialiser votre mot de passe.
       </p>
 
       <form
@@ -124,7 +122,7 @@ const ForgetPasswordClient = () => {
           required
           placeholder="new password"
         />
-        <Button type="submit">Reset Password</Button>
+        <Button type="submit">Réinitialiser votre mot de passe</Button>
       </form>
     </div>
   );

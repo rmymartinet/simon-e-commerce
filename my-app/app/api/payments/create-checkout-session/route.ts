@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import Stripe from "stripe";
 import { verifyAuth } from "@/lib/auth-utils";
 import { z } from 'zod';
+import { prisma } from "@/lib/prisma";
 
 const stripe = new Stripe(process.env.NEXT_PUBLIC_STRIPE_SECRET_KEY!);
 
@@ -36,19 +37,16 @@ function formatTitlePlan(titlePlan: string | string[]) {
 export async function POST(req: NextRequest) {
   try {
     const data = await req.json();
-    console.log("Données reçues:", data);
     
     // Validation des entrées
     const validatedData = checkoutSchema.parse(data);
-    console.log("Données validées:", validatedData);
 
     const { priceId, subscription, email, month, titlePlan, guest } = validatedData;
-
-
 
     // Vérification de l'authentification
     let userId = 'guest';
     let userEmail = email;
+    let user = null;
 
     // Si ce n'est pas un invité, on vérifie l'authentification
     if (!guest) {
@@ -57,6 +55,7 @@ export async function POST(req: NextRequest) {
         if (auth.success && auth.user) {
           userId = auth.user.id;
           userEmail = auth.user.email;
+          user = auth.user;
         } else {
           console.error("Échec de l'authentification:", auth.error);
           return NextResponse.json(
@@ -79,10 +78,26 @@ export async function POST(req: NextRequest) {
       );
     }
 
+    let stripeCustomerId = user?.stripeCustomerId;
+    if (!stripeCustomerId) {
+      const customer = await stripe.customers.create({
+        email: userEmail,
+        name: user?.name || "",
+      });
+      stripeCustomerId = customer.id;
+      // Mets à jour l'utilisateur dans la base
+      if (user) {
+        await prisma.user.update({
+          where: { id: user.id },
+          data: { stripeCustomerId },
+        });
+      }
+    }
+
     const lineItems = createLineItems(priceId);
     const titlePlanString = formatTitlePlan(titlePlan);
 
-    const baseSessionConfig = {
+    const sessionParams: Stripe.Checkout.SessionCreateParams = {
       line_items: lineItems,
       metadata: {
         userId,
@@ -92,13 +107,18 @@ export async function POST(req: NextRequest) {
       },
       success_url: `${process.env.NEXT_PUBLIC_BASE_URL}/success?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${process.env.NEXT_PUBLIC_BASE_URL}/cancel`,
-      customer_email: userEmail,
     };
+
+    if (stripeCustomerId) {
+      sessionParams.customer = stripeCustomerId;
+    } else {
+      sessionParams.customer_email = userEmail;
+    }
 
     const session = await stripe.checkout.sessions.create(
       subscription
         ? {
-            ...baseSessionConfig,
+            ...sessionParams,
             payment_method_types: ["sepa_debit"],
             mode: "subscription",
             allow_promotion_codes: true,
@@ -106,12 +126,12 @@ export async function POST(req: NextRequest) {
               enabled: true,
             },
             metadata: {
-              ...baseSessionConfig.metadata,
+              ...sessionParams.metadata,
               subscription: "true",
             },
           }
         : {
-            ...baseSessionConfig,
+            ...sessionParams,
             payment_method_types: ["card"],
             mode: "payment",
           }
