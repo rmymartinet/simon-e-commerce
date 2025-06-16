@@ -31,7 +31,7 @@ export default async function CalendarPage() {
             Aucun abonnement actif
           </h2>
           <p className="mt-2 text-gray-400">
-            Vous n'avez pas encore de coaching actif. Activez votre abonnement
+            Vous n&apos;avez pas encore de coaching actif. Activez votre abonnement
             pour accéder à votre suivi personnalisé et débloquer toutes les
             fonctionnalités !
           </p>
