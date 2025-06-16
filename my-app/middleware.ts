@@ -23,7 +23,7 @@ const PROTECTED_ROUTES = [
   '/api/payments',
   '/api/invoices',
   '/api/user',
-  '/dashboard',
+  '/compte',
   '/studio',
 ] as const;
 
@@ -98,7 +98,7 @@ export async function middleware(request: NextRequest) {
     // Vérification supplémentaire pour les routes protégées
     if (PROTECTED_ROUTES.some(route => path.startsWith(route))) {
       const userData = await response.json();
-      if (!userData?.isSubscribed && path.startsWith('/dashboard')) {
+      if (!userData?.isSubscribed && path.startsWith('/compte')) {
         return NextResponse.redirect(new URL('/programs', request.url));
       }
     }
@@ -131,7 +131,7 @@ export const config = {
   matcher: [
     '/api/:path*',
     '/studio/:path*',
-    '/dashboard/:path*',
+    '/compte/:path*',
     '/auth/:path*',
     '/programs/:path*',
     '/coachings/:path*'
