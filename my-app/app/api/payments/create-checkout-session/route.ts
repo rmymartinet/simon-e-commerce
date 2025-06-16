@@ -77,17 +77,13 @@ export async function POST(req: NextRequest) {
 
     let stripeCustomerId = user?.stripeCustomerId;
 
-    console.log("Vérification du stripeCustomerId:", stripeCustomerId);
 
     // Vérifier si le stripeCustomerId existe dans Stripe
     if (stripeCustomerId) {
       try {
-        const customer = await stripe.customers.retrieve(stripeCustomerId);
-        console.log("Client Stripe trouvé:", customer.id);
+        await stripe.customers.retrieve(stripeCustomerId);
       } catch (error) {
-        console.log("Erreur lors de la vérification du client Stripe:", error);
 
-        console.log("Client Stripe non trouvé, création d'un nouveau client");
         stripeCustomerId = null;
         // Réinitialiser le stripeCustomerId dans la base de données
         if (user) {
