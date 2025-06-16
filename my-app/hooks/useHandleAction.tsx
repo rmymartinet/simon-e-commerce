@@ -46,7 +46,7 @@ export default function useHandleAction(session: BetterAuthSession | null) {
       }
 
       // Cas non connecté
-      if (!session) {
+      if (!session && filterName === "coachings") {
         setCheckoutData({
           productData: products,
           filterName,
@@ -101,12 +101,14 @@ export default function useHandleAction(session: BetterAuthSession | null) {
         total: products.reduce((acc, item) => acc + Number(item.price), 0),
       });
 
+
       const params = new URLSearchParams({
         from: filterName,
         product: encodeURIComponent(JSON.stringify(products[0])),
       });
 
       if (filterName === "programmes") {
+        console.log("PROGRAMMES")
         router.push(`/auth/choose-auth?${params.toString()}`);
       }
     } finally {
