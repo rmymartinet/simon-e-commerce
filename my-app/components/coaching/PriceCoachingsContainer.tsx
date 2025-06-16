@@ -9,6 +9,7 @@ import { useGSAP } from "@gsap/react";
 import { animateBlockReveal } from "@/utils/Animation";
 import { RefObject } from "react";
 import { BetterAuthSession } from "@/types/types"
+import { prisma } from "@/lib/prisma";
 
 
 const PriceCoachingsContainer = () => {
@@ -31,7 +32,6 @@ const PriceCoachingsContainer = () => {
 
     if (!selectedCard) return null;
 
-  
 
     return (
         <section ref={priceCoachingsRef} className="relative mb-10 gap-8 md:gap-40 overflow-hidden rounded-3xl p-4 md:p-8">

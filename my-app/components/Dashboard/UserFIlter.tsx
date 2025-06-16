@@ -1,3 +1,5 @@
+import { Button } from "../ui/button";
+
 const UserFilter = ({
   isProgram,
   setIsProgram,
@@ -7,18 +9,18 @@ const UserFilter = ({
 }) => {
   return (
     <div className=" flex items-center gap-10 self-end">
-      <button
+      <Button
+        variant={isProgram === "program" ? "whiteBg" : "default"}
         onClick={() => setIsProgram("program")}
-        className={`px-4 py-2 ${isProgram === "program" ? "bg-button-gradient" : "bg-black opacity-50"} rounded-xl`}
       >
         Programme
-      </button>
-      <button
+      </Button>
+      <Button
+        variant={isProgram === "subscription" ? "whiteBg" : "default"}
         onClick={() => setIsProgram("subscription")}
-        className={`px-4 py-2 ${isProgram === "subscription" ? "bg-button-gradient" : "bg-black opacity-50"} rounded-xl`}
       >
         Abonnement
-      </button>
+      </Button>
     </div>
   );
 };

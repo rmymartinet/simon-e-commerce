@@ -1,5 +1,6 @@
 import { UserDataProps } from "@/types/types";
 import { useState } from "react";
+import { Button } from "../ui/button";
 
 const UserProfile = ({ userData }: { userData: UserDataProps }) => {
   const [isEditing, setIsEditing] = useState(false);
@@ -75,19 +76,21 @@ const UserProfile = ({ userData }: { userData: UserDataProps }) => {
         )}
       </div>
       {isEditing ? (
-        <button
+        <Button
           onClick={handleUpdateProfile}
+          variant="whiteBg"
           className="w-max self-end rounded-md bg-button-gradient px-4 py-2 font-bold text-white"
         >
           Enregistrer
-        </button>
+        </Button>
       ) : (
-        <button
+        <Button
           onClick={() => setIsEditing(true)}
+          variant="whiteBg"
           className="mt-10 w-max self-end rounded-md bg-button-gradient px-4 py-2 font-bold text-white"
         >
           Gérer
-        </button>
+        </Button>
       )}
     </div>
   );

@@ -17,22 +17,22 @@ import {
 const items = [
   {
     title: "Accueil",
-    url: "/auth/dashboard",
+    url: "/auth/compte",
     icon: Home,
   },
   {
     title: "Factures",
-    url: "/auth/dashboard/invoices",
+    url: "/auth/compte/factures",
     icon: Inbox,
   },
   {
     title: "Calendrier",
-    url: "/auth/dashboard/calendar",
+    url: "/auth/compte/calendrier",
     icon: Calendar,
   },
   {
     title: "Paramètres",
-    url: "/auth/dashboard/settings",
+    url: "/auth/compte/parametres",
     icon: Settings,
   },
 ];

@@ -20,9 +20,7 @@ const UserPurchaseHistory = ({
             <div
               key={index}
               className={`flex justify-between p-4 font-bold ${
-                index % 2 !== 0
-                  ? "program-button-container rounded-md"
-                  : "bg-inherit"
+                index % 2 === 0 ? "bg-gray-900" : "bg-gray-800"
               }`}
             >
               <p>

@@ -3,5 +3,5 @@ export default function AuthLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return <main className="lg:px-[10vw]">{children}</main>;
+  return <main className="px-4 md:px-10 lg:px-20">{children}</main>;
 }

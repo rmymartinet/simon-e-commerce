@@ -71,12 +71,11 @@ export async function GET(req: NextRequest) {
     where: {
       email: auth.user?.email,
     },
-    include: {
+    select: {
+      isSubscribed: true,
       Purchase: true,
     },
   });
 
   return NextResponse.json(user, { status: 200 });
-
-
 }

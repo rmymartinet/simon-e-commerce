@@ -28,19 +28,19 @@ function UserCoachingPanel({
             <p className="text-xl font-semibold">Plan actuel</p>
             <p className="text-slate-200">(Avec engagement)</p>
           </div>
-          <p className="text-5xl font-bold">
+          <p className="text-3xl font-bold">
             {subscriptionInfos.subscriptionPlan}
           </p>
         </div>
         <div className="flex flex-col items-end justify-between border-b border-slate-400 p-6">
           <p className="self-start text-xl font-semibold">Prochain paiement</p>
-          <p className="text-3xl font-bold text-violet-300">
+          <p className="text-2xl font-bold text-violet-300">
             {subscriptionInfos.nextPaymentDate}
           </p>
         </div>
         <div className="flex flex-col items-end justify-between border-b border-r border-slate-400 p-6">
           <p className="self-start text-xl font-semibold">Montant par mois</p>
-          <div className="text-3xl font-bold text-violet-300 md:text-5xl">
+          <div className="text-3xl font-bold text-violet-300">
             {subscriptionInfos.amount === 0
               ? subscriptionInfos.amount
               : `${subscriptionInfos.amount}, 00€`}
@@ -50,16 +50,16 @@ function UserCoachingPanel({
           <p className="self-start text-xl font-semibold">
             Période d&apos;abonnement
           </p>
-          <div className="flex flex-col gap-4 text-violet-300 md:flex-row">
+          <div className="flex flex-col gap-4 text-violet-300 md:flex-row flex-wrap">
             <p className="text-center">
               Début:{" "}
-              <span className="text-xl font-bold">
+              <span className="text-lg md:text-xl font-bold break-words">
                 {subscriptionInfos.startDate}
               </span>
             </p>
             <p className="text-center text-violet-300">
               Fin:{" "}
-              <span className="text-xl font-bold">
+              <span className="text-lg md:text-xl font-bold break-words">
                 {subscriptionInfos.endDate}
               </span>
             </p>

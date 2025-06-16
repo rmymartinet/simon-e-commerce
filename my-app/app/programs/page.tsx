@@ -20,6 +20,7 @@ export default async function Programs() {
       userId: session.session.userId,
       expiresAt: session.session.expiresAt,
       token: session.session.token
+
     },
     user: {
       id: session.user.id,
@@ -28,7 +29,7 @@ export default async function Programs() {
       emailVerified: session.user.emailVerified,
       image: session.user.image,
       createdAt: session.user.createdAt,
-      updatedAt: session.user.updatedAt
+      updatedAt: session.user.updatedAt,
     }
   } : null; 
 

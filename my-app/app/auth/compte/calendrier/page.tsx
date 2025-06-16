@@ -31,7 +31,7 @@ export default async function CalendarPage() {
             Aucun abonnement actif
           </h2>
           <p className="mt-2 text-gray-400">
-            Vous n’avez pas encore de coaching actif. Activez votre abonnement
+            Vous n'avez pas encore de coaching actif. Activez votre abonnement
             pour accéder à votre suivi personnalisé et débloquer toutes les
             fonctionnalités !
           </p>
@@ -58,24 +58,26 @@ export default async function CalendarPage() {
   return (
     <div className="mt-40 flex w-full flex-col items-center gap-10 px-4">
       <h1 className="text-4xl font-bold text-white">Abonnement</h1>
-      <p className="mt-2 text-gray-400">
-        Détails de votre abonnement en cours :
+      <p className="text-gray-400">
+        Détails de votre abonnement en cours
       </p>
 
-      <div className="mt-10 space-y-4 text-white">
-        <p>📅 Début : {format(start, "dd MMMM yyyy", { locale: fr })}</p>
-        <p>⏳ Fin : {format(end, "dd MMMM yyyy", { locale: fr })}</p>
-        <p>🧮 Temps restant : {remainingDays} jour(s)</p>
-
-        <div className="relative mt-6 h-4 w-full overflow-hidden rounded-full bg-gray-800">
-          <div
-            className="absolute left-0 top-0 h-full bg-gradient-to-r from-green-400 to-green-600 transition-all duration-500"
-            style={{ width: `${progress}%` }}
-          />
+      <div className="max-w-xl mx-auto mt-16 p-8 bg-white rounded-2xl shadow-lg flex flex-col items-center">
+        <h1 className="text-2xl font-bold mb-6 text-violet-700">Votre période d'abonnement</h1>
+        <div className="flex flex-col md:flex-row gap-8 w-full justify-center">
+          <div className="flex-1 bg-violet-50 rounded-xl p-6 flex flex-col items-center shadow">
+            <span className="text-gray-500 text-sm mb-2">Début</span>
+            <span className="text-xl font-bold text-violet-700">
+              {format(start, "dd MMMM yyyy", { locale: fr })}
+            </span>
+          </div>
+          <div className="flex-1 bg-violet-50 rounded-xl p-6 flex flex-col items-center shadow">
+            <span className="text-gray-500 text-sm mb-2">Fin</span>
+            <span className="text-xl font-bold text-violet-700">
+              {format(end, "dd MMMM yyyy", { locale: fr })}
+            </span>
+          </div>
         </div>
-        <p className="text-sm text-gray-400">
-          {passedDays} jour(s) passé(s) / {totalDays} jours totaux
-        </p>
       </div>
     </div>
   );

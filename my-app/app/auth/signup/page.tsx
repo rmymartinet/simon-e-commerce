@@ -233,7 +233,8 @@ export default function SignUp() {
                 );
               }}
             >
-              <svg
+           <div className="flex items-center gap-2">
+           <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="0.98em"
                 height="1em"
@@ -257,6 +258,7 @@ export default function SignUp() {
                 ></path>
               </svg>
               S&apos;inscrire avec Google
+              </div>
             </Button>
             <p className="text-sm text-center mt-4">
               Déjà un compte ?{" "}
