@@ -1,7 +1,7 @@
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
 import { prisma } from "@/lib/prisma";
-import { differenceInDays, format } from "date-fns";
+import { format } from "date-fns";
 import fr from "date-fns/locale/fr";
 
 export default async function CalendarPage() {
@@ -48,12 +48,7 @@ export default async function CalendarPage() {
 
   const start = new Date(purchase.subscriptionData.startDate);
   const end = new Date(purchase.subscriptionData.endDate);
-  const now = new Date();
 
-  const totalDays = differenceInDays(end, start);
-  const passedDays = differenceInDays(now, start);
-  const remainingDays = Math.max(differenceInDays(end, now), 0);
-  const progress = Math.min(100, (passedDays / totalDays) * 100);
 
   return (
     <div className="mt-40 flex w-full flex-col items-center gap-10 px-4">
@@ -63,7 +58,7 @@ export default async function CalendarPage() {
       </p>
 
       <div className="max-w-xl mx-auto mt-16 p-8 bg-white rounded-2xl shadow-lg flex flex-col items-center">
-        <h1 className="text-2xl font-bold mb-6 text-violet-700">Votre période d'abonnement</h1>
+        <h1 className="text-2xl font-bold mb-6 text-violet-700">Votre période d&apos;abonnement</h1>
         <div className="flex flex-col md:flex-row gap-8 w-full justify-center">
           <div className="flex-1 bg-violet-50 rounded-xl p-6 flex flex-col items-center shadow">
             <span className="text-gray-500 text-sm mb-2">Début</span>

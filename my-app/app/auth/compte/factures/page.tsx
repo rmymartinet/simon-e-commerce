@@ -32,7 +32,6 @@ export default async function FacturesPage() {
     limit: 20,
   });
 
-  console.log(invoices);
 
   return (
     <div className="flex w-full flex-col items-center gap-10 px-4 md:mt-40">
@@ -40,7 +39,7 @@ export default async function FacturesPage() {
         Mes factures
       </h1>
       <p className="max-w-xl text-center text-muted-foreground">
-        Retrouvez ici l'historique de vos paiements. Vous pouvez télécharger
+        Retrouvez ici l&apos;historique de vos paiements. Vous pouvez télécharger
         chaque facture au format PDF.
       </p>
 
