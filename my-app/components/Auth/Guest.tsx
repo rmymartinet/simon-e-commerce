@@ -2,7 +2,7 @@
 
 import { usePayment } from "@/hooks/usePayment";
 import { useRouter } from "next/navigation";
-import { ProductDataProps } from "@/types/types";
+import { ProductDataProps, CartItemProps } from "@/types/types";
 import { authClient } from "@/lib/auth-client";
 import { useCheckout } from "@/app/context/CheckoutContext";
 import { useEffect, useState } from "react";
@@ -24,30 +24,6 @@ const Guest = () => {
     }
   }, [session, router]);
 
-  let allPriceIds: string[] = [];
-  let allTitles: string[] = [];
-  let allMonths: number[] = [];
-
-  if (checkoutData) {
-    if (Array.isArray(checkoutData.productData)) {
-      allPriceIds = checkoutData.productData.map(
-        (product: ProductDataProps) => product.priceId || "",
-      );
-      allTitles = checkoutData.productData.map(
-        (product: ProductDataProps) => product.titlePlan || "",
-      );
-      allMonths = checkoutData.productData.map(
-        (product: ProductDataProps) => product.month || 0,
-      );
-    } else {
-      allPriceIds = [
-        (checkoutData.productData as ProductDataProps).priceId || "",
-      ];
-      allTitles = [(checkoutData.productData as ProductDataProps).titlePlan];
-      allMonths = [(checkoutData.productData as ProductDataProps).month];
-    }
-  }
-
   const handleGuestCheckout = () => {
     if (!email) {
       Swal.fire({
@@ -57,17 +33,30 @@ const Guest = () => {
       });
       return;
     }
-    if (allPriceIds) {
-      handlePayment(
-        allPriceIds,
-        allTitles,
-        allMonths[0],
-        false,
-        true,
-        email
-      );
+    if (checkoutData?.productData) {
+      const cartItems: CartItemProps[] = Array.isArray(checkoutData.productData) 
+        ? (checkoutData.productData as ProductDataProps[]).map(product => ({
+            type: product.type,
+            titlePlan: product.titlePlan,
+            price: product.price,
+            priceId: product.priceId,
+            imageUrl: product.imageUrl,
+            month: product.month,
+            quantity: 1
+          }))
+        : [{
+            type: (checkoutData.productData as ProductDataProps).type,
+            titlePlan: (checkoutData.productData as ProductDataProps).titlePlan,
+            price: (checkoutData.productData as ProductDataProps).price,
+            priceId: (checkoutData.productData as ProductDataProps).priceId,
+            imageUrl: (checkoutData.productData as ProductDataProps).imageUrl,
+            month: (checkoutData.productData as ProductDataProps).month,
+            quantity: 1
+          }];
+
+      handlePayment(cartItems, true, email);
     } else {
-      console.error("priceId is undefined");
+      console.error("Aucun produit sélectionné");
     }
   };
 
