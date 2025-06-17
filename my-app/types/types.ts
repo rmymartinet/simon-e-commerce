@@ -367,14 +367,14 @@ export interface LayoutTransitionProps {
 export type Step1_UserInfoProps = {
   formState: {
     genre: string;
-    age: number;
-    height: number;
-    weight: number;
+    age: string | number;
+    height: string | number;
+    weight: string | number;
     activities: number;
     bodyFatMode: string;
-    trainingDays: number;
-    sessionDuration: number;
-    intensity: number;
+    trainingDays: string | number;
+    sessionDuration: string | number;
+    intensity: string | number;
   };
 
   
@@ -390,15 +390,17 @@ export type Step1_UserInfoProps = {
 export type Step2_UserGoalsProps = {
   formState: {
     genre: string;
-    age: number;
-    height: number;
-    weight: number;
+    age: number | "";
+    height: number | "";
+    weight: number | "";
     activities: number;
     bodyFatMode: string;
-    trainingDays: number;
-    sessionDuration: number;
-    intensity: number;
+    trainingDays: number | "";
+    sessionDuration: number | "";
+    intensity: number | "";
   };
+
+  
   setTotalCalories: React.Dispatch<React.SetStateAction<number>>;
   formIsValid: boolean;
   setTotalCaloriesTraining: React.Dispatch<React.SetStateAction<number>>;
