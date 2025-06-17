@@ -83,6 +83,7 @@ export async function POST(req: NextRequest) {
       try {
         await stripe.customers.retrieve(stripeCustomerId);
       } catch (error) {
+        console.error("Erreur lors de la vérification du stripeCustomerId:", error);
 
         stripeCustomerId = null;
         // Réinitialiser le stripeCustomerId dans la base de données

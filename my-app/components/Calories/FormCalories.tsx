@@ -1,4 +1,4 @@
-import { useState, useCallback, useMemo } from "react";
+import { useState, useCallback } from "react";
 import Step1_UserInfo from "./Step1_UserInfo";
 import Step2_UserGoals from "./Step2_UserGoals";
 import Step3_UserDiet from "./Step3_UserDiet";
