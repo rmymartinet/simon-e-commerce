@@ -1,7 +1,7 @@
 import { Step1_UserInfoProps } from "@/types/types";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
-import React, { useCallback } from "react";
+import React, { useCallback, useMemo } from "react";
 
 // Composant pour les champs de saisie numériques
 const NumberInput = React.memo(({ 
@@ -14,8 +14,8 @@ const NumberInput = React.memo(({
 }: { 
   id: string; 
   label: string; 
-  value: number; 
-  onChange: (value: number) => void; 
+  value: string | number; 
+  onChange: (value: string | number) => void; 
   error?: string;
   unit?: string;
 }) => (
@@ -27,7 +27,7 @@ const NumberInput = React.memo(({
       type="number"
       id={id}
       value={value === 0 ? "" : value}
-      onChange={(e) => onChange(Number(e.target.value))}
+      onChange={(e) => onChange(e.target.value === "" ? "" : Number(e.target.value))}
       className={`rounded-lg bg-slate-100 p-2 text-black ${error ? "border border-red-400" : ""}`}
     />
     {error && <span className="text-red-400">{error}</span>}
@@ -54,7 +54,26 @@ const Step1_UserInfo = ({
     intensity,
   } = formState;
 
+
   const formRef = React.useRef<HTMLFormElement>(null);
+
+  const safeFormState = useMemo(() => ({
+    ...formState,
+    age: formState.age === "" ? 0 : formState.age,
+    height: formState.height === "" ? 0 : formState.height,
+    weight: formState.weight === "" ? 0 : formState.weight,
+    trainingDays: formState.trainingDays === "" ? 0 : formState.trainingDays,
+    sessionDuration: formState.sessionDuration === "" ? 0 : formState.sessionDuration,
+    intensity: formState.intensity === "" ? 0 : formState.intensity,
+  }), [
+    formState.age,
+    formState.height,
+    formState.weight,
+    formState.trainingDays,
+    formState.sessionDuration,
+    formState.intensity,
+    // ajoute d'autres champs si besoin
+  ]);
 
   const handleSubmit = useCallback((e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -81,7 +100,7 @@ const Step1_UserInfo = ({
 
     setErrors({});
     setFormIsValid(true);
-  }, [formState, setErrors, setFormIsValid]);
+  }, [safeFormState, setErrors, setFormIsValid]);
 
   useGSAP(() => {
     gsap.from(formRef.current, {
@@ -217,7 +236,7 @@ const Step1_UserInfo = ({
         label="Jours d'entraînement/semaine"
         value={formState.trainingDays}
         onChange={(value) => {
-          if (value >= 0 && value <= 7) {
+          if (typeof value === "number" && value >= 0 && value <= 7) {
             updateField("trainingDays", value);
           }
         }}
@@ -261,6 +280,13 @@ const Step1_UserInfo = ({
           <span className="text-red-400">{errors.intensity}</span>
         )}
       </div>
+
+      <button
+        type="submit"
+        className="mt-8 rounded-xl bg-violet-500 px-6 py-3 font-bold text-white transition hover:bg-violet-700"
+      >
+        Valider
+      </button>
     </form>
   );
 };
