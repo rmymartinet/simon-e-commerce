@@ -33,7 +33,7 @@ const Header = ({setIsOpen}: {setIsOpen: (isOpen: boolean) => void}) => {
             </h4>
             <div className="mt-4 flex gap-10 md:flex-row">
             <div className=" items-center justify-center flex flex-col gap-4 md:flex-row">
-<CoachingsProgramsButtons />
+<CoachingsProgramsButtons variant="purpleBg" />
 <CalendlyCallButton setIsOpen={setIsOpen} />
 
 </div>

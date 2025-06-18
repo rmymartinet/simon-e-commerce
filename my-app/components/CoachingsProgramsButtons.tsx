@@ -4,7 +4,7 @@ import { useGSAP } from "@gsap/react"
 import { useRef } from "react"
 import { animateBlockRevealOnScroll } from "@/utils/Animation"
 
-const CoachingsProgramsButtons = ({variant = "purpleBg"}: {variant?: "purpleBg" | "whiteBg"}) => {
+const CoachingsProgramsButtons = ({variant = "purpleBg"}: {variant?: "purpleBg" | "whiteBg" | "whitetopurple"}) => {
 
   const coachingsProgramsButtonsRef = useRef<HTMLDivElement>(null)
 

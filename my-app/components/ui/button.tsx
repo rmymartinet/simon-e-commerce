@@ -108,7 +108,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
           <div
             ref={overlayRef}
             className={`absolute left-0 bottom-0 w-full ${
-              variant === "purpleBg" ? "h-full" : "h-0"
+              variant === "purpleBg" ? "h-0" : "h-0"
             } z-0 transition-colors duration-300 ${
               variant === "purpleBg" ? "bg-black" : "bg-white"
             }`}

@@ -4,7 +4,7 @@ import { PiClock, PiCheckCircle, PiChatCircle } from "react-icons/pi";
 import CalendlyCallButton from "./CalendlyCallButton";
 import CalendlyCallModal from "./CalendlyCallModal";
 import { RefObject, useRef, useState } from "react";
-import { animateBlockReveal } from "@/utils/Animation";
+import { animateBlockRevealOnScroll } from "@/utils/Animation";
 import { useGSAP } from "@gsap/react";
 
 const CalendlyContainer = () => {
@@ -13,7 +13,7 @@ const CalendlyContainer = () => {
 
     useGSAP(() => {
         if (calendlyContainerRef.current) {
-            animateBlockReveal(calendlyContainerRef as RefObject<HTMLDivElement>, 0.5);
+            animateBlockRevealOnScroll(calendlyContainerRef as RefObject<HTMLDivElement>, 0.5);
         } 
     }, []);
  

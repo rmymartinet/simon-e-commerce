@@ -35,7 +35,7 @@ const Iphone = ({
             />
           )}
           {video && (
-            <div className="absolute inset-0 left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex h-[90%] w-[87%] items-center justify-center overflow-hidden">
+            <div className={`absolute inset-0 left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex h-[90%] w-[87%] items-center justify-center overflow-hidden ${video === "/videos/exercices/video1.mp4" ? "h-[95%]" : ""}`}>
               <video
                 autoPlay
                 playsInline
@@ -43,7 +43,7 @@ const Iphone = ({
                 muted
                 preload="auto"
                 src={video}
-                className="h-full w-full object-contain"
+                className={`h-full w-full ${video === "/videos/exercices/video1.mp4" ? "object-cover " : "object-contain"}`}
               ></video>
             </div>
           )}

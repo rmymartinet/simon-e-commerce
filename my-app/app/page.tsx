@@ -21,8 +21,8 @@ export default function Home() {
   return (
     <section className="flex flex-col items-center">
       <Header setIsOpen={setIsOpen} />
-      <CalendlyCallModal isOpen={isOpen} setIsOpen={setIsOpen} />
       <CalendlyContainer />
+      <CalendlyCallModal isOpen={isOpen} setIsOpen={setIsOpen} />
       <ProgramOverview />
       <Youtube />
       <CoachingOverview />
