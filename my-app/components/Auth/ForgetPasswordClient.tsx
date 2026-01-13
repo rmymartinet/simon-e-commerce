@@ -13,10 +13,13 @@ const ForgetPasswordClient = () => {
 
   if (!token) {
     return (
-      <div className="mx-auto w-full max-w-md p-4 h-screen flex flex-col items-center justify-center">
-        <h1 className="mb-4 text-2xl font-bold">Réinitialiser votre mot de passe</h1>
-        <p className="mb-4 text-sm text-[--subtext] text-center">
-          Entrez votre email et nous vous enverrons un lien pour réinitialiser votre mot de passe.
+      <div className="mx-auto flex h-screen w-full max-w-md flex-col items-center justify-center p-4">
+        <h1 className="mb-4 text-2xl font-bold">
+          Réinitialiser votre mot de passe
+        </h1>
+        <p className="mb-4 text-center text-sm text-[--subtext]">
+          Entrez votre email et nous vous enverrons un lien pour réinitialiser
+          votre mot de passe.
         </p>
 
         <form
@@ -24,7 +27,7 @@ const ForgetPasswordClient = () => {
             const email = formData.get("email") as string;
 
             try {
-              const { error } = await authClient.forgetPassword(
+              const { error } = await authClient.requestPasswordReset(
                 {
                   email,
                   redirectTo: "/auth/forget-password",
@@ -68,7 +71,9 @@ const ForgetPasswordClient = () => {
             required
             placeholder="name@example.com"
           />
-          <Button type="submit" variant="whiteBg" className="w-full">Envoyer le lien de réinitialisation</Button>
+          <Button type="submit" variant="whiteBg" className="w-full">
+            Envoyer le lien de réinitialisation
+          </Button>
         </form>
       </div>
     );
@@ -76,9 +81,12 @@ const ForgetPasswordClient = () => {
 
   return (
     <div className="mx-auto w-full max-w-md p-4">
-      <h1 className="mb-4 text-2xl font-bold">Réinitialiser votre mot de passe</h1>
+      <h1 className="mb-4 text-2xl font-bold">
+        Réinitialiser votre mot de passe
+      </h1>
       <p className="mb-4 text-sm text-muted-foreground">
-        Entrez votre email et nous vous enverrons un lien pour réinitialiser votre mot de passe.
+        Entrez votre email et nous vous enverrons un lien pour réinitialiser
+        votre mot de passe.
       </p>
 
       <form
