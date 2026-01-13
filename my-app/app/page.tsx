@@ -17,10 +17,9 @@ gsap.registerPlugin(useGSAP);
 export default function Home() {
   const [isOpen, setIsOpen] = useState(false);
 
-
   return (
     <section className="flex flex-col items-center">
-      <Header setIsOpen={setIsOpen} />
+      <Header />
       <CalendlyContainer />
       <CalendlyCallModal isOpen={isOpen} setIsOpen={setIsOpen} />
       <ProgramOverview />

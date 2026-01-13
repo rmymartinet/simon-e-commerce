@@ -5,8 +5,10 @@ import TitleComponent from "@/components/TitleComponent";
 import FormCalories from "@/components/Calories/FormCalories";
 import { useGSAP } from "@gsap/react";
 import { animateBlockReveal } from "@/utils/Animation";
-import CoachingsProgramsButtons from "@/components/CoachingsProgramsButtons";
 import AnimatedQuestions from "@/components/AnimatedQuestions";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 
 export default function Calorie() {
   const containerRef = useRef(null);
@@ -32,10 +34,12 @@ export default function Calorie() {
 
   useGSAP(() => {
     if (calculatorContentRef.current) {
-      animateBlockReveal(calculatorContentRef as unknown as RefObject<HTMLDivElement>, 0.5);
+      animateBlockReveal(
+        calculatorContentRef as unknown as RefObject<HTMLDivElement>,
+        0.5,
+      );
     }
   }, []);
-
 
   return (
     <div
@@ -49,23 +53,32 @@ export default function Calorie() {
           apports caloriques personnalisés en fonction de tes dépenses
           énergiques et de ton alimentation."
       />
-   <div ref={calculatorContentRef} className="flex flex-col gap-4 items-center">
-   <div className="flex gap-4">
- <CoachingsProgramsButtons variant="whiteBg"/>
-     </div>
-      <FormCalories />
-      <div className="flex w-full flex-col items-center px-4">
-        <TitleComponent
-          title="Vous voulez gagner du temps ?"
-          subtitle=" Vous vous êtes sûrement posé ces questions"
-          isTextSplitLines={false}
-        />
-        <div className="flex gap-4">
-  <CoachingsProgramsButtons variant="whiteBg"/>
-</div>
-        <AnimatedQuestions questions={questions} />
+      <div
+        ref={calculatorContentRef}
+        className="flex flex-col items-center gap-4"
+      >
+        <Button asChild variant="purpleBg">
+          <Link href="/coachings" className="flex items-center gap-2">
+            <p>Découvrir les coachings</p>
+            <ArrowRight />
+          </Link>
+        </Button>
+        <FormCalories />
+        <div className="flex w-full flex-col items-center px-4">
+          <TitleComponent
+            title="Vous voulez gagner du temps ?"
+            subtitle=" Vous vous êtes sûrement posé ces questions"
+            isTextSplitLines={false}
+          />
+          <Button asChild variant="purpleBg">
+            <Link href="/coachings" className="flex items-center gap-2">
+              <p>Découvrir les coachings</p>
+              <ArrowRight />
+            </Link>
+          </Button>
+          <AnimatedQuestions questions={questions} />
+        </div>
       </div>
-   </div>
     </div>
   );
 }

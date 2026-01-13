@@ -2,6 +2,7 @@ import Script from "next/script";
 import Footer from "@/components/Footer/Footer";
 import LocomotiveScrollWrapper from "@/components/LocomotiveScrollWrapper";
 import Providers from "./providers";
+import "../app/globals.css";
 
 export default function RootLayout({
   children,
@@ -27,15 +28,3 @@ export default function RootLayout({
     </html>
   );
 }
-
-// <AuthProvider>
-//   <CartProvider>
-//     <CheckoutProvider>
-//       <AnimationProvider>
-//         {/* <Analytics /> */}
-
-//         <LocomotiveScrollWrapper />
-//       </AnimationProvider>
-//     </CheckoutProvider>
-//   </CartProvider>
-// </AuthProvider>;

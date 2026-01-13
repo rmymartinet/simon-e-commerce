@@ -10,7 +10,9 @@ import TitleComponent from "@/components/TitleComponent";
 import Overlay from "@/components/Overlay";
 import { animateBlockReveal } from "@/utils/Animation";
 import Faq from "@/components/Faq/Faq";
-import CoachingsProgramsButtons from "@/components/CoachingsProgramsButtons";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 
 gsap.registerPlugin(useGSAP, ScrollTrigger);
 
@@ -24,18 +26,22 @@ export default function Infos() {
   const headerRef = useRef<HTMLDivElement | null>(null);
 
   useGSAP(() => {
- 
- animateBlockReveal(headerRef as RefObject<HTMLDivElement>, 0.5);
+    animateBlockReveal(headerRef as RefObject<HTMLDivElement>, 0.5);
     if (firstParaRef.current && secondParaRef.current && thirdParaRef.current) {
-      textSplitLinesScrollTrigger(firstParaTitle as React.RefObject<HTMLElement>)
-      textSplitLinesScrollTrigger(secondParaTitle as React.RefObject<HTMLElement>)
+      textSplitLinesScrollTrigger(
+        firstParaTitle as React.RefObject<HTMLElement>,
+      );
+      textSplitLinesScrollTrigger(
+        secondParaTitle as React.RefObject<HTMLElement>,
+      );
       textSplitLinesScrollTrigger(firstParaRef as React.RefObject<HTMLElement>);
       textSplitLinesScrollTrigger(
         secondParaRef as React.RefObject<HTMLElement>,
       );
       textSplitLinesScrollTrigger(thirdParaRef as React.RefObject<HTMLElement>);
-      textSplitLinesScrollTrigger(fourthParaRef as React.RefObject<HTMLElement>);
-
+      textSplitLinesScrollTrigger(
+        fourthParaRef as React.RefObject<HTMLElement>,
+      );
     }
   }, []);
 
@@ -104,63 +110,81 @@ export default function Infos() {
         </div>
       </div>
       <div className="mt-20 flex w-full flex-col items-center gap-8">
-      <div className="relative w-full flex md:items-center justify-center h-[70vh] md:h-screen md:px-20">  
-        <Image src="/images/about/calum.jpg" alt="calum-von-moger" width={1000}  height={1000} quality={100} className="absolute inset-0 -z-10" />
-       <Overlay/>
-        <div className="flex flex-col md:grid md:grid-cols-2 gap-10">
-          <div className="flex flex-col gap-4">
-          <h1 ref={firstParaTitle} className="text-4xl lg:text-7xl font-bold uppercase">Du déclic <br /> à la passion</h1>
-
-<CoachingsProgramsButtons/>
-          </div>
-            <div className="flex flex-col gap-2"
-            >
+        <div className="relative flex h-[70vh] w-full justify-center md:h-screen md:items-center md:px-20">
+          <Image
+            src="/images/about/calum.jpg"
+            alt="calum-von-moger"
+            width={1000}
+            height={1000}
+            quality={100}
+            className="absolute inset-0 -z-10"
+          />
+          <Overlay />
+          <div className="flex flex-col gap-10 md:grid md:grid-cols-2">
+            <div className="flex flex-col gap-4">
+              <h1
+                ref={firstParaTitle}
+                className="text-4xl font-bold uppercase lg:text-7xl"
+              >
+                Du déclic <br /> à la passion
+              </h1>
+              <Button asChild variant="purpleBg">
+                <Link href="/coachings" className="flex items-center gap-2">
+                  <p>Découvrir les coachings</p>
+                  <ArrowRight />
+                </Link>
+              </Button>{" "}
+            </div>
+            <div className="flex flex-col gap-2">
               <p
-               ref={firstParaRef}
-              className="text-justify text-[--subtext] lg:text-xl "
-            >
-              Depuis mon plus jeune âge, je me voyais comme un{" "}
-              <span className="font-bold text-white">garçon frêle</span>,
-              manquant de{" "}
-              <span className="font-bold text-white">confiance</span> en lui.
-              Mon frère, passionné de{" "}
-              <span className="font-bold text-white">sport</span>, avait réussi
-              à transformer son{" "}
-              <span className="font-bold text-white">physique</span>, et cette{" "}
-              <span className="font-bold text-white">métamorphose</span>{" "}
-              m&apos;a profondément inspiré. Cela m&apos;a conduit à me poser
-              une question qui ne cessait de me hanter :{" "}
-              <span className="italic">
-                &quot;De quoi suis-je réellement capable ?&quot;
-              </span>{" "}
-              À 17 ans, j&apos;ai décidé de ne plus rester dans
-              l&apos;incertitude. 
-            </p>
-            <p  ref={secondParaRef}             
-            className="text-justify text-[--subtext] lg:text-xl"
-            > En découvrant la{" "}
-              <span className="font-bold text-white">musculation</span>,
-              j&apos;ai trouvé bien plus qu&apos;un moyen de me transformer{" "}
-              <span className="font-bold text-white">physiquement</span> :
-              j&apos;ai trouvé une{" "}
-              <span className="font-bold text-white">passion</span> et une
-              <span className="font-bold text-white">discipline</span> qui
-              m&apos;ont appris le{" "}
-              <span className="font-bold text-white">dépassement de soi</span>{" "}
-              et m&apos;ont changé à jamais. Cette quête de mon{" "}
-              <span className="font-bold text-white">potentiel</span>, portée
-              par une envie irrésistible de devenir la{" "}
-              <span className="font-bold text-white">meilleure version</span> de
-              moi-même, m&apos;a permis de comprendre que le{" "}
-              <span className="font-bold text-white">corps</span> et l&apos;
-              <span className="font-bold text-white">esprit</span> sont
-              indissociables dans cette{" "}
-              <span className="font-bold text-white">transformation</span>.
+                ref={firstParaRef}
+                className="text-justify text-[--subtext] lg:text-xl"
+              >
+                Depuis mon plus jeune âge, je me voyais comme un{" "}
+                <span className="font-bold text-white">garçon frêle</span>,
+                manquant de{" "}
+                <span className="font-bold text-white">confiance</span> en lui.
+                Mon frère, passionné de{" "}
+                <span className="font-bold text-white">sport</span>, avait
+                réussi à transformer son{" "}
+                <span className="font-bold text-white">physique</span>, et cette{" "}
+                <span className="font-bold text-white">métamorphose</span>{" "}
+                m&apos;a profondément inspiré. Cela m&apos;a conduit à me poser
+                une question qui ne cessait de me hanter :{" "}
+                <span className="italic">
+                  &quot;De quoi suis-je réellement capable ?&quot;
+                </span>{" "}
+                À 17 ans, j&apos;ai décidé de ne plus rester dans
+                l&apos;incertitude.
               </p>
-              <div className="bg-violet-400 w-full h-[1px] mt-4"></div>
+              <p
+                ref={secondParaRef}
+                className="text-justify text-[--subtext] lg:text-xl"
+              >
+                {" "}
+                En découvrant la{" "}
+                <span className="font-bold text-white">musculation</span>,
+                j&apos;ai trouvé bien plus qu&apos;un moyen de me transformer{" "}
+                <span className="font-bold text-white">physiquement</span> :
+                j&apos;ai trouvé une{" "}
+                <span className="font-bold text-white">passion</span> et une
+                <span className="font-bold text-white">discipline</span> qui
+                m&apos;ont appris le{" "}
+                <span className="font-bold text-white">dépassement de soi</span>{" "}
+                et m&apos;ont changé à jamais. Cette quête de mon{" "}
+                <span className="font-bold text-white">potentiel</span>, portée
+                par une envie irrésistible de devenir la{" "}
+                <span className="font-bold text-white">meilleure version</span>{" "}
+                de moi-même, m&apos;a permis de comprendre que le{" "}
+                <span className="font-bold text-white">corps</span> et l&apos;
+                <span className="font-bold text-white">esprit</span> sont
+                indissociables dans cette{" "}
+                <span className="font-bold text-white">transformation</span>.
+              </p>
+              <div className="mt-4 h-[1px] w-full bg-violet-400"></div>
             </div>
           </div>
-          </div>
+        </div>
         {/* <div
           ref={imgRef}
           className="flex w-full lg:mb-[20vh] lg:mt-[20vh] lg:px-72"
@@ -175,9 +199,14 @@ export default function Infos() {
             quality={100}
           />
         </div> */}
-        <div className="flex flex-col items-center gap-10 lg:items-start md:px-20">
-          <div className="flex flex-col gap-8 mt-20 md:mt-0">
-            <h1 ref={secondParaTitle} className="text-4xl lg:text-7xl text-center uppercase font-bold">Une passion en vocation</h1>
+        <div className="flex flex-col items-center gap-10 md:px-20 lg:items-start">
+          <div className="mt-20 flex flex-col gap-8 md:mt-0">
+            <h1
+              ref={secondParaTitle}
+              className="text-center text-4xl font-bold uppercase lg:text-7xl"
+            >
+              Une passion en vocation
+            </h1>
             <p
               ref={thirdParaRef}
               className="text-justify text-[--subtext] lg:text-xl"
@@ -249,7 +278,7 @@ export default function Infos() {
           </div>{" "}
         </div>
       </div>
-      <Faq/>
+      <Faq />
     </main>
   );
 }
