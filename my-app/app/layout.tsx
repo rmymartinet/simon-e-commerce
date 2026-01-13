@@ -17,28 +17,28 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <AuthProvider> 
-      <CartProvider>
-        <CheckoutProvider>
-          <AnimationProvider>
-            <html lang="en">
-              <head>
-                <title>Smartinet Coaching</title>
-                <Script
-                  src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXX"
-                  strategy="afterInteractive"
-                ></Script>
-                <Script id="google-analytic">
-                  {` 
-                  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+    <html lang="en">
+      <head>
+        <title>Smartinet Coaching</title>
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXX"
+          strategy="afterInteractive"
+        ></Script>
+        <Script id="google-analytic">
+          {` 
+          window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
 
-  gtag('config', 'G-NH0VPNGP9L');
-  `}
-                </Script>
-              </head>
-              <body id="main-container" className="antialiased">
+gtag('config', 'G-NH0VPNGP9L');
+`}
+        </Script>
+      </head>
+      <body id="main-container" className="antialiased">
+        <AuthProvider>
+          <CartProvider>
+            <CheckoutProvider>
+              <AnimationProvider>
                 <Analytics />
                 <ConditionalNav />
                 <LayoutTransition>
@@ -46,11 +46,11 @@ export default function RootLayout({
                 </LayoutTransition>
                 <Footer />
                 <LocomotiveScrollWrapper />
-              </body>
-            </html>
-          </AnimationProvider>
-        </CheckoutProvider>
-      </CartProvider>
-    </AuthProvider>
+              </AnimationProvider>
+            </CheckoutProvider>
+          </CartProvider>
+        </AuthProvider>
+      </body>
+    </html>
   );
 }
