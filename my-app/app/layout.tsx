@@ -5,11 +5,19 @@ import { AnimationProvider } from "./context/AnimationContext";
 import "./globals.css";
 import Script from "next/script";
 import ConditionalNav from "@/components/Nav/ConditionalNav";
-import { LayoutTransition } from "@/components/pageTransitions/LayoutTransition";
 import Footer from "@/components/Footer/Footer";
 import LocomotiveScrollWrapper from "@/components/LocomotiveScrollWrapper";
 import { Analytics } from "@vercel/analytics/react";
 import { AuthProvider } from "./context/AuthContext";
+import dynamic from "next/dynamic";
+
+const LayoutTransition = dynamic(
+  () =>
+    import("@/components/pageTransitions/LayoutTransition").then(
+      (mod) => mod.LayoutTransition,
+    ),
+  { ssr: false },
+);
 
 export default function RootLayout({
   children,
