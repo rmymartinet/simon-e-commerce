@@ -13,10 +13,10 @@ export default function Cancel() {
         </div>
       </div>
       <h1 className="mb-3 scroll-m-20 text-center text-5xl font-semibold tracking-tight transition-colors first:mt-0">
-        Paiement Échoué😢
+        Paiement Échoué
       </h1>
       <p className="leading-7">
-        La bonne nouvelle, c&apos;est que vous pouvez réessayer 😊
+        La bonne nouvelle, c&apos;est que vous pouvez réessayer
       </p>
       <div className="mt-5">
         <Button>
