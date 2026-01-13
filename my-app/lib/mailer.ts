@@ -9,7 +9,7 @@ import { EmailTemplateResetPassword } from "@/components/EmailTemplate/EmailTemp
 
 dotenv.config();
 
-const resend = new Resend(process.env.NEXT_RESEND_API_KEY);
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 
 export async function sendProgramEmail(
@@ -38,7 +38,7 @@ export async function sendProgramEmail(
 
   try {
     const { data, error } = await resend.emails.send({
-      from: process.env.EMAIL_USER as string,
+      from: process.env.EMAIL_FROM as string,
       to: email,
       subject: "Vos programmes disponibles",
       react: React.createElement(EmailTemplateProgramContent, {
@@ -66,7 +66,7 @@ export async function sendResetPasswordEmail(email: string, token: string) {
 
   try {
     const { data, error } = await resend.emails.send({
-      from: process.env.EMAIL_USER as string,
+      from: process.env.EMAIL_FROM as string,
       to: email,
       subject: "Réinitialisation du mot de passe",
       react: React.createElement(EmailTemplateResetPassword, {
