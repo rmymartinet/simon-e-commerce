@@ -4,8 +4,9 @@ import { RefObject, useRef } from "react";
 import { animateBlockReveal } from "@/utils/Animation";
 import { Button } from "../ui/button";
 import Link from "next/link";
-import { ArrowRight, Calendar, Dumbbell } from "lucide-react";
+import { ArrowRight, Calendar, Dumbbell, Star } from "lucide-react";
 import { GiFruitBowl } from "react-icons/gi";
+import { Badge } from "../ui/badge";
 
 gsap.registerPlugin(useGSAP);
 
@@ -27,7 +28,11 @@ const Header = () => {
     >
       <div className="z-50 mb-4 flex h-screen w-full flex-col items-center justify-center">
         <div className="flex flex-col items-center gap-20">
-          <div className="mb-20 flex w-[55vw] flex-col items-center gap-6">
+          <div className="mb-20 flex w-[55vw] flex-col items-start gap-6">
+            <Badge variant="secondary">
+              <Star className="size-3.5" />
+              +300 personnes transformations réussies
+            </Badge>
             <h1 className="text-6xl font-semibold tracking-tighter text-white">
               Transforme ton physique avec un plan clair{" "}
               <strong className="text-violet-400">
