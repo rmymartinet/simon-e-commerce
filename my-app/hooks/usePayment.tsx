@@ -34,7 +34,7 @@ export const usePayment = ({ userData }: { userData?: UserDataProps } = {}) => {
       const requestBody = {
         userId: userData?.id,
         lineItems,
-        subscription: cartItems[0]?.subscription || false,
+        subscription: cartItems.some((item) => item.subscription),
         isSubscribed: userData?.isSubscribed,
         guest,
         email: email || userData?.email,

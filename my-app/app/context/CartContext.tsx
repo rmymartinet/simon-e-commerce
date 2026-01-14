@@ -60,11 +60,26 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
 
   const addToCart = (newItem: CartItemProps) => {
     setCart((prevCart) => {
+      const isCoaching =
+        !!newItem.subscription ||
+        (newItem.type || "").toLowerCase().includes("coach");
+      const hasCoaching = prevCart.some(
+        (item) =>
+          !!item.subscription || (item.type || "").toLowerCase().includes("coach"),
+      );
+
+      if (isCoaching && hasCoaching) {
+        return prevCart;
+      }
+
       const existingItemIndex = prevCart.findIndex(
         (item) => item.priceId === newItem.priceId
       );
 
       if (existingItemIndex !== -1) {
+        if (isCoaching) {
+          return prevCart;
+        }
         // Si l'item existe déjà, on met à jour sa quantité
         const updatedCart = [...prevCart];
         updatedCart[existingItemIndex] = {
@@ -114,11 +129,17 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
 
   const updateCartQuantity = (itemId: string, newQuantity: number) => {
     setCart((prevCart) =>
-      prevCart.map((item) =>
-        item.priceId === itemId
-          ? { ...item, quantity: Math.max(1, newQuantity) }
-          : item,
-      ),
+      prevCart.map((item) => {
+        if (item.priceId !== itemId) {
+          return item;
+        }
+        const isCoaching =
+          !!item.subscription || (item.type || "").toLowerCase().includes("coach");
+        if (isCoaching) {
+          return { ...item, quantity: 1 };
+        }
+        return { ...item, quantity: Math.max(1, newQuantity) };
+      }),
     );
   };
 

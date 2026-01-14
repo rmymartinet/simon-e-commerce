@@ -61,13 +61,19 @@ function CheckoutComponent({ session }: { session: BetterAuthSession | null }) {
                   className="flex h-[20vh] w-full items-start gap-6 rounded-xl border border-white/10 bg-[--card-bg] p-4 shadow-md"
                 >
                   <div className="h-full w-[150px] overflow-hidden rounded-lg bg-[#fafafa]">
-                    <Image
-                      width={300}
-                      height={300}
-                      src={item.imageUrl || ""}
-                      alt={item.titlePlan}
-                      className="h-full w-full object-cover"
-                    />
+                    {item.imageUrl ? (
+                      <Image
+                        width={300}
+                        height={300}
+                        src={item.imageUrl}
+                        alt={item.titlePlan}
+                        className="h-full w-full object-cover"
+                      />
+                    ) : (
+                      <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-violet-500/30 to-black/60 text-center text-xs font-semibold text-white">
+                        {item.titlePlan}
+                      </div>
+                    )}
                   </div>
                   <div className="flex h-full w-full flex-col justify-between">
                     <div className="flex w-full items-center justify-between">

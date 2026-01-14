@@ -24,6 +24,16 @@ export const useAddToCart = () => {
       return;
     }
 
+    // Cas 1bis : On veut ajouter un coaching alors qu'il y en a déjà un
+    if (isSubscription && cartHasSubscription) {
+      Swal.fire({
+        icon: "error",
+        title: "Panier limité",
+        text: "Vous ne pouvez ajouter qu’un seul coaching à la fois.",
+      });
+      return;
+    }
+
     // Cas 2 : On veut ajouter un produit unique alors qu'il y a déjà un abonnement
     if (!isSubscription && cartHasSubscription) {
       Swal.fire({

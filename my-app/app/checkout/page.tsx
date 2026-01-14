@@ -7,9 +7,5 @@ export default async function Checkout() {
     headers: await headers(),
   });
 
-  return (
-    <>
-      <CheckoutComponent session={session} />
-    </>
-  );
+  return <CheckoutComponent session={session} />;
 }
