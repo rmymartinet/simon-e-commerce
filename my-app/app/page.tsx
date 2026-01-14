@@ -1,30 +1,21 @@
-"use client";
-
 import BeforeAfterPhoto from "@/components/BeforeAfterPhoto";
-import CalendlyCallModal from "@/components/Calendly/CalendlyCallModal";
-import CalendlyContainer from "@/components/Calendly/CalendlyContainer";
-import CoachingOverview from "@/components/coaching/CoachingOverview";
+import CoachingContainer from "@/components/coaching/CoachingContainer";
 import Header from "@/components/Header/Header";
-import ProgramOverview from "@/components/Programs/ProgramOverview";
-import Youtube from "@/components/Programs/Youtube";
-
-import { useGSAP } from "@gsap/react";
-import gsap from "gsap";
-import { useState } from "react";
-
-gsap.registerPlugin(useGSAP);
+import ProgramsContainer from "@/components/Programs/ProgramsContainer";
+// import Youtube from "@/components/Programs/Youtube";
 
 export default function Home() {
-  const [isOpen, setIsOpen] = useState(false);
+  // const [isOpen, setIsOpen] = useState(false);
 
   return (
     <section className="flex flex-col items-center">
       <Header />
-      <CalendlyContainer />
-      <CalendlyCallModal isOpen={isOpen} setIsOpen={setIsOpen} />
-      <ProgramOverview />
-      <Youtube />
-      <CoachingOverview />
+      {/* <CalendlyContainer /> */}
+      {/* <CalendlyCallModal isOpen={isOpen} setIsOpen={setIsOpen} /> */}
+      {/* <ProgramOverview /> */}
+      <ProgramsContainer />
+      <CoachingContainer />
+      {/* <Youtube /> */}
       <BeforeAfterPhoto />
     </section>
   );
