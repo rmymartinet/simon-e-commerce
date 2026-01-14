@@ -1,3 +1,5 @@
+"use client";
+
 import { useGSAP } from "@gsap/react";
 import { textSplitLinesScrollTrigger } from "@/utils/common/textAnimation";
 import { useEffect, useRef, useState } from "react";
@@ -25,8 +27,6 @@ const CoachingOverview = () => {
   const [isCounting, setIsCounting] = useState(false);
   const coachingRef = useRef<HTMLDivElement>(null);
 
-
-
   useGSAP(() => {
     ScrollTrigger.create({
       trigger: countContainerRef.current,
@@ -49,7 +49,7 @@ const CoachingOverview = () => {
           start: "top bottom",
           once: true,
         },
-      })
+      });
     }
   }, []);
 
@@ -89,11 +89,13 @@ const CoachingOverview = () => {
     <section
       ref={coachingRef}
       id="coaching"
-      className="mx-auto mt-20 flex w-screen max-w-[90vw] flex-col items-center overflow-hidden rounded-3xl px-4 py-20 text-black md:mt-[20vh] md:gap-10 relative"
-
+      className="relative mx-auto mt-20 flex w-screen max-w-[90vw] flex-col items-center overflow-hidden rounded-3xl px-4 py-20 text-black md:mt-[20vh] md:gap-10"
     >
-      <div ref={bgRef} className="absolute top-0 -z-10 h-full w-full bg-white"/>
-    
+      <div
+        ref={bgRef}
+        className="absolute top-0 -z-10 h-full w-full bg-white"
+      />
+
       <TitleComponent
         title="Un coaching sur-mesure"
         titleIndication="coaching"

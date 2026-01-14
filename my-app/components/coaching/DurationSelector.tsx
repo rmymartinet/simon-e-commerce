@@ -25,7 +25,10 @@ interface DurationSelectorProps {
   selectedDuration: number;
 }
 
-export default function DurationSelector({ onChange, selectedDuration }: DurationSelectorProps) {
+export default function DurationSelector({
+  onChange,
+  selectedDuration,
+}: DurationSelectorProps) {
   const [selected, setSelected] = useState(selectedDuration);
 
   const calculateSavingsPercentage = (price: number) => {
@@ -52,9 +55,10 @@ export default function DurationSelector({ onChange, selectedDuration }: Duratio
       value: 6,
       dayPrice: "4.50",
       pricePerMonth: 165,
-      description: "Suivi sur 6 mois – résultats durables, tarif mensuel allégé",
+      description:
+        "Suivi sur 6 mois – résultats durables, tarif mensuel allégé",
       badge: `- ${calculateSavingsPercentage(165)}%`,
-      badgeColor: "bg-green-500",
+      badgeColor: "bg-violet-500",
       badgeTextColor: "text-white",
       features: [
         "Ajustements hebdomadaires",
@@ -71,7 +75,7 @@ export default function DurationSelector({ onChange, selectedDuration }: Duratio
       pricePerMonth: 159,
       description: "Suivi sur 9 mois – transformation complète à petit prix",
       badge: `- ${calculateSavingsPercentage(159)}%`,
-      badgeColor: "bg-green-500",
+      badgeColor: "bg-violet-500",
       badgeTextColor: "text-white",
       features: [
         "Programme d'entraînement évolutif",
@@ -94,12 +98,14 @@ export default function DurationSelector({ onChange, selectedDuration }: Duratio
     <fieldset className="space-y-4">
       {options.map((opt) => {
         const isChecked = selected === opt.value;
-        
+
         return (
           <label
             key={opt.value}
             className={`flex cursor-pointer items-start rounded-lg border px-4 py-3 transition ${
-              isChecked ? "border-green-500 bg-green-50" : "border-gray-300 bg-white hover:border-gray-400"
+              isChecked
+                ? "border-violet-500 bg-violet-500 text-white shadow-[0_18px_40px_rgba(124,58,237,0.35)]"
+                : "border-white/10 bg-[#15171c] text-white/80 hover:border-violet-400/60"
             }`}
           >
             <input
@@ -111,42 +117,57 @@ export default function DurationSelector({ onChange, selectedDuration }: Duratio
               className="sr-only"
             />
 
-            <span className={`mt-1 grid h-5 w-5 flex-shrink-0 place-content-center rounded-full border-2 transition ${
-              isChecked ? "border-green-500 bg-green-500" : "border-gray-400 bg-white"
-            }`}>
-              {isChecked && <span className="mx-auto block h-3 w-3 rounded-full bg-white" />}
+            <span
+              className={`mt-1 grid h-5 w-5 flex-shrink-0 place-content-center rounded-full border-2 transition ${
+                isChecked
+                  ? "border-white/90 bg-white/20"
+                  : "border-white/30 bg-transparent"
+              }`}
+            >
+              {isChecked && (
+                <span className="mx-auto block h-3 w-3 rounded-full bg-white" />
+              )}
             </span>
 
             <div className="relative ml-4 flex w-full flex-col">
               <div className="flex items-start justify-between">
-                <span className={`font-medium text-lg ${isChecked ? "text-gray-900" : "text-gray-800"}`}>
-                  {opt.label}
-                </span>
+                <span className="text-lg font-medium">{opt.label}</span>
 
                 <div className="flex flex-col items-end">
-                  <span className={`font-semibold ${isChecked ? "text-green-600" : "text-gray-700"}`}>
+                  <span className="font-semibold">
                     {opt.pricePerMonth} €/mois
                   </span>
-                  <span className="text-sm text-[--subtext]">
+                  <span
+                    className={`text-sm ${
+                      isChecked ? "text-white/80" : "text-[--subtext]"
+                    }`}
+                  >
                     soit {opt.dayPrice} €/jour
                   </span>
                 </div>
               </div>
 
-              <p className="mt-1 text-sm text-gray-600">{opt.description}</p>
+              <p className={`mt-1 text-sm ${isChecked ? "text-white/85" : ""}`}>
+                {opt.description}
+              </p>
 
               {opt.badge && (
-                <span className={`absolute -top-[30px] right-0 mt-2 inline-block rounded-full px-2 py-0.5 text-xs font-semibold ${opt.badgeColor} ${opt.badgeTextColor}`}>
+                <span
+                  className={`absolute -top-[30px] right-0 mt-2 inline-block rounded-full px-2 py-0.5 text-xs font-semibold ${opt.badgeColor} ${opt.badgeTextColor}`}
+                >
                   {opt.badge}
                 </span>
               )}
 
               {isChecked && (
-                <div className="mt-4 pt-4 border-t border-gray-200 text-black">
+                <div className="mt-4 border-t border-white/20 pt-4 font-bold">
                   <ul className="space-y-2">
                     {opt.features.map((feature, idx) => (
-                      <li key={idx} className="flex items-start space-x-2 text-sm">
-                        <CiCircleCheck className="text-green-500 w-5 h-5 mt-0.5 flex-shrink-0 font-bold" />
+                      <li
+                        key={idx}
+                        className="flex items-start space-x-2 text-sm"
+                      >
+                        <CiCircleCheck className="mt-0.5 h-5 w-5 flex-shrink-0 font-bold text-white" />
                         <span>{feature}</span>
                       </li>
                     ))}
