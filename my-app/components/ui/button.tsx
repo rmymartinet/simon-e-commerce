@@ -20,7 +20,7 @@ const buttonVariants = cva(
         ghost: "hover:bg-accent hover:text-accent-foreground",
         link: "text-primary underline-offset-4 hover:underline",
         purpleBg:
-          "h-12 rounded-xl bg-[var(--purple-color)] px-[1rem] py-[2rem] font-bold text-secondary transition-transform duration-900 hover:scale-[1.02]",
+          "h-12 bg-[var(--purple-color)] px-[1rem] py-[2rem] font-bold text-secondary transition-transform duration-900 hover:scale-[1.02] ",
         whiteBg:
           "h-12 rounded-xl bg-[var(--purple-color)] px-[1rem] py-[2rem] font-bold text-secondary transition-transform duration-900 hover:scale-[1.02]",
         whitetopurple:
@@ -61,18 +61,9 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         ref={ref}
         {...props}
       >
-        {(variant === "purpleBg" || variant === "whiteBg") && (
-          <div
-            className={`absolute bottom-0 left-0 w-full ${
-              variant === "purpleBg" ? "h-0" : "h-0"
-            } z-0 transition-colors duration-300 ${
-              variant === "purpleBg" ? "bg-black" : "bg-white"
-            }`}
-          />
-        )}
         <span
           className={cn(
-            "relative z-10 block",
+            "relative z-10 inline-flex items-center gap-4",
             (variant === "purpleBg" || variant === "whiteBg") && "text-white",
           )}
         >

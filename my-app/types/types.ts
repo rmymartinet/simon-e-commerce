@@ -1,6 +1,5 @@
 import { motion } from "framer-motion";
 
-
 export interface PurchaseItemProps {
   id: string;
   createdAt: Date;
@@ -27,7 +26,7 @@ export interface ProgramDataPros {
 export interface CartItemProps {
   type: string;
   priceId?: string;
-  imageUrl: string;
+  imageUrl?: string;
   mostPopular?: boolean;
   titlePlan: string;
   month: number;
@@ -72,11 +71,9 @@ export interface CheckoutData {
 }
 
 export interface CheckoutContextValue {
-    checkoutData: CheckoutData | null;
-    setCheckoutData: (data: CheckoutData | null) => void;
+  checkoutData: CheckoutData | null;
+  setCheckoutData: (data: CheckoutData | null) => void;
 }
-
-
 
 export interface AddToCartButtonProps {
   productData: ProductDataProps;
@@ -377,7 +374,6 @@ export type Step1_UserInfoProps = {
     intensity: string | number;
   };
 
-  
   updateField: (
     field: keyof Step1_UserInfoProps["formState"],
     value: string | number,
@@ -400,7 +396,6 @@ export type Step2_UserGoalsProps = {
     intensity: number | "";
   };
 
-  
   setTotalCalories: React.Dispatch<React.SetStateAction<number>>;
   formIsValid: boolean;
   setTotalCaloriesTraining: React.Dispatch<React.SetStateAction<number>>;

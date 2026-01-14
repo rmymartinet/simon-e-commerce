@@ -1,3 +1,5 @@
+"use client";
+
 import { useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -36,14 +38,12 @@ const Youtube = () => {
   return (
     <div className="mt-[20vh] flex w-full flex-col items-center px-4">
       <div className="relative mb-10 flex flex-col items-center gap-6 text-center md:mb-40">
-
         <TitleComponent
           title="Tous vos exercices en vidéo"
           titleIndication="Accès inclus pour tous les membres"
           subtitle="Accédez à mes vidéos exclusives sur YouTube pour perfectionner vos mouvements et exécuter chaque exercice avec précision. Disponible pour tous les membres et programmes."
           isTextSplitLines={false}
         />
-
       </div>
       <BackgroundYoutubeImg iphoneRef={iphoneRef} imagesRefs={imagesRefs} />
     </div>
