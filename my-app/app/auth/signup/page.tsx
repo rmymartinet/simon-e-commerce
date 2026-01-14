@@ -19,6 +19,9 @@ import { cn } from "@/lib/utils";
 import { toast } from "sonner";
 import { useRouter, useSearchParams } from "next/navigation";
 import { signIn } from "@/lib/auth-client";
+import { useAddToCart } from "@/hooks/useAddToCart";
+import { useCart } from "@/app/context/CartContext";
+import { useAuth } from "@/app/context/AuthContext";
 
 export default function SignUp() {
   const [firstName, setFirstName] = useState("");
@@ -34,6 +37,11 @@ export default function SignUp() {
   const searchParams = useSearchParams();
   const params = searchParams.toString();
   const router = useRouter();
+  const from = searchParams.get("from");
+  const productRaw = searchParams.get("product");
+  const addToCart = useAddToCart();
+  const { cart } = useCart();
+  const { refreshSession } = useAuth();
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -184,8 +192,26 @@ export default function SignUp() {
                       setErrorMessage(ctx.error.message);
                       toast.error(ctx.error.message);
                     },
-                    onSuccess: () => {
-                      router.push("/auth/portal");
+                    onSuccess: async () => {
+                      try {
+                        await refreshSession();
+                        router.refresh();
+                        if (from && productRaw) {
+                          const product = JSON.parse(
+                            decodeURIComponent(productRaw),
+                          );
+                          if (
+                            !cart.some((item) => item.priceId === product.priceId)
+                          ) {
+                            addToCart(product);
+                          }
+                          await router.push("/checkout");
+                          return;
+                        }
+                        await router.push("/auth/portal");
+                      } finally {
+                        setLoading(false);
+                      }
                     },
                   },
                 );

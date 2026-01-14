@@ -213,7 +213,10 @@ export default function SignIn() {
               </Button>
               <p className="text-sm text-center mt-4">
                 Pas encore de compte ?{" "}
-                <Link href="/auth/signup" className="text-violet-500 hover:underline">
+                <Link
+                  href={`/auth/signup${searchParams.toString() ? `?${searchParams.toString()}` : ""}`}
+                  className="text-violet-500 hover:underline"
+                >
                   Créer un compte
                 </Link>
               </p>
