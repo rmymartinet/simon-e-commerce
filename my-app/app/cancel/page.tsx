@@ -20,7 +20,7 @@ export default function Cancel() {
       </p>
       <div className="mt-5">
         <Button>
-          <Link href="/pricing">Réessayer</Link>
+          <Link href="/">Réessayer</Link>
         </Button>
       </div>
     </main>
