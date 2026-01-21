@@ -7,17 +7,19 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { IoArrowBack } from "react-icons/io5";
 import { Suspense } from "react";
 import Guest from "@/components/Auth/Guest";
+import { useCart } from "@/app/context/CartContext";
 
 const ChooseAuthContent = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const params = searchParams.toString();
+  const { cart } = useCart();
 
   return (
     <div className="flex min-h-screen flex-col items-center justify-center px-4 py-10 md:py-20">
       <div className="flex w-full max-w-4xl flex-col items-center gap-10 lg:flex-row lg:gap-20">
         {/* Image de fond ou illustration - cachée sur mobile */}
-        <div className="hidden lg:flex items-center justify-center">
+        <div className="hidden items-center justify-center lg:flex">
           <Image
             src="/images/card_program/advanced.png"
             alt="Illustration programme"
@@ -29,9 +31,9 @@ const ChooseAuthContent = () => {
 
         {/* Section Choix utilisateur */}
         <div className="flex w-full max-w-md flex-col items-center justify-center gap-6">
-          <button 
+          <button
             onClick={() => router.back()}
-            className="self-start flex items-center gap-2 mb-12"
+            className="mb-12 flex items-center gap-2 self-start"
           >
             <IoArrowBack />
             Retour
@@ -42,7 +44,8 @@ const ChooseAuthContent = () => {
           </h1>
 
           <p className="text-center">
-            Pour finaliser votre achat, vous devez soit vous connecter à votre compte, soit continuer en tant qu&apos;invité.
+            Pour finaliser votre achat, vous devez soit vous connecter à votre
+            compte, soit continuer en tant qu&apos;invité.
           </p>
 
           <div className="flex w-full flex-col gap-4">
@@ -55,7 +58,7 @@ const ChooseAuthContent = () => {
             <div className="relative text-center text-gray-500 before:absolute before:left-0 before:top-1/2 before:h-px before:w-full before:bg-gray-300 before:content-['']">
               <span className="relative z-10 bg-white px-4 text-sm">ou</span>
             </div>
-            <Guest />
+            <Guest cartItems={cart} />
           </div>
         </div>
       </div>
