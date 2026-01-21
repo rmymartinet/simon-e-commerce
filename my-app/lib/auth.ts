@@ -3,7 +3,7 @@ import { prismaAdapter } from "better-auth/adapters/prisma";
 import { prisma } from "./prisma";
 import { resend } from "./resend";
 import { nextCookies } from "better-auth/next-js";
-import { z } from 'zod';
+import { z } from "zod";
 
 // Schéma de validation pour les variables d'environnement
 const envSchema = z.object({
@@ -42,7 +42,7 @@ export const auth = betterAuth({
   secret: process.env.BETTER_AUTH_SECRET!,
 
   database: prismaAdapter(prisma, {
-    provider: "postgresql"
+    provider: "postgresql",
   }),
 
   session: {
@@ -53,7 +53,13 @@ export const auth = betterAuth({
     path: "/",
     httpOnly: true,
     name: "better-auth.session_token",
-    async create(data: { id: string; userId: string; token: string; expiresAt: Date }) {
+
+    async create(data: {
+      id: string;
+      userId: string;
+      token: string;
+      expiresAt: Date;
+    }) {
       try {
         const session = await prisma.session.create({
           data: {
@@ -62,8 +68,8 @@ export const auth = betterAuth({
             token: data.token,
             expiresAt: data.expiresAt,
             createdAt: new Date(),
-            updatedAt: new Date()
-          }
+            updatedAt: new Date(),
+          },
         });
         return session;
       } catch (error) {
@@ -71,18 +77,19 @@ export const auth = betterAuth({
         throw error;
       }
     },
+
     async validate(data: { token: string }) {
       try {
         const session = await prisma.session.findUnique({
           where: { token: data.token },
-          include: { user: true }
+          include: { user: true },
         });
         return session;
       } catch (error) {
         console.error("Erreur lors de la validation de la session:", error);
         throw error;
       }
-    }
+    },
   },
 
   emailAndPassword: {
@@ -98,7 +105,6 @@ export const auth = betterAuth({
 
     async sendResetPassword(data) {
       try {
-        
         await resend.emails.send({
           from: process.env.EMAIL_FROM!,
           to: data.user.email,
@@ -112,7 +118,6 @@ export const auth = betterAuth({
             <p>Si vous n'avez pas demandé cette réinitialisation, veuillez ignorer cet email.</p>
           `,
         });
-
       } catch (error) {
         console.error("❌ Erreur lors de l'envoi de l'email:", error);
         throw new Error("Échec de l'envoi de l'email de réinitialisation");
@@ -140,16 +145,20 @@ export const auth = betterAuth({
 
   cookies: {
     sessionToken: {
-      name: process.env.NODE_ENV === "production"
-        ? "__Secure-better-auth.session_token"
-        : "better-auth.session_token",
+      name:
+        process.env.NODE_ENV === "production"
+          ? "__Secure-better-auth.session_token"
+          : "better-auth.session_token",
       options: {
         httpOnly: true,
         sameSite: "lax",
         path: "/",
         secure: process.env.NODE_ENV === "production",
-        domain: process.env.NODE_ENV === "production" ? ".smartinet-coaching.com" : undefined,
+        domain:
+          process.env.NODE_ENV === "production"
+            ? ".smartinet-coaching.com"
+            : undefined,
       },
     },
-  }
+  },
 });

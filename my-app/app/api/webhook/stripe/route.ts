@@ -2,6 +2,7 @@ import Stripe from "stripe";
 import { prisma } from "@/lib/prisma";
 import { handleSubscription } from "@/lib/stripe/subscription";
 import { handleProgram } from "@/lib/stripe/programs";
+import { sendProgramEmail } from "@/lib/mailer";
 import { stripe } from "@/lib/stripe/stripe";
 import { getUserAndSubscription } from "@/lib/stripe/getUserAndSubscription";
 import { headers } from "next/headers";
@@ -21,7 +22,10 @@ const HANDLED_EVENTS = [
 
 async function handleCheckoutSession(session: Stripe.Checkout.Session) {
   const subscriptionId = session.subscription as string;
-  const email = session.customer_details?.email;
+  const email =
+    session.customer_details?.email ||
+    session.customer_email ||
+    session.metadata?.email;
 
   if (!email) {
     throw new Error("No email found in session");
@@ -30,6 +34,11 @@ async function handleCheckoutSession(session: Stripe.Checkout.Session) {
   const existingUser = await prisma.user.findUnique({
     where: { email },
   });
+
+  const programTitle =
+    (session.metadata?.titlePlan as string | undefined) ||
+    (session.metadata?.programTitle as string | undefined) ||
+    "";
 
   if (existingUser) {
     if (session.metadata?.subscription) {
@@ -45,15 +54,19 @@ async function handleCheckoutSession(session: Stripe.Checkout.Session) {
         status: session.payment_status || "unpaid",
         customerId: session.customer as string,
         createdAt: new Date(),
-        userPurchaseData: session.metadata?.programTitle
+        userPurchaseData: programTitle
           ? {
               create: {
-                titlePlan: session.metadata.programTitle,
+                titlePlan: programTitle,
               },
             }
           : undefined,
       },
     });
+
+    if (programTitle) {
+      await sendProgramEmail(email, programTitle);
+    }
   }
 }
 

@@ -11,12 +11,10 @@ dotenv.config();
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
-
 export async function sendProgramEmail(
   email: string,
   programTitles: string[] | string,
 ) {
-
   const isProgramTitlesArray = Array.isArray(programTitles)
     ? programTitles
     : programTitles.split(",").map((title) => title.trim());
@@ -62,7 +60,7 @@ export async function sendProgramEmail(
 }
 
 export async function sendResetPasswordEmail(email: string, token: string) {
-  const resetUrl = `https://www.smartinet-coaching.com/reset-password?token=${token}`;
+  const resetUrl = `https://www.smartinet-coaching.fr/reset-password?token=${token}`;
 
   try {
     const { data, error } = await resend.emails.send({
