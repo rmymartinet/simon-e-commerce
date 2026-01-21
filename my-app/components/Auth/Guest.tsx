@@ -2,25 +2,28 @@
 
 import { usePayment } from "@/hooks/usePayment";
 import { useRouter } from "next/navigation";
-import { ProductDataProps, CartItemProps } from "@/types/types";
+import { CartItemProps } from "@/types/types";
 import { authClient } from "@/lib/auth-client";
-import { useCheckout } from "@/app/context/CheckoutContext";
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import Swal from "sweetalert2";
+import Link from "next/link";
 const { useSession } = authClient;
 
-const Guest = () => {
+type GuestProps = {
+  cartItems: CartItemProps[];
+};
+
+const Guest = ({ cartItems }: GuestProps) => {
   const { handlePayment } = usePayment({});
-  const { checkoutData } = useCheckout();
   const router = useRouter();
   const { data: session } = useSession();
   const [email, setEmail] = useState("");
 
   useEffect(() => {
     if (session) {
-      router.push("/auth/dashboard");
+      router.push("/checkout");
     }
   }, [session, router]);
 
@@ -33,31 +36,12 @@ const Guest = () => {
       });
       return;
     }
-    if (checkoutData?.productData) {
-      const cartItems: CartItemProps[] = Array.isArray(checkoutData.productData) 
-        ? (checkoutData.productData as ProductDataProps[]).map(product => ({
-            type: product.type,
-            titlePlan: product.titlePlan,
-            price: product.price,
-            priceId: product.priceId,
-            imageUrl: product.imageUrl,
-            month: product.month,
-            quantity: 1
-          }))
-        : [{
-            type: (checkoutData.productData as ProductDataProps).type,
-            titlePlan: (checkoutData.productData as ProductDataProps).titlePlan,
-            price: (checkoutData.productData as ProductDataProps).price,
-            priceId: (checkoutData.productData as ProductDataProps).priceId,
-            imageUrl: (checkoutData.productData as ProductDataProps).imageUrl,
-            month: (checkoutData.productData as ProductDataProps).month,
-            quantity: 1
-          }];
-
-      handlePayment(cartItems, true, email);
-    } else {
+    if (cartItems.length === 0) {
       console.error("Aucun produit sélectionné");
+      return;
     }
+
+    handlePayment(cartItems, true, email);
   };
 
   return (
@@ -77,6 +61,15 @@ const Guest = () => {
         >
           Continuer en tant qu&apos;invité
         </Button>
+        <div className="text-sm text-white/70">
+          Déjà un compte ?{" "}
+          <Link
+            href="/auth/signin?from=checkout"
+            className="text-violet-400 hover:underline"
+          >
+            Se connecter
+          </Link>
+        </div>
       </div>
     </section>
   );

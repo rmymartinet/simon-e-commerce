@@ -196,14 +196,18 @@ export default function SignUp() {
                       try {
                         await refreshSession();
                         router.refresh();
-                        if (from && productRaw) {
-                          const product = JSON.parse(
-                            decodeURIComponent(productRaw),
-                          );
-                          if (
-                            !cart.some((item) => item.priceId === product.priceId)
-                          ) {
-                            addToCart(product);
+                        if (from === "checkout") {
+                          if (productRaw) {
+                            const product = JSON.parse(
+                              decodeURIComponent(productRaw),
+                            );
+                            if (
+                              !cart.some(
+                                (item) => item.priceId === product.priceId,
+                              )
+                            ) {
+                              addToCart(product);
+                            }
                           }
                           await router.push("/checkout");
                           return;

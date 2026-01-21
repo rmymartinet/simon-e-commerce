@@ -60,15 +60,24 @@ export default function SignIn() {
             try {
               await refreshSession();
               router.refresh();
-              if (from && productRaw) {
-                const product = JSON.parse(decodeURIComponent(productRaw));
-                if (!cart.some(item => item.priceId === product.priceId)) {
-                  addToCart(product);
-                }
-                await router.push("/checkout");
-              } else {
-                await router.push("/auth/portal");
-              }
+                        if (from === "checkout") {
+                          if (productRaw) {
+                            const product = JSON.parse(
+                              decodeURIComponent(productRaw),
+                            );
+                            if (
+                              !cart.some(
+                                (item) => item.priceId === product.priceId,
+                              )
+                            ) {
+                              addToCart(product);
+                            }
+                          }
+                          await router.push("/checkout");
+                          return;
+                        }
+
+                        await router.push("/auth/portal");
             } finally {
               setLoading(false);
             }

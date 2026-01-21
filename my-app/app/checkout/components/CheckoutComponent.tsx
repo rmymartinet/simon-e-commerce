@@ -3,6 +3,7 @@
 import { useCart } from "@/app/context/CartContext";
 import TitleComponent from "@/components/TitleComponent";
 import { Button } from "@/components/ui/button";
+import Guest from "@/components/Auth/Guest";
 import { usePayment } from "@/hooks/usePayment";
 import { BetterAuthSession, UserDataProps } from "@/types/types";
 import Image from "next/image";
@@ -130,21 +131,25 @@ function CheckoutComponent({ session }: { session: BetterAuthSession | null }) {
             <span>{totalAmount.toFixed(2)} €</span>
           </div>
 
-          <Button
-            variant="whiteBg"
-            className="w-full"
-            onClick={() => {
-              if (!userData) return;
-              handlePayment(
-                cart,
-                isGuest,
-                session?.user?.email,
-              );
-            }}
-            disabled={cart.length === 0 || !userData}
-          >
-            Procéder au paiement
-          </Button>
+          {isGuest ? (
+            <Guest cartItems={cart} />
+          ) : (
+            <Button
+              variant="whiteBg"
+              className="w-full"
+              onClick={() => {
+                if (!userData) return;
+                handlePayment(
+                  cart,
+                  isGuest,
+                  session?.user?.email,
+                );
+              }}
+              disabled={cart.length === 0 || !userData}
+            >
+              Procéder au paiement
+            </Button>
+          )}
         </div>
       </div>
     </section>
