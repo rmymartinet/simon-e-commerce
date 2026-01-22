@@ -89,7 +89,7 @@ const PriceCoachingsContainer = () => {
 
   return (
     <section className="mx-auto">
-      <div className="grid w-full grid-cols-1 gap-10 p-4 md:p-8 lg:grid-cols-2 lg:gap-16">
+      <div className="grid w-full grid-cols-1 gap-10 md:p-8 lg:grid-cols-2 lg:gap-16">
         <div className="flex w-full flex-col gap-6">
           <div className="flex flex-1 flex-col gap-6">
             <Badge
