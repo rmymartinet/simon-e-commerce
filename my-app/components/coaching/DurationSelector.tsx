@@ -134,15 +134,11 @@ export default function DurationSelector({
                 <span className="text-lg font-medium">{opt.label}</span>
 
                 <div className="flex flex-col items-end">
-                  <span className="font-semibold">
+                  <span className="font-semibold text-white">
                     {opt.pricePerMonth} €/mois
                   </span>
-                  <span
-                    className={`text-sm ${
-                      isChecked ? "text-white/80" : "text-[--subtext]"
-                    }`}
-                  >
-                    soit {opt.dayPrice} €/jour
+                  <span className="mt-1 inline-flex items-center gap-1 rounded-full bg-white/15 px-2 py-0.5 text-[11px] font-semibold uppercase tracking-wide text-white/90">
+                    {opt.dayPrice} €/jour
                   </span>
                 </div>
               </div>
@@ -152,11 +148,18 @@ export default function DurationSelector({
               </p>
 
               {opt.badge && (
-                <span
-                  className={`absolute -top-[30px] right-0 mt-2 inline-block rounded-full px-2 py-0.5 text-xs font-semibold ${opt.badgeColor} ${opt.badgeTextColor}`}
-                >
-                  {opt.badge}
-                </span>
+                <div className="mt-3 flex w-full items-center justify-between text-xs font-semibold">
+                  <span className="text-white/70">Économie</span>
+                  <span
+                    className={`rounded-full px-2 py-0.5 text-[11px] font-bold uppercase tracking-wide shadow-sm ${
+                      isChecked
+                        ? "bg-white text-violet-700"
+                        : `${opt.badgeColor} ${opt.badgeTextColor}`
+                    }`}
+                  >
+                    {opt.badge}
+                  </span>
+                </div>
               )}
 
               {isChecked && (

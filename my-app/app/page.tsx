@@ -8,11 +8,10 @@ export default function Home() {
   // const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <section className="flex flex-col items-center">
+    <section className="flex flex-col items-center px-4">
       <Header />
       {/* <CalendlyContainer /> */}
       {/* <CalendlyCallModal isOpen={isOpen} setIsOpen={setIsOpen} /> */}
-      {/* <ProgramOverview /> */}
       <ProgramsContainer />
       <CoachingContainer />
       {/* <Youtube /> */}

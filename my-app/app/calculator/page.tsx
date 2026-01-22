@@ -44,7 +44,7 @@ export default function Calorie() {
   return (
     <div
       ref={containerRef}
-      className="mt-[25vh] flex min-h-screen flex-col items-center justify-center gap-20 overflow-hidden"
+      className="mt-[20vh] flex min-h-screen flex-col items-center justify-center gap-20 overflow-hidden"
     >
       <TitleComponent
         titleIndication="Calories"

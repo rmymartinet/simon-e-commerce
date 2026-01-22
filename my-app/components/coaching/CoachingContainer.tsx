@@ -5,7 +5,7 @@ import PriceCoachingsContainer from "./PriceCoachingsContainer";
 
 const CoachingContainer = () => {
   return (
-    <div className="mt-40">
+    <div className="mt-[20vh]">
       <TitleComponent
         title="Coachings"
         titleIndication="coachings"

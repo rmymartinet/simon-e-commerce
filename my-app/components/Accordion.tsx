@@ -38,28 +38,26 @@ const Accordion = ({
   const { width } = useWindowWidth();
 
   return (
-    <>
-      <div
-        onClick={handleIsClicked}
-        className="flex w-full cursor-pointer flex-col items-center gap-6 overflow-hidden rounded-3xl py-6"
-      >
-        <div className="flex w-full items-center justify-between gap-10 lg:grid lg:grid-cols-coachingNutrition">
-          {width > 1024 && <span className="lg:text-xl">0{index + 1}</span>}
-          <h1 className="lg:text-xl">{title}</h1>
-          <div
-            ref={iconRef}
-            className="rounded-full border border-[--border-color] bg-[--card-bg] lg:p-2"
-          >
-            <IoAdd className="text-xl text-muted" />
-          </div>
+    <div
+      onClick={handleIsClicked}
+      className="flex w-full cursor-pointer flex-col items-center gap-6 overflow-hidden rounded-3xl py-6"
+    >
+      <div className="flex w-full items-center justify-between gap-10 lg:grid lg:grid-cols-coachingNutrition">
+        {width > 1024 && <span className="lg:text-xl">0{index + 1}</span>}
+        <h1 className="lg:text-xl">{title}</h1>
+        <div
+          ref={iconRef}
+          className="rounded-full border border-[--border-color] bg-[--card-bg] lg:p-2"
+        >
+          <IoAdd className="text-xl text-muted" />
         </div>
-        <p
-          ref={accordionRef}
-          className="h-0 self-start text-sm leading-relaxed opacity-0 sm:text-base md:text-lg lg:text-xl"
-          dangerouslySetInnerHTML={{ __html: text }}
-        ></p>
       </div>
-    </>
+      <p
+        ref={accordionRef}
+        className="h-0 self-start text-sm leading-relaxed opacity-0 sm:text-base md:text-lg lg:text-xl"
+        dangerouslySetInnerHTML={{ __html: text }}
+      ></p>
+    </div>
   );
 };
 

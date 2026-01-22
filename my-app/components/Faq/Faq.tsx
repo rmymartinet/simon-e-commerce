@@ -1,12 +1,9 @@
-"use client"
+"use client";
 
 import { faqCoachingData, faqProgramData } from "@/app/data/faqData";
 import { useRef, useEffect, useState, useCallback } from "react";
 import TitleComponent from "../TitleComponent";
 import Accordion from "../Accordion";
-
-
-
 
 interface FaqItem {
   question: string;
@@ -31,12 +28,12 @@ const faqCategories: FaqCategory[] = [
 ];
 
 // Génère la liste des questions pour le scrollspy
-const allQuestions: FaqQuestion[] = faqCategories.flatMap(cat =>
+const allQuestions: FaqQuestion[] = faqCategories.flatMap((cat) =>
   cat.data.map((q, idx) => ({
     ...q,
     sectionId: `${cat.id}-${idx}`,
     categoryId: cat.id,
-  }))
+  })),
 );
 
 export default function Faq() {
@@ -45,13 +42,13 @@ export default function Faq() {
 
   const handleScroll = useCallback(() => {
     if (typeof window === "undefined") return;
-    
+
     const offsets = sectionRefs.current.map((ref) => {
       if (!ref) return Number.POSITIVE_INFINITY;
       const rect = ref.getBoundingClientRect();
       return Math.abs(rect.top - window.innerHeight * 0.22);
     });
-    
+
     const minIndex = offsets.indexOf(Math.min(...offsets));
     if (allQuestions[minIndex]) {
       setActiveCat(allQuestions[minIndex].categoryId);
@@ -64,38 +61,42 @@ export default function Faq() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [handleScroll]);
 
-  const scrollToSection = useCallback((catId: string) => (e: React.MouseEvent) => {
-    e.preventDefault();
-    const firstSectionIdx = allQuestions.findIndex(q => q.categoryId === catId);
-    sectionRefs.current[firstSectionIdx]?.scrollIntoView({ 
-      behavior: "smooth", 
-      block: "start" 
-    });
-    setActiveCat(catId);
-  }, []);
+  const scrollToSection = useCallback(
+    (catId: string) => (e: React.MouseEvent) => {
+      e.preventDefault();
+      const firstSectionIdx = allQuestions.findIndex(
+        (q) => q.categoryId === catId,
+      );
+      sectionRefs.current[firstSectionIdx]?.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+      setActiveCat(catId);
+    },
+    [],
+  );
 
   return (
-    <section className="relative mx-auto pt-12">
+    <section className="relative mx-auto mt-[20vh]">
       <div className="max-w-7xl px-4">
         <TitleComponent
           title="Questions fréquentes"
           subtitle="Voici les questions les plus fréquemment posées. Si vous avez d'autres questions, n'hésitez pas à nous contacter."
           titleIndication="Questions fréquentes"
         />
-        <div className="flex flex-col md:flex-row gap-8">
+        <div className="mt-20 flex flex-col gap-8 md:flex-row">
           {/* Menu catégories - visible uniquement en desktop */}
-          <nav className="hidden md:flex mr-[10vw] md:flex-col gap-2 md:gap-8 md:min-w-[160px] md:sticky md:top-28 self-start z-10 p-10 rounded-2xl">
+          <nav className="z-10 mr-[10vw] hidden gap-2 self-start rounded-2xl p-10 md:sticky md:top-28 md:flex md:min-w-[160px] md:flex-col md:gap-8">
             {faqCategories.map((cat) => (
               <a
                 key={cat.id}
                 href={`#${cat.id}`}
                 onClick={scrollToSection(cat.id)}
-                className={`font-bold text-lg md:text-2xl transition-all duration-200
-                  ${activeCat === cat.id
-                    ? "text-white bg-black rounded-full shadow-md"
+                className={`text-lg font-bold transition-all duration-200 md:text-2xl ${
+                  activeCat === cat.id
+                    ? "rounded-full bg-black text-white shadow-md"
                     : "text-[] hover:text-gray-600"
-                  }
-                `}
+                } `}
                 style={{
                   opacity: activeCat === cat.id ? 1 : 0.5,
                   pointerEvents: activeCat === cat.id ? "none" : "auto",
@@ -107,22 +108,26 @@ export default function Faq() {
           </nav>
 
           {/* Questions FAQ */}
-          <div className="flex-1 flex flex-col gap-6">
+          <div className="flex flex-1 flex-col gap-6">
             {faqCategories.map((cat, catIndex) => (
               <div key={cat.id} className="flex flex-col gap-12">
                 {/* Titre de catégorie - visible uniquement en mobile */}
-                <h2 className="md:hidden text-2xl font-bold text-center mb-4">{cat.label}</h2>
+                <h2 className="mb-4 text-center text-2xl font-bold md:hidden">
+                  {cat.label}
+                </h2>
                 {cat.data.map((q, idx) => {
                   const sectionId = `${cat.id}-${idx}`;
-                  const refIdx = allQuestions.findIndex(qq => qq.sectionId === sectionId);
+                  const refIdx = allQuestions.findIndex(
+                    (qq) => qq.sectionId === sectionId,
+                  );
                   return (
                     <section
                       key={sectionId}
                       id={sectionId}
-                      ref={el => {
+                      ref={(el) => {
                         sectionRefs.current[refIdx] = el;
                       }}
-                      className="scroll-mt-32"
+                      className="flex scroll-mt-32 items-center border-b border-gray-700"
                     >
                       <Accordion
                         index={idx}
@@ -135,7 +140,7 @@ export default function Faq() {
                 })}
                 {/* Ligne de séparation entre les catégories */}
                 {catIndex < faqCategories.length - 1 && (
-                  <div className="w-full h-px bg-gray-200 my-8" />
+                  <div className="my-8" />
                 )}
               </div>
             ))}

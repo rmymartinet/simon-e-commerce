@@ -185,20 +185,6 @@ export default function Infos() {
             </div>
           </div>
         </div>
-        {/* <div
-          ref={imgRef}
-          className="flex w-full lg:mb-[20vh] lg:mt-[20vh] lg:px-72"
-        >
-          <Image
-            src="/images/about/photo-output.jpeg"
-            alt=""
-            width={2000}
-            height={2000}
-            className="h-full w-full rounded-xl object-cover"
-            layout="responsive"
-            quality={100}
-          />
-        </div> */}
         <div className="flex flex-col items-center gap-10 md:px-20 lg:items-start">
           <div className="mt-20 flex flex-col gap-8 md:mt-0">
             <h1

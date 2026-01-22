@@ -6,14 +6,16 @@ import { RefObject, useRef } from "react";
 import { animateBlockReveal } from "@/utils/Animation";
 import { Button } from "../ui/button";
 import Link from "next/link";
-import { ArrowRight, Calendar, Dumbbell, Star } from "lucide-react";
+import { ArrowRight, Calendar, Dumbbell, Flame } from "lucide-react";
 import { GiFruitBowl } from "react-icons/gi";
 import { Badge } from "../ui/badge";
+import BackgroundTransition from "../BackgroundTransition";
 
 gsap.registerPlugin(useGSAP);
 
 const Header = () => {
   const containerRef = useRef(null);
+
   useGSAP(() => {
     if (containerRef.current) {
       animateBlockReveal(
@@ -28,12 +30,18 @@ const Header = () => {
       ref={containerRef}
       className="relative flex w-screen flex-col justify-end overflow-hidden"
     >
+      <BackgroundTransition />
       <div className="z-50 mb-4 flex min-h-screen w-full flex-col items-center justify-center px-4">
         <div className="flex w-full flex-col items-center gap-12 lg:gap-20">
           <div className="mb-10 flex w-full max-w-3xl flex-col gap-4 md:mb-20 md:items-start md:text-left">
-            <Badge variant="secondary" className="w-max">
-              <Star className="size-3.5" />
-              +300 personnes transformations réussies
+            <Badge
+              variant="secondary"
+              className="s w-max gap-2 rounded-full border border-violet-500/20 bg-white/5 px-3 py-1 text-xs font-semibold text-white/80 backdrop-blur-md"
+            >
+              <span className="flex h-5 w-5 items-center justify-center rounded-full bg-violet-500/20">
+                <Flame className="size-3 text-red-500" />
+              </span>
+              +200 transformations réussies
             </Badge>
             <h1 className="text-4xl font-semibold tracking-tighter text-white sm:text-5xl lg:text-6xl xl:text-7xl">
               Transforme ton physique avec un plan clair{" "}

@@ -1,12 +1,11 @@
 "use client";
 
-import PremiumCoachingsSlider from "@/components/coaching/PremiumCoachingsSlider";
 import TitleComponent from "@/components/TitleComponent";
 import PriceCoachingsContainer from "@/components/coaching/PriceCoachingsContainer";
-import CoachingsApps from "@/components/coaching/CoachingsApps";
 import AfterPurchaseSteps from "@/components/AfterPurchaseSteps";
 import { coachingsSteps } from "../data/afterPurchaseSteps";
 import Faq from "@/components/Faq/Faq";
+import FeedBackContainer from "@/components/FeedBack/FeedBackContainer";
 
 export default function CoachingsPage() {
   return (
@@ -17,8 +16,7 @@ export default function CoachingsPage() {
         subtitle="Découvrez nos coachings pour atteindre vos objectifs."
       />
       <PriceCoachingsContainer />
-      <PremiumCoachingsSlider />
-      <CoachingsApps />
+      <FeedBackContainer />
       <AfterPurchaseSteps data={coachingsSteps} />
       <Faq />
     </main>

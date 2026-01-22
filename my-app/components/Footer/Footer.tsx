@@ -6,6 +6,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import FooterLinks from "./FooterLinks";
 import { FaArrowUp } from "react-icons/fa6";
 import { usePathname } from "next/navigation";
+import BackgroundTransition from "../BackgroundTransition";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -36,11 +37,15 @@ const Footer = () => {
       {isDisplayNavBar && (
         <footer
           ref={footerContainerRef}
-          className="-z-50 flex min-h-[100dvh] flex-col justify-between overflow-hidden bg-red-400 text-primary"
+          className="relative flex min-h-[100dvh] flex-col justify-between overflow-hidden"
         >
+          <BackgroundTransition orientation={180} yPosition="top-0" />
+          <div className="pointer-events-none absolute -top-80 h-0 w-full">
+            <div className="h-[100vh] w-full bg-[radial-gradient(circle_at_center,_rgba(139,92,246,0.25),_transparent_60%)]" />
+          </div>
           <div
             ref={footerContentRef}
-            className="flex min-h-[100dvh] flex-col justify-between bg-secondary px-4 text-primary"
+            className="flex min-h-[100dvh] flex-col justify-between px-4"
           >
             <div className="mt-4 flex w-full flex-col gap-20 text-sm md:grid md:grid-cols-3">
               <div className="flex flex-col gap-4 uppercase">
@@ -51,7 +56,10 @@ const Footer = () => {
                   on t&apos;aide à transformer ton corps et ta discipline, grâce
                   à une méthode claire, humaine et adaptée à ton rythme.
                 </span>
-                <a href="mailto:contact@smartinet-coaching.com" className="underline">
+                <a
+                  href="mailto:contact@smartinet-coaching.com"
+                  className="underline"
+                >
                   contact@smartinet-coaching.com
                 </a>
               </div>

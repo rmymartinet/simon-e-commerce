@@ -1,103 +1,77 @@
-"use client";
-
-import { useRef } from "react";
-import { useGSAP } from "@gsap/react";
-import gsap from "gsap";
 import Image from "next/image";
-import { imagesUrls, names } from "@/app/data/beforeAfterPhotoData";
-
-gsap.registerPlugin(useGSAP);
+import { imagesUrls } from "@/app/data/beforeAfterPhotoData";
+import { ArrowRight } from "lucide-react";
+import TitleComponent from "./TitleComponent";
 
 const BeforeAfterPhoto = () => {
-  const chgRef = useRef<(HTMLDivElement | null)[]>([]);
-  const namesRef = useRef<(HTMLDivElement | null)[]>([]);
-
-  useGSAP(() => {
-    const tl = gsap.timeline({ repeat: -1 });
-
-    namesRef.current.forEach((el) => {
-      if (el) {
-        tl.fromTo(
-          el,
-          { opacity: 0, y: 100, rotate: 10 },
-          {
-            opacity: 1,
-            rotate: 0,
-            y: 0,
-            duration: 1,
-            ease: "power2.out",
-          },
-        );
-        tl.to(el, {
-          y: -100,
-          opacity: 0,
-          ease: "power2.out",
-        });
-      }
-    });
-  }, []);
-
   return (
-    <div className="relative mt-[20vh] flex w-full flex-col items-center justify-center p-4">
-      <div className="relative mb-20 w-full justify-center gap-4 md:inline-flex lg:mb-40">
-        <h1 className="text-4xl lg:text-6xl">Changer comme</h1>
-        <div className="relative h-20 w-40 overflow-hidden pb-4 lg:w-72">
-          {names.map((name, idx) => (
-            <div
-              key={idx}
-              ref={(el) => {
-                namesRef.current[idx] = el;
-              }}
-              className="absolute text-4xl lg:text-6xl"
-            >
-              {name}
-            </div>
-          ))}
-        </div>
-      </div>
-      <div className="relative flex h-full w-full flex-wrap justify-evenly gap-10 overflow-hidden rounded-xl">
+    <div className="relative mt-[20vh] flex w-full flex-col items-center justify-center">
+      <TitleComponent
+        title="Une méthode. Un accompagnement. Des résultats."
+        titleIndication="transformations physiques"
+        subtitle="Découvrez nos avants / après."
+      />
+
+      <div className="relative mt-20 flex w-full flex-col items-center gap-16">
         {imagesUrls.map((image, index) => {
           return (
             <div
               key={index}
-              ref={(el) => {
-                chgRef.current[index] = el;
-              }}
-              className="grid h-[350px] w-[300px] cursor-pointer grid-cols-2 overflow-hidden rounded-xl"
+              className="relative grid w-full grid-cols-[1fr_auto_1fr] gap-2 md:w-max md:grid-cols-[300px_100px_300px]"
             >
-              <div className="flex flex-col items-center bg-black font-semibold text-white">
-                <div className="flex w-full flex-col gap-2 py-2">
-                  <span className="border-b border-slate-400 pb-2 text-center text-xl">
-                    {image.firstMoutnh}
+              <div className="flex justify-center">
+                <div className="flex w-full max-w-[280px] flex-col overflow-hidden rounded-2xl border border-white/10 bg-black font-semibold text-white">
+                  <span className="w-full bg-violet-500 py-1 text-center text-xs font-semibold uppercase text-white">
+                    Avant
                   </span>
-                  <span className="text-center text-xl">Résultats:</span>
+                  <div className="flex w-full items-center justify-center gap-2 border-b border-white/10 px-4 py-3 text-sm uppercase tracking-wide text-white/80">
+                    <span>{image.firstMoutnh}</span>
+                  </div>
+                  {image.before && (
+                    <div className="relative h-64 w-full overflow-hidden md:h-80">
+                      <Image
+                        src={image.before}
+                        alt={`Image avant ${image.name}`}
+                        fill
+                        sizes="(max-width: 768px) 100vw, 50vw"
+                        className="object-cover"
+                      />
+                    </div>
+                  )}
                 </div>
-                {image.before && (
-                  <Image
-                    src={image.before}
-                    alt={`Image avant ${image.name}`}
-                    width={500}
-                    height={500}
-                    className="h-full w-full object-cover"
-                  />
-                )}
               </div>
-              <div className="flex flex-col items-center bg-black font-semibold text-white">
-                <div className="flex w-full flex-col gap-2 py-2">
-                  <span className="border-b border-slate-400 pb-2 text-center text-xl">
-                    {image.lastMoutnh}
-                  </span>
-                  <span className="text-center text-xl">{image.result}</span>
+
+              <div className="relative flex items-center justify-center">
+                <div className="flex h-6 w-6 items-center justify-center rounded-full border border-white/20 bg-[#121214] text-white/80 shadow-lg md:h-12 md:w-12">
+                  <ArrowRight className="size-4" />
                 </div>
-                {image.after && (
-                  <Image
-                    src={image.after}
-                    alt={`Image après ${image.name}`}
-                    width={500}
-                    height={500}
-                    className="h-full w-full object-cover"
-                  />
-                )}
+              </div>
+
+              <div className="flex justify-center">
+                <div className="flex w-full max-w-[280px] flex-col overflow-hidden rounded-2xl border border-white/10 bg-black font-semibold text-white">
+                  <span className="w-full bg-violet-500 py-1 text-center text-xs font-semibold uppercase text-white">
+                    Après
+                  </span>
+                  <div className="flex w-full items-center justify-between gap-2 border-b border-white/10 px-4 py-3 text-sm uppercase tracking-wide text-white/80">
+                    <span>{image.lastMoutnh}</span>
+                    {image.result && (
+                      <span className="rounded-full bg-violet-500/10 px-2 py-0.5 font-semibold uppercase tracking-wide">
+                        {image.result}
+                      </span>
+                    )}
+                  </div>
+                  {image.after && (
+                    <div className="relative h-64 w-full overflow-hidden md:h-80">
+                      <Image
+                        src={image.after}
+                        alt={`Image après ${image.name}`}
+                        fill
+                        sizes="(max-width: 768px) 100vw, 50vw"
+                        className="object-cover"
+                      />
+                    </div>
+                  )}
+                </div>
               </div>
             </div>
           );
