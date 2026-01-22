@@ -49,7 +49,7 @@ const ProgramsCard = ({
                 className="absolute -top-3 left-1/2 z-50 -translate-x-1/2"
               >
                 <Badge className="rounded-full bg-violet-500 text-sm font-bold text-white">
-                  Populaire
+                  Le + Populaire
                 </Badge>
               </div>
             )}

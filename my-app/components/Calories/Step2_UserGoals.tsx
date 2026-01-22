@@ -21,77 +21,100 @@ const GAIN_OPTIONS: { value: string; label: string }[] = [
 ];
 
 // Composant pour les cartes d'objectif
-const GoalCard = React.memo(({ 
-  title, 
-  selected, 
-  onSelect, 
-  value, 
-  options, 
-  disabled = false,
-  customInput = false,
-  onCustomChange,
-  onOptionChange,
-  selectedOption,
-  id
-}: { 
-  title: string;
-  selected: boolean;
-  onSelect: () => void;
-  value: number | string;
-  options?: { value: string; label: string }[];
-  disabled?: boolean;
-  customInput?: boolean;
-  onCustomChange?: (value: number) => void;
-  onOptionChange?: (value: string) => void;
-  selectedOption?: string;
-  id: string;
-}) => (
-  <div className="rounded-xl border border-gray-300 bg-white p-6 shadow-md">
-    <label className="mb-2 flex items-center gap-2">
-      <input
-        type="radio"
-        name="goal"
-        checked={selected}
-        onChange={onSelect}
-      />
-      <h3 className="text-xl font-bold text-blue-700">{title}</h3>
-    </label>
-    <p className={`${!disabled ? "text-black" : "text-[--subtext]"} text-3xl font-semibold`}>
-      {disabled ? "-" : Math.round(Number(value))} kcal
-    </p>
-    <p className="mb-4 text-sm text-gray-500">kcal par jour</p>
-    {options && options.map((option) => (
-      <label
-        key={option.value}
-        className={`flex items-center gap-2 ${!disabled ? "text-black" : "text-[--subtext]"}`}
-      >
+const GoalCard = React.memo(
+  ({
+    title,
+    selected,
+    onSelect,
+    value,
+    options,
+    disabled = false,
+    customInput = false,
+    onCustomChange,
+    onOptionChange,
+    selectedOption,
+    id,
+  }: {
+    title: string;
+    selected: boolean;
+    onSelect: () => void;
+    value: number | string;
+    options?: { value: string; label: string }[];
+    disabled?: boolean;
+    customInput?: boolean;
+    onCustomChange?: (value: number) => void;
+    onOptionChange?: (value: string) => void;
+    selectedOption?: string;
+    id: string;
+  }) => (
+    <div
+      className={`rounded-2xl border p-6 transition-colors ${
+        selected
+          ? "border-violet-400 bg-violet-500/10"
+          : "border-gray-700 bg-gray-800/50 hover:border-gray-600"
+      } ${disabled ? "opacity-60" : ""}`}
+    >
+      <label className="mb-2 flex items-center gap-2">
         <input
           type="radio"
-          name={`goalcard-${id}-option`}
-          value={option.value}
-          checked={option.value === selectedOption}
-          onChange={() => {
-            if (onOptionChange) onOptionChange(option.value);
-            if (!selected) onSelect(); // sélectionner la carte si radio modifiée
-          }}
-          disabled={!selected}
+          name="goal"
+          checked={selected}
+          onChange={onSelect}
+          className="accent-violet-400"
         />
-        {option.label}
+        <h3
+          className={`text-xl font-bold ${
+            selected ? "text-violet-400" : "text-white"
+          }`}
+        >
+          {title}
+        </h3>
       </label>
-    ))}
-    {customInput && selected && (
-      <input
-        type="number"
-        className="mt-2 w-full rounded border border-gray-300 p-2"
-        placeholder="Ex: 2500"
-        value={value || ""}
-        onChange={(e) => onCustomChange?.(Number(e.target.value))}
-      />
-    )}
-  </div>
-));
+      <p
+        className={`text-3xl font-semibold ${
+          !disabled ? "text-white" : "text-gray-500"
+        }`}
+      >
+        {disabled ? "-" : Math.round(Number(value))} kcal
+      </p>
+      <p className="mb-4 text-sm text-gray-400">kcal par jour</p>
+      {options &&
+        options.map((option) => (
+          <label
+            key={option.value}
+            className={`flex items-center gap-2 ${
+              !disabled ? "text-gray-200" : "text-gray-500"
+            }`}
+          >
+            <input
+              type="radio"
+              name={`goalcard-${id}-option`}
+              value={option.value}
+              checked={option.value === selectedOption}
+              onChange={() => {
+                if (onOptionChange) onOptionChange(option.value);
+                if (!selected) onSelect(); // sélectionner la carte si radio modifiée
+              }}
+              disabled={!selected}
+              className="accent-violet-400"
+            />
+            {option.label}
+          </label>
+        ))}
+      {customInput && selected && (
+        <input
+          type="number"
+          className="mt-2 w-full rounded-xl border-2 border-gray-700 bg-gray-800/50 p-2 text-white focus:border-violet-400 focus:outline-none"
+          placeholder="Ex: 2500"
+          value={value || ""}
+          onChange={(e) => onCustomChange?.(Number(e.target.value))}
+        />
+      )}
+    </div>
+  ),
+);
 
-GoalCard.displayName = 'GoalCard';
+GoalCard.displayName = "GoalCard";
 
 const Step2_UserGoals = ({
   formState,
@@ -109,42 +132,52 @@ const Step2_UserGoals = ({
   const [gainChoice, setGainChoice] = useState<GainType>("prudente");
   const [customCalories, setCustomCalories] = useState<number | null>(null);
 
-  const safeFormState = useMemo(() => ({
-    ...formState,
-    age: formState.age === "" ? 0 : formState.age,
-    height: formState.height === "" ? 0 : formState.height,
-    weight: formState.weight === "" ? 0 : formState.weight,
-    trainingDays: formState.trainingDays === "" ? 0 : formState.trainingDays,
-    sessionDuration: formState.sessionDuration === "" ? 0 : formState.sessionDuration,
-    intensity: formState.intensity === "" ? 0 : formState.intensity,
-  }), [
-    formState.age,
-    formState.height,
-    formState.weight,
-    formState.trainingDays,
-    formState.sessionDuration,
-    formState.intensity,
-    formState.genre,
-    formState.activities,
-    formState.bodyFatMode,
-  ]);
+  const safeFormState = useMemo(
+    () => ({
+      ...formState,
+      age: formState.age === "" ? 0 : formState.age,
+      height: formState.height === "" ? 0 : formState.height,
+      weight: formState.weight === "" ? 0 : formState.weight,
+      trainingDays: formState.trainingDays === "" ? 0 : formState.trainingDays,
+      sessionDuration:
+        formState.sessionDuration === "" ? 0 : formState.sessionDuration,
+      intensity: formState.intensity === "" ? 0 : formState.intensity,
+    }),
+    [
+      formState.age,
+      formState.height,
+      formState.weight,
+      formState.trainingDays,
+      formState.sessionDuration,
+      formState.intensity,
+      formState.genre,
+      formState.activities,
+      formState.bodyFatMode,
+    ],
+  );
 
   // Calcul toutes les calories pour chaque carte selon SON choix propre
   const allCalories = useMemo(() => {
-    if (!goals) return {
-      perte: 0, gain: 0, maintien: 0, custom: customCalories || 0
-    };
+    if (!goals)
+      return {
+        perte: 0,
+        gain: 0,
+        maintien: 0,
+        custom: customCalories || 0,
+      };
 
     const calcPerte = calculateAll({
       ...safeFormState,
       bodyFatPercentage: 15,
-      weightChange: perteChoice === "lente" ? 0.25 : perteChoice === "moderee" ? 0.5 : 0.75,
+      weightChange:
+        perteChoice === "lente" ? 0.25 : perteChoice === "moderee" ? 0.5 : 0.75,
       isTrainingDay,
     });
     const calcGain = calculateAll({
       ...safeFormState,
       bodyFatPercentage: 15,
-      weightChange: gainChoice === "prudente" ? 0.25 : gainChoice === "moderee" ? 0.5 : 1,
+      weightChange:
+        gainChoice === "prudente" ? 0.25 : gainChoice === "moderee" ? 0.5 : 1,
       isTrainingDay,
     });
     const calcMaintien = calculateAll({
@@ -158,17 +191,32 @@ const Step2_UserGoals = ({
       perte: calcPerte.totalPerte[perteChoice] ?? 0,
       gain: calcGain.totalGain[gainChoice] ?? 0,
       maintien: calcMaintien.totalMaintien ?? 0,
-      custom: customCalories || 0
+      custom: customCalories || 0,
     };
-  }, [goals, safeFormState, perteChoice, gainChoice, customCalories, isTrainingDay]);
+  }, [
+    goals,
+    safeFormState,
+    perteChoice,
+    gainChoice,
+    customCalories,
+    isTrainingDay,
+  ]);
 
   // Calcul du weightChange seulement pour la carte sélectionnée
   const weightChange = useMemo(() => {
     if (selectedGoal === "perte") {
-      return perteChoice === "lente" ? 0.25 : perteChoice === "moderee" ? 0.5 : 0.75;
+      return perteChoice === "lente"
+        ? 0.25
+        : perteChoice === "moderee"
+          ? 0.5
+          : 0.75;
     }
     if (selectedGoal === "gain") {
-      return gainChoice === "prudente" ? 0.25 : gainChoice === "moderee" ? 0.5 : 1;
+      return gainChoice === "prudente"
+        ? 0.25
+        : gainChoice === "moderee"
+          ? 0.5
+          : 1;
     }
     return 0;
   }, [selectedGoal, perteChoice, gainChoice]);
@@ -246,18 +294,12 @@ const Step2_UserGoals = ({
   }, [calculateValues]);
 
   return (
-    <div className="relative flex w-screen flex-col gap-4 rounded-xl border border-[--border-color] bg-[--card-bg] p-8 lg:w-full">
-      <div className="mb-10 flex flex-col items-center gap-4 text-center">
-        <h2 className="text-2xl">
-          <span className="font-bold text-violet-400">Étape 2</span> : choisis ton objectif
+    <div className="relative flex w-full flex-col gap-4 rounded-xl border border-[--border-color] bg-[--card-bg] p-5 sm:p-8">
+      <div className="mb-6 flex flex-col items-center gap-4 text-center sm:mb-10">
+        <h2 className="text-xl sm:text-2xl">
+          <span className="font-bold text-violet-400">Étape 2</span> : Choisis
+          ton objectif
         </h2>
-        <p className="lg:max-w-[40vw]">
-          Choisis ton objectif : perdre de la graisse, prendre de la masse, ou
-          simplement maintenir ton poids. Tu peux aussi entrer un total
-          personnalisé si tu sais déjà ce que tu veux viser. Ensuite, ajuste le
-          niveau d&apos;intensité de ton objectif pour un déficit ou un surplus
-          progressif ou plus rapide
-        </p>
       </div>
 
       <div className="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-2">

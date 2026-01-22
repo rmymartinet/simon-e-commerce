@@ -57,12 +57,6 @@ export default function Calorie() {
         ref={calculatorContentRef}
         className="flex flex-col items-center gap-4"
       >
-        <Button asChild variant="purpleBg">
-          <Link href="/coachings" className="flex items-center gap-2">
-            <p>Découvrir les coachings</p>
-            <ArrowRight />
-          </Link>
-        </Button>
         <FormCalories />
         <div className="flex w-full flex-col items-center px-4">
           <TitleComponent
@@ -70,7 +64,7 @@ export default function Calorie() {
             subtitle=" Vous vous êtes sûrement posé ces questions"
             isTextSplitLines={false}
           />
-          <Button asChild variant="purpleBg">
+          <Button asChild variant="purpleBg" className="mt-20 md:mt-0">
             <Link href="/coachings" className="flex items-center gap-2">
               <p>Découvrir les coachings</p>
               <ArrowRight />

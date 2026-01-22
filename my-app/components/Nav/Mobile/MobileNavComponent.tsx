@@ -30,6 +30,7 @@ const MobileNavComponent = ({ session }: NavComponentProps) => {
   const shoppingIconRef = useRef<HTMLDivElement | null>(null);
   const menuRef = useRef<HTMLDivElement | null>(null);
   const cart = useCart();
+  const [isCartShaking, setIsCartShaking] = useState(false);
 
   const pathname = usePathname();
   const { width } = useWindowWidth();
@@ -41,6 +42,7 @@ const MobileNavComponent = ({ session }: NavComponentProps) => {
     (total, item) => total + (item.quantity || 1),
     0,
   );
+  const prevCountRef = useRef(numberOfProducts);
 
   const navLinks = [
     { title: "Home", link: "/" },
@@ -72,6 +74,16 @@ const MobileNavComponent = ({ session }: NavComponentProps) => {
   useGSAP(() => {
     gsap.set(socialIconRefs.current, { y: 100 });
   }, []);
+
+  useEffect(() => {
+    if (numberOfProducts > prevCountRef.current) {
+      setIsCartShaking(true);
+      prevCountRef.current = numberOfProducts;
+      const timeout = setTimeout(() => setIsCartShaking(false), 400);
+      return () => clearTimeout(timeout);
+    }
+    prevCountRef.current = numberOfProducts;
+  }, [numberOfProducts]);
 
   useEffect(() => {
     if (!isClicked) return;
@@ -160,7 +172,9 @@ const MobileNavComponent = ({ session }: NavComponentProps) => {
             <Link href="/checkout">
               <div
                 ref={shoppingIconRef}
-                className="relative flex h-10 w-10 flex-col items-center justify-center gap-1 rounded-full border"
+                className={`relative flex h-10 w-10 flex-col items-center justify-center gap-1 rounded-full border ${
+                  isCartShaking ? "cart-shake" : ""
+                }`}
               >
                 <button className="z-50 grid place-content-center">
                   <FaCartShopping color="white" />

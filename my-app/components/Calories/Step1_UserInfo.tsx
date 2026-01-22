@@ -4,37 +4,45 @@ import gsap from "gsap";
 import React, { useCallback, useMemo } from "react";
 
 // Composant pour les champs de saisie numériques
-const NumberInput = React.memo(({ 
-  id, 
-  label, 
-  value, 
-  onChange, 
-  error, 
-  unit = "" 
-}: { 
-  id: string; 
-  label: string; 
-  value: string | number; 
-  onChange: (value: string | number) => void; 
-  error?: string;
-  unit?: string;
-}) => (
-  <div className="flex flex-col">
-    <label htmlFor={id} className="mb-2 text-lg font-semibold">
-      {label}{unit && ` (${unit})`}
-    </label>
-    <input
-      type="number"
-      id={id}
-      value={value === 0 ? "" : value}
-      onChange={(e) => onChange(e.target.value === "" ? "" : Number(e.target.value))}
-      className={`rounded-lg bg-slate-100 p-2 text-black ${error ? "border border-red-400" : ""}`}
-    />
-    {error && <span className="text-red-400">{error}</span>}
-  </div>
-));
+const NumberInput = React.memo(
+  ({
+    id,
+    label,
+    value,
+    onChange,
+    error,
+    unit = "",
+    placeholder,
+  }: {
+    id: string;
+    label: string;
+    value: string | number;
+    onChange: (value: string | number) => void;
+    error?: string;
+    unit?: string;
+    placeholder?: string;
+  }) => (
+    <div className="flex flex-col">
+      <label htmlFor={id} className="mb-2 text-sm font-medium text-gray-300">
+        {label}
+        {unit && ` (${unit})`}
+      </label>
+      <input
+        type="number"
+        id={id}
+        placeholder={placeholder}
+        value={value === 0 ? "" : value}
+        onChange={(e) =>
+          onChange(e.target.value === "" ? "" : Number(e.target.value))
+        }
+        className={`rounded-xl border-2 border-gray-700 bg-gray-800/50 px-4 py-3 text-white placeholder:text-gray-500 focus:border-violet-400 focus:outline-none ${error ? "border-red-400" : ""}`}
+      />
+      {error && <span className="text-red-400">{error}</span>}
+    </div>
+  ),
+);
 
-NumberInput.displayName = 'NumberInput';
+NumberInput.displayName = "NumberInput";
 
 const Step1_UserInfo = ({
   formState,
@@ -42,6 +50,7 @@ const Step1_UserInfo = ({
   errors,
   setErrors,
   setFormIsValid,
+  onNext,
 }: Step1_UserInfoProps) => {
   const {
     age,
@@ -54,53 +63,61 @@ const Step1_UserInfo = ({
     intensity,
   } = formState;
 
-
   const formRef = React.useRef<HTMLFormElement>(null);
 
-  const safeFormState = useMemo(() => ({
-    ...formState,
-    age: formState.age === "" ? 0 : formState.age,
-    height: formState.height === "" ? 0 : formState.height,
-    weight: formState.weight === "" ? 0 : formState.weight,
-    trainingDays: formState.trainingDays === "" ? 0 : formState.trainingDays,
-    sessionDuration: formState.sessionDuration === "" ? 0 : formState.sessionDuration,
-    intensity: formState.intensity === "" ? 0 : formState.intensity,
-  }), [
-    formState.age,
-    formState.height,
-    formState.weight,
-    formState.trainingDays,
-    formState.sessionDuration,
-    formState.intensity,
-    // ajoute d'autres champs si besoin
-  ]);
+  const safeFormState = useMemo(
+    () => ({
+      ...formState,
+      age: formState.age === "" ? 0 : formState.age,
+      height: formState.height === "" ? 0 : formState.height,
+      weight: formState.weight === "" ? 0 : formState.weight,
+      trainingDays: formState.trainingDays === "" ? 0 : formState.trainingDays,
+      sessionDuration:
+        formState.sessionDuration === "" ? 0 : formState.sessionDuration,
+      intensity: formState.intensity === "" ? 0 : formState.intensity,
+    }),
+    [
+      formState.age,
+      formState.height,
+      formState.weight,
+      formState.trainingDays,
+      formState.sessionDuration,
+      formState.intensity,
+      // ajoute d'autres champs si besoin
+    ],
+  );
 
-  const handleSubmit = useCallback((e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const handleSubmit = useCallback(
+    (e: React.FormEvent<HTMLFormElement>) => {
+      e.preventDefault();
 
-    const newErrors: { [key: string]: string } = {};
-    if (!age) newErrors.age = "Veuillez entrer votre âge.";
-    if (!height) newErrors.height = "Veuillez entrer votre taille.";
-    if (!weight) newErrors.weight = "Veuillez entrer votre poids.";
-    if (!activities)
-      newErrors.activities = "Veuillez sélectionner votre niveau d'activité.";
-    if (!bodyFatMode) newErrors.bodyFatMode = "Veuillez sélectionner un mode.";
-    if (!trainingDays)
-      newErrors.trainingDays =
-        "Veuillez entrer le nombre de jours d'entraînement.";
-    if (!sessionDuration)
-      newErrors.sessionDuration = "Veuillez entrer la durée de vos séances.";
-    if (!intensity)
-      newErrors.intensity = "Veuillez sélectionner une intensité.";
+      const newErrors: { [key: string]: string } = {};
+      if (!age) newErrors.age = "Veuillez entrer votre âge.";
+      if (!height) newErrors.height = "Veuillez entrer votre taille.";
+      if (!weight) newErrors.weight = "Veuillez entrer votre poids.";
+      if (!activities)
+        newErrors.activities = "Veuillez sélectionner votre niveau d'activité.";
+      if (!bodyFatMode)
+        newErrors.bodyFatMode = "Veuillez sélectionner un mode.";
+      if (!trainingDays)
+        newErrors.trainingDays =
+          "Veuillez entrer le nombre de jours d'entraînement.";
+      if (!sessionDuration)
+        newErrors.sessionDuration = "Veuillez entrer la durée de vos séances.";
+      if (!intensity)
+        newErrors.intensity = "Veuillez sélectionner une intensité.";
 
-    if (Object.keys(newErrors).length > 0) {
-      setErrors(newErrors);
-      return;
-    }
+      if (Object.keys(newErrors).length > 0) {
+        setErrors(newErrors);
+        return;
+      }
 
-    setErrors({});
-    setFormIsValid(true);
-  }, [safeFormState, setErrors, setFormIsValid]);
+      setErrors({});
+      setFormIsValid(true);
+      onNext?.();
+    },
+    [safeFormState, setErrors, setFormIsValid, onNext],
+  );
 
   useGSAP(() => {
     gsap.from(formRef.current, {
@@ -115,35 +132,32 @@ const Step1_UserInfo = ({
   return (
     <form
       ref={formRef}
-      className="relative flex w-screen flex-col gap-4 rounded-xl border border-[--border-color] bg-[--card-bg] p-8 lg:w-full"
+      className="relative flex w-full flex-col gap-4 rounded-xl border border-[--border-color] bg-[--card-bg] p-5 sm:p-8"
       onSubmit={handleSubmit}
     >
-      <div className="mb-10 flex flex-col items-center gap-4 text-center">
-        <h2 className="text-2xl">
-          <span className="font-bold text-violet-400">Étape 1</span> :
-          informations générales
+      <div className="mb-6 flex flex-col items-center gap-4 text-center sm:mb-10">
+        <h2 className="text-xl sm:text-2xl">
+          <span className="font-bold text-violet-400">Étape 1</span> : Tes
+          informations{" "}
         </h2>
-        <p className="lg:max-w-[40vw]">
-          Commence par renseigner tes données de base : âge, sexe, taille,
-          poids, niveau d&apos;activité et fréquence d&apos;entraînement. Ces infos nous
-          permettent de calculer précisément ton métabolisme de base (BMR) et
-          tes besoins énergétiques
-        </p>
       </div>
 
       {/* Genre */}
       <div className="flex flex-col">
-        <label className="mb-2 text-lg font-semibold">Genre</label>
+        <label className="mb-2 text-sm font-medium text-gray-300">Genre</label>
         <div className="flex gap-4">
           {["male", "female"].map((value) => (
-            <label key={value} className="flex items-center gap-2">
+            <label
+              key={value}
+              className="flex items-center gap-2 text-gray-200"
+            >
               <input
                 type="radio"
                 name="genre"
                 value={value}
                 checked={formState.genre === value}
                 onChange={(e) => updateField("genre", e.target.value)}
-                className="accent-blue"
+                className="accent-violet-400"
               />
               {value === "male" ? "Homme" : "Femme"}
             </label>
@@ -158,6 +172,7 @@ const Step1_UserInfo = ({
         value={formState.age}
         onChange={(value) => updateField("age", value)}
         error={errors.age}
+        placeholder="ex: 28"
       />
 
       <NumberInput
@@ -167,6 +182,7 @@ const Step1_UserInfo = ({
         onChange={(value) => updateField("height", value)}
         error={errors.height}
         unit="cm"
+        placeholder="ex: 175"
       />
 
       <NumberInput
@@ -176,22 +192,26 @@ const Step1_UserInfo = ({
         onChange={(value) => updateField("weight", value)}
         error={errors.weight}
         unit="kg"
+        placeholder="ex: 75"
       />
 
       {/* Masse grasse */}
       <div className="flex flex-col">
-        <label className="mb-2 text-lg font-semibold">Masse grasse</label>
-        <label className="flex items-center gap-2">
+        <label className="mb-2 text-sm font-medium text-gray-300">
+          Masse grasse
+        </label>
+        <label className="flex items-center gap-2 text-gray-200">
           <input
             type="radio"
             name="bodyFatMode"
             value="auto"
             checked={formState.bodyFatMode === "auto"}
             onChange={() => updateField("bodyFatMode", "auto")}
+            className="accent-violet-400"
           />
           Calcul automatique (d&apos;après mon IMC)
         </label>
-        <label className="flex cursor-not-allowed items-center gap-2 opacity-50">
+        <label className="flex cursor-not-allowed items-center gap-2 text-gray-500">
           <input type="radio" name="bodyFatMode" value="manual" disabled />
           Calcul précis (bientôt dispo)
         </label>
@@ -199,10 +219,10 @@ const Step1_UserInfo = ({
           <span className="text-red-400">{errors.bodyFatMode}</span>
         )}
       </div>
-      
+
       {/* Activité quotidienne */}
       <div className="flex flex-col">
-        <label className="mb-2 text-lg font-semibold">
+        <label className="mb-2 text-sm font-medium text-gray-300">
           Activité quotidienne
         </label>
         {[
@@ -212,7 +232,10 @@ const Step1_UserInfo = ({
           { value: "1.725", label: "Très actif(ve) : physique régulière" },
           { value: "1.9", label: "Extrême : chantier / sport intensif" },
         ].map((option) => (
-          <label key={option.value} className="flex items-center gap-2">
+          <label
+            key={option.value}
+            className="flex items-center gap-2 text-gray-200"
+          >
             <input
               type="radio"
               name="activities"
@@ -221,7 +244,7 @@ const Step1_UserInfo = ({
               onChange={(e) =>
                 updateField("activities", Number(e.target.value))
               }
-              className="accent-blue"
+              className="accent-violet-400"
             />
             {option.label}
           </label>
@@ -241,6 +264,7 @@ const Step1_UserInfo = ({
           }
         }}
         error={errors.trainingDays}
+        placeholder="ex: 3"
       />
 
       <NumberInput
@@ -250,22 +274,23 @@ const Step1_UserInfo = ({
         onChange={(value) => updateField("sessionDuration", value)}
         error={errors.sessionDuration}
         unit="minutes"
+        placeholder="ex: 60"
       />
 
       {/* Intensité */}
       <div className="flex flex-col">
-        <label className="mb-2 text-lg font-semibold">
+        <label className="mb-2 text-sm font-medium text-gray-300">
           À quelle intensité t&apos;entraînes-tu ?
         </label>
         {[4, 6, 8, 10].map((val) => (
-          <label key={val} className="flex items-center gap-2">
+          <label key={val} className="flex items-center gap-2 text-gray-200">
             <input
               type="radio"
               name="intensity"
               value={val}
               checked={formState.intensity === val}
               onChange={(e) => updateField("intensity", Number(e.target.value))}
-              className="accent-blue"
+              className="accent-violet-400"
             />
             {val === 4
               ? "Légère : je m'entraîne surtout pour m'entretenir."
@@ -285,7 +310,7 @@ const Step1_UserInfo = ({
         type="submit"
         className="mt-8 rounded-xl bg-violet-500 px-6 py-3 font-bold text-white transition hover:bg-violet-700"
       >
-        Valider
+        Continuer
       </button>
     </form>
   );

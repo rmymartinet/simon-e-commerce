@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { LiaArrowAltCircleRight } from "react-icons/lia";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
@@ -10,6 +10,7 @@ import useWindowWidth from "@/hooks/useWindowWidth";
 import { useCart } from "@/app/context/CartContext";
 import { FaEdit } from "react-icons/fa";
 import { useAuth } from "@/app/context/AuthContext";
+import { FaCartShopping } from "react-icons/fa6";
 
 gsap.registerPlugin(useGSAP);
 
@@ -22,8 +23,12 @@ const NavComponent = () => {
   const { width } = useWindowWidth();
   const cart = useCart();
   const { session } = useAuth();
-
-  const numberOfProducts = cart.cart.reduce((total, item) => total + (item.quantity || 1), 0);
+  const numberOfProducts = cart.cart.reduce(
+    (total, item) => total + (item.quantity || 1),
+    0,
+  );
+  const [isCartShaking, setIsCartShaking] = useState(false);
+  const prevCountRef = useRef(numberOfProducts);
 
   const isDisplayNavBar =
     pathname !== "/success" &&
@@ -66,6 +71,16 @@ const NavComponent = () => {
       });
     }
   }, [hoveredIndex]);
+
+  useEffect(() => {
+    if (numberOfProducts > prevCountRef.current) {
+      setIsCartShaking(true);
+      prevCountRef.current = numberOfProducts;
+      const timeout = setTimeout(() => setIsCartShaking(false), 400);
+      return () => clearTimeout(timeout);
+    }
+    prevCountRef.current = numberOfProducts;
+  }, [numberOfProducts]);
 
   if (isStudio && width > 1024) {
     return (
@@ -137,9 +152,16 @@ const NavComponent = () => {
                 navItemsRef.current[navLinks.length + 2] = el;
               }}
             >
-              <Link href="/checkout">
-                Panier ({numberOfProducts > 0 ? ` ${numberOfProducts} ` : " 0 "}
-                )
+              <Link href="/checkout" className="flex items-center gap-2">
+                <div className={`relative ${isCartShaking ? "cart-shake" : ""}`}>
+                  <FaCartShopping className="text-xl" />
+                  {numberOfProducts > 0 && (
+                    <span className="absolute -right-3 -top-2 flex h-5 min-w-[20px] items-center justify-center rounded-full bg-violet-500 px-1 text-xs font-semibold text-white">
+                      {numberOfProducts}
+                    </span>
+                  )}
+                </div>
+                <span>Panier</span>
               </Link>
             </div>
           </div>

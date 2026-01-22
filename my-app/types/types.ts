@@ -381,6 +381,7 @@ export type Step1_UserInfoProps = {
   errors: { [key: string]: string };
   setErrors: (errors: { [key: string]: string }) => void;
   setFormIsValid: (isValid: boolean) => void;
+  onNext?: () => void;
 };
 
 export type Step2_UserGoalsProps = {
