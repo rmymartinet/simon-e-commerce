@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { PiInstagramLogoFill, PiLinkedinLogoFill } from "react-icons/pi";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
@@ -35,11 +35,12 @@ const MobileNavComponent = ({ session }: NavComponentProps) => {
   const { width } = useWindowWidth();
   const lineRefs = useRef<(HTMLDivElement | null)[]>([]);
 
-  const isDisplayNavBar =
-    pathname !== "/success" &&
-    pathname !== "/cancel";
+  const isDisplayNavBar = pathname !== "/success" && pathname !== "/cancel";
 
-  const numberOfProducts = cart.cart.reduce((total, item) => total + (item.quantity || 1), 0);
+  const numberOfProducts = cart.cart.reduce(
+    (total, item) => total + (item.quantity || 1),
+    0,
+  );
 
   const navLinks = [
     { title: "Home", link: "/" },
@@ -71,6 +72,17 @@ const MobileNavComponent = ({ session }: NavComponentProps) => {
   useGSAP(() => {
     gsap.set(socialIconRefs.current, { y: 100 });
   }, []);
+
+  useEffect(() => {
+    if (!isClicked) return;
+
+    const originalOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+
+    return () => {
+      document.body.style.overflow = originalOverflow;
+    };
+  }, [isClicked]);
 
   useGSAP(() => {
     gsap.to(navRef.current, {
@@ -155,7 +167,7 @@ const MobileNavComponent = ({ session }: NavComponentProps) => {
           </div>
           <nav
             ref={navRef}
-            className="fixed inset-0 z-[999999] flex h-dvh w-screen -translate-y-[150%] flex-col bg-black px-10 text-white overflow-y-auto"
+            className="fixed inset-0 z-[999999] flex h-dvh w-screen -translate-y-[150%] flex-col overflow-hidden bg-black px-10 text-white"
           >
             <button
               ref={navActionRef}
@@ -245,7 +257,7 @@ const MobileNavComponent = ({ session }: NavComponentProps) => {
                   </li>
                 )}
               </ul>
-              <div className="program-button-container flex w-full items-center justify-between gap-6 rounded-lg border border-[#3a3a3a]">
+              <div className="program-button-container flex w-full items-center justify-between gap-6 rounded-lg">
                 <div className="padding flex w-full justify-between gap-6 overflow-hidden">
                   {socialIcons.map((icon, index) => (
                     <Link

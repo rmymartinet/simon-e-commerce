@@ -12,6 +12,8 @@ const ProgramsDetails = () => {
               autoPlay
               muted
               loop
+              playsInline
+              disablePictureInPicture
               className="h-full w-full rounded-xl object-cover"
             />
           </div>

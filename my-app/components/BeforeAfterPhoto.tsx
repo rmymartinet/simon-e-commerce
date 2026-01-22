@@ -24,7 +24,7 @@ const BeforeAfterPhoto = () => {
                   <span className="w-full bg-violet-500 py-1 text-center text-xs font-semibold uppercase text-white">
                     Avant
                   </span>
-                  <div className="flex w-full items-center justify-center gap-2 border-b border-white/10 px-4 py-3 text-sm uppercase tracking-wide text-white/80">
+                  <div className="flex w-full items-center justify-center gap-2 border-b border-white/10 px-4 py-3 text-sm uppercase tracking-wide text-white/90">
                     <span>{image.firstMoutnh}</span>
                   </div>
                   {image.before && (
@@ -42,7 +42,7 @@ const BeforeAfterPhoto = () => {
               </div>
 
               <div className="relative flex items-center justify-center">
-                <div className="flex h-6 w-6 items-center justify-center rounded-full border border-white/20 bg-[#121214] text-white/80 shadow-lg md:h-12 md:w-12">
+                <div className="flex h-6 w-6 items-center justify-center rounded-full border border-white/20 bg-[#121214] text-white/90 shadow-lg md:h-12 md:w-12">
                   <ArrowRight className="size-4" />
                 </div>
               </div>
@@ -52,10 +52,10 @@ const BeforeAfterPhoto = () => {
                   <span className="w-full bg-violet-500 py-1 text-center text-xs font-semibold uppercase text-white">
                     Après
                   </span>
-                  <div className="flex w-full items-center justify-between gap-2 border-b border-white/10 px-4 py-3 text-sm uppercase tracking-wide text-white/80">
+                  <div className="flex w-full items-center justify-between gap-2 border-b border-white/10 px-4 py-3 text-sm uppercase tracking-wide text-white/90">
                     <span>{image.lastMoutnh}</span>
                     {image.result && (
-                      <span className="rounded-full bg-violet-500/10 px-2 py-0.5 font-semibold uppercase tracking-wide">
+                      <span className="rounded-full border border-violet-400/40 bg-violet-500/20 px-2 py-0.5 font-semibold uppercase tracking-wide text-violet-200">
                         {image.result}
                       </span>
                     )}

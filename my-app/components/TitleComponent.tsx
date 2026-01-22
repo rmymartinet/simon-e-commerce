@@ -12,11 +12,13 @@ const TitleComponent = ({
   title,
   subtitle,
   isTextSplitLines = true,
+  scrollTrigger = false,
 }: {
   titleIndication?: string;
   title: string;
   subtitle: string;
   isTextSplitLines?: boolean;
+  scrollTrigger?: boolean;
 }) => {
   const titleRef = React.useRef<HTMLDivElement>(null);
   const subtitleRef = React.useRef<HTMLParagraphElement>(null);
@@ -31,7 +33,8 @@ const TitleComponent = ({
       titleRef.current &&
       subtitleRef.current &&
       titleIndicationRef.current &&
-      !isTextSplitLines
+      !isTextSplitLines &&
+      scrollTrigger
     ) {
       textSplitLinesScrollTrigger(titleRef as React.RefObject<HTMLElement>);
       textSplitLinesScrollTrigger(subtitleRef as React.RefObject<HTMLElement>);

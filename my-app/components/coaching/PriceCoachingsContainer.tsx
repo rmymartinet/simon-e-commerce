@@ -23,6 +23,7 @@ import { Badge } from "../ui/badge";
 const PriceCoachingsContainer = () => {
   const [selectedDuration, setSelectedDuration] = useState(3);
   const priceCoachingsRef = useRef<HTMLDivElement>(null);
+  const pricingContainerLeft = useRef<HTMLDivElement>(null);
   const addToCart = useAddToCart();
   const router = useRouter();
   const { session } = useAuth();
@@ -33,8 +34,12 @@ const PriceCoachingsContainer = () => {
   );
 
   useGSAP(() => {
-    if (priceCoachingsRef.current) {
+    if (priceCoachingsRef.current && pricingContainerLeft.current) {
       animateBlockReveal(priceCoachingsRef as RefObject<HTMLDivElement>, 0.5);
+      animateBlockReveal(
+        pricingContainerLeft as RefObject<HTMLDivElement>,
+        0.2,
+      );
     }
   }, []);
 
@@ -90,7 +95,7 @@ const PriceCoachingsContainer = () => {
   return (
     <section className="mx-auto">
       <div className="grid w-full grid-cols-1 gap-10 md:p-8 lg:grid-cols-2 lg:gap-16">
-        <div className="flex w-full flex-col gap-6">
+        <div ref={pricingContainerLeft} className="flex w-full flex-col gap-6">
           <div className="flex flex-1 flex-col gap-6">
             <Badge
               variant="secondary"

@@ -106,6 +106,7 @@ export default function Infos() {
             autoPlay
             controls
             playsInline
+            disablePictureInPicture
           />
         </div>
       </div>

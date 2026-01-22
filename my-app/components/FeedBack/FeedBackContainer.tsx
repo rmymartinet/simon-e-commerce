@@ -9,6 +9,7 @@ const FeedBackContainer = () => {
         title="Nos Résultats"
         subtitle="Découvrez ce que nos clients disent de notre équipe et de nos services "
         isTextSplitLines={false}
+        scrollTrigger={false}
       />
 
       <FeedBackCarouselle />
