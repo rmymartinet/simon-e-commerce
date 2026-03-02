@@ -5,6 +5,9 @@
   "resolutions": {
     "prettier": "3.5.3"
   },
+  "overrides": {
+    "rollup": "4.55.1"
+  },
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "prisma generate && next build",
